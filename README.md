@@ -26,8 +26,8 @@ Expense Note App is a backend monolithic application developed using **Spring Bo
 ## Installation and Setup
 
 1. **Clone the repository**:
-   git clone https://github.com/jdomdev/expense-note-app-springboot.git
-   cd expense-note-app-springboot
+   - git clone https://github.com/jdomdev/expense-note-app-springboot.git
+   - cd expense-note-app-springboot
    
 
 2. **Configure PostgreSQL**:
@@ -36,7 +36,7 @@ Expense Note App is a backend monolithic application developed using **Spring Bo
 
 3. **Run the Application**:
    - Use Maven to compile and run the application:
-     mvn spring-boot:run
+       - mvn spring-boot:run
      
 
 ## API Documentation
