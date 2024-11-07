@@ -65,9 +65,10 @@ public class UserTest {
 	// @Transactional
 	public void testUserSaving() {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		/* 83 Rihanna Fenty 1988-02-20 18:22:17.000 17 */
+		// 83 Rihanna Fenty 1988-02-20 18:22:17.000 17
+		// akirakurosawa@sunbit.com - Akira Kurosawa - kurosawa1234
 		final String ROLE_ADMIN = "ROLE_ADMIN";
-		String rawPassword = "fenty1234";
+		String rawPassword = "kurosawa1234";
 		String encodedPassword = passwordEncoder.encode(rawPassword);
 		ensureRoleExist();
 		// Obtén el rol, lanza una excepción si no se encuentra
@@ -78,10 +79,10 @@ public class UserTest {
 		ExpenseUser savedUser = new ExpenseUser();
 		if (adminRoleOpt.isPresent()) {
 			adminRole = adminRoleOpt.get();
-			newUser.setEmail("rihannafenty@mail.com");
-			newUser.setName("Rihanna");
+			newUser.setEmail("akirakurosawa@sunbit.com");
+			newUser.setName("Akira");
 			newUser.setPassword(encodedPassword);
-			newUser.setSurname("Fenty");
+			newUser.setSurname("Kurosawa");
 			newUser.addRole(adminRole);
 			savedUser = userDao.save(newUser);
 			// entityManager.persist(newUser);
