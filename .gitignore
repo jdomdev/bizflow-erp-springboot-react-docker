@@ -32,4 +32,36 @@ build/
 ### VS Code ###
 .vscode/
 
+# Configuration
 application.properties
+application.yml
+
+# Maven / Gradle dependencies
+target/
+build/
+
+# IDE-specific files
+.idea/
+*.iml
+*.code-workspace
+*.classpath
+*.project
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+spring.log
+
+# OS-specific files
+*.swp
+*.swo
+*.swn
+*.swd
+
+# Build outputs
+out/
