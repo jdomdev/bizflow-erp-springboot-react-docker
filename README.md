@@ -1,4 +1,4 @@
-# Expense Note App
+# ENTERPRISE SPEND CONTROL SYSTEM ON MONOLITHIC ARCHITECTURE
 
 Expense Note App is a backend monolithic application developed using **Spring Boot** and **Java JDK 11**, recently upgraded to **JDK 17**. It serves as an expense management system that allows employees, who may or may not be system users, to manage their expense notes and payroll data. The system includes a **RESTful API** for handling requests, which can be tested through **Postman**.
 
