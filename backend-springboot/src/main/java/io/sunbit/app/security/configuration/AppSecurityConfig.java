@@ -48,8 +48,25 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
+        http.cors(cors -> cors.configurationSource(request -> {
+            var corsConfig = new org.springframework.web.cors.CorsConfiguration();
+            corsConfig.setAllowedOriginPatterns(java.util.List.of("*"));
+            corsConfig.setAllowedMethods(java.util.List.of("*"));
+            corsConfig.setAllowedHeaders(java.util.List.of("*"));
+            corsConfig.setAllowCredentials(true);
+            return corsConfig;
+        }));
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthenticationEntryPoint));
+        
+        // Configure authorization rules
+        http.authorizeHttpRequests(auth -> auth
+            // Allow public endpoints
+            .requestMatchers("/", "/api/v1/**", "/actuator/**", "/health").permitAll()
+            // All other requests require authentication
+            .anyRequest().authenticated()
+        );
+        
         return http.build();
     }
 }
