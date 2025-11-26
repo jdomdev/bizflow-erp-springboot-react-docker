@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply box-border;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos globales para gradientes premium */
+.gradient-primary {
+  @apply bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-700;
+}
+
+.gradient-secondary {
+  @apply bg-gradient-to-r from-purple-500 via-purple-600 to-pink-700;
+}
+
+.gradient-accent {
+  @apply bg-gradient-to-r from-emerald-500 via-green-600 to-teal-700;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500;
+}
+
+/* Efectos de sombra premium */
+.shadow-glow {
+  @apply shadow-lg shadow-blue-500/20;
+}
+
+.shadow-glow-lg {
+  @apply shadow-2xl shadow-blue-500/30;
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  @apply animate-[fadeInUp_0.6s_ease-out];
+}
+
+.animate-slide-in-right {
+  @apply animate-[slideInRight_0.6s_ease-out];
+}
