@@ -1,0 +1,66 @@
+{
+  "name": "ExpenseNoteApp Development",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:latest": {},
+    "ghcr.io/devcontainers/features/github-cli:latest": {},
+    "ghcr.io/devcontainers/features/node:latest": {
+      "version": "20"
+    }
+  },
+  "forwardPorts": [3000, 5432, 8080, 5050],
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "Backend",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "Database",
+      "onAutoForward": "silent"
+    },
+    "5050": {
+      "label": "pgAdmin",
+      "onAutoForward": "silent"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.Extension-Pack-for-Java",
+        "ms-vscode.vscode-node-debug2",
+        "Equim-chan.marginalia",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "sonarsource.sonarlint-vscode",
+        "redhat.vscode-yaml",
+        "ms-python.python",
+        "ms-vscode-remote.remote-containers"
+      ],
+      "settings": {
+        "java.server.launchMode": "Standard",
+        "java.import.gradle.wrapper.checksums": "ignore",
+        "[java]": {
+          "editor.defaultFormatter": "redhat.java",
+          "editor.formatOnSave": true,
+          "editor.formatOnPaste": true
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "files.exclude": {
+          "**/node_modules": true,
+          "**/.gradle": true,
+          "**/target": true
+        }
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "remoteUser": "vscode",
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+  }
+}
