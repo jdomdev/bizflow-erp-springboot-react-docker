@@ -5,7 +5,6 @@ import javax.crypto.SecretKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -23,7 +22,6 @@ import io.sunbit.app.security.entity.ExpenseUser;
  * @author ExpenseNoteApp Team
  */
 @Component
-@PropertySource("classpath:application-sample.properties")
 public class JwtAuthenticationUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationUtil.class);
