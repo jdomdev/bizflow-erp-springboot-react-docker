@@ -1,52 +1,114 @@
-# ENTERPRISE SPEND CONTROL SYSTEM ON MONOLITHIC ARCHITECTURE
+# ENTERPRISE EXPENSE MANAGEMENT SYSTEM
 
-Expense Note App is a backend monolithic application developed using **Spring Boot** and **Java JDK 11**, recently upgraded to **JDK 17**. It serves as an expense management system that allows employees, who may or may not be system users, to manage their expense notes and payroll data. The system includes a **RESTful API** for handling requests, which can be tested through **Postman**.
+**Expense Note App v1.1.0** - Una aplicación moderna para gestión de gastos empresariales con backend Spring Boot 3.3.4 y frontend React 18.
 
-## Key Features
+## 🎯 Descripción General
 
-- **Monolithic Architecture**: The application follows a monolithic architecture for simplicity and centralized control.
-- **RESTful API**: Endpoints are exposed for interaction, currently being tested with **Postman**.
-- **DTO & DAO Patterns**: The application utilizes **Data Transfer Object (DTO)** and **Data Access Object (DAO)** patterns to streamline data processing and persistence.
-- **Role-Based Access Control (RBAC)**:
-  - Two roles: `ROLE_ADMIN` and `ROLE_USER`.
-  - **JWT Authentication**: Users authenticate through JSON Web Tokens (JWT), ensuring secure access based on roles.
-  - Employees may or may not have user accounts within the system.
-- **Persistence**: Data is stored in a **PostgreSQL** database, supporting the persistence of employee records, system users, and payroll information.
-- **Java and Spring Boot Versions**: 
-  - Initially developed with **JDK 11** and **Spring Boot 2**, with a planned migration to **Spring Boot 3**.
+ExpenseNoteApp es una solución completa para la administración de gastos corporativos que permite a los empleados gestionar sus reportes de gastos y nómina. Combina un backend robusto en Spring Boot 3 con un frontend moderno en React, proporcionando una experiencia de usuario profesional y segura.
 
-## Tech Stack
+**Nota**: Esta versión (1.1.0) incluye una actualización importante desde Spring Boot 2.7.18 → 3.3.4, con todas las dependencias actualizadas a las versiones más seguras.
 
-- **Java JDK**: Initially built on **JDK 11**, migrated to **JDK 17**.
-- **Spring Boot**: Version 2, planning migration to **Spring Boot 3**.
-- **Database**: PostgreSQL for reliable data storage.
-- **JWT**: Secure authentication and authorization mechanism.
-- **API Testing Tool**: Postman for manual testing of API endpoints.
+## 📚 Documentación
 
-## Installation and Setup
+Para una guía completa, consulta los documentos en la carpeta `/docs`:
+- **[📖 INDEX.md](./docs/INDEX.md)** - Índice de documentación completo
+- **[🚀 QUICK_START.md](./docs/QUICK_START.md)** - Guía rápida de inicio
+- **[🔍 ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md)** - Problemas encontrados y soluciones
+- **[✅ CAMBIOS_V2.md](./docs/CAMBIOS_V2.md)** - Documentación detallada de cambios
 
-1. **Clone the repository**:
-   - git clone https://github.com/jdomdev/expense-note-app-springboot.git
-   - cd expense-note-app-springboot
-   
+## ✨ Características Principales
 
-2. **Configure PostgreSQL**:
-   - Ensure a PostgreSQL instance is running.
-   - Create a database for the application and configure connection properties in `application.properties`.
+### Autenticación & Seguridad
+- ✅ Autenticación JWT moderna (JJWT 0.12.6)
+- ✅ Control de acceso basado en roles (RBAC)
+- ✅ Cifrado de contraseñas con Spring Security
+- ✅ Todas las dependencias sin vulnerabilidades conocidas
 
-3. **Run the Application**:
-   - Use Maven to compile and run the application:
-       - mvn spring-boot:run
-     
+### Gestión de Gastos
+- ✅ CRUD completo de gastos
+- ✅ Validación en frontend y backend
+- ✅ Filtros avanzados
+- ✅ Dashboard con estadísticas
 
-## API Documentation
+### Gestión de Personal
+- ✅ Registro de empleados
+- ✅ Información de nómina
+- ✅ Puestos y departamentos
+- ✅ Gestión de roles
 
-The **Expense Note App** includes RESTful endpoints to handle requests for:
-- **Employees**: Adding, viewing, and managing employee data.
-- **Users**: Managing users of the expense system with assigned roles.
-- **Payroll**: Handling payroll records and related operations.
+### Interfaz Moderna
+- ✅ React 18 con Vite (ultra-rápido)
+- ✅ Tailwind CSS para diseño responsivo
+- ✅ Framer Motion para animaciones suaves
+- ✅ Zustand para state management eficiente
 
-Documentation and endpoint details can be accessed via Postman for detailed request and response formats.
+## 🛠️ Stack Tecnológico
+
+| Componente | Tecnología | Versión |
+|-----------|-----------|---------|
+| **Lenguaje** | Java | 21 |
+| **Framework Backend** | Spring Boot | 3.3.4 |
+| **Framework Frontend** | React | 18.2.0 |
+| **Build Frontend** | Vite | 5.0.0 |
+| **Estilos** | Tailwind CSS | 3.4.0 |
+| **Base de Datos** | PostgreSQL | Latest |
+| **Autenticación** | JWT (JJWT) | 0.12.6 |
+| **Build Backend** | Maven | 3.6+ |
+
+## 🚀 Inicio Rápido
+
+### Requisitos
+- Java 21+
+- Node.js 18+
+- PostgreSQL 12+
+- Maven 3.6+
+
+### Instalación
+
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/yourusername/ExpenseNoteApp.git
+cd ExpenseNoteApp
+
+# 2. Configurar base de datos
+createdb expense_note_app
+# Editar backend-springboot/src/main/resources/application.properties
+
+# 3. Iniciar backend
+cd backend-springboot
+mvn spring-boot:run
+# Backend disponible en http://localhost:8080
+
+# 4. En otra terminal, iniciar frontend
+cd frontend
+npm install
+npm run dev
+# Frontend disponible en http://localhost:3000
+```
+
+### Credenciales de Prueba
+- **Email**: admin@example.com
+- **Contraseña**: <PASSWORD>
+
+## 📊 Versioning
+
+Este proyecto usa **Semantic Versioning (SemVer)**:
+- **v1.1.0** (actual): Frontend React + Security updates
+- **v1.0.0**: Backend Spring Boot 3 migration
+- **v2.0.0**: Próximas grandes características
+
+Ver [CAMBIOS_V2.md](./docs/CAMBIOS_V2.md) para historial completo.
+
+## 🔒 Seguridad
+
+✅ **Todas las dependencias están actualizadas** a versiones sin vulnerabilidades:
+- Spring Boot 3.3.4 con actualizaciones de seguridad más recientes
+- Spring Security 6.3.3
+- Log4j 2.23.1 con parches CVE
+- Jackson 2.17.2
+- Y más...
+
+Ver [ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md) para detalles completos.
 
 ## Authentication and Authorization
 
