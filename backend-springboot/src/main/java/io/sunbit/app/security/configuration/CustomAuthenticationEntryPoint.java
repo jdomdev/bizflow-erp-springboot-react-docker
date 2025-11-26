@@ -23,7 +23,5 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.sendError(
                 jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED,
                 "Unauthorized: Authentication is required");
-
-        throw new UnsupportedOperationException("Unimplemented method 'commence'");
     }
 }
