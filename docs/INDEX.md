@@ -33,6 +33,22 @@ Análisis completo de seguridad y vulnerabilidades solucionadas.
 - Prácticas de seguridad implementadas
 - Checklist pre-producción
 
+### 5. **[LAUNCH_GUIDE.md](./LAUNCH_GUIDE.md)** 🚀
+Guía paso a paso para lanzar la aplicación.
+- Requisitos previos y verificación
+- Configuración de base de datos
+- Ejecución de backend y frontend
+- Troubleshooting y resolución de problemas
+
+### 6. **[FEATURES_ROADMAP.md](./FEATURES_ROADMAP.md)** 🎯
+Características empresariales adicionales para futuras versiones.
+- Gestión avanzada de gastos
+- Workflows de aprobación multi-nivel
+- Gestión presupuestaria
+- Reportes y analytics
+- Integraciones externas
+- Roadmap de implementación
+
 ## 🏗️ Estructura del Proyecto
 
 ```
