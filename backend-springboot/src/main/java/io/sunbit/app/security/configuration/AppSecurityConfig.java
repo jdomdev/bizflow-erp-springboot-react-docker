@@ -62,7 +62,12 @@ public class AppSecurityConfig {
         // Configure authorization rules
         http.authorizeHttpRequests(auth -> auth
             // Allow public endpoints
-            .requestMatchers("/", "/api/v1/**", "/actuator/**", "/health").permitAll()
+            .requestMatchers("/", "/health").permitAll()
+            // Allow signup without authentication
+            .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/check-username", "/api/v1/auth/check-email").permitAll()
+            // Allow all other /api/v1/** endpoints (for now - will be secured later)
+            .requestMatchers("/api/v1/**").permitAll()
+            .requestMatchers("/actuator/**").permitAll()
             // All other requests require authentication
             .anyRequest().authenticated()
         );

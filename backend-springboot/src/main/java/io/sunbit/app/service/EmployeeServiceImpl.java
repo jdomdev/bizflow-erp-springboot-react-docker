@@ -106,7 +106,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public Employee findByEmail(String email) throws Exception {
 		try {
 			Optional<Employee> optEmployee = employeeDao.findByEmail(email);
-			return optEmployee.get();
+			return optEmployee.orElse(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());

@@ -48,15 +48,23 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		ExpenseUser savedUser = new ExpenseUser();
 		ExpenseUser settedUser = new ExpenseUser();
 		try {
-			Employee employee = employeeService.findByEmail(user.getEmail());
-			if (employee != null) {
-				if ((user.getRoles() == null) || (user.getRoles().size() == 0)) {
-					user.getRoles().add(roleDao.findByName(ROLE_USER).get());
-				}
-				settedUser = setUser(user);
-				savedUser = userDao.save(settedUser);
-				// entityManager.persist(settedUser);
+			// Try to find associated employee, but it's optional for signup
+			Employee employee = null;
+			try {
+				employee = employeeService.findByEmail(user.getEmail());
+			} catch (Exception e) {
+				// Employee not found, which is OK for signup
+				employee = null;
 			}
+
+			// Assign default USER role if not already assigned
+			if ((user.getRoles() == null) || (user.getRoles().size() == 0)) {
+				user.getRoles().add(roleDao.findByName(ROLE_USER).get());
+			}
+
+			settedUser = setUser(user);
+			savedUser = userDao.save(settedUser);
+			// entityManager.persist(settedUser);
 		} catch (Exception e) {
 			// System.out.println("e.getCause(): " + e.getCause());
 			throw new Exception(e.getCause());
@@ -71,7 +79,8 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		settedUser.setEmail(user.getEmail());
 		settedUser.setName(user.getName());
 		settedUser.setSurname(user.getSurname());
-		settedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+		// Password is already encoded in the caller, just use it as is
+		settedUser.setPassword(user.getPassword());
 
 		for (Role role : user.getRoles()) {
 			try {
@@ -110,18 +119,9 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 		Optional<ExpenseUser> optionalUser = userDao.findByEmail(userEmail);
-		if (optionalUser == null)
+		if (optionalUser == null || optionalUser.isEmpty())
 			throw new UsernameNotFoundException("User or Password INVALIDS");
-		/*
-		 * Warning !!!
-		 * We have to implement User constructor:
-		 * 'Construct the User with the details required by
-		 * org.springframework.security.authentication.dao.DaoAuthentication'
-		 */
-		return new org.springframework.security.core.userdetails.User(
-				optionalUser.get().getEmail(),
-				optionalUser.get().getPassword(),
-				mappAuthorityRole(optionalUser.get().getRoles()));
+		return optionalUser.get();
 	}
 
 	public Collection<? extends GrantedAuthority> mappAuthorityRole(Collection<Role> roles) {
@@ -137,7 +137,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		if (!optionalUser.isEmpty()) {
 			searchedUser = optionalUser.get();
 		}
-		return Optional.of(searchedUser);
+		return Optional.ofNullable(searchedUser);
 	}
 
 	@Override
