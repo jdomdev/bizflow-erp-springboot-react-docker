@@ -12,11 +12,10 @@ function SignupPage() {
   const navigate = useNavigate();
   const { login } = useAuthStore();
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
-    firstName: '',
-    lastName: '',
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -29,12 +28,16 @@ function SignupPage() {
 
   const validateForm = () => {
     const newErrors = {};
+    if (!formData.username) newErrors.username = 'Usuario requerido';
+    if (formData.username && formData.username.length < 3) {
+      newErrors.username = 'Usuario debe tener mínimo 3 caracteres';
+    }
     if (!formData.email) newErrors.email = 'Email requerido';
     if (!formData.password) newErrors.password = 'Contraseña requerida';
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Las contraseñas no coinciden';
     }
-    if (formData.password.length < 6) {
+    if (formData.password && formData.password.length < 6) {
       newErrors.password = 'La contraseña debe tener mínimo 6 caracteres';
     }
     return newErrors;
@@ -53,10 +56,9 @@ function SignupPage() {
 
     try {
       const response = await authService.signup({
+        username: formData.username,
         email: formData.email,
         password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
       });
       login({ email: formData.email }, response.data.accessToken);
       navigate('/dashboard');
@@ -124,30 +126,18 @@ function SignupPage() {
             onSubmit={handleSubmit}
             className="space-y-4"
           >
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div variants={itemVariants}>
-                <Input
-                  label="Nombre"
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="Juan"
-                  error={errors.firstName}
-                />
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <Input
-                  label="Apellido"
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  placeholder="García"
-                  error={errors.lastName}
-                />
-              </motion.div>
-            </div>
+            <motion.div variants={itemVariants}>
+              <Input
+                label="Usuario"
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="juan_garcia"
+                error={errors.username}
+                required
+              />
+            </motion.div>
 
             <motion.div variants={itemVariants}>
               <Input

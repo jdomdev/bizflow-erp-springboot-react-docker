@@ -103,7 +103,8 @@ public class AuthController {
             throw e;
         } catch (Exception e) {
             log.error("Error during signup", e);
-            throw new BadRequestException("signup", "unknown", "Error during registration: " + e.getMessage());
+            String errorMessage = e.getMessage() != null ? e.getMessage() : e.getClass().getSimpleName();
+            throw new BadRequestException("signup", "unknown", "Error during registration: " + errorMessage);
         }
     }
 

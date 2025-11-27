@@ -32,7 +32,7 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "name", nullable = false, unique = true)
-	@Length(min = 6, max = 25)
+	@Length(min = 3, max = 25)
 	private String name;
 
 	// Constructor without id.
