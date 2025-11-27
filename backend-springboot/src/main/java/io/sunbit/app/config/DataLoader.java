@@ -1,19 +1,13 @@
 package io.sunbit.app.config;
 
-import io.sunbit.app.entity.Role;
-import io.sunbit.app.entity.User;
-import io.sunbit.app.security.dao.RoleRepository;
-import io.sunbit.app.security.dao.UserRepository;
+import io.sunbit.app.security.entity.Role;
+import io.sunbit.app.security.dao.IRoleDao;
+import io.sunbit.app.security.dao.IUserDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * DataLoader Component
@@ -29,13 +23,10 @@ import java.util.Set;
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
-    private RoleRepository roleRepository;
+    private IRoleDao roleRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private IUserDao userRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -80,30 +71,21 @@ public class DataLoader implements ApplicationRunner {
         try {
             // Create ADMIN role
             if (!roleRepository.findByName("ADMIN").isPresent()) {
-                Role adminRole = Role.builder()
-                        .name("ADMIN")
-                        .description("Administrator with full permissions")
-                        .build();
+                Role adminRole = new Role("ADMIN");
                 roleRepository.save(adminRole);
                 log.info("✓ ADMIN role created");
             }
 
             // Create USER role
             if (!roleRepository.findByName("USER").isPresent()) {
-                Role userRole = Role.builder()
-                        .name("USER")
-                        .description("Regular user with standard permissions")
-                        .build();
+                Role userRole = new Role("USER");
                 roleRepository.save(userRole);
                 log.info("✓ USER role created");
             }
 
             // Create MANAGER role
             if (!roleRepository.findByName("MANAGER").isPresent()) {
-                Role managerRole = Role.builder()
-                        .name("MANAGER")
-                        .description("Manager with team oversight permissions")
-                        .build();
+                Role managerRole = new Role("MANAGER");
                 roleRepository.save(managerRole);
                 log.info("✓ MANAGER role created");
             }
