@@ -119,75 +119,75 @@ Dockerfile (✨ Backend Dockerfile)
 
 ## 🧪 Testing Realizado
 
-### Manual Testing
-- ✅ Signup success (valid email/password)
-- ✅ Signup validation (invalid email, weak password)
-- ✅ Login success (valid credentials)
-- ✅ Login failure (invalid credentials)
-- ✅ JWT token generation and validation
-- ✅ Token expiration (24 hours)
-- ✅ Protected endpoints (require valid token)
+### Pruebas Manuales
+- ✅ Registro exitoso (email y contraseña válidos)
+- ✅ Validación de registro (email inválido, contraseña débil)
+- ✅ Login exitoso (credenciales válidas)
+- ✅ Login fallido (credenciales inválidas)
+- ✅ Generación y validación de tokens JWT
+- ✅ Expiración de tokens (24 horas)
+- ✅ Endpoints protegidos (requieren token válido)
 
-### Test Users Created
-| Email | Password | Role | Status |
-|-------|----------|------|--------|
-| admin@example.com | `${ADMIN_PASSWORD}` | ADMIN | ✅ Active |
-| admin2@example.com | `${ADMIN_PASSWORD_2}` | ADMIN | ✅ Active |
-| manager@example.com | `${MANAGER_PASSWORD}` | MANAGER | ✅ Active |
-| manager2@example.com | `${MANAGER_PASSWORD_2}` | MANAGER | ✅ Active |
-| user@example.com | `${USER_PASSWORD}` | USER | ✅ Active |
-| user2@example.com | `${USER_PASSWORD_2}` | USER | ✅ Active |
-| jdomdev@example.com | `${ADMIN_PASSWORD_JDOMDEV}` | ADMIN | ✅ Active |
+### Usuarios de Prueba Creados
+| Email | Contraseña | Rol | Estado |
+|-------|------------|-----|--------|
+| admin@example.com | `${ADMIN_PASSWORD}` | ADMIN | ✅ Activo |
+| admin2@example.com | `${ADMIN_PASSWORD_2}` | ADMIN | ✅ Activo |
+| manager@example.com | `${MANAGER_PASSWORD}` | MANAGER | ✅ Activo |
+| manager2@example.com | `${MANAGER_PASSWORD_2}` | MANAGER | ✅ Activo |
+| user@example.com | `${USER_PASSWORD}` | USER | ✅ Activo |
+| user2@example.com | `${USER_PASSWORD_2}` | USER | ✅ Activo |
+| jdomdev@example.com | `${ADMIN_PASSWORD_JDOMDEV}` | ADMIN | ✅ Activo |
 
 **⚠️ Nota:** Las contraseñas están en el documento SESSION_5_SUMMARY.md en `/docs/SESSION_5/` para referencia interna únicamente. No compartir en PR públicos.
 
-### Database Persistence
-- ✅ Users persist after Docker restart
-- ✅ Roles persist correctly
-- ✅ PostgreSQL volume working (postgres_data)
+### Persistencia de Datos
+- ✅ Los usuarios persisten después de reiniciar Docker
+- ✅ Los roles se persisten correctamente
+- ✅ Volumen de PostgreSQL funcionando (postgres_data)
 
 ---
 
-## 🔐 Security Considerations
+## 🔐 Consideraciones de Seguridad
 
-### JWT Implementation
-- Algorithm: HS512 (HMAC with SHA-512)
-- Secret: 64-character random string (env var)
-- Expiration: 24 hours
-- Token stored: Browser LocalStorage
+### Implementación JWT
+- Algoritmo: HS512 (HMAC con SHA-512)
+- Secreto: Cadena aleatoria de 64 caracteres (variable de entorno)
+- Expiración: 24 horas
+- Token almacenado en: LocalStorage del navegador
 
-### Password Encoding
-- Algorithm: BCrypt with 10 rounds
-- Random salt generated per password
-- Encoding happens only once (no double-encoding)
+### Codificación de Contraseñas
+- Algoritmo: BCrypt con 10 rondas
+- Salt aleatorio generado por contraseña
+- Codificación ocurre una sola vez (sin doble-codificación)
 
-### CORS Configuration
-- Allowed origins: http://localhost:3000 (dev)
-- Allowed methods: GET, POST, PUT, DELETE, OPTIONS
-- Credentials: included
-
----
-
-## 📖 Documentation Added
-
-### Session 5 Documentation (4,300+ lines)
-- `SESSION_5_SUMMARY.md` - This PR changes detailed (600+ lines)
-- `SESSION_5_ARCHITECTURE.md` - JWT architecture (900+ lines)
-- `SESSION_5_DEBUGGING_GUIDE.md` - 7 errors & solutions (500+ lines)
-- `SESSION_5_INDEX.md` - Navigation by role
-- `SESSION_5_START_HERE.md` - 5-minute onboarding
-- `SESSION_6_ROADMAP.md` - Next phase plan (Dashboard + CRUD)
-
-### Organization
-- All docs in `/docs/` folder with `SESSION_X_` prefix
-- Reorganized in subfolders: `SESSION_1_GUIDE/`, `SESSION_2_ANALYSIS/`, etc.
-- Master index: `docs/INDEX.md`
+### Configuración CORS
+- Orígenes permitidos: http://localhost:3000 (desarrollo)
+- Métodos permitidos: GET, POST, PUT, DELETE, OPTIONS
+- Credenciales: incluidas
 
 ---
 
-## 🚀 How to Test
+## 📖 Documentación Agregada
 
-### Prerequisites
+### Documentación Session 5 (4,300+ líneas)
+- `SESSION_5_SUMMARY.md` - Cambios de esta PR detallados (600+ líneas)
+- `SESSION_5_ARCHITECTURE.md` - Arquitectura JWT (900+ líneas)
+- `SESSION_5_DEBUGGING_GUIDE.md` - 7 errores y soluciones (500+ líneas)
+- `SESSION_5_INDEX.md` - Navegación por rol
+- `SESSION_5_START_HERE.md` - Onboarding de 5 minutos
+- `SESSION_6_ROADMAP.md` - Plan de la siguiente fase (Dashboard + CRUD)
+
+### Organización
+- Todos los docs en carpeta `/docs/` con prefijo `SESSION_X_`
+- Reorganizados en subcarpetas: `SESSION_1_GUIDE/`, `SESSION_2_ANALYSIS/`, etc.
+- Índice maestro: `docs/INDEX.md`
+
+---
+
+## 🚀 Cómo Probar
+
+### Requisitos Previos
 ```bash
 docker --version       # v20+
 docker-compose -v     # v1.29+
@@ -195,15 +195,15 @@ git clone ...
 cd ExpenseNoteApp
 ```
 
-### Run Locally
+### Ejecutar Localmente
 ```bash
-# Start all services
+# Iniciar todos los servicios
 docker-compose up -d
 
-# Check logs
+# Ver logs
 docker-compose logs -f
 
-# Test endpoints
+# Probar endpoints
 curl http://localhost:8080/api/v1/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
@@ -213,59 +213,59 @@ curl http://localhost:8080/api/v1/auth/signup \
   }'
 ```
 
-### Test Credentials
+### Credenciales de Prueba
 ```
 Email: admin@example.com
-Password: Ver documento SESSION_5_SUMMARY.md en /docs/SESSION_5/
+Contraseña: Ver documento SESSION_5_SUMMARY.md en /docs/SESSION_5/
 (Credenciales almacenadas de forma segura en documentación interna)
 ```
 
-### Access Application
-- Frontend: http://localhost:80 (or localhost:3000 for dev)
+### Acceder a la Aplicación
+- Frontend: http://localhost:80 (o localhost:3000 para desarrollo)
 - Backend: http://localhost:8080
 - PgAdmin: http://localhost:5050
 
 ---
 
-## ✅ Checklist
+## ✅ Lista de Verificación
 
-- [x] Code follows project conventions
-- [x] Commits are granular and meaningful
-- [x] Documentation is complete
-- [x] All bugs mentioned are fixed
-- [x] Docker setup works
-- [x] Test users created and verified
-- [x] No hardcoded credentials
-- [x] Ready for code review
-- [x] Ready for testing by QA
-
----
-
-## 📝 Next Steps (Session 6)
-
-This PR is a prerequisite for Session 6 which will implement:
-
-1. **Dashboard Development** - Employee and expense list views
-2. **Expense CRUD Module** - Full CRUD operations for expenses
-3. **Reporting System** - Generate reports and statistics
-4. **Testing Suite** - Unit and integration tests
-
-See `/docs/SESSION_6_ROADMAP.md` for detailed implementation plan.
+- [x] El código sigue las convenciones del proyecto
+- [x] Los commits son granulares y significativos
+- [x] La documentación está completa
+- [x] Todos los bugs mencionados están solucionados
+- [x] La configuración de Docker funciona
+- [x] Los usuarios de prueba están creados y verificados
+- [x] Sin credenciales hardcodeadas
+- [x] Listo para revisión de código
+- [x] Listo para pruebas de QA
 
 ---
 
-## 🙏 Notes for Reviewers
+## 📝 Próximos Pasos (Session 6)
 
-1. **Java Version:** Now correctly set to 17 (was 21 in config). This is just a config fix.
-2. **Test Users:** All 7 test users are active and can be used immediately after deploy
-3. **Database:** Persistent volume ensures data survives container restarts
-4. **Documentation:** 4,300+ lines added. Start with `/docs/INDEX.md` or `/docs/SESSION_5_INDEX.md`
-5. **Frontend:** React components use modern hooks and Zustand for state
+Esta PR es un prerequisito para Session 6 que implementará:
+
+1. **Desarrollo del Dashboard** - Vistas de lista de empleados y gastos
+2. **Módulo CRUD de Gastos** - Operaciones CRUD completas para gastos
+3. **Sistema de Reportes** - Generar reportes y estadísticas
+4. **Suite de Pruebas** - Pruebas unitarias e integración
+
+Ver `/docs/SESSION_6_ROADMAP.md` para el plan de implementación detallado.
 
 ---
 
-**Created by:** AI Assistant  
-**Date:** 28 November 2025  
-**Session:** 5 - Complete Authentication Implementation
+## 🙏 Notas para Revisores
 
-Related Issues: #session-5, #authentication, #jwt
+1. **Versión Java:** Ahora correctamente establecida en 17 (era 21 en config). Es solo una corrección de configuración.
+2. **Usuarios de Prueba:** Los 7 usuarios de prueba están activos y pueden usarse inmediatamente después del deploy
+3. **Base de Datos:** El volumen persistente asegura que los datos sobrevivan reinicios de contenedores
+4. **Documentación:** 4,300+ líneas agregadas. Comenzar con `/docs/INDEX.md` o `/docs/SESSION_5_INDEX.md`
+5. **Frontend:** Los componentes React usan hooks modernos y Zustand para el estado
+
+---
+
+**Creado por:** AI Assistant  
+**Fecha:** 28 Noviembre 2025  
+**Session:** 5 - Implementación Completa de Autenticación
+
+Issues Relacionados: #session-5, #authentication, #jwt
