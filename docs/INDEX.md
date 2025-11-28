@@ -1,167 +1,193 @@
-# Documentación - ExpenseNoteApp v1.1.0
+# 📚 DOCUMENTACIÓN COMPLETA - ExpenseNoteApp
 
-Bienvenido a la documentación completa del proyecto ExpenseNoteApp. Este proyecto es una aplicación moderna para gestión de gastos empresariales con autenticación JWT, backend Spring Boot 3.3.4 y frontend React.
+## 🎯 Índice por Sesión
 
-## 📋 Índice de Documentación
+### 📌 Session 1 - Guía Inicial
+**Carpeta:** `SESSION_1_GUIDE/`
 
-### 1. **[QUICK_START.md](./QUICK_START.md)** 🚀
-Guía rápida para empezar a usar la aplicación.
-- Requisitos previos
-- Instalación y configuración
-- Ejecución de backend y frontend
-- Troubleshooting común
+Documentos para el onboarding inicial del proyecto:
+- [SESSION_1_LAUNCH_GUIDE.md](./SESSION_1_GUIDE/SESSION_1_LAUNCH_GUIDE.md) - Guía de lanzamiento
+- [SESSION_1_MAÑANA_EMPIEZA_AQUI.md](./SESSION_1_GUIDE/SESSION_1_MAÑANA_EMPIEZA_AQUI.md) - Inicio rápido
+- [SESSION_1_QUICK_START.md](./SESSION_1_GUIDE/SESSION_1_QUICK_START.md) - Setup rápido
+- [SESSION_1_WELCOME_SESSION4.md](./SESSION_1_GUIDE/SESSION_1_WELCOME_SESSION4.md) - Bienvenida
+- [SESSION_1_VSCODE_KEEP_BUTTON_EXPLAINED.md](./SESSION_1_GUIDE/SESSION_1_VSCODE_KEEP_BUTTON_EXPLAINED.md) - Tips VS Code
+- Y más...
 
-### 2. **[ANALISIS_DETALLADO.md](./ANALISIS_DETALLADO.md)** 🔍
-Análisis exhaustivo de los problemas encontrados en el código original.
-- Dependencias deprecadas
-- Códigos vulnerables
-- Issues de seguridad
-- Recomendaciones de solución
-
-### 3. **[CAMBIOS_V2.md](./CAMBIOS_V2.md)** ✅
-Documentación detallada de todos los cambios realizados.
-- Migraciones de dependencias
-- Refactorización de código JWT
-- Eliminación de code smells
-- Aplicación de SOLID principles
-- Creación del frontend React
-
-### 4. **[SECURITY.md](./SECURITY.md)** 🔒
-Análisis completo de seguridad y vulnerabilidades solucionadas.
-- 13 vulnerabilidades identificadas y solucionadas
-- Detalles técnicos de cada remediación
-- Prácticas de seguridad implementadas
-- Checklist pre-producción
-
-### 5. **[LAUNCH_GUIDE.md](./LAUNCH_GUIDE.md)** 🚀
-Guía paso a paso para lanzar la aplicación.
-- Requisitos previos y verificación
-- Configuración de base de datos
-- Ejecución de backend y frontend
-- Troubleshooting y resolución de problemas
-
-### 6. **[FEATURES_ROADMAP.md](./FEATURES_ROADMAP.md)** 🎯
-Características empresariales adicionales para futuras versiones.
-- Gestión avanzada de gastos
-- Workflows de aprobación multi-nivel
-- Gestión presupuestaria
-- Reportes y analytics
-- Integraciones externas
-- Roadmap de implementación
-
-### 7. **[DOCKER.md](./DOCKER.md)** 🐳
-Guía completa de Docker, docker-compose y dev-containers.
-- Arquitectura de containers
-- Dockerfile backend (Java 21)
-- Dockerfile frontend (Nginx + React)
-- Docker Compose orchestration
-- VS Code dev-containers setup
-- Comandos útiles y troubleshooting
-
-### 8. **[RELEASE_NOTES_v1.1.0.md](../RELEASE_NOTES_v1.1.0.md)** 📋
-Resumen completo del release v1.1.0.
-- 8 commits granulares (Angular convention)
-- Estadísticas del proyecto
-- 13 vulnerabilidades solucionadas
-- Cambios principales por commit
-- Cómo iniciar con Docker
-- Beneficios de v1.1.0
-
-## 🏗️ Estructura del Proyecto
-
-```
-ExpenseNoteApp/
-├── backend-springboot/         # Backend Spring Boot 3.3.4
-│   ├── src/main/java/         # Código fuente Java
-│   ├── src/main/resources/    # Configuración
-│   └── pom.xml                # Dependencias Maven
-├── frontend/                   # Frontend React + Vite
-│   ├── src/                   # Componentes y páginas
-│   ├── public/                # Assets estáticos
-│   └── package.json           # Dependencias NPM
-├── docs/                      # Documentación (este archivo)
-└── README.md                  # Descripción general del proyecto
-```
-
-## 🛠️ Tecnologías Principales
-
-### Backend
-- **Java 21** con Spring Boot 3.3.4
-- **Spring Framework 6.1.13**
-- **Spring Security 6.3.3** con JWT (JJWT 0.12.6)
-- **PostgreSQL** para persistencia
-- **Maven 3.6+** para build
-
-### Frontend
-- **React 18.2.0** con Vite 5.0.0
-- **Tailwind CSS 3.4.0** para estilos
-- **Framer Motion 10.16.4** para animaciones
-- **Zustand 4.4.7** para state management
-- **Axios 1.6.0** para API calls
-
-## 📊 Versioning
-
-Este proyecto usa **Semantic Versioning (SemVer)**:
-- **1.1.0**: Versión actual con nuevas características (frontend React agregado)
-- Mayor (v2.0.0): Cambios incompatibles
-- Menor (v1.1.0): Nuevas características compatibles
-- Patch (v1.0.1): Correcciones de bugs
-
-## 🔒 Seguridad
-
-Todas las dependencias han sido actualizadas a las versiones más seguras:
-- ✅ Spring Boot 3.3.4 (últimas actualizaciones de seguridad)
-- ✅ Spring Security 6.3.3 (sin vulnerabilidades conocidas)
-- ✅ Log4j 2.23.1 (parches CVE aplicados)
-- ✅ Jackson 2.17.2 (sin vulnerabilidades conocidas)
-- ✅ PostgreSQL 42.7.3 (driver más reciente)
-- ✅ SnakeYAML 2.2 (mitigación de deserialización)
-- ✅ Commons Lang3 3.14.0
-- ✅ Commons IO 2.16.1
-
-## 🚀 Próximos Pasos
-
-1. **[Lee QUICK_START.md](./QUICK_START.md)** para configurar el ambiente
-2. **[Revisa CAMBIOS_V2.md](./CAMBIOS_V2.md)** para entender la arquitectura
-3. **Inicia el backend**: `cd backend-springboot && mvn spring-boot:run`
-4. **Inicia el frontend**: `cd frontend && npm run dev`
-5. Accede a http://localhost:3000 en tu navegador
-
-## 📱 Funcionalidades Principales
-
-### Autenticación
-- Login y registro de usuarios
-- JWT token basado en seguridad
-- Roles y permisos (Admin, User)
-
-### Gestión de Gastos
-- Crear, leer, actualizar, eliminar gastos
-- Filtrar por fecha, empleado, cantidad
-- Validación de datos en frontend y backend
-
-### Gestión de Nómina
-- Registro de salarios
-- Detalles de empleados
-- Información de puestos
-
-### Dashboard
-- Estadísticas de gastos
-- Gastos recientes
-- Indicadores clave
-
-## 🐛 Reportar Issues
-
-Si encuentras problemas:
-1. Revisa la sección de [troubleshooting en QUICK_START.md](./QUICK_START.md#troubleshooting)
-2. Verifica los logs en `backend-springboot/target/logs/`
-3. Abre un issue en GitHub con detalles del error
-
-## 📝 Licencia
-
-Este proyecto está bajo la licencia indicada en LICENSE.txt
+**Propósito:** Setupeo inicial, primeros pasos, configuración básica
 
 ---
 
-**Última actualización**: Noviembre 2024
-**Versión**: 1.1.0
-**Mantenido por**: ExpenseNoteApp Team
+### 📊 Session 2 - Análisis Detallado
+**Carpeta:** `SESSION_2_ANALYSIS/`
+
+Análisis técnico, problemas encontrados y soluciones:
+- [SESSION_2_ANALISIS_DETALLADO.md](./SESSION_2_ANALYSIS/SESSION_2_ANALISIS_DETALLADO.md) - Análisis profundo
+- [SESSION_2_CAMBIOS_V2.md](./SESSION_2_ANALYSIS/SESSION_2_CAMBIOS_V2.md) - Versión 2 cambios
+- [SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md) - Deploy cloud
+- [SESSION_2_EXCEPTION_HANDLING_PLAN.md](./SESSION_2_ANALYSIS/SESSION_2_EXCEPTION_HANDLING_PLAN.md) - Manejo excepciones
+- [SESSION_2_MIGRATION_SESSION_2025_11_26.md](./SESSION_2_ANALYSIS/SESSION_2_MIGRATION_SESSION_2025_11_26.md) - Migración
+- [SESSION_2_SESSION2_FAQ.md](./SESSION_2_ANALYSIS/SESSION_2_SESSION2_FAQ.md) - FAQ Session 2
+- [SESSION_2_SESSION3_SUMMARY.md](./SESSION_2_ANALYSIS/SESSION_2_SESSION3_SUMMARY.md) - Resumen Session 3
+- [SESSION_2_SIGNUP_ISSUE_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_SIGNUP_ISSUE_ANALYSIS.md) - Análisis problemas signup
+
+**Propósito:** Documentar issues encontrados, análisis técnico, soluciones implementadas
+
+---
+
+### 🏗️ Session 3 - Arquitectura
+**Carpeta:** `SESSION_3_ARCHITECTURE/`
+
+Diseño arquitectónico y decisiones técnicas:
+- [SESSION_3_ARCHITECTURE.md](./SESSION_3_ARCHITECTURE/SESSION_3_ARCHITECTURE.md) - Arquitectura general
+- [SESSION_3_DOCKER.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCKER.md) - Configuración Docker
+- [SESSION_3_DOCUMENTACION_INDEX.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCUMENTACION_INDEX.md) - Índice documentación
+- [SESSION_3_FEATURES_ROADMAP.md](./SESSION_3_ARCHITECTURE/SESSION_3_FEATURES_ROADMAP.md) - Roadmap features
+- [SESSION_3_INDEX.md](./SESSION_3_ARCHITECTURE/SESSION_3_INDEX.md) - Índice archivos
+- [SESSION_3_SECURITY.md](./SESSION_3_ARCHITECTURE/SESSION_3_SECURITY.md) - Seguridad
+
+**Propósito:** Diseño técnico, patrones arquitectónicos, decisiones de seguridad
+
+---
+
+### ⚙️ Session 4 - Setup
+**Carpeta:** `SESSION_4_SETUP/`
+
+Guías de setup y configuración:
+- [SESSION_4_DATABASE_INITIALIZATION.md](./SESSION_4_SETUP/SESSION_4_DATABASE_INITIALIZATION.md) - Inicialización BD
+
+**Propósito:** Setup ambiente, configuración base de datos, inicialización
+
+---
+
+### 🔐 Session 5 - Autenticación JWT
+**Carpeta:** `SESSION_5/`
+
+Documentación completa de implementación de autenticación:
+- [SESSION_5_SUMMARY.md](./SESSION_5/SESSION_5_SUMMARY.md) - Resumen Session 5 (600+ líneas)
+- [SESSION_5_ARCHITECTURE.md](./SESSION_5/SESSION_5_ARCHITECTURE.md) - Arquitectura JWT (900+ líneas)
+- [SESSION_5_DEBUGGING_GUIDE.md](./SESSION_5/SESSION_5_DEBUGGING_GUIDE.md) - Debugging (500+ líneas)
+- [SESSION_5_START_HERE.md](./SESSION_5/SESSION_5_START_HERE.md) - Inicio rápido (250+ líneas)
+- [SESSION_5_OVERVIEW.md](./SESSION_5/SESSION_5_OVERVIEW.md) - Resumen ejecutivo
+- [SESSION_5_README_IMPROVED.md](./SESSION_5/SESSION_5_README_IMPROVED.md) - README mejorado
+- [SESSION_5_INDEX.md](./SESSION_5/SESSION_5_INDEX.md) - Navegación por roles
+- [SESSION_5_DOCUMENTATION_COMPLETE.md](./SESSION_5/SESSION_5_DOCUMENTATION_COMPLETE.md) - Meta-documentación
+
+**Propósito:** JWT implementation, Spring Security, autenticación usuario
+
+**¿Por dónde empezar?**
+1. Lee: `SESSION_5_START_HERE.md` (5 min)
+2. Luego: `SESSION_5_INDEX.md` (elige tu rol)
+3. Profundiza: `SESSION_5_ARCHITECTURE.md` (si es técnico)
+
+---
+
+### 🚀 Session 6 - Dashboard & Expense Management
+**Carpeta:** `SESSION_6/`
+
+Implementación de Dashboard y módulo de gastos:
+- [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Plan 4 fases (50+ ejemplos código)
+
+**Fases:**
+1. **Dashboard Development** - Vistas empleados/gastos
+2. **Expense CRUD** - Create, Read, Update, Delete
+3. **Reporting** - Reportes y estadísticas
+4. **Testing & Deployment** - Suite tests + Docker
+
+**¿Por dónde empezar?**
+- Lee: `SESSION_6_ROADMAP.md` para plan detallado
+
+---
+
+## 📖 Guía por Rol
+
+### 👨‍💻 Developer Nuevo
+1. [SESSION_1_QUICK_START.md](./SESSION_1_GUIDE/SESSION_1_QUICK_START.md) - 5 min setup
+2. [SESSION_5_START_HERE.md](./SESSION_5/SESSION_5_START_HERE.md) - Arquitectura actual
+3. [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Plan siguiente
+
+### 🏗️ Arquitecto/Tech Lead
+1. [SESSION_3_ARCHITECTURE.md](./SESSION_3_ARCHITECTURE/SESSION_3_ARCHITECTURE.md) - Diseño actual
+2. [SESSION_5_ARCHITECTURE.md](./SESSION_5/SESSION_5_ARCHITECTURE.md) - Autenticación
+3. [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Próximas fases
+
+### 🐛 QA/Debugger
+1. [SESSION_5_DEBUGGING_GUIDE.md](./SESSION_5/SESSION_5_DEBUGGING_GUIDE.md) - Problemas comunes
+2. [SESSION_2_EXCEPTION_HANDLING_PLAN.md](./SESSION_2_ANALYSIS/SESSION_2_EXCEPTION_HANDLING_PLAN.md) - Manejo errores
+3. [SESSION_3_DOCKER.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCKER.md) - Docker troubleshooting
+
+### 📊 Project Manager
+1. [SESSION_5_OVERVIEW.md](./SESSION_5/SESSION_5_OVERVIEW.md) - Status Session 5
+2. [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Plan detallado Session 6
+3. Ver GitHub Projects Kanban para tasks
+
+### 🔒 Security/DevSecOps
+1. [SESSION_3_SECURITY.md](./SESSION_3_ARCHITECTURE/SESSION_3_SECURITY.md) - Seguridad actual
+2. [SESSION_5_ARCHITECTURE.md](./SESSION_5/SESSION_5_ARCHITECTURE.md) - JWT seguridad
+3. [SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md) - Deploy seguro
+
+### 🚀 DevOps/Infrastructure
+1. [SESSION_3_DOCKER.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCKER.md) - Configuración Docker
+2. [SESSION_4_DATABASE_INITIALIZATION.md](./SESSION_4_SETUP/SESSION_4_DATABASE_INITIALIZATION.md) - BD setup
+3. [SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md) - Cloud deploy
+
+---
+
+## 📊 Estadísticas
+
+| Métrica | Valor |
+|---------|-------|
+| Total Sesiones Documentadas | 6 |
+| Sesiones en Planificación | Session 7+ |
+| Total de Documentos | 30+ |
+| Líneas de Documentación | 4,300+ |
+| Sesión más Documentada | Session 5 (8 docs) |
+
+---
+
+## 🔗 Referencias Rápidas
+
+### Configuración
+- Backend: `/backend/`
+- Frontend: `/frontend/`
+- Docker: `docker-compose.yml`
+- Maven: `backend/pom.xml`
+
+### Ejecución
+```bash
+# Con Docker (recomendado)
+docker-compose up -d
+
+# Sin Docker
+mvn clean install
+npm install && npm run dev
+```
+
+### Documentación
+- README: Proyecto root (`README.md`)
+- Todos los docs: En esta carpeta (`/docs/`)
+- Por Session: `SESSION_X_XXXXXX/`
+
+---
+
+## 🎯 Próximos Pasos
+
+### Inmediatos (Session 6)
+- [ ] Dashboard development
+- [ ] Expense CRUD module
+- [ ] Reporting system
+- [ ] Test suite
+
+### Planificados (Session 7-10)
+- [ ] API documentation (OpenAPI/Swagger)
+- [ ] Frontend improvements
+- [ ] Performance optimization
+- [ ] CI/CD automation
+
+Ver `SESSION_6_ROADMAP.md` para detalles completos.
+
+---
+
+**Última actualización:** 28 Noviembre 2025  
+**Status:** Documentación Session 5 completa, Session 6 en planificación
+
+Para navegación rápida por rol, ver sección "Guía por Rol" arriba.

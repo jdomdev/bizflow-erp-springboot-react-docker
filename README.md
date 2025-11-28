@@ -46,7 +46,7 @@ Para una guía completa, consulta los documentos en la carpeta `/docs`:
 
 | Componente | Tecnología | Versión |
 |-----------|-----------|---------|
-| **Lenguaje** | Java | 21 |
+| **Lenguaje** | Java | 17 |
 | **Framework Backend** | Spring Boot | 3.3.4 |
 | **Framework Frontend** | React | 18.2.0 |
 | **Build Frontend** | Vite | 5.0.0 |
@@ -58,10 +58,22 @@ Para una guía completa, consulta los documentos en la carpeta `/docs`:
 ## 🚀 Inicio Rápido
 
 ### Requisitos
-- Java 21+
+- Java 17+
 - Node.js 18+
 - PostgreSQL 12+
 - Maven 3.6+
+
+### Verificar Instalación
+
+```bash
+# Verificar versiones instaladas
+java -version
+javac -version
+node --version
+npm --version
+mvn --version
+psql --version
+```
 
 ### Instalación
 
@@ -72,10 +84,10 @@ cd ExpenseNoteApp
 
 # 2. Configurar base de datos
 createdb expense_note_app
-# Editar backend-springboot/src/main/resources/application.properties
+# Editar backend/src/main/resources/application.properties
 
 # 3. Iniciar backend
-cd backend-springboot
+cd backend
 mvn spring-boot:run
 # Backend disponible en http://localhost:8080
 
@@ -85,6 +97,30 @@ npm install
 npm run dev
 # Frontend disponible en http://localhost:3000
 ```
+
+### 🐳 Ejecución con Docker
+
+Para ejecutar la aplicación completa con Docker (recomendado para desarrollo y producción):
+
+```bash
+# Desde la raíz del proyecto
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+
+# Detener
+docker-compose down
+
+# Detener y limpiar (elimina todo excepto datos persistentes)
+docker-compose down --volumes
+```
+
+**📌 Importante sobre Persistencia de Datos:**
+- La base de datos PostgreSQL usa un **volumen persistente** (`postgres_data`)
+- Los datos se mantienen incluso si los contenedores se detienen/reinician
+- Para eliminar completamente los datos: `docker volume rm postgres_data`
+- Las credenciales de prueba (usuarios creados) persisten después de reinicios
 
 ### Credenciales de Prueba
 - **Email**: admin@example.com
