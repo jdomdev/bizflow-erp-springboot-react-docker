@@ -42,7 +42,7 @@ services:
   # Spring Boot Backend
   backend:
     build:
-      context: ./backend-springboot
+      context: ./backend
       dockerfile: Dockerfile
     container_name: expense_backend
     environment:
@@ -67,7 +67,7 @@ services:
       - expense_network
     restart: unless-stopped
     volumes:
-      - ./backend-springboot/logs:/app/logs
+      - ./backend/logs:/app/logs
 
   # React Frontend
   frontend:
