@@ -104,7 +104,7 @@
 ### Estructura de Directorios
 
 ```
-backend-springboot/
+backend/
 ├── src/main/java/io/sunbit/app/
 │   ├── ExpenseNoteAppApplication.java
 │   │   └── Main Spring Boot application class
@@ -976,7 +976,7 @@ jobs:
       
       - name: Build Backend
         run: |
-          cd backend-springboot
+          cd backend
           mvn clean package
       
       - name: Build Frontend

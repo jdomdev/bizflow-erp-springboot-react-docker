@@ -160,7 +160,7 @@ server {
 
 ### Project Structure
 ```
-backend-springboot/
+backend/
 ├── src/main/
 │   ├── java/io/sunbit/app/
 │   │   ├── ExpenseNoteAppApplication.java

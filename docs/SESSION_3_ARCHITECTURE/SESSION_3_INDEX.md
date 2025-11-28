@@ -71,7 +71,7 @@ Resumen completo del release v1.1.0.
 
 ```
 ExpenseNoteApp/
-├── backend-springboot/         # Backend Spring Boot 3.3.4
+├── backend/         # Backend Spring Boot 3.3.4
 │   ├── src/main/java/         # Código fuente Java
 │   ├── src/main/resources/    # Configuración
 │   └── pom.xml                # Dependencias Maven
@@ -123,7 +123,7 @@ Todas las dependencias han sido actualizadas a las versiones más seguras:
 
 1. **[Lee QUICK_START.md](./QUICK_START.md)** para configurar el ambiente
 2. **[Revisa CAMBIOS_V2.md](./CAMBIOS_V2.md)** para entender la arquitectura
-3. **Inicia el backend**: `cd backend-springboot && mvn spring-boot:run`
+3. **Inicia el backend**: `cd backend && mvn spring-boot:run`
 4. **Inicia el frontend**: `cd frontend && npm run dev`
 5. Accede a http://localhost:3000 en tu navegador
 
@@ -153,7 +153,7 @@ Todas las dependencias han sido actualizadas a las versiones más seguras:
 
 Si encuentras problemas:
 1. Revisa la sección de [troubleshooting en QUICK_START.md](./QUICK_START.md#troubleshooting)
-2. Verifica los logs en `backend-springboot/target/logs/`
+2. Verifica los logs en `backend/target/logs/`
 3. Abre un issue en GitHub con detalles del error
 
 ## 📝 Licencia

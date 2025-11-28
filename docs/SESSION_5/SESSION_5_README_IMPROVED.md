@@ -77,7 +77,7 @@ cd ExpenseNoteApp
 
 ```bash
 # Backend
-cd backend-springboot
+cd backend
 cp .env.example .env
 # Editar .env con valores necesarios
 
@@ -207,7 +207,7 @@ Respuesta: 200 OK
 
 ```
 ExpenseNoteApp/
-├── backend-springboot/          # Spring Boot backend
+├── backend/          # Spring Boot backend
 │   ├── src/main/java/...       # Código fuente Java
 │   ├── src/main/resources/     # Configuración, BD migrations
 │   ├── pom.xml                  # Dependencias Maven
@@ -283,7 +283,7 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 
 ```bash
 # Backend
-cd backend-springboot
+cd backend
 mvn test
 
 # Frontend

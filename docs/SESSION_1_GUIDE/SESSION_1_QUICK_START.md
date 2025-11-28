@@ -20,7 +20,7 @@ createdb expense_note_app
 
 ### 2. Backend
 ```bash
-cd backend-springboot
+cd backend
 
 # Editar application.properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/expense_note_app
@@ -88,7 +88,7 @@ npm run dev
 
 ```bash
 # Backend - Compilar (verifica build)
-cd backend-springboot
+cd backend
 mvn clean compile
 
 # Frontend - Verificar
@@ -116,7 +116,7 @@ npm run lint
 
 ### Backend
 ```bash
-cd backend-springboot
+cd backend
 mvn clean package -DskipTests
 java -jar target/expensenoteapp-v2.0.0.jar
 ```

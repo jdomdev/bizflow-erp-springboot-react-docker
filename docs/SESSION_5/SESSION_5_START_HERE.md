@@ -233,7 +233,7 @@ Por el final de Session 6, se tendrá:
 Project Root
 ├── README.md (viejo, reemplazar con README_NEW.md)
 ├── docker-compose.yml (⭐ Levanta la app)
-├── backend-springboot/ (Código Java)
+├── backend/ (Código Java)
 │   └── src/main/java/io/sunbit/app/...
 ├── frontend/ (Código React)
 │   └── src/pages/ & components/

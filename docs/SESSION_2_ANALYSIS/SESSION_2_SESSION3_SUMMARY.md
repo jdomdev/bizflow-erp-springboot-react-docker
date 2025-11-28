@@ -222,7 +222,7 @@ ExpenseNoteApp/
 │   ├── SESSION2_FAQ.md
 │   ├── SIGNUP_ISSUE_ANALYSIS.md               ⭐ NUEVO
 │   └── VSCODE_KEEP_BUTTON_EXPLAINED.md        ⭐ NUEVO
-├── backend-springboot/
+├── backend/
 ├── README.md
 └── ...
 

@@ -11,7 +11,7 @@
 Se han creado dos soluciones complementarias para inicializar datos en la base de datos:
 
 ### 1️⃣ SQL Script (`init-data.sql`)
-- **Ubicación:** `backend-springboot/src/main/resources/db/init-data.sql`
+- **Ubicación:** `backend/src/main/resources/db/init-data.sql`
 - **Propósito:** Insertar datos iniciales directamente en PostgreSQL
 - **Contenido:**
   - 3 roles por defecto: `ADMIN`, `USER`, `MANAGER`
@@ -19,7 +19,7 @@ Se han creado dos soluciones complementarias para inicializar datos en la base d
   - 3 posiciones de ejemplo para testing
 
 ### 2️⃣ DataLoader Bean (`DataLoader.java`)
-- **Ubicación:** `backend-springboot/src/main/java/io/sunbit/app/config/DataLoader.java`
+- **Ubicación:** `backend/src/main/java/io/sunbit/app/config/DataLoader.java`
 - **Propósito:** Ejecutar automáticamente al iniciar la aplicación
 - **Ventajas:**
   - ✅ Evita duplicados (verifica primero)
@@ -383,10 +383,10 @@ Ver: `EXCEPTION_HANDLING_PLAN.md` para crear endpoint seguro y validado
 
 ## 📚 Referencias
 
-- **DataLoader:** `backend-springboot/src/main/java/io/sunbit/app/config/DataLoader.java`
-- **SQL Init:** `backend-springboot/src/main/resources/db/init-data.sql`
-- **SecurityConfig:** `backend-springboot/src/main/java/io/sunbit/app/security/configuration/SecurityConfiguration.java`
-- **Repositorios:** `backend-springboot/src/main/java/io/sunbit/app/security/dao/`
+- **DataLoader:** `backend/src/main/java/io/sunbit/app/config/DataLoader.java`
+- **SQL Init:** `backend/src/main/resources/db/init-data.sql`
+- **SecurityConfig:** `backend/src/main/java/io/sunbit/app/security/configuration/SecurityConfiguration.java`
+- **Repositorios:** `backend/src/main/java/io/sunbit/app/security/dao/`
 
 ---
 

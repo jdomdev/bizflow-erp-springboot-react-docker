@@ -696,7 +696,7 @@ export const useAuthStore = create(...)
 
 ```bash
 # 1. Navegar al directorio backend
-cd backend-springboot
+cd backend
 
 # 2. Compilar el proyecto
 mvn clean install
@@ -738,7 +738,7 @@ npm run dev
 
 **Terminal 1 - Backend**:
 ```bash
-cd backend-springboot
+cd backend
 mvn spring-boot:run
 # Backend disponible en: http://localhost:8080
 ```
@@ -754,7 +754,7 @@ npm run dev
 
 **Backend**:
 ```bash
-cd backend-springboot
+cd backend
 mvn clean package -DskipTests
 # JAR disponible en: target/expensenoteapp-v2.0.0.jar
 

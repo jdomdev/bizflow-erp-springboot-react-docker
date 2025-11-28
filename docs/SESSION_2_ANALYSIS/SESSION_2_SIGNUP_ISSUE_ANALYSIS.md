@@ -61,7 +61,7 @@ INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
 ```
 
 **Archivos a crear:**
-- `backend-springboot/src/main/resources/db/init.sql`
+- `backend/src/main/resources/db/init.sql`
 - Modificar `application.properties` para ejecutar en startup
 
 ---
@@ -199,7 +199,7 @@ public class AuthController {
 **Escalabilidad:** Máxima (recomendado para producción)
 
 ```
-backend-springboot/src/main/resources/db/migration/
+backend/src/main/resources/db/migration/
 ├── V1__initial_schema.sql
 ├── V2__insert_roles.sql
 └── V3__insert_admin_user.sql

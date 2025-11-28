@@ -49,22 +49,22 @@ docs/CLOUD_DEPLOYMENT_ANALYSIS.md
 
 ```java
 // 1. Crear exception classes
-backend-springboot/src/main/java/io/sunbit/app/exception/
+backend/src/main/java/io/sunbit/app/exception/
 ├─ ResourceNotFoundException.java
 ├─ BadRequestException.java
 ├─ UnauthorizedException.java
 └─ InternalServerException.java
 
 // 2. GlobalExceptionHandler
-backend-springboot/src/main/java/io/sunbit/app/exception/
+backend/src/main/java/io/sunbit/app/exception/
 └─ GlobalExceptionHandler.java
 
 // 3. Error response DTO
-backend-springboot/src/main/java/io/sunbit/app/dto/
+backend/src/main/java/io/sunbit/app/dto/
 └─ ErrorResponse.java
 
 // 4. Actualizar todos los controllers
-backend-springboot/src/main/java/io/sunbit/app/controller/
+backend/src/main/java/io/sunbit/app/controller/
 ├─ EmployeeControllerImpl.java
 ├─ ExpenseControllerImpl.java
 ├─ PayrollControllerImpl.java
@@ -72,7 +72,7 @@ backend-springboot/src/main/java/io/sunbit/app/controller/
 // → Agregar @Valid y manejo de excepciones
 
 // 5. Actualizar todos los services
-backend-springboot/src/main/java/io/sunbit/app/service/
+backend/src/main/java/io/sunbit/app/service/
 ├─ EmployeeService.java
 ├─ ExpenseService.java
 ├─ PayrollService.java
@@ -80,7 +80,7 @@ backend-springboot/src/main/java/io/sunbit/app/service/
 // → Agregar try-catch y validaciones
 
 // 6. Tests para excepciones
-backend-springboot/src/test/java/...
+backend/src/test/java/...
 └─ exception/ExceptionHandlingTests.java
 ```
 
@@ -90,15 +90,15 @@ backend-springboot/src/test/java/...
 
 ```java
 // 1. DataLoader para roles iniciales
-backend-springboot/src/main/java/io/sunbit/app/config/
+backend/src/main/java/io/sunbit/app/config/
 └─ RoleDataLoader.java
 
 // 2. Signup endpoint
-backend-springboot/src/main/java/io/sunbit/app/controller/
+backend/src/main/java/io/sunbit/app/controller/
 └─ AuthController.java (nuevo)
 
 // 3. DTOs
-backend-springboot/src/main/java/io/sunbit/app/dto/
+backend/src/main/java/io/sunbit/app/dto/
 ├─ SignUpRequest.java (nuevo)
 └─ SignUpResponse.java (nuevo)
 
@@ -109,7 +109,7 @@ frontend/src/components/
 // → Mejorar error handling
 
 // 5. Initial data script
-backend-springboot/src/main/resources/db/
+backend/src/main/resources/db/
 └─ init-roles.sql (opcional)
 ```
 
@@ -119,7 +119,7 @@ backend-springboot/src/main/resources/db/
 
 ```bash
 # 1. Verificar Dockerfile
-backend-springboot/Dockerfile
+backend/Dockerfile
 └─ Multi-stage build optimizado
 
 # 2. Create production env template

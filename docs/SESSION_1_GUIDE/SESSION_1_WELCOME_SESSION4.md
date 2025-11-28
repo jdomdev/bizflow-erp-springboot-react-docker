@@ -75,7 +75,7 @@ docs/
 ```
 1. Abre: docs/EXCEPTION_HANDLING_PLAN.md
 2. Copia: Código de "Implementation" section
-3. Pega: En tu backend-springboot/src/main/java/...
+3. Pega: En tu backend/src/main/java/...
 4. Sigue: Paso-a-paso
 ```
 
@@ -90,7 +90,7 @@ docs/
 
 ```bash
 # Crear archivos necesarios
-mkdir -p backend-springboot/src/main/java/io/sunbit/app/exception/
+mkdir -p backend/src/main/java/io/sunbit/app/exception/
 touch GlobalExceptionHandler.java
 touch ResourceNotFoundException.java
 # ... + 3 más exceptions
@@ -104,7 +104,7 @@ touch ResourceNotFoundException.java
 
 ```bash
 # Crear DataLoader para roles iniciales
-mkdir -p backend-springboot/src/main/java/io/sunbit/app/config/
+mkdir -p backend/src/main/java/io/sunbit/app/config/
 touch RoleDataLoader.java
 
 # Crear endpoint de signup
@@ -235,17 +235,17 @@ cat docs/EXCEPTION_HANDLING_PLAN.md | head -100
 ### Paso 3: Comienza implementación
 ```bash
 # Crear directorio para excepciones
-mkdir -p backend-springboot/src/main/java/io/sunbit/app/exception/
+mkdir -p backend/src/main/java/io/sunbit/app/exception/
 
 # Crear el primer archivo
-cat > backend-springboot/src/main/java/io/sunbit/app/exception/ResourceNotFoundException.java << 'EOF'
+cat > backend/src/main/java/io/sunbit/app/exception/ResourceNotFoundException.java << 'EOF'
 # ... (copiar de EXCEPTION_HANDLING_PLAN.md)
 EOF
 ```
 
 ### Paso 4: Verifica que compile
 ```bash
-cd backend-springboot
+cd backend
 mvn clean compile
 ```
 
