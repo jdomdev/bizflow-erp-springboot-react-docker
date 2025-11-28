@@ -87,7 +87,7 @@ He creado **6 documentos extensos** (3,500+ líneas) en `/docs/` para documentar
 ### Opción 3: Desarrollo Inmediato
 ```bash
 1. Lee: /docs/SESSION_6_ROADMAP.md (FASE 1)
-2. Ve al código: backend-springboot/src/main/java/...
+2. Ve al código: backend/src/main/java/...
 3. Empieza a desarrollar dashboard
 ```
 

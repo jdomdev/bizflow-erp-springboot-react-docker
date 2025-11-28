@@ -125,7 +125,7 @@ docker-compose down -v
 ### Ubicación
 
 ```
-backend-springboot/Dockerfile
+backend/Dockerfile
 ```
 
 ### Características
@@ -152,7 +152,7 @@ FROM eclipse-temurin:21-jre-alpine
 
 ```bash
 # Compilar imagen
-docker build -t expense-backend:1.1.0 ./backend-springboot
+docker build -t expense-backend:1.1.0 ./backend
 
 # Ejecutar container
 docker run -d \
@@ -289,7 +289,7 @@ Usuarios:
 
 **3. Backend Spring Boot**
 ```yaml
-Build: Desde ./backend-springboot/Dockerfile
+Build: Desde ./backend/Dockerfile
 Puerto: 8080
 Depende de: postgres (service_healthy)
 Volumen: logs directory
@@ -471,7 +471,7 @@ Ejecuta automáticamente:
 # Terminal dentro del container
 
 # Backend
-cd backend-springboot
+cd backend
 mvn clean compile     # Verificar
 mvn spring-boot:run   # Ejecutar
 
@@ -604,7 +604,7 @@ docker-compose build --no-cache
 docker-compose build backend --verbose
 
 # Verificar Dockerfile
-docker build --rm -f backend-springboot/Dockerfile ./backend-springboot
+docker build --rm -f backend/Dockerfile ./backend
 ```
 
 ### Error: "Health check failed"

@@ -28,7 +28,7 @@ target frontend: failed to solve: process "/bin/sh -c npm ci" did not complete s
 
 **Solutions Applied:**
 ```
-backend-springboot/src/main/java/io/sunbit/app/security/configuration/AppSecurityConfig.java
+backend/src/main/java/io/sunbit/app/security/configuration/AppSecurityConfig.java
 ├─ Convert postcss.config.js to ES Module syntax
 ├─ Fix vite.config.js __dirname with fileURLToPath utility
 ├─ Pin exact versions in package.json (remove carets)
@@ -404,7 +404,7 @@ docker-compose exec -T postgres pg_isready -U postgres
 - [ ] Test filtering/pagination if implemented
 
 #### 3. **Unit & Integration Tests** ✅
-- [ ] Run existing tests in `backend-springboot/src/test/java/`
+- [ ] Run existing tests in `backend/src/test/java/`
 - [ ] Review test coverage
 - [ ] Fix any failing tests
 - [ ] Add tests for:
@@ -414,12 +414,12 @@ docker-compose exec -T postgres pg_isready -U postgres
   - JWT authentication (if applicable)
 
 **Test Files Location:**
-- Employee Tests: `backend-springboot/src/test/java/io/sunbit/app/test/employee/EmployeeTest.java`
-- User Tests: `backend-springboot/src/test/java/io/sunbit/app/test/user/UserTest.java`
-- Role Tests: `backend-springboot/src/test/java/io/sunbit/app/test/user/RoleTest.java`
-- Expense Tests: `backend-springboot/src/test/java/io/sunbit/app/test/expense/ExpenseTest.java`
-- DAO Tests: `backend-springboot/src/test/java/io/sunbit/app/security/dao/`
-- App Tests: `backend-springboot/src/test/java/io/sunbit/app/test/ExpenseNoteAppApplicationTests.java`
+- Employee Tests: `backend/src/test/java/io/sunbit/app/test/employee/EmployeeTest.java`
+- User Tests: `backend/src/test/java/io/sunbit/app/test/user/UserTest.java`
+- Role Tests: `backend/src/test/java/io/sunbit/app/test/user/RoleTest.java`
+- Expense Tests: `backend/src/test/java/io/sunbit/app/test/expense/ExpenseTest.java`
+- DAO Tests: `backend/src/test/java/io/sunbit/app/security/dao/`
+- App Tests: `backend/src/test/java/io/sunbit/app/test/ExpenseNoteAppApplicationTests.java`
 
 #### 4. **Create PR to dev Branch** 🔀
 - [ ] Create Pull Request: `fix/api-endpoint-authorization` → `dev`

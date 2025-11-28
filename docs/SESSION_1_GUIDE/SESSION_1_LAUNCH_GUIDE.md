@@ -63,7 +63,7 @@ cd expense-note-app-springboot
 createdb expense_note_app
 
 # 3. Editar configuración (reemplazar valores)
-cd backend-springboot
+cd backend
 # Editar: src/main/resources/application.properties
 # Cambiar: spring.datasource.username y password
 
@@ -135,7 +135,7 @@ REM Salir
 ### Paso 3: Configurar Backend Spring Boot
 
 ```bash
-cd backend-springboot
+cd backend
 ```
 
 Abrir `src/main/resources/application.properties`:
@@ -178,7 +178,7 @@ openssl rand -base64 32
 ### Paso 4: Compilar Backend
 
 ```bash
-cd backend-springboot
+cd backend
 mvn clean compile
 ```
 
@@ -222,7 +222,7 @@ npm install
 #### Terminal 1: Backend Spring Boot
 
 ```bash
-cd backend-springboot
+cd backend
 mvn spring-boot:run
 ```
 
@@ -258,7 +258,7 @@ VITE v5.0.0 ready in XXX ms
 #!/bin/bash
 
 # Backend en background
-cd backend-springboot
+cd backend
 mvn spring-boot:run &
 BACKEND_PID=$!
 
@@ -284,7 +284,7 @@ wait
 @echo off
 
 REM Backend en terminal separada
-start "ExpenseNoteApp Backend" cmd /k "cd backend-springboot && mvn spring-boot:run"
+start "ExpenseNoteApp Backend" cmd /k "cd backend && mvn spring-boot:run"
 
 REM Frontend en terminal separada
 start "ExpenseNoteApp Frontend" cmd /k "cd frontend && npm install && npm run dev"
@@ -442,7 +442,7 @@ npm run dev
 ### Error: "BUILD FAILURE" en Backend
 
 ```bash
-cd backend-springboot
+cd backend
 mvn clean compile -U
 
 # Si persiste, verificar:
@@ -552,7 +552,7 @@ ExpenseNoteApp v1.1.0
 # Vite reinicia automáticamente al cambiar archivos
 
 # Ver logs en tiempo real
-tail -f backend-springboot/logs/*.log
+tail -f backend/logs/*.log
 ```
 
 ### Testing API
@@ -588,7 +588,7 @@ Si tienes problemas:
 2. Revisa [ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md) para problemas técnicos
 3. Abre un issue en GitHub con detalles del error
 4. Verifica logs:
-   - Backend: `backend-springboot/logs/`
+   - Backend: `backend/logs/`
    - Frontend: Browser DevTools (F12)
 
 ---

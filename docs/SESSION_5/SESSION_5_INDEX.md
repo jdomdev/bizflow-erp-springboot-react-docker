@@ -117,7 +117,7 @@ docs/
 3. [SESSION_5_DEBUGGING_GUIDE.md](./SESSION_5_DEBUGGING_GUIDE.md) (20 min)
 4. [SESSION_5_README_IMPROVED.md](./SESSION_5_README_IMPROVED.md) (15 min)
 5. [SESSION_6_ROADMAP.md](./SESSION_6_ROADMAP.md) (30 min)
-6. Código: Analizar `backend-springboot/src/main/java/io/sunbit/app/security/`
+6. Código: Analizar `backend/src/main/java/io/sunbit/app/security/`
 
 ---
 

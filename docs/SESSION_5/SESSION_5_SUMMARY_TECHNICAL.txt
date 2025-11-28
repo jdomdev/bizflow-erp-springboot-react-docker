@@ -401,7 +401,7 @@ Recurso más visitado cuando falla algo:
 ================================================================================
 
 Para setup de base de datos y aplicación:
-  - Ver: .env.example (en backend-springboot/)
+  - Ver: .env.example (en backend/)
   - Copiar: cp .env.example .env
   - Editar: Ajustar valores según tu ambiente
 

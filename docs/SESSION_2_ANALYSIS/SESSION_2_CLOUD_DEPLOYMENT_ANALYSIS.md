@@ -135,7 +135,7 @@ Usuarios/mes | Render | Railway | AWS (pago) | Supabase | Firebase
 ### Paso 1: Preparar Repositorio
 ```bash
 # Asegurarse de que Dockerfile está listo
-# Backend: backend-springboot/Dockerfile
+# Backend: backend/Dockerfile
 # Frontend: frontend/Dockerfile
 
 # .env.production debe tener variables para cloud

@@ -89,7 +89,7 @@ cd /home/bytetech/code/java/ExpenseNoteApp
 docker-compose exec backend bash -c "cd . && mvn test"
 
 # View test results
-# Results will be in: backend-springboot/target/surefire-reports/
+# Results will be in: backend/target/surefire-reports/
 ```
 
 ### Phase 4: Create Pull Request 🔀
@@ -224,7 +224,7 @@ docker-compose exec postgres psql -U postgres -d expense_note_app -c "\dt"
   3. Or import seed data from SQL scripts
 
 ### Configuration Files
-- **Backend Config:** `backend-springboot/src/main/resources/application.properties`
+- **Backend Config:** `backend/src/main/resources/application.properties`
 - **Docker Compose:** `docker-compose.yml`
 - **Frontend Config:** `frontend/vite.config.js`, `frontend/.env.development`
 

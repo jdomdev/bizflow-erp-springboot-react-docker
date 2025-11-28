@@ -21,7 +21,7 @@ Implementar un sistema robusto de manejo de excepciones en el backend Java/Sprin
 
 ### 1. Custom Exception Classes
 
-Crear excepciones personalizadas en `backend-springboot/src/main/java/io/sunbit/app/exception/`:
+Crear excepciones personalizadas en `backend/src/main/java/io/sunbit/app/exception/`:
 
 ```java
 // RuntimeException personalizadas
