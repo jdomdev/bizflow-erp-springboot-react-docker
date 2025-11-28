@@ -218,7 +218,7 @@ docker-compose ps
 # Cmd/Ctrl+Shift+P → "Dev Containers: Open Folder in Container"
 
 # 2. Terminal dentro del container
-cd backend-springboot
+cd backend
 mvn spring-boot:run
 
 # 3. En otra terminal

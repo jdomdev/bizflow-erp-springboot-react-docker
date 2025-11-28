@@ -5,7 +5,7 @@
 ### 1. Java Version Mismatch
 - **Before:** pom.xml = Java 21, Runtime = Java 17
 - **After:** pom.xml = Java 17, Runtime = Java 17 ✅
-- **File:** `backend-springboot/pom.xml`
+- **File:** `backend/pom.xml`
 - **Commit:** `2e23899` - fix(build): Update Java version from 21 to 17
 
 ### 2. Documentation Issues
