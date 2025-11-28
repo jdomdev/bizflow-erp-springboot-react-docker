@@ -10,7 +10,7 @@ Total Files: 9 commits, 4,300+ lines added
 
 ### Backend Infrastructure
 ```
-✨ NEW: backend-springboot/Dockerfile (31 lines)
+✨ NEW: backend/Dockerfile (31 lines)
    - Multi-stage Maven builder → Java 21 JRE
    - Non-root user 'spring' (UID: 1000)
    - Health check: curl to /actuator/health
@@ -147,7 +147,7 @@ Total Files: 9 commits, 4,300+ lines added
 
 ### Dependency Management
 ```
-✏️ MODIFIED: backend-springboot/pom.xml (40 dependency updates)
+✏️ MODIFIED: backend/pom.xml (40 dependency updates)
    - Spring Boot: 2.7.18 → 3.3.4
    - Spring Framework: 5.3.x → 6.1.13
    - Spring Security: 5.8.x → 6.3.3
@@ -163,23 +163,23 @@ Total Files: 9 commits, 4,300+ lines added
 
 ### Java Source Files (Jakarta Migration)
 ```
-✏️ MODIFIED: backend-springboot/src/main/java/.../ExpenseNoteAppApplication.java
+✏️ MODIFIED: backend/src/main/java/.../ExpenseNoteAppApplication.java
    - Updated imports (javax → jakarta)
 
-✏️ MODIFIED: backend-springboot/src/main/java/.../controller/*.java (6 files)
+✏️ MODIFIED: backend/src/main/java/.../controller/*.java (6 files)
    - Updated servlet imports
    - Updated framework imports
 
-✏️ MODIFIED: backend-springboot/src/main/java/.../dao/*.java
+✏️ MODIFIED: backend/src/main/java/.../dao/*.java
    - Updated imports for jakarta
 
-✏️ MODIFIED: backend-springboot/src/main/java/.../dto/*.java
+✏️ MODIFIED: backend/src/main/java/.../dto/*.java
    - Updated imports
 
-✏️ MODIFIED: backend-springboot/src/main/java/.../entity/*.java
+✏️ MODIFIED: backend/src/main/java/.../entity/*.java
    - Updated imports
 
-✏️ MODIFIED: backend-springboot/src/main/java/.../security/*.java
+✏️ MODIFIED: backend/src/main/java/.../security/*.java
    - JWT authentication refactored
    - JJWT 0.12.6 API migration
    - Security logging added
@@ -407,7 +407,7 @@ docker-compose up -d
 ```
 Location: Root directory
 - docker-compose.yml              (Orchestration)
-- backend-springboot/Dockerfile   (Backend image)
+- backend/Dockerfile   (Backend image)
 - frontend/Dockerfile             (Frontend image)
 - frontend/nginx.conf             (Web server config)
 ```
@@ -433,10 +433,10 @@ Location: docs/ and root
 
 ### Source Files
 ```
-Backend: backend-springboot/src/main/java/.../
+Backend: backend/src/main/java/.../
 Frontend: frontend/src/
-Tests: backend-springboot/src/test/
-Resources: backend-springboot/src/main/resources/
+Tests: backend/src/test/
+Resources: backend/src/main/resources/
 ```
 
 ---

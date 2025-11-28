@@ -84,10 +84,10 @@ cd ExpenseNoteApp
 
 # 2. Configurar base de datos
 createdb expense_note_app
-# Editar backend-springboot/src/main/resources/application.properties
+# Editar backend/src/main/resources/application.properties
 
 # 3. Iniciar backend
-cd backend-springboot
+cd backend
 mvn spring-boot:run
 # Backend disponible en http://localhost:8080
 
