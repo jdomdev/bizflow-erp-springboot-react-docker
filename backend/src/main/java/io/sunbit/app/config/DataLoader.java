@@ -70,21 +70,21 @@ public class DataLoader implements ApplicationRunner {
     private void createDefaultRoles() {
         try {
             // Create ADMIN role
-            if (!roleRepository.findByName("ADMIN").isPresent()) {
+            if (roleRepository.findByName("ADMIN").isEmpty()) {
                 Role adminRole = new Role("ADMIN");
                 roleRepository.save(adminRole);
                 log.info("✓ ADMIN role created");
             }
 
             // Create USER role
-            if (!roleRepository.findByName("USER").isPresent()) {
+            if (roleRepository.findByName("USER").isEmpty()) {
                 Role userRole = new Role("USER");
                 roleRepository.save(userRole);
                 log.info("✓ USER role created");
             }
 
             // Create MANAGER role
-            if (!roleRepository.findByName("MANAGER").isPresent()) {
+            if (roleRepository.findByName("MANAGER").isEmpty()) {
                 Role managerRole = new Role("MANAGER");
                 roleRepository.save(managerRole);
                 log.info("✓ MANAGER role created");

@@ -9,6 +9,10 @@ WORKDIR /app
 # Update npm to latest
 RUN npm install -g npm@latest
 
+# Build arguments
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Copy package files
 COPY package*.json ./
 
@@ -43,9 +47,9 @@ RUN echo "OK" > /usr/share/nginx/html/health/index.html
 
 # Create cache and temp directories with proper permissions
 RUN mkdir -p /var/cache/nginx/client_temp /var/run/nginx \
-    && chmod -R 777 /var/cache/nginx /var/run/nginx \
-    && touch /var/run/nginx.pid \
-    && chmod 666 /var/run/nginx.pid
+  && chmod -R 777 /var/cache/nginx /var/run/nginx \
+  && touch /var/run/nginx.pid \
+  && chmod 666 /var/run/nginx.pid
 
 # Create non-root user (handle if it already exists)
 RUN addgroup -g 1000 appuser && adduser -D -u 1000 -G appuser appuser || true

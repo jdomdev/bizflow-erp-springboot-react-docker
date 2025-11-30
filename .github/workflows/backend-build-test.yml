@@ -102,7 +102,7 @@ jobs:
       run: |
         cd backend
         mvn clean verify sonar:sonar \
-          -Dsonar.projectKey=ExpenseNoteApp \
+          -Dsonar.projectKey=BizflowERP \
           -Dsonar.sources=src/main \
           -Dsonar.exclusions='src/test/**'
       if: env.SONAR_TOKEN != ''
