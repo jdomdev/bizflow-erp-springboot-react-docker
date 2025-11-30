@@ -119,7 +119,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 		Optional<ExpenseUser> optionalUser = userDao.findByEmail(userEmail);
-		if (optionalUser == null || optionalUser.isEmpty())
+		if (optionalUser.isEmpty())
 			throw new UsernameNotFoundException("User or Password INVALIDS");
 		return optionalUser.get();
 	}
@@ -132,12 +132,8 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	public Optional<ExpenseUser> findByEmail(String email) throws Exception {
-		ExpenseUser searchedUser = null;
 		Optional<ExpenseUser> optionalUser = userDao.findByEmail(email);
-		if (!optionalUser.isEmpty()) {
-			searchedUser = optionalUser.get();
-		}
-		return Optional.ofNullable(searchedUser);
+		return optionalUser;
 	}
 
 	@Override
@@ -156,7 +152,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		Optional<ExpenseUser> optUser = userDao.findById(id);
-		if (optUser != null) {
+		if (optUser.isPresent()) {
 			optUser.get().getRoles().clear();
 			userDao.delete(optUser.get());
 			isDeleted = true;

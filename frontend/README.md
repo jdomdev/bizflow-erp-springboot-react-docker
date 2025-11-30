@@ -1,4 +1,4 @@
-# ExpenseNote App - Frontend
+# Bizflow ERP - Frontend
 
 Frontend moderno, profesional y responsivo para el Sistema de Control de Gastos Empresariales.
 
@@ -180,7 +180,7 @@ Este proyecto está bajo la licencia GPLv3.
 
 ## 👨‍💻 Autores
 
-- ExpenseNote App Team
+- Bizflow ERP Team
 
 ---
 

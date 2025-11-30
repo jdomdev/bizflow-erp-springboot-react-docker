@@ -11,7 +11,7 @@ function SettingsPage() {
     >
       <div>
         <h1 className="gradient-text text-4xl font-bold">Configuración</h1>
-        <p className="mt-2 text-slate-400">Personaliza tu experiencia en ExpenseNote</p>
+        <p className="mt-2 text-slate-400">Personaliza tu experiencia en Bizflow ERP</p>
       </div>
 
       <Card className="p-8 text-center">

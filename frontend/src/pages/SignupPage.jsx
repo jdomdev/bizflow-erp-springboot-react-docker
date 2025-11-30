@@ -116,7 +116,7 @@ function SignupPage() {
         {/* Logo */}
         <motion.div variants={itemVariants} className="text-center mb-8">
           <h1 className="gradient-text text-3xl font-bold mb-2">Crear Cuenta</h1>
-          <p className="text-slate-400">Únete a ExpenseNote hoy</p>
+          <p className="text-slate-400">Únete a Bizflow ERP hoy</p>
         </motion.div>
 
         {/* Signup Card */}

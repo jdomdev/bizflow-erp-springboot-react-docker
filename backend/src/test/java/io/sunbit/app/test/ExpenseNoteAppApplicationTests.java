@@ -6,7 +6,7 @@ package io.sunbit.app.test;
  * import org.springframework.boot.test.context.SpringBootTest;
  * 
  * @SpringBootTest
- * class ExpenseNoteAppApplicationTests {
+ * class BizflowErpApplicationTests {
  * 
  * @Test
  * void contextLoads() {

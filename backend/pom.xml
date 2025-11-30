@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.sunbit</groupId>
-	<artifactId>expensenoteapp</artifactId>
+	<artifactId>bizflowerp</artifactId>
 	<version>1.1.0</version>
-	<name>ExpenseNoteApp</name>
+	<name>BizflowERP</name>
 	<description>Spring Boot project for company expense note of employees</description>
 	<properties>
 		<spring.version>6.1.13</spring.version>
@@ -73,7 +73,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 		  <groupId>org.modelmapper</groupId>
 		  <artifactId>modelmapper</artifactId>

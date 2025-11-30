@@ -1,12 +1,15 @@
-# ENTERPRISE EXPENSE MANAGEMENT SYSTEM
 
-**Expense Note App v1.1.0** - Una aplicación moderna para gestión de gastos empresariales con backend Spring Boot 3.3.4 y frontend React 18.
+# BIZFLOW ERP
+
+**Bizflow ERP v1.1.0** - Una aplicación moderna para gestión de gastos empresariales con backend Spring Boot 3.3.4 y frontend React 18.
 
 ## 🎯 Descripción General
 
-ExpenseNoteApp es una solución completa para la administración de gastos corporativos que permite a los empleados gestionar sus reportes de gastos y nómina. Combina un backend robusto en Spring Boot 3 con un frontend moderno en React, proporcionando una experiencia de usuario profesional y segura.
 
-**Nota**: Esta versión (1.1.0) incluye una actualización importante desde Spring Boot 2.7.18 → 3.3.4, con todas las dependencias actualizadas a las versiones más seguras.
+Bizflow ERP es una solución completa para la administración de gastos corporativos que permite a los empleados gestionar sus reportes de gastos y nómina. Combina un backend robusto en Spring Boot 3 con un frontend moderno en React, proporcionando una experiencia de usuario profesional y segura.
+
+
+**Nota**: Esta versión (1.1.0) incluye una actualización importante desde Spring Boot 2.7.18 → 3.3.4, con todas las dependencias actualizadas a las versiones más seguras. El backend utiliza **Java 17 LTS** (no Java 21).
 
 ## 📚 Documentación
 
@@ -79,8 +82,8 @@ psql --version
 
 ```bash
 # 1. Clonar repositorio
-git clone https://github.com/yourusername/ExpenseNoteApp.git
-cd ExpenseNoteApp
+git clone https://github.com/yourusername/BizflowERP.git
+cd BizflowERP
 
 # 2. Configurar base de datos
 createdb expense_note_app
