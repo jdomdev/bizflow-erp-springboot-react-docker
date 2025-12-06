@@ -4,6 +4,8 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import { userService, roleService } from '../services/api';
 
+const SUCCESS_MESSAGE_TIMEOUT = 3000;
+
 export default function UserManagementPage() {
   const [users, setUsers] = useState([]);
   const [roles, setRoles] = useState([]);
@@ -66,7 +68,7 @@ export default function UserManagementPage() {
       await userService.assignRole(selectedUser.id, roleId);
       setSuccess('Rol asignado correctamente');
       await loadUserRoles(selectedUser.id);
-      setTimeout(() => setSuccess(''), 3000);
+      setTimeout(() => setSuccess(''), SUCCESS_MESSAGE_TIMEOUT);
     } catch (err) {
       setError('Error al asignar rol: ' + (err.response?.data?.error || err.message));
     } finally {
@@ -82,7 +84,7 @@ export default function UserManagementPage() {
       await userService.removeRole(selectedUser.id, roleId);
       setSuccess('Rol eliminado correctamente');
       await loadUserRoles(selectedUser.id);
-      setTimeout(() => setSuccess(''), 3000);
+      setTimeout(() => setSuccess(''), SUCCESS_MESSAGE_TIMEOUT);
     } catch (err) {
       setError('Error al eliminar rol: ' + (err.response?.data?.error || err.message));
     } finally {

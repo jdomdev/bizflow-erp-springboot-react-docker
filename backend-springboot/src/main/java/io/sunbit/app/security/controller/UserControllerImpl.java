@@ -2,6 +2,8 @@ package io.sunbit.app.security.controller;
 
 import jakarta.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,9 @@ import io.sunbit.app.security.service.UserServiceImpl;
 @CrossOrigin(origins = "*")
 @RequestMapping("api/v1/user")
 public class UserControllerImpl implements IUserController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerImpl.class);
+	
 	@Lazy
 	@Autowired
 	private UserServiceImpl userService;
@@ -35,7 +40,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error retrieving all users", e);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. Please, Try it later. It is NOT possible to SHOW all the users\"}");
 		}
@@ -48,7 +53,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.findById(userId));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error retrieving user with id: {}", userId, e);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the user who you find.\"}");
 		}
@@ -61,7 +66,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error saving user", e);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SAVE the user.\"}");
 		}
@@ -75,7 +80,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.update(userId, user));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error updating user with id: {}", userId, e);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
 					"{\"error\":\"Error. Please, Try it later. it is NOT possible UPDATE the user who you looking for.\"}");
 		}
@@ -88,7 +93,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.delete(userId));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error deleting user with id: {}", userId, e);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
 					"{\"error\":\"Error. Please, Try it later. It is NOT possible DELETE the user who you looking for.\"}");
 		}
@@ -102,7 +107,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.assignRoleToUser(userId, roleId));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error assigning role {} to user {}", roleId, userId, e);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"error\":\"Error. Could not assign role to user: " + e.getMessage() + "\"}");
 		}
@@ -116,7 +121,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.removeRoleFromUser(userId, roleId));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error removing role {} from user {}", roleId, userId, e);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"error\":\"Error. Could not remove role from user: " + e.getMessage() + "\"}");
 		}
@@ -129,7 +134,7 @@ public class UserControllerImpl implements IUserController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.getUserRoles(userId));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Error retrieving roles for user {}", userId, e);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. Could not retrieve user roles: " + e.getMessage() + "\"}");
 		}
