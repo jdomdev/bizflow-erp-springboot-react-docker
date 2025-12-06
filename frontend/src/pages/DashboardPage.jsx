@@ -7,7 +7,6 @@ import LineChart from '../components/charts/LineChart';
 import BarChart from '../components/charts/BarChart';
 import DoughnutChart from '../components/charts/DoughnutChart';
 import DateRangeFilter from '../components/filters/DateRangeFilter';
-import SelectFilter from '../components/filters/SelectFilter';
 import { useExpenseStore, usePayrollStore } from '../store/authStore';
 import { expenseService, payrollService } from '../services/api';
 import { getLastNMonths, isSameMonth } from '../utils/dateUtils';
@@ -39,7 +38,6 @@ function DashboardPage() {
   // Filter states
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
 
   useEffect(() => {
     loadData();
@@ -108,11 +106,10 @@ function DashboardPage() {
       
       if (startDate && expDate < new Date(startDate)) return false;
       if (endDate && expDate > new Date(endDate)) return false;
-      if (statusFilter && expense.status !== statusFilter) return false;
       
       return true;
     });
-  }, [expenses, startDate, endDate, statusFilter]);
+  }, [expenses, startDate, endDate]);
 
   // Prepare chart data for monthly trend
   const monthlyTrendData = useMemo(() => {
@@ -273,19 +270,12 @@ function DashboardPage() {
         >
           <Card className="p-6">
             <h3 className="text-lg font-semibold text-white mb-4">Filtros Avanzados</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <DateRangeFilter
                 startDate={startDate}
                 endDate={endDate}
                 onStartDateChange={setStartDate}
                 onEndDateChange={setEndDate}
-              />
-              <SelectFilter
-                value={statusFilter}
-                onChange={setStatusFilter}
-                options={statusOptions}
-                label="Estado"
-                placeholder="Todos los estados"
               />
               <div className="flex items-end">
                 <Button
@@ -293,7 +283,6 @@ function DashboardPage() {
                   onClick={() => {
                     setStartDate('');
                     setEndDate('');
-                    setStatusFilter('');
                   }}
                   className="w-full"
                 >
@@ -397,21 +386,18 @@ function DashboardPage() {
                   <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
                     Fecha
                   </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
-                    Estado
-                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-700">
                 {isLoading ? (
                   <tr>
-                    <td colSpan="4" className="px-6 py-8 text-center text-slate-400">
+                    <td colSpan="3" className="px-6 py-8 text-center text-slate-400">
                       Cargando gastos...
                     </td>
                   </tr>
                 ) : filteredExpenses.length === 0 ? (
                   <tr>
-                    <td colSpan="4" className="px-6 py-8 text-center text-slate-400">
+                    <td colSpan="3" className="px-6 py-8 text-center text-slate-400">
                       No hay gastos registrados
                     </td>
                   </tr>
@@ -424,20 +410,6 @@ function DashboardPage() {
                       </td>
                       <td className="px-6 py-4 text-slate-400">
                         {new Date(expense.date).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span 
-                          className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                            expense.status === 'APPROVED' 
-                              ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                              : expense.status === 'REJECTED'
-                              ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                              : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                          }`}
-                        >
-                          {expense.status === 'APPROVED' ? 'Aprobado' : 
-                           expense.status === 'REJECTED' ? 'Rechazado' : 'Pendiente'}
-                        </span>
                       </td>
                     </tr>
                   ))

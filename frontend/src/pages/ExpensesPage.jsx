@@ -4,19 +4,13 @@ import {
   Plus, 
   Edit2, 
   Trash2, 
-  Filter, 
-  Download, 
-  CheckCircle, 
-  XCircle,
-  Clock,
-  Search
+  Filter
 } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import ConfirmDialog from '../components/ConfirmDialog';
 import DateRangeFilter from '../components/filters/DateRangeFilter';
-import SelectFilter from '../components/filters/SelectFilter';
 import SearchFilter from '../components/filters/SearchFilter';
 import { useExpenseStore } from '../store/authStore';
 import { expenseService } from '../services/api';
@@ -48,7 +42,6 @@ function ExpensesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
 
   // Form states
   const [formData, setFormData] = useState({
@@ -86,12 +79,10 @@ function ExpensesPage() {
       const matchesDateRange = 
         (!startDate || expDate >= new Date(startDate)) &&
         (!endDate || expDate <= new Date(endDate));
-      
-      const matchesStatus = !statusFilter || expense.status === statusFilter;
 
-      return matchesSearch && matchesDateRange && matchesStatus;
+      return matchesSearch && matchesDateRange;
     });
-  }, [expenses, searchTerm, startDate, endDate, statusFilter]);
+  }, [expenses, searchTerm, startDate, endDate]);
 
   const handleOpenModal = (expense = null) => {
     if (expense) {
@@ -190,58 +181,10 @@ function ExpensesPage() {
     }
   };
 
-  const handleApprove = async (id) => {
-    try {
-      const response = await expenseService.approve(id);
-      updateExpense(id, response.data);
-    } catch (error) {
-      console.error('Error aprobando gasto:', error);
-    }
-  };
-
-  const handleReject = async (id) => {
-    try {
-      const response = await expenseService.reject(id);
-      updateExpense(id, response.data);
-    } catch (error) {
-      console.error('Error rechazando gasto:', error);
-    }
-  };
-
   const clearFilters = () => {
     setSearchTerm('');
     setStartDate('');
     setEndDate('');
-    setStatusFilter('');
-  };
-
-  const statusOptions = [
-    { value: 'PENDING', label: 'Pendiente' },
-    { value: 'APPROVED', label: 'Aprobado' },
-    { value: 'REJECTED', label: 'Rechazado' },
-  ];
-
-  const getStatusBadge = (status) => {
-    const styles = {
-      APPROVED: 'bg-green-500/20 text-green-400 border-green-500/30',
-      REJECTED: 'bg-red-500/20 text-red-400 border-red-500/30',
-      PENDING: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-    };
-
-    const labels = {
-      APPROVED: 'Aprobado',
-      REJECTED: 'Rechazado',
-      PENDING: 'Pendiente',
-    };
-
-    return (
-      <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium border ${styles[status] || styles.PENDING}`}>
-        {status === 'APPROVED' && <CheckCircle className="h-4 w-4" />}
-        {status === 'REJECTED' && <XCircle className="h-4 w-4" />}
-        {status === 'PENDING' && <Clock className="h-4 w-4" />}
-        {labels[status] || 'Pendiente'}
-      </span>
-    );
   };
 
   return (
@@ -280,7 +223,7 @@ function ExpensesPage() {
         >
           <Card className="p-6">
             <h3 className="text-lg font-semibold text-white mb-4">Filtros Avanzados</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <SearchFilter
                 value={searchTerm}
                 onChange={setSearchTerm}
@@ -292,13 +235,6 @@ function ExpensesPage() {
                 endDate={endDate}
                 onStartDateChange={setStartDate}
                 onEndDateChange={setEndDate}
-              />
-              <SelectFilter
-                value={statusFilter}
-                onChange={setStatusFilter}
-                options={statusOptions}
-                label="Estado"
-                placeholder="Todos los estados"
               />
               <div className="flex items-end">
                 <Button
@@ -333,9 +269,6 @@ function ExpensesPage() {
                   Fecha
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
-                  Estado
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-slate-300">
                   Acciones
                 </th>
               </tr>
@@ -343,13 +276,13 @@ function ExpensesPage() {
             <tbody className="divide-y divide-slate-700">
               {isLoading ? (
                 <tr>
-                  <td colSpan="6" className="px-6 py-8 text-center text-slate-400">
+                  <td colSpan="5" className="px-6 py-8 text-center text-slate-400">
                     Cargando gastos...
                   </td>
                 </tr>
               ) : filteredExpenses.length === 0 ? (
                 <tr>
-                  <td colSpan="6" className="px-6 py-8 text-center text-slate-400">
+                  <td colSpan="5" className="px-6 py-8 text-center text-slate-400">
                     No hay gastos que coincidan con los filtros
                   </td>
                 </tr>
@@ -367,28 +300,7 @@ function ExpensesPage() {
                       {new Date(expense.date).toLocaleDateString('es-ES')}
                     </td>
                     <td className="px-6 py-4">
-                      {getStatusBadge(expense.status)}
-                    </td>
-                    <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        {expense.status === 'PENDING' && (
-                          <>
-                            <button
-                              onClick={() => handleApprove(expense.id)}
-                              className="p-2 text-green-400 hover:bg-green-500/20 rounded-lg transition"
-                              title="Aprobar"
-                            >
-                              <CheckCircle className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => handleReject(expense.id)}
-                              className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg transition"
-                              title="Rechazar"
-                            >
-                              <XCircle className="h-4 w-4" />
-                            </button>
-                          </>
-                        )}
                         <button
                           onClick={() => handleOpenModal(expense)}
                           className="p-2 text-blue-400 hover:bg-blue-500/20 rounded-lg transition"
