@@ -43,22 +43,31 @@ export const authService = {
 
 // Servicios de gastos
 export const expenseService = {
-  getAll: () => apiClient.get('/expenses'),
-  getById: (id) => apiClient.get(`/expenses/${id}`),
-  create: (data) => apiClient.post('/expenses', data),
-  update: (id, data) => apiClient.put(`/expenses/${id}`, data),
-  delete: (id) => apiClient.delete(`/expenses/${id}`),
+  getAll: () => apiClient.get('/expense/'),
+  getById: (id) => apiClient.get(`/expense/${id}`),
+  getByStatus: (status) => apiClient.get(`/expense/status/${status}`),
+  create: (data) => apiClient.post('/expense/', data),
+  update: (id, data) => apiClient.put(`/expense/${id}`, data),
+  delete: (id) => apiClient.delete(`/expense/${id}`),
+  approve: (id) => apiClient.put(`/expense/${id}/approve`),
+  reject: (id) => apiClient.put(`/expense/${id}/reject`),
 };
 
 // Servicios de nómina
 export const payrollService = {
-  getAll: () => apiClient.get('/payroll'),
+  getAll: () => apiClient.get('/payroll/'),
   getById: (id) => apiClient.get(`/payroll/${id}`),
+  getByEmployee: (employeeId) => apiClient.get(`/payroll/employee/${employeeId}`),
+  create: (data) => apiClient.post('/payroll/', data),
+  update: (id, data) => apiClient.put(`/payroll/${id}`, data),
+  delete: (id) => apiClient.delete(`/payroll/${id}`),
 };
 
 // Servicios de empleados
 export const employeeService = {
-  getAll: () => apiClient.get('/employees'),
-  getById: (id) => apiClient.get(`/employees/${id}`),
-  update: (id, data) => apiClient.put(`/employees/${id}`, data),
+  getAll: () => apiClient.get('/employee/'),
+  getById: (id) => apiClient.get(`/employee/${id}`),
+  create: (data) => apiClient.post('/employee/', data),
+  update: (id, data) => apiClient.put(`/employee/${id}`, data),
+  delete: (id) => apiClient.delete(`/employee/${id}`),
 };
