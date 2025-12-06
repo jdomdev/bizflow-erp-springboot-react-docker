@@ -16,6 +16,7 @@ import DateRangeFilter from '../components/filters/DateRangeFilter';
 import SearchFilter from '../components/filters/SearchFilter';
 import { usePayrollStore } from '../store/authStore';
 import { payrollService, employeeService } from '../services/api';
+import { getLastNMonths, isSameMonth } from '../utils/dateUtils';
 
 /**
  * PayrollPage - Payroll management and visualization
@@ -116,37 +117,30 @@ function PayrollPage() {
 
   // Prepare monthly trend data
   const monthlyTrendData = useMemo(() => {
-    const last6Months = [];
-    const now = new Date();
-    
-    for (let i = 5; i >= 0; i--) {
-      const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      last6Months.push({
-        month: date.toLocaleDateString('es-ES', { month: 'short', year: '2-digit' }),
-        amount: 0,
-        count: 0,
-      });
-    }
+    const monthsData = getLastNMonths(6);
+
+    monthsData.forEach((monthInfo) => {
+      monthInfo.amount = 0;
+      monthInfo.count = 0;
+    });
 
     filteredPayrolls.forEach((payroll) => {
       const payDate = new Date(payroll.date);
-      const monthIndex = last6Months.findIndex((m) => {
-        const [monthName] = m.month.split(' ');
-        const payMonth = payDate.toLocaleDateString('es-ES', { month: 'short' });
-        return monthName === payMonth;
-      });
+      const monthIndex = monthsData.findIndex((m) => 
+        isSameMonth(m.date, payDate)
+      );
       if (monthIndex !== -1) {
-        last6Months[monthIndex].amount += payroll.amount || 0;
-        last6Months[monthIndex].count += 1;
+        monthsData[monthIndex].amount += payroll.amount || 0;
+        monthsData[monthIndex].count += 1;
       }
     });
 
     return {
-      labels: last6Months.map((m) => m.month),
+      labels: monthsData.map((m) => m.label),
       datasets: [
         {
           label: 'Total Nómina',
-          data: last6Months.map((m) => m.amount),
+          data: monthsData.map((m) => m.amount),
           backgroundColor: 'rgba(139, 92, 246, 0.8)',
           borderColor: 'rgb(139, 92, 246)',
           borderWidth: 2,

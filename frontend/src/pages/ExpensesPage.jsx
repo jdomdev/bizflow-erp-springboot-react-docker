@@ -14,6 +14,7 @@ import {
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import ConfirmDialog from '../components/ConfirmDialog';
 import DateRangeFilter from '../components/filters/DateRangeFilter';
 import SelectFilter from '../components/filters/SelectFilter';
 import SearchFilter from '../components/filters/SearchFilter';
@@ -40,6 +41,8 @@ function ExpensesPage() {
   const [showModal, setShowModal] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [expenseToDelete, setExpenseToDelete] = useState(null);
 
   // Filter states
   const [searchTerm, setSearchTerm] = useState('');
@@ -170,13 +173,20 @@ function ExpensesPage() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('¿Está seguro de eliminar este gasto?')) return;
+    setExpenseToDelete(id);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!expenseToDelete) return;
 
     try {
-      await expenseService.delete(id);
-      removeExpense(id);
+      await expenseService.delete(expenseToDelete);
+      removeExpense(expenseToDelete);
     } catch (error) {
       console.error('Error eliminando gasto:', error);
+    } finally {
+      setExpenseToDelete(null);
     }
   };
 
@@ -508,6 +518,18 @@ function ExpensesPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        onConfirm={confirmDelete}
+        title="¿Eliminar gasto?"
+        message="Esta acción no se puede deshacer. El gasto será eliminado permanentemente."
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        variant="danger"
+      />
     </motion.div>
   );
 }

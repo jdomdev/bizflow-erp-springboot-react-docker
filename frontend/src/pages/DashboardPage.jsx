@@ -10,6 +10,7 @@ import DateRangeFilter from '../components/filters/DateRangeFilter';
 import SelectFilter from '../components/filters/SelectFilter';
 import { useExpenseStore, usePayrollStore } from '../store/authStore';
 import { expenseService, payrollService } from '../services/api';
+import { getLastNMonths, isSameMonth } from '../utils/dateUtils';
 
 /**
  * DashboardPage - Main dashboard with expense and payroll analytics
@@ -115,48 +116,39 @@ function DashboardPage() {
 
   // Prepare chart data for monthly trend
   const monthlyTrendData = useMemo(() => {
-    const last6Months = [];
-    const now = new Date();
-    
-    for (let i = 5; i >= 0; i--) {
-      const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      last6Months.push({
-        month: date.toLocaleDateString('es-ES', { month: 'short', year: '2-digit' }),
-        expenses: 0,
-        payroll: 0,
-      });
-    }
+    const monthsData = getLastNMonths(6);
+
+    monthsData.forEach((monthInfo) => {
+      monthInfo.expenses = 0;
+      monthInfo.payroll = 0;
+    });
 
     filteredExpenses.forEach((expense) => {
       const expDate = new Date(expense.date);
-      const monthIndex = last6Months.findIndex((m) => {
-        const [monthName] = m.month.split(' ');
-        const expMonth = expDate.toLocaleDateString('es-ES', { month: 'short' });
-        return monthName === expMonth;
-      });
+      const monthIndex = monthsData.findIndex((m) => 
+        isSameMonth(m.date, expDate)
+      );
       if (monthIndex !== -1) {
-        last6Months[monthIndex].expenses += expense.amount || 0;
+        monthsData[monthIndex].expenses += expense.amount || 0;
       }
     });
 
     payrolls.forEach((payroll) => {
       const payDate = new Date(payroll.date);
-      const monthIndex = last6Months.findIndex((m) => {
-        const [monthName] = m.month.split(' ');
-        const payMonth = payDate.toLocaleDateString('es-ES', { month: 'short' });
-        return monthName === payMonth;
-      });
+      const monthIndex = monthsData.findIndex((m) => 
+        isSameMonth(m.date, payDate)
+      );
       if (monthIndex !== -1) {
-        last6Months[monthIndex].payroll += payroll.amount || 0;
+        monthsData[monthIndex].payroll += payroll.amount || 0;
       }
     });
 
     return {
-      labels: last6Months.map((m) => m.month),
+      labels: monthsData.map((m) => m.label),
       datasets: [
         {
           label: 'Gastos',
-          data: last6Months.map((m) => m.expenses),
+          data: monthsData.map((m) => m.expenses),
           borderColor: 'rgb(59, 130, 246)',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
           fill: true,
@@ -164,7 +156,7 @@ function DashboardPage() {
         },
         {
           label: 'Nóminas',
-          data: last6Months.map((m) => m.payroll),
+          data: monthsData.map((m) => m.payroll),
           borderColor: 'rgb(16, 185, 129)',
           backgroundColor: 'rgba(16, 185, 129, 0.1)',
           fill: true,
