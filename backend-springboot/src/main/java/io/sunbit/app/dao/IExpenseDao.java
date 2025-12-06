@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import io.sunbit.app.entity.Expense;
+import io.sunbit.app.entity.ExpenseStatus;
 
 @Repository
 public interface IExpenseDao extends JpaRepository<Expense, Long> {
@@ -17,11 +18,21 @@ public interface IExpenseDao extends JpaRepository<Expense, Long> {
 	List<Expense> findAllByEmployeeId(Long employeeId);
 
 	@Query(value = "SELECT * FROM expense WHERE expense.amount=?1 "
-			+ "and expense.date=?2 "
+			+ "and expense.expense_date=?2 "
 			+ "and expense.concept=?3 "
 			+ "and expense.employee_id=?4", nativeQuery = true)
 	Optional<Expense> findByAmountAndDateAndConceptAndEmployeeId(Double amount,
 			LocalDateTime expenseDate,
 			String concept,
 			Long employeeId);
+	
+	/**
+	 * Find all expenses by status
+	 */
+	List<Expense> findByStatus(ExpenseStatus status);
+	
+	/**
+	 * Find all expenses by employee and status
+	 */
+	List<Expense> findByEmployeeIdAndStatus(Long employeeId, ExpenseStatus status);
 }

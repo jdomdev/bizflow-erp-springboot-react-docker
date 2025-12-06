@@ -179,4 +179,14 @@ public class JwtAuthenticationUtil {
 		}
 		return null;
 	}
+	
+	/**
+	 * Alias for extractTokenUserEmail for convenience.
+	 * 
+	 * @param token Token JWT
+	 * @return Email del usuario
+	 */
+	public String getEmailFromToken(String token) {
+		return extractTokenUserEmail(token);
+	}
 }
