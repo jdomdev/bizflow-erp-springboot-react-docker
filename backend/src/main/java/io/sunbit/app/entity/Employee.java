@@ -64,7 +64,7 @@ public class Employee implements Serializable {
 	@NonNull
 	private String email;
 	@OneToOne
-	@JoinColumn(name = "id") // <-position_id(olds employee_type_id/employee_type_id_fk)
+	@JoinColumn(name = "position_id", nullable = false) // <-position_id(olds employee_type_id/employee_type_id_fk)
 	@NonNull
 	private Position position;
 

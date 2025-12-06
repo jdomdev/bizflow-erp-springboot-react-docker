@@ -47,6 +47,7 @@ public class Role implements Serializable {
 	}
 
 	@ManyToMany(mappedBy = "roles")
+	@com.fasterxml.jackson.annotation.JsonBackReference
 	private List<ExpenseUser> users;
 
 	@Override

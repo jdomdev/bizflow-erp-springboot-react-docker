@@ -63,7 +63,7 @@ public class ExpenseUser implements UserDetails {
 	@NonNull
 	private String password;
 	@OneToOne
-	@JoinColumn(name = "id", nullable = false) // <-employee_id
+	@JoinColumn(name = "employee_id", nullable = false)
 	private Employee employee;
 
 	// Constructor without ID.
@@ -98,6 +98,7 @@ public class ExpenseUser implements UserDetails {
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@com.fasterxml.jackson.annotation.JsonManagedReference
 	private Collection<Role> roles = new ArrayList<>();
 
 	public void addRole(Role role) {
@@ -111,9 +112,13 @@ public class ExpenseUser implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		for (Role role : this.roles) {
-			authorities.add(new SimpleGrantedAuthority(role.getName()));
-		}
+		   for (Role role : this.roles) {
+			   String roleName = role.getName();
+			   if (!roleName.startsWith("ROLE_")) {
+				   roleName = "ROLE_" + roleName;
+			   }
+			   authorities.add(new SimpleGrantedAuthority(roleName));
+		   }
 		return authorities;
 	}
 
