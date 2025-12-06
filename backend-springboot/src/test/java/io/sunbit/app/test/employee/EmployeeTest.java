@@ -2,11 +2,13 @@ package io.sunbit.app.test.employee;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,10 @@ import org.springframework.test.annotation.Rollback;
 import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IPositionDao;
 import io.sunbit.app.entity.Employee;
+import io.sunbit.app.entity.Employee.EmployeeStatus;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.entity.Payroll;
+import io.sunbit.app.entity.Position;
 import io.sunbit.app.util.DateUtil;
 
 @DataJpaTest
@@ -31,6 +35,16 @@ public class EmployeeTest {
 	IEmployeeDao employeeDao;
 	@Autowired
 	IPositionDao positionDao;
+
+	@BeforeEach
+	public void setupPosition() {
+		// Create a position if it doesn't exist
+		Optional<Position> existingPosition = positionDao.findByNameIgnoreCase("Project Manager");
+		if (existingPosition.isEmpty()) {
+			Position position = new Position("Project Manager");
+			positionDao.save(position);
+		}
+	}
 
 	@Test
 	@DisplayName(value = "Test 1 -> test employee saving\n"
@@ -46,12 +60,16 @@ public class EmployeeTest {
 				DateUtil.formattingDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42)),
 				positionDao.findByNameIgnoreCase("Project Manager").get(),
 				"diegomaradona@mail.com",
+				LocalDate.of(2020, 1, 15),
+				EmployeeStatus.ACTIVE,
 				expenses,
 				payrolls);
 		Employee savedEmployee = employeeDao.save(newEmployee);
 
 		assertThat(savedEmployee).isNotNull();
 		assertThat(savedEmployee.getId()).isGreaterThan(0);
+		assertThat(savedEmployee.getStatus()).isEqualTo(EmployeeStatus.ACTIVE);
+		assertThat(savedEmployee.getStartDate()).isNotNull();
 	}
 
 	/*

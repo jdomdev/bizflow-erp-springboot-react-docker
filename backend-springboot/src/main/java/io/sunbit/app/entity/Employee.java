@@ -1,6 +1,7 @@
 package io.sunbit.app.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +19,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -43,26 +50,48 @@ import lombok.ToString;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Employee implements Serializable {
 
+	public enum EmployeeStatus {
+		ACTIVE, INACTIVE, TERMINATED
+	}
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "name", nullable = false, length = 128)
-	@Length(min = 3, max = 128)
+	@NotBlank(message = "Name is required")
+	@Length(min = 3, max = 128, message = "Name must be between 3 and 128 characters")
 	@NonNull
 	private String name;
+	
 	@Column(name = "surname", nullable = false, length = 255)
-	@Length(min = 5, max = 255)
+	@NotBlank(message = "Surname is required")
+	@Length(min = 2, max = 255, message = "Surname must be between 2 and 255 characters")
 	@NonNull
 	private String surname;
+	
 	@Column(name = "birth_date")
-	// @Temporal(TemporalType.TIMESTAMP)
+	@PastOrPresent(message = "Birth date must be in the past or present")
 	@NonNull
 	private LocalDateTime birthDate;
+	
 	@Column(name = "email", nullable = false, length = 255)
-	@Length(min = 3, max = 255)
+	@NotBlank(message = "Email is required")
+	@Email(message = "Email must be valid")
+	@Length(max = 255, message = "Email must not exceed 255 characters")
 	@NonNull
 	private String email;
+	
+	@Column(name = "start_date")
+	@NotNull(message = "Start date is required")
+	private LocalDate startDate;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", nullable = false, length = 20)
+	@NotNull(message = "Status is required")
+	private EmployeeStatus status = EmployeeStatus.ACTIVE;
+	
 	@OneToOne
 	@JoinColumn(name = "id") // <-position_id(olds employee_type_id/employee_type_id_fk)
 	@NonNull
@@ -82,25 +111,29 @@ public class Employee implements Serializable {
 
 	// Constructor without id.
 	public Employee(String name, String surname, LocalDateTime birthDate, Position position, String email,
-			List<Expense> expenses, List<Payroll> payrolls) {
+			LocalDate startDate, EmployeeStatus status, List<Expense> expenses, List<Payroll> payrolls) {
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.position = position;
 		this.email = email;
+		this.startDate = startDate;
+		this.status = status != null ? status : EmployeeStatus.ACTIVE;
 		this.expenses = expenses;
 		this.payrolls = payrolls;
 	}
 
 	// Constructor with id.
 	public Employee(Long id, String name, String surname, LocalDateTime birthDate, Position position, String email,
-			List<Expense> expenses, List<Payroll> payrolls) {
+			LocalDate startDate, EmployeeStatus status, List<Expense> expenses, List<Payroll> payrolls) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.position = position;
 		this.email = email;
+		this.startDate = startDate;
+		this.status = status != null ? status : EmployeeStatus.ACTIVE;
 		this.expenses = expenses;
 		this.payrolls = payrolls;
 	}

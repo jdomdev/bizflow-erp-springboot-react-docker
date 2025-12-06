@@ -2,6 +2,7 @@ package io.sunbit.app.test.expense;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -82,6 +83,8 @@ public class ExpenseTest {
 							DateUtil.formattingDate(LocalDateTime.of(1984, 06, 15, 11, 24, 00)),
 							positionDao.findByNameIgnoreCase("scrum master").get(),
 							"slystone@gmail.com",
+							LocalDate.of(2020, 1, 1),
+							Employee.EmployeeStatus.ACTIVE,
 							new ArrayList<Expense>(),
 							new ArrayList<Payroll>()));
 			updatedExpense = expenseDao.save(expenseToUp);

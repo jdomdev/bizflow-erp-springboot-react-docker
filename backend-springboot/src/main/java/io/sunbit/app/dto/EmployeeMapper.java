@@ -23,8 +23,10 @@ public class EmployeeMapper {
 				employeeDto.getName(),
 				employeeDto.getSurname(),
 				employeeDto.getBirthDate(),
-				employeeDto.getEmail(),
 				PositionMapper.dtoToPosition(employeeDto.getPositionDto()),
+				employeeDto.getEmail(),
+				employeeDto.getStartDate(),
+				employeeDto.getStatus(),
 				dtosToExpenses(employeeDto.getExpenseDtos()),
 				dtosToPayrolls(employeeDto.getPayrollDtos()));
 	}
@@ -42,6 +44,9 @@ public class EmployeeMapper {
 				employee.getName(),
 				employee.getSurname(),
 				employee.getBirthDate(),
+				employee.getEmail(),
+				employee.getStartDate(),
+				employee.getStatus(),
 				PositionMapper.positionToDtoWithId(employee.getPosition()),
 				expensesToDtos(employee.getExpenses()),
 				payrollsToDtos(employee.getPayrolls()));
@@ -63,6 +68,8 @@ public class EmployeeMapper {
 				employeeDto.getBirthDate(),
 				employeeType,
 				employeeDto.getEmail(),
+				employeeDto.getStartDate(),
+				employeeDto.getStatus(),
 				dtosToExpenses(employeeDto.getExpenseDtos()),
 				dtosToPayrolls(employeeDto.getPayrollDtos()));
 	}
@@ -73,7 +80,12 @@ public class EmployeeMapper {
 				employee.getName(),
 				employee.getSurname(),
 				employee.getBirthDate(),
-				PositionMapper.PositionToDto(employee.getPosition()));
+				employee.getEmail(),
+				employee.getStartDate(),
+				employee.getStatus(),
+				PositionMapper.PositionToDto(employee.getPosition()),
+				new ArrayList<>(),
+				new ArrayList<>());
 	}
 
 	private static Boolean isNullList(List<?> list) {

@@ -72,10 +72,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		Employee updatedEmployee = null;
 		try {
 			Optional<Employee> optionalEmployee = employeeDao.findById(id);
-			if (optionalEmployee != null) {
+			if (optionalEmployee.isPresent()) {
 				LocalDateTime parsedDate = DateUtil.formattingDate(employee.getBirthDate());
+				employee.setId(id); // Ensure the ID is set
 				employee.setBirthDate(parsedDate);
 				updatedEmployee = employeeDao.save(employee);
+			} else {
+				throw new Exception("Employee with id " + id + " not found");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
