@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import ExpensesPage from './pages/ExpensesPage';
 import PayrollPage from './pages/PayrollPage';
 import SettingsPage from './pages/SettingsPage';
+import UserManagementPage from './pages/UserManagementPage';
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -27,6 +28,7 @@ function App() {
             <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/payroll" element={<PayrollPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/users" element={<UserManagementPage />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Route>
         )}

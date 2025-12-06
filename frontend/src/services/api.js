@@ -62,3 +62,24 @@ export const employeeService = {
   getById: (id) => apiClient.get(`/employees/${id}`),
   update: (id, data) => apiClient.put(`/employees/${id}`, data),
 };
+
+// Servicios de usuarios
+export const userService = {
+  getAll: () => apiClient.get('/user/'),
+  getById: (id) => apiClient.get(`/user/${id}`),
+  create: (data) => apiClient.post('/user/', data),
+  update: (id, data) => apiClient.put(`/user/${id}`, data),
+  delete: (id) => apiClient.delete(`/user/${id}`),
+  getUserRoles: (id) => apiClient.get(`/user/${id}/roles`),
+  assignRole: (userId, roleId) => apiClient.post(`/user/${userId}/roles/${roleId}`),
+  removeRole: (userId, roleId) => apiClient.delete(`/user/${userId}/roles/${roleId}`),
+};
+
+// Servicios de roles
+export const roleService = {
+  getAll: () => apiClient.get('/role/'),
+  getById: (id) => apiClient.get(`/role/${id}`),
+  create: (data) => apiClient.post('/role/', data),
+  update: (id, data) => apiClient.put(`/role/${id}`, data),
+  delete: (id) => apiClient.delete(`/role/${id}`),
+};
