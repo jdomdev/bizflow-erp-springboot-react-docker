@@ -63,6 +63,8 @@ jobs:
     name: Deploy to Production
     needs: build-and-push
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     if: github.ref == 'refs/heads/main'
     
     steps:

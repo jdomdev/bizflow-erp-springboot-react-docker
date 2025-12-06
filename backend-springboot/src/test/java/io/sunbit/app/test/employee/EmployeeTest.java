@@ -35,7 +35,8 @@ public class EmployeeTest {
 		newEmployee.setSurname("Maradona");
 		newEmployee.setBirthDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42));
 		newEmployee.setEmail("diegomaradona@mail.com");
-		newEmployee.setPosition(positionDao.findByNameIgnoreCase("Project Manager").orElse(null));
+		newEmployee.setPosition(positionDao.findByNameIgnoreCase("Project Manager")
+				.orElseThrow(() -> new RuntimeException("Position 'Project Manager' not found")));
 		
 		Employee savedEmployee = employeeDao.save(newEmployee);
 

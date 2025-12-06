@@ -16,6 +16,8 @@ jobs:
   build-and-test:
     name: Build and Test Backend
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     services:
       postgres:

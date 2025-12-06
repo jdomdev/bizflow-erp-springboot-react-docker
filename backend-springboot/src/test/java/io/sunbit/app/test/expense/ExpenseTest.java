@@ -40,7 +40,8 @@ public class ExpenseTest {
 		employee.setSurname("Doe Smith"); // Must be at least 5 characters
 		employee.setBirthDate(LocalDateTime.of(1990, 1, 1, 0, 0));
 		employee.setEmail("johndoe@mail.com");
-		employee.setPosition(positionDao.findByNameIgnoreCase("Developer").orElse(null));
+		employee.setPosition(positionDao.findByNameIgnoreCase("Developer")
+				.orElseThrow(() -> new RuntimeException("Position 'Developer' not found")));
 		Employee savedEmployee = employeeDao.save(employee);
 
 		// Now create an expense for this employee

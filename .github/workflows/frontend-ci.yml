@@ -16,6 +16,8 @@ jobs:
   build-and-test:
     name: Build and Test Frontend
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
     - name: Checkout code
@@ -39,7 +41,6 @@ jobs:
     - name: Run tests
       working-directory: ./frontend
       run: npm test
-      continue-on-error: true
 
     - name: Build application
       working-directory: ./frontend

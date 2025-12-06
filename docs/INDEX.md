@@ -49,7 +49,15 @@ Características empresariales adicionales para futuras versiones.
 - Integraciones externas
 - Roadmap de implementación
 
-### 7. **[DOCKER.md](./DOCKER.md)** 🐳
+### 7. **[CICD.md](./CICD.md)** 🔄
+Documentación completa de CI/CD y workflows automatizados.
+- GitHub Actions workflows (Backend CI, Frontend CI, Docker CD)
+- Test automation y coverage reporting
+- Docker image building y deployment
+- Best practices y troubleshooting
+- Future enhancements roadmap
+
+### 8. **[DOCKER.md](./DOCKER.md)** 🐳
 Guía completa de Docker, docker-compose y dev-containers.
 - Arquitectura de containers
 - Dockerfile backend (Java 21)
@@ -58,7 +66,7 @@ Guía completa de Docker, docker-compose y dev-containers.
 - VS Code dev-containers setup
 - Comandos útiles y troubleshooting
 
-### 8. **[RELEASE_NOTES_v1.1.0.md](../RELEASE_NOTES_v1.1.0.md)** 📋
+### 9. **[RELEASE_NOTES_v1.1.0.md](../RELEASE_NOTES_v1.1.0.md)** 📋
 Resumen completo del release v1.1.0.
 - 8 commits granulares (Angular convention)
 - Estadísticas del proyecto
