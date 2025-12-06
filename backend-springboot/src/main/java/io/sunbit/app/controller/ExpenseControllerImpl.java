@@ -112,15 +112,12 @@ public class ExpenseControllerImpl implements IExpenseController {
 		}
 	}
 
-	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{expenseId}")
 	public ResponseEntity<?> deleteExpense(@PathVariable("expenseId") Long expenseId,
 			@RequestHeader("Authorization") String headerAuth) {
 		try {
-			Expense expense = expenseService.findById(expenseId, headerAuth);
-			Employee employee = expense.getEmployee();
-			employee.removeExpense(expense);
+			// Service handles all deletion logic including relationships
 			return ResponseEntity.status(HttpStatus.OK).body(expenseService.delete(expenseId));
 		} catch (Exception e) {
 			log.error("Error deleting expense: {}", e.getMessage());

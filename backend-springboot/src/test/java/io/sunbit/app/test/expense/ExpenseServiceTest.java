@@ -225,6 +225,7 @@ public class ExpenseServiceTest {
 	void testUpdatePendingExpense() throws Exception {
 		// Given
 		when(expenseDao.findById(1L)).thenReturn(Optional.of(testExpense));
+		when(employeeDao.findById(1L)).thenReturn(Optional.of(testEmployee));
 		when(jwtAuthUtil.isAdminTokenUser(anyString())).thenReturn(true);
 		when(expenseDao.save(any(Expense.class))).thenReturn(testExpense);
 		
@@ -244,6 +245,7 @@ public class ExpenseServiceTest {
 		// Given
 		testExpense.setStatus(ExpenseStatus.APPROVED);
 		when(expenseDao.findById(1L)).thenReturn(Optional.of(testExpense));
+		when(employeeDao.findById(1L)).thenReturn(Optional.of(testEmployee));
 		when(jwtAuthUtil.isAdminTokenUser(anyString())).thenReturn(true);
 		
 		// When & Then
@@ -257,6 +259,7 @@ public class ExpenseServiceTest {
 	void testFindAllByEmployeeId() throws Exception {
 		// Given
 		List<Expense> expenses = Arrays.asList(testExpense);
+		when(employeeDao.findById(1L)).thenReturn(Optional.of(testEmployee));
 		when(jwtAuthUtil.isAdminTokenUser(anyString())).thenReturn(true);
 		when(expenseDao.findAllByEmployeeId(1L)).thenReturn(expenses);
 		

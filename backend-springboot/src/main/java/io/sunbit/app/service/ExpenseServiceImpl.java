@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IExpenseAttachmentDao;
 import io.sunbit.app.dao.IExpenseDao;
+import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.entity.ExpenseAttachment;
 import io.sunbit.app.entity.ExpenseStatus;
@@ -52,8 +53,13 @@ public class ExpenseServiceImpl implements IExpenseService {
 	public List<Expense> findAllByEmployeeId(Long employeeId, String headerAuth) throws Exception {
 		try {
 			String token = headerAuth.split(" ")[1].trim();
+			Optional<Employee> optEmployee = employeeDao.findById(employeeId);
+			if (optEmployee.isEmpty()) {
+				throw new Exception("Employee not found with ID: " + employeeId);
+			}
+			
 			if (jwtAuthUtil.isAdminTokenUser(token)
-					|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).orElseThrow(), token)) {
+					|| employeeUtil.matchEmployeeUserEmail(optEmployee.get(), token)) {
 				return expenseDao.findAllByEmployeeId(employeeId);
 			}
 			throw new SecurityException("Unauthorized access to employee expenses");
@@ -74,8 +80,13 @@ public class ExpenseServiceImpl implements IExpenseService {
 			String headerAuth) throws Exception {
 		try {
 			String token = headerAuth.split(" ")[1].trim();
+			Optional<Employee> optEmployee = employeeDao.findById(employeeId);
+			if (optEmployee.isEmpty()) {
+				throw new Exception("Employee not found with ID: " + employeeId);
+			}
+			
 			if (jwtAuthUtil.isAdminTokenUser(token)
-					|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).orElseThrow(), token)) {
+					|| employeeUtil.matchEmployeeUserEmail(optEmployee.get(), token)) {
 				Optional<Expense> optSearchedExpense = expenseDao.findByAmountAndDateAndConceptAndEmployeeId(amount,
 						date,
 						concept,
@@ -128,15 +139,21 @@ public class ExpenseServiceImpl implements IExpenseService {
 		try {
 			String token = headerAuth.split(" ")[1].trim();
 			Optional<Expense> optExpense = expenseDao.findById(id);
-			if (optExpense.isPresent()) {
-				Expense expense = optExpense.get();
-				if (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil
-						.matchEmployeeUserEmail(employeeDao.findById(expense.getEmployee().getId()).orElseThrow(), token)) {
-					return expense;
-				}
-				throw new SecurityException("Unauthorized access to expense");
+			if (optExpense.isEmpty()) {
+				throw new Exception("Expense not found with ID: " + id);
 			}
-			throw new Exception("Expense not found with ID: " + id);
+			
+			Expense expense = optExpense.get();
+			Optional<Employee> optEmployee = employeeDao.findById(expense.getEmployee().getId());
+			if (optEmployee.isEmpty()) {
+				throw new Exception("Employee not found for expense");
+			}
+			
+			if (jwtAuthUtil.isAdminTokenUser(token) || 
+				employeeUtil.matchEmployeeUserEmail(optEmployee.get(), token)) {
+				return expense;
+			}
+			throw new SecurityException("Unauthorized access to expense");
 		} catch (Exception e) {
 			log.error("Error finding expense by ID {}: {}", id, e.getMessage());
 			throw e;
@@ -149,25 +166,31 @@ public class ExpenseServiceImpl implements IExpenseService {
 		try {
 			String token = headerAuth.split(" ")[1].trim();
 			Optional<Expense> optExpense = expenseDao.findById(expense.getId());
-			if (optExpense.isPresent()) {
-				Expense existingExpense = optExpense.get();
-				if (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil.matchEmployeeUserEmail(
-						employeeDao.findById(existingExpense.getEmployee().getId()).orElseThrow(), token)) {
-					
-					// Don't allow updating approved/rejected expenses
-					if (existingExpense.isApproved() || existingExpense.isRejected()) {
-						throw new IllegalStateException("Cannot update an expense that has been approved or rejected");
-					}
-					
-					LocalDateTime parsedDate = DateUtil.formattingDate(expense.getDate());
-					expense.setDate(parsedDate);
-					Expense expenseUpdated = expenseDao.save(expense);
-					log.info("Expense updated successfully with ID: {}", expenseUpdated.getId());
-					return expenseUpdated;
-				}
-				throw new SecurityException("Unauthorized to update expense");
+			if (optExpense.isEmpty()) {
+				throw new Exception("Expense not found with ID: " + expense.getId());
 			}
-			throw new Exception("Expense not found with ID: " + expense.getId());
+			
+			Expense existingExpense = optExpense.get();
+			Optional<Employee> optEmployee = employeeDao.findById(existingExpense.getEmployee().getId());
+			if (optEmployee.isEmpty()) {
+				throw new Exception("Employee not found for expense");
+			}
+			
+			if (jwtAuthUtil.isAdminTokenUser(token) || 
+				employeeUtil.matchEmployeeUserEmail(optEmployee.get(), token)) {
+				
+				// Don't allow updating approved/rejected expenses
+				if (existingExpense.isApproved() || existingExpense.isRejected()) {
+					throw new IllegalStateException("Cannot update an expense that has been approved or rejected");
+				}
+				
+				LocalDateTime parsedDate = DateUtil.formattingDate(expense.getDate());
+				expense.setDate(parsedDate);
+				Expense expenseUpdated = expenseDao.save(expense);
+				log.info("Expense updated successfully with ID: {}", expenseUpdated.getId());
+				return expenseUpdated;
+			}
+			throw new SecurityException("Unauthorized to update expense");
 		} catch (Exception e) {
 			log.error("Error updating expense: {}", e.getMessage());
 			throw e;
@@ -202,20 +225,21 @@ public class ExpenseServiceImpl implements IExpenseService {
 			}
 			
 			Optional<Expense> optExpense = expenseDao.findById(expenseId);
-			if (optExpense.isPresent()) {
-				Expense expense = optExpense.get();
-				
-				if (!expense.isPending()) {
-					throw new IllegalStateException("Only pending expenses can be approved");
-				}
-				
-				String approverEmail = jwtAuthUtil.getEmailFromToken(token);
-				expense.approve(approverEmail);
-				Expense approvedExpense = expenseDao.save(expense);
-				log.info("Expense {} approved by {}", expenseId, approverEmail);
-				return approvedExpense;
+			if (optExpense.isEmpty()) {
+				throw new Exception("Expense not found with ID: " + expenseId);
 			}
-			throw new Exception("Expense not found with ID: " + expenseId);
+			
+			Expense expense = optExpense.get();
+			
+			if (!expense.isPending()) {
+				throw new IllegalStateException("Only pending expenses can be approved");
+			}
+			
+			String approverEmail = jwtAuthUtil.getEmailFromToken(token);
+			expense.approve(approverEmail);
+			Expense approvedExpense = expenseDao.save(expense);
+			log.info("Expense {} approved by {}", expenseId, approverEmail);
+			return approvedExpense;
 		} catch (Exception e) {
 			log.error("Error approving expense {}: {}", expenseId, e.getMessage());
 			throw e;
@@ -238,20 +262,21 @@ public class ExpenseServiceImpl implements IExpenseService {
 			}
 			
 			Optional<Expense> optExpense = expenseDao.findById(expenseId);
-			if (optExpense.isPresent()) {
-				Expense expense = optExpense.get();
-				
-				if (!expense.isPending()) {
-					throw new IllegalStateException("Only pending expenses can be rejected");
-				}
-				
-				String approverEmail = jwtAuthUtil.getEmailFromToken(token);
-				expense.reject(approverEmail, reason);
-				Expense rejectedExpense = expenseDao.save(expense);
-				log.info("Expense {} rejected by {}", expenseId, approverEmail);
-				return rejectedExpense;
+			if (optExpense.isEmpty()) {
+				throw new Exception("Expense not found with ID: " + expenseId);
 			}
-			throw new Exception("Expense not found with ID: " + expenseId);
+			
+			Expense expense = optExpense.get();
+			
+			if (!expense.isPending()) {
+				throw new IllegalStateException("Only pending expenses can be rejected");
+			}
+			
+			String approverEmail = jwtAuthUtil.getEmailFromToken(token);
+			expense.reject(approverEmail, reason);
+			Expense rejectedExpense = expenseDao.save(expense);
+			log.info("Expense {} rejected by {}", expenseId, approverEmail);
+			return rejectedExpense;
 		} catch (Exception e) {
 			log.error("Error rejecting expense {}: {}", expenseId, e.getMessage());
 			throw e;
@@ -282,7 +307,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 			String token = headerAuth.split(" ")[1].trim();
 			
 			Optional<Expense> optExpense = expenseDao.findById(expenseId);
-			if (!optExpense.isPresent()) {
+			if (optExpense.isEmpty()) {
 				throw new Exception("Expense not found with ID: " + expenseId);
 			}
 			
@@ -343,7 +368,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 			String token = headerAuth.split(" ")[1].trim();
 			
 			Optional<Expense> optExpense = expenseDao.findById(expenseId);
-			if (!optExpense.isPresent()) {
+			if (optExpense.isEmpty()) {
 				throw new Exception("Expense not found with ID: " + expenseId);
 			}
 			
@@ -369,7 +394,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 			String token = headerAuth.split(" ")[1].trim();
 			
 			Optional<ExpenseAttachment> optAttachment = attachmentDao.findById(attachmentId);
-			if (!optAttachment.isPresent()) {
+			if (optAttachment.isEmpty()) {
 				throw new Exception("Attachment not found with ID: " + attachmentId);
 			}
 			
