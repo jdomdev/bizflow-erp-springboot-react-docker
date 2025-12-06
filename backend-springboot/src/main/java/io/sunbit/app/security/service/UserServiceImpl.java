@@ -163,4 +163,63 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		}
 		return isDeleted;
 	}
+
+	@Override
+	@Transactional
+	public ExpenseUser assignRoleToUser(Long userId, Long roleId) throws Exception {
+		Optional<ExpenseUser> optUser = userDao.findById(userId);
+		Optional<Role> optRole = roleDao.findById(roleId);
+		
+		if (optUser.isEmpty()) {
+			throw new Exception("User not found with id: " + userId);
+		}
+		if (optRole.isEmpty()) {
+			throw new RoleNotFoundException("Role not found with id: " + roleId);
+		}
+		
+		ExpenseUser user = optUser.get();
+		Role role = optRole.get();
+		
+		// Check if user already has this role
+		boolean hasRole = user.getRoles().stream()
+			.anyMatch(r -> r.getId().equals(roleId));
+		
+		if (!hasRole) {
+			user.addRole(role);
+			return userDao.save(user);
+		}
+		
+		return user;
+	}
+
+	@Override
+	@Transactional
+	public ExpenseUser removeRoleFromUser(Long userId, Long roleId) throws Exception {
+		Optional<ExpenseUser> optUser = userDao.findById(userId);
+		Optional<Role> optRole = roleDao.findById(roleId);
+		
+		if (optUser.isEmpty()) {
+			throw new Exception("User not found with id: " + userId);
+		}
+		if (optRole.isEmpty()) {
+			throw new RoleNotFoundException("Role not found with id: " + roleId);
+		}
+		
+		ExpenseUser user = optUser.get();
+		Role role = optRole.get();
+		
+		user.removeRole(role);
+		return userDao.save(user);
+	}
+
+	@Override
+	public Collection<Role> getUserRoles(Long userId) throws Exception {
+		Optional<ExpenseUser> optUser = userDao.findById(userId);
+		
+		if (optUser.isEmpty()) {
+			throw new Exception("User not found with id: " + userId);
+		}
+		
+		return optUser.get().getRoles();
+	}
 }

@@ -1,6 +1,7 @@
 
 package io.sunbit.app.security.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,25 +12,22 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import io.sunbit.app.security.jwt.JwtAuthenticationFilter;
 
 @Configuration
-// @EnableTransactionManagement
 @EnableMethodSecurity(prePostEnabled = true)
 public class AppSecurityConfig {
-    /*
-     * @Autowired
-     * private IUserDao userDao;
-     * 
-     * @Autowired
-     * private JwtAuthenticationFilter jwtAuthFilter;
-     */
+
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Crear el bean de AuthenticationManager usando AuthenticationConfiguration
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration)
@@ -44,12 +42,19 @@ public class AppSecurityConfig {
         this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
     }
 
-    // Definir el SecurityFilterChain para configurar la seguridad HTTP
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable());
-        http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthenticationEntryPoint));
+        http
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(management -> management
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/v1/auth/**", "/actuator/**").permitAll()
+                .anyRequest().authenticated())
+            .exceptionHandling(handling -> handling
+                .authenticationEntryPoint(customAuthenticationEntryPoint))
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        
         return http.build();
     }
 }

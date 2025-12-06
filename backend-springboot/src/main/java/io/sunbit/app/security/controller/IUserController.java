@@ -20,4 +20,10 @@ public interface IUserController {
 			@PathVariable Long userId);
 
 	public ResponseEntity<?> deleteUser(@PathVariable Long userId);
+
+	public ResponseEntity<?> assignRoleToUser(@PathVariable Long userId, @PathVariable Long roleId);
+
+	public ResponseEntity<?> removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId);
+
+	public ResponseEntity<?> getUserRoles(@PathVariable Long userId);
 }

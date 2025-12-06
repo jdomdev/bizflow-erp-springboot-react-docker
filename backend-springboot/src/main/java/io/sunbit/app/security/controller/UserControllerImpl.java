@@ -93,4 +93,45 @@ public class UserControllerImpl implements IUserController {
 					"{\"error\":\"Error. Please, Try it later. It is NOT possible DELETE the user who you looking for.\"}");
 		}
 	}
+
+	@Override
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/{userId}/roles/{roleId}")
+	public ResponseEntity<?> assignRoleToUser(@PathVariable("userId") Long userId, 
+			@PathVariable("roleId") Long roleId) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(userService.assignRoleToUser(userId, roleId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("{\"error\":\"Error. Could not assign role to user: " + e.getMessage() + "\"}");
+		}
+	}
+
+	@Override
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@DeleteMapping("/{userId}/roles/{roleId}")
+	public ResponseEntity<?> removeRoleFromUser(@PathVariable("userId") Long userId, 
+			@PathVariable("roleId") Long roleId) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(userService.removeRoleFromUser(userId, roleId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("{\"error\":\"Error. Could not remove role from user: " + e.getMessage() + "\"}");
+		}
+	}
+
+	@Override
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@GetMapping("/{userId}/roles")
+	public ResponseEntity<?> getUserRoles(@PathVariable("userId") Long userId) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(userService.getUserRoles(userId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. Could not retrieve user roles: " + e.getMessage() + "\"}");
+		}
+	}
 }
