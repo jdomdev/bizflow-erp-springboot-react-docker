@@ -4,21 +4,79 @@ Bienvenido a la documentación completa del proyecto ExpenseNoteApp. Este proyec
 
 ## 📋 Índice de Documentación
 
-### 1. **[QUICK_START.md](./QUICK_START.md)** 🚀
+### Guías de Usuario
+
+### 1. **[USER_GUIDE.md](./USER_GUIDE.md)** 👤
+Guía completa para usuarios finales del sistema.
+- Primeros pasos y login
+- Gestión de gastos (crear, editar, eliminar)
+- Consulta de nómina
+- Configuración de perfil
+- Roles y permisos
+- Preguntas frecuentes
+- Ejemplos prácticos
+
+### Guías Técnicas
+
+### 2. **[QUICK_START.md](./QUICK_START.md)** 🚀
 Guía rápida para empezar a usar la aplicación.
 - Requisitos previos
 - Instalación y configuración
 - Ejecución de backend y frontend
 - Troubleshooting común
 
-### 2. **[ANALISIS_DETALLADO.md](./ANALISIS_DETALLADO.md)** 🔍
+### 3. **[API_REFERENCE.md](./API_REFERENCE.md)** 📡
+Documentación completa de la REST API.
+- Información general y autenticación
+- Endpoints de gastos (CRUD completo)
+- Endpoints de empleados
+- Endpoints de nómina y puestos
+- Endpoints de usuarios y roles
+- Códigos de respuesta
+- Swagger UI y OpenAPI
+- Ejemplos con curl
+
+### 4. **[ARCHITECTURE.md](./ARCHITECTURE.md)** 🏗️
+Arquitectura técnica del sistema.
+- Visión general y componentes
+- Arquitectura de alto nivel
+- Capas del backend (MVC)
+- Arquitectura del frontend
+- Modelo de datos y relaciones
+- Seguridad y flujos de datos
+- Decisiones de diseño
+- Escalabilidad
+
+### 5. **[DEPLOYMENT.md](./DEPLOYMENT.md)** 🚀
+Guía completa de despliegue.
+- Despliegue local y con Docker
+- Despliegue en producción
+- Cloud providers (AWS, Azure, GCP, Heroku)
+- Configuración de entornos
+- Monitoreo y mantenimiento
+- Backups y disaster recovery
+- Checklist de despliegue
+
+### 6. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** 🔧
+Solución de problemas comunes.
+- Problemas de instalación
+- Problemas de backend y frontend
+- Problemas de base de datos
+- Problemas de autenticación
+- Problemas de Docker
+- Errores comunes y soluciones
+- Herramientas de diagnóstico
+
+### Documentación de Proyecto
+
+### 7. **[ANALISIS_DETALLADO.md](./ANALISIS_DETALLADO.md)** 🔍
 Análisis exhaustivo de los problemas encontrados en el código original.
 - Dependencias deprecadas
 - Códigos vulnerables
 - Issues de seguridad
 - Recomendaciones de solución
 
-### 3. **[CAMBIOS_V2.md](./CAMBIOS_V2.md)** ✅
+### 8. **[CAMBIOS_V2.md](./CAMBIOS_V2.md)** ✅
 Documentación detallada de todos los cambios realizados.
 - Migraciones de dependencias
 - Refactorización de código JWT
@@ -26,21 +84,21 @@ Documentación detallada de todos los cambios realizados.
 - Aplicación de SOLID principles
 - Creación del frontend React
 
-### 4. **[SECURITY.md](./SECURITY.md)** 🔒
+### 9. **[SECURITY.md](./SECURITY.md)** 🔒
 Análisis completo de seguridad y vulnerabilidades solucionadas.
 - 13 vulnerabilidades identificadas y solucionadas
 - Detalles técnicos de cada remediación
 - Prácticas de seguridad implementadas
 - Checklist pre-producción
 
-### 5. **[LAUNCH_GUIDE.md](./LAUNCH_GUIDE.md)** 🚀
+### 10. **[LAUNCH_GUIDE.md](./LAUNCH_GUIDE.md)** 🚀
 Guía paso a paso para lanzar la aplicación.
 - Requisitos previos y verificación
 - Configuración de base de datos
 - Ejecución de backend y frontend
 - Troubleshooting y resolución de problemas
 
-### 6. **[FEATURES_ROADMAP.md](./FEATURES_ROADMAP.md)** 🎯
+### 11. **[FEATURES_ROADMAP.md](./FEATURES_ROADMAP.md)** 🎯
 Características empresariales adicionales para futuras versiones.
 - Gestión avanzada de gastos
 - Workflows de aprobación multi-nivel
@@ -49,7 +107,7 @@ Características empresariales adicionales para futuras versiones.
 - Integraciones externas
 - Roadmap de implementación
 
-### 7. **[DOCKER.md](./DOCKER.md)** 🐳
+### 12. **[DOCKER.md](./DOCKER.md)** 🐳
 Guía completa de Docker, docker-compose y dev-containers.
 - Arquitectura de containers
 - Dockerfile backend (Java 21)
@@ -58,7 +116,7 @@ Guía completa de Docker, docker-compose y dev-containers.
 - VS Code dev-containers setup
 - Comandos útiles y troubleshooting
 
-### 8. **[RELEASE_NOTES_v1.1.0.md](../RELEASE_NOTES_v1.1.0.md)** 📋
+### 13. **[RELEASE_NOTES_v1.1.0.md](../RELEASE_NOTES_v1.1.0.md)** 📋
 Resumen completo del release v1.1.0.
 - 8 commits granulares (Angular convention)
 - Estadísticas del proyecto
@@ -91,6 +149,7 @@ ExpenseNoteApp/
 - **Spring Security 6.3.3** con JWT (JJWT 0.12.6)
 - **PostgreSQL** para persistencia
 - **Maven 3.6+** para build
+- **Springdoc OpenAPI 2.3.0** para documentación de API (Swagger)
 
 ### Frontend
 - **React 18.2.0** con Vite 5.0.0
@@ -98,6 +157,22 @@ ExpenseNoteApp/
 - **Framer Motion 10.16.4** para animaciones
 - **Zustand 4.4.7** para state management
 - **Axios 1.6.0** para API calls
+
+## 🌐 Acceso a la Aplicación
+
+Una vez iniciada la aplicación, puedes acceder a:
+
+### Interfaces de Usuario
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8080/api/v1
+
+### Documentación API Interactiva
+- **Swagger UI**: http://localhost:8080/swagger-ui.html
+- **OpenAPI Spec**: http://localhost:8080/v3/api-docs
+
+### Credenciales por Defecto
+- **Email**: admin@example.com
+- **Password**: admin123
 
 ## 📊 Versioning
 

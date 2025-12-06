@@ -50,6 +50,19 @@ public class AppSecurityConfig {
         http.csrf(csrf -> csrf.disable());
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthenticationEntryPoint));
+        
+        // Allow public access to Swagger/OpenAPI endpoints
+        http.authorizeHttpRequests(auth -> auth
+            .requestMatchers(
+                "/swagger-ui/**",
+                "/v3/api-docs/**",
+                "/swagger-ui.html",
+                "/swagger-resources/**",
+                "/webjars/**"
+            ).permitAll()
+            .anyRequest().authenticated()
+        );
+        
         return http.build();
     }
 }

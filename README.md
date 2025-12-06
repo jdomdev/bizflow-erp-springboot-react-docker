@@ -11,10 +11,24 @@ ExpenseNoteApp es una solución completa para la administración de gastos corpo
 ## 📚 Documentación
 
 Para una guía completa, consulta los documentos en la carpeta `/docs`:
+
+### Documentación Principal
 - **[📖 INDEX.md](./docs/INDEX.md)** - Índice de documentación completo
 - **[🚀 QUICK_START.md](./docs/QUICK_START.md)** - Guía rápida de inicio
-- **[🔍 ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md)** - Problemas encontrados y soluciones
-- **[✅ CAMBIOS_V2.md](./docs/CAMBIOS_V2.md)** - Documentación detallada de cambios
+- **[👤 USER_GUIDE.md](./docs/USER_GUIDE.md)** - Guía de usuario completa
+- **[📡 API_REFERENCE.md](./docs/API_REFERENCE.md)** - Referencia completa de API REST
+
+### Documentación Técnica
+- **[🏗️ ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - Arquitectura del sistema
+- **[🚀 DEPLOYMENT.md](./docs/DEPLOYMENT.md)** - Guía de despliegue
+- **[🐳 DOCKER.md](./docs/DOCKER.md)** - Guía de Docker y contenedores
+- **[🔧 TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md)** - Solución de problemas
+
+### Documentación de Proyecto
+- **[🔍 ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md)** - Análisis técnico y soluciones
+- **[✅ CAMBIOS_V2.md](./docs/CAMBIOS_V2.md)** - Historial de cambios
+- **[🔒 SECURITY.md](./docs/SECURITY.md)** - Seguridad y vulnerabilidades
+- **[🎯 FEATURES_ROADMAP.md](./docs/FEATURES_ROADMAP.md)** - Roadmap de características
 
 ## ✨ Características Principales
 
@@ -84,6 +98,21 @@ cd frontend
 npm install
 npm run dev
 # Frontend disponible en http://localhost:3000
+```
+
+### Documentación API Interactiva (Swagger)
+
+Una vez iniciado el backend, accede a la documentación interactiva de la API:
+
+- **Swagger UI**: http://localhost:8080/swagger-ui.html
+- **OpenAPI JSON**: http://localhost:8080/v3/api-docs
+
+En Swagger UI puedes:
+- Explorar todos los endpoints disponibles
+- Probar las APIs directamente desde el navegador
+- Ver ejemplos de request/response
+- Autenticarte con tu token JWT
+
 ```
 
 ### Credenciales de Prueba
