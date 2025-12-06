@@ -67,11 +67,25 @@ cd ExpenseNoteApp
 # Iniciar PostgreSQL
 sudo systemctl start postgresql
 
-# Crear base de datos
+# Crear base de datos y usuario
 sudo -u postgres psql
 CREATE DATABASE expense_note_app;
 CREATE USER expenseapp WITH PASSWORD 'secure_password';
-GRANT ALL PRIVILEGES ON DATABASE expense_note_app TO expenseapp;
+
+-- Otorgar acceso a la base de datos
+GRANT CONNECT ON DATABASE expense_note_app TO expenseapp;
+
+-- Conectar a la base de datos
+\c expense_note_app
+
+-- Otorgar permisos necesarios en el schema public
+GRANT USAGE ON SCHEMA public TO expenseapp;
+GRANT CREATE ON SCHEMA public TO expenseapp;
+
+-- Otorgar permisos sobre tablas
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO expenseapp;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO expenseapp;
+
 \q
 ```
 
@@ -345,11 +359,25 @@ sudo nano /etc/postgresql/14/main/pg_hba.conf
 # Reiniciar PostgreSQL
 sudo systemctl restart postgresql
 
-# Crear base de datos
+# Crear base de datos y usuario con permisos limitados (principio de menor privilegio)
 sudo -u postgres psql
 CREATE DATABASE expense_note_app;
 CREATE USER expenseapp WITH ENCRYPTED PASSWORD 'STRONG_PASSWORD';
-GRANT ALL PRIVILEGES ON DATABASE expense_note_app TO expenseapp;
+
+-- Otorgar acceso a la base de datos
+GRANT CONNECT ON DATABASE expense_note_app TO expenseapp;
+
+-- Conectar a la base de datos
+\c expense_note_app
+
+-- Otorgar permisos necesarios en el schema public
+GRANT USAGE ON SCHEMA public TO expenseapp;
+GRANT CREATE ON SCHEMA public TO expenseapp;
+
+-- Otorgar permisos sobre tablas (se aplicarán a tablas futuras también)
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO expenseapp;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO expenseapp;
+
 \q
 ```
 

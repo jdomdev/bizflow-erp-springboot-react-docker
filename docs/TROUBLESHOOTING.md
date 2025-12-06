@@ -139,15 +139,24 @@ spring.jpa.hibernate.ddl-auto=create-drop
 
 **Alternativa manual**:
 ```sql
+-- ⚠️ ADVERTENCIA: Esto eliminará TODOS los datos. Solo para desarrollo.
+-- ⚠️ En producción, SIEMPRE haz backup primero.
+
 -- Conectar a la base de datos
 psql -U postgres -d expense_note_app
 
 -- Verificar tablas
 \dt
 
--- Si no existen, eliminar y recrear BD
+-- Si no existen, salir de psql
+\q
+
+-- SOLO EN DESARROLLO: Eliminar y recrear BD
+-- ⚠️ ESTO BORRARÁ TODOS LOS DATOS
+psql -U postgres
 DROP DATABASE expense_note_app;
 CREATE DATABASE expense_note_app;
+\q
 ```
 
 ---

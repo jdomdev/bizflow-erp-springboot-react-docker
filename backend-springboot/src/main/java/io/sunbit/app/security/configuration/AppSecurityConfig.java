@@ -51,8 +51,11 @@ public class AppSecurityConfig {
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthenticationEntryPoint));
         
-        // Allow public access to Swagger/OpenAPI endpoints
+        // Configure authorization rules
         http.authorizeHttpRequests(auth -> auth
+            // Allow public access to authentication endpoints
+            .requestMatchers("/api/v1/auth/**").permitAll()
+            // Allow public access to Swagger/OpenAPI endpoints
             .requestMatchers(
                 "/swagger-ui/**",
                 "/v3/api-docs/**",
@@ -60,6 +63,7 @@ public class AppSecurityConfig {
                 "/swagger-resources/**",
                 "/webjars/**"
             ).permitAll()
+            // All other requests require authentication
             .anyRequest().authenticated()
         );
         
