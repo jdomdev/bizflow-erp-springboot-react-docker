@@ -6,7 +6,7 @@ services:
     image: postgres:16-alpine
     container_name: bizflowerp_db
     environment:
-      POSTGRES_DB: expense_note_app
+      POSTGRES_DB: bizflow_erp
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
@@ -19,7 +19,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - expense_network
+      - bizflow_erp_network
     restart: unless-stopped
 
   # pgAdmin - PostgreSQL GUI (optional)
@@ -34,19 +34,20 @@ services:
     depends_on:
       - postgres
     networks:
-      - expense_network
+      - bizflow_erp_network
     restart: unless-stopped
     profiles:
       - debug
 
   # Spring Boot Backend
   backend:
+    image: bizflow-erp-springboot-react-docker-backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: bizflowerp_backend
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/expense_note_app
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bizflow_erp
       SPRING_DATASOURCE_USERNAME: ${DB_USER:-postgres}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-postgres}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
@@ -64,7 +65,7 @@ services:
       retries: 3
       start_period: 40s
     networks:
-      - expense_network
+      - bizflow_erp_network
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
@@ -91,7 +92,7 @@ services:
       retries: 3
       start_period: 10s
     networks:
-      - expense_network
+      - bizflow_erp_network
     restart: unless-stopped
 
 volumes:
@@ -99,5 +100,5 @@ volumes:
     driver: local
 
 networks:
-  expense_network:
+  bizflow_erp_network:
     driver: bridge
