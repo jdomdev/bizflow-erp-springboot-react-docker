@@ -15,6 +15,7 @@ Para una guía completa, consulta los documentos en la carpeta `/docs`:
 - **[🚀 QUICK_START.md](./docs/QUICK_START.md)** - Guía rápida de inicio
 - **[🔍 ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md)** - Problemas encontrados y soluciones
 - **[✅ CAMBIOS_V2.md](./docs/CAMBIOS_V2.md)** - Documentación detallada de cambios
+- **[👥 EMPLOYEE_API.md](./docs/EMPLOYEE_API.md)** - API de gestión de empleados
 
 ## ✨ Características Principales
 
@@ -31,10 +32,15 @@ Para una guía completa, consulta los documentos en la carpeta `/docs`:
 - ✅ Dashboard con estadísticas
 
 ### Gestión de Personal
-- ✅ Registro de empleados
+- ✅ CRUD completo de empleados
+- ✅ Validación robusta de datos (email, fechas, estado)
+- ✅ Búsqueda y filtrado de empleados
+- ✅ Estados de empleado (ACTIVO, INACTIVO, TERMINADO)
+- ✅ Gestión de fechas de inicio
 - ✅ Información de nómina
 - ✅ Puestos y departamentos
 - ✅ Gestión de roles
+- ✅ Tests unitarios e integración (11 tests)
 
 ### Interfaz Moderna
 - ✅ React 18 con Vite (ultra-rápido)
