@@ -43,11 +43,26 @@ export const authService = {
 
 // Servicios de gastos
 export const expenseService = {
-  getAll: () => apiClient.get('/expenses'),
-  getById: (id) => apiClient.get(`/expenses/${id}`),
-  create: (data) => apiClient.post('/expenses', data),
-  update: (id, data) => apiClient.put(`/expenses/${id}`, data),
-  delete: (id) => apiClient.delete(`/expenses/${id}`),
+  getAll: () => apiClient.get('/expense'),
+  getById: (id) => apiClient.get(`/expense/${id}`),
+  getByEmployee: (employeeId) => apiClient.get(`/expense/employee/${employeeId}`),
+  getByStatus: (status) => apiClient.get(`/expense/status/${status}`),
+  create: (data) => apiClient.post('/expense', data),
+  update: (data) => apiClient.put('/expense', data),
+  delete: (id) => apiClient.delete(`/expense/${id}`),
+  approve: (id) => apiClient.put(`/expense/${id}/approve`),
+  reject: (id, reason) => apiClient.put(`/expense/${id}/reject`, { reason }),
+  uploadAttachment: (id, file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return apiClient.post(`/expense/${id}/attachment`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  getAttachments: (id) => apiClient.get(`/expense/${id}/attachment`),
+  deleteAttachment: (attachmentId) => apiClient.delete(`/expense/attachment/${attachmentId}`),
 };
 
 // Servicios de nómina
