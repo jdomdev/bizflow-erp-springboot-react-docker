@@ -7,6 +7,7 @@ import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import ExpensesPage from './pages/ExpensesPage';
 import PayrollPage from './pages/PayrollPage';
+import EmployeesPage from './pages/EmployeesPage';
 import SettingsPage from './pages/SettingsPage';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/payroll" element={<PayrollPage />} />
+            <Route path="/employees" element={<EmployeesPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Route>

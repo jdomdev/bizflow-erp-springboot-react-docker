@@ -58,7 +58,10 @@ export const payrollService = {
 
 // Servicios de empleados
 export const employeeService = {
-  getAll: () => apiClient.get('/employees'),
-  getById: (id) => apiClient.get(`/employees/${id}`),
-  update: (id, data) => apiClient.put(`/employees/${id}`, data),
+  getAll: () => apiClient.get('/employee/'),
+  getById: (id) => apiClient.get(`/employee/${id}`),
+  create: (data) => apiClient.post('/employee/', data),
+  update: (id, data) => apiClient.put(`/employee/${id}`, data),
+  delete: (id) => apiClient.delete(`/employee/${id}`),
+  findByNameAndSurname: (name, surname) => apiClient.get(`/employee/${name}/${surname}`),
 };

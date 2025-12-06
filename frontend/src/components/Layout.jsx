@@ -7,6 +7,7 @@ import {
   LogOut,
   Menu,
   Settings,
+  Users,
   X,
 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
@@ -22,6 +23,7 @@ function Layout() {
     { icon: BarChart3, label: 'Dashboard', path: '/dashboard' },
     { icon: CreditCard, label: 'Gastos', path: '/expenses' },
     { icon: BarChart3, label: 'Nómina', path: '/payroll' },
+    { icon: Users, label: 'Empleados', path: '/employees' },
     { icon: Settings, label: 'Configuración', path: '/settings' },
   ];
 
