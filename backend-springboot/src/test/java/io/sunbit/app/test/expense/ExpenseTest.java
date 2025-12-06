@@ -19,6 +19,7 @@ import io.sunbit.app.dao.IExpenseDao;
 import io.sunbit.app.dao.IPositionDao;
 import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Expense;
+import io.sunbit.app.entity.ExpenseStatus;
 import io.sunbit.app.entity.Payroll;
 import io.sunbit.app.util.DateUtil;
 
@@ -39,54 +40,153 @@ public class ExpenseTest {
 			+ "1.1 - savedExpense.isNotNull()\n"
 			+ "1.2 - savedExpense.getId().isGreaterThan(0)\n")
 	public void testExpenseSaving() {
+		// Find or create an employee for testing
+		Optional<Employee> optEmployee = employeeDao.findById(1L);
+		Employee employee;
+		if (optEmployee.isPresent()) {
+			employee = optEmployee.get();
+		} else {
+			// Create a minimal employee for testing
+			employee = new Employee();
+			employee.setName("Test");
+			employee.setSurname("Employee");
+			employee.setEmail("test.employee@example.com");
+			employee.setBirthDate(LocalDateTime.of(1990, 1, 1, 0, 0));
+			employee = employeeDao.save(employee);
+		}
 
 		Expense newExpense = new Expense(
-
+			"Conference Travel",
+			"Business trip to conference",
+			LocalDateTime.now(),
+			150.00,
+			employee
 		);
+		
 		Expense savedExpense = expenseDao.save(newExpense);
 
 		assertThat(savedExpense).isNotNull();
 		assertThat(savedExpense.getId()).isGreaterThan(0);
+		assertThat(savedExpense.getStatus()).isEqualTo(ExpenseStatus.PENDING);
+		assertThat(savedExpense.getAmount()).isEqualTo(150.00);
 	}
 
 	@Test
+	@DisplayName(value = "Test 2 -> test expense updating")
 	public void testExpenseUpdating() {
-		Optional<Expense> optOldExpense = expenseDao.findByAmountAndDateAndConceptAndEmployeeId(
-				46.1,
-				DateUtil.formattingDate(LocalDateTime.of(2022, 03, 12, 10, 24, 00)),
-				"Taxi",
-				58L);
-
-		// Test.
-		System.out.println("TEST: Old Expense --> " + optOldExpense.get().toString());
-
-		Expense updatedExpense = null;
-		if (optOldExpense != null) {
-			// Expense expense = new
-			// Integer id,String concept,LocalDateTime date,Double amount,Employee employee
-
-			/*
-			 * public Employee(String name, String surname, LocalDateTime birthDate,
-			 * Position position, String email,
-			 * List<Expense> expenses, List<Payroll> payrolls)
-			 */
-			Expense expenseToUp = new Expense(
-					13L,
-					"Taxiiiiiiiii",
-					DateUtil.formattingDate(LocalDateTime.of(2022, 03, 12, 10, 24, 00)),
-					46.1,
-					new Employee(
-							58L,
-							"Sylvester",
-							"Stewart",
-							DateUtil.formattingDate(LocalDateTime.of(1984, 06, 15, 11, 24, 00)),
-							positionDao.findByNameIgnoreCase("scrum master").get(),
-							"slystone@gmail.com",
-							new ArrayList<Expense>(),
-							new ArrayList<Payroll>()));
-			updatedExpense = expenseDao.save(expenseToUp);
+		// First, save an expense
+		Optional<Employee> optEmployee = employeeDao.findById(1L);
+		if (!optEmployee.isPresent()) {
+			Employee employee = new Employee();
+			employee.setName("Test");
+			employee.setSurname("Employee");
+			employee.setEmail("test2.employee@example.com");
+			employee.setBirthDate(LocalDateTime.of(1990, 1, 1, 0, 0));
+			employeeDao.save(employee);
+			optEmployee = Optional.of(employee);
 		}
+
+		Expense expense = new Expense(
+			"Taxi",
+			"City travel",
+			DateUtil.formattingDate(LocalDateTime.of(2022, 03, 12, 10, 24, 00)),
+			46.1,
+			optEmployee.get()
+		);
+		expense = expenseDao.save(expense);
+
+		// Now update it
+		expense.setConcept("Taxi - Updated");
+		expense.setAmount(50.0);
+		
+		Expense updatedExpense = expenseDao.save(expense);
+		
 		assertThat(updatedExpense).isNotNull();
 		assertThat(updatedExpense.getId()).isGreaterThan(0);
+		assertThat(updatedExpense.getConcept()).isEqualTo("Taxi - Updated");
+		assertThat(updatedExpense.getAmount()).isEqualTo(50.0);
+	}
+	
+	@Test
+	@DisplayName(value = "Test 3 -> test expense status workflow")
+	public void testExpenseStatusWorkflow() {
+		// Create an expense
+		Optional<Employee> optEmployee = employeeDao.findById(1L);
+		if (!optEmployee.isPresent()) {
+			Employee employee = new Employee();
+			employee.setName("Test");
+			employee.setSurname("Employee");
+			employee.setEmail("test3.employee@example.com");
+			employee.setBirthDate(LocalDateTime.of(1990, 1, 1, 0, 0));
+			employeeDao.save(employee);
+			optEmployee = Optional.of(employee);
+		}
+
+		Expense expense = new Expense(
+			"Office Supplies",
+			"Purchase of office supplies",
+			LocalDateTime.now(),
+			75.50,
+			optEmployee.get()
+		);
+		expense = expenseDao.save(expense);
+		
+		// Test initial status
+		assertThat(expense.getStatus()).isEqualTo(ExpenseStatus.PENDING);
+		assertThat(expense.isPending()).isTrue();
+		
+		// Test approve
+		expense.approve("admin@example.com");
+		expense = expenseDao.save(expense);
+		
+		assertThat(expense.getStatus()).isEqualTo(ExpenseStatus.APPROVED);
+		assertThat(expense.isApproved()).isTrue();
+		assertThat(expense.getApprovedBy()).isEqualTo("admin@example.com");
+		assertThat(expense.getApprovalDate()).isNotNull();
+	}
+	
+	@Test
+	@DisplayName(value = "Test 4 -> test finding expenses by status")
+	public void testFindByStatus() {
+		// Create expenses with different statuses
+		Optional<Employee> optEmployee = employeeDao.findById(1L);
+		if (!optEmployee.isPresent()) {
+			Employee employee = new Employee();
+			employee.setName("Test");
+			employee.setSurname("Employee");
+			employee.setEmail("test4.employee@example.com");
+			employee.setBirthDate(LocalDateTime.of(1990, 1, 1, 0, 0));
+			employeeDao.save(employee);
+			optEmployee = Optional.of(employee);
+		}
+
+		Expense pendingExpense = new Expense(
+			"Pending Expense",
+			"Test pending",
+			LocalDateTime.now(),
+			100.0,
+			optEmployee.get()
+		);
+		expenseDao.save(pendingExpense);
+		
+		Expense approvedExpense = new Expense(
+			"Approved Expense",
+			"Test approved",
+			LocalDateTime.now(),
+			200.0,
+			optEmployee.get()
+		);
+		approvedExpense.approve("admin@example.com");
+		expenseDao.save(approvedExpense);
+		
+		// Test finding by status
+		var pendingExpenses = expenseDao.findByStatus(ExpenseStatus.PENDING);
+		assertThat(pendingExpenses).isNotEmpty();
+		assertThat(pendingExpenses.stream().anyMatch(e -> e.getConcept().equals("Pending Expense"))).isTrue();
+		
+		var approvedExpenses = expenseDao.findByStatus(ExpenseStatus.APPROVED);
+		assertThat(approvedExpenses).isNotEmpty();
+		assertThat(approvedExpenses.stream().anyMatch(e -> e.getConcept().equals("Approved Expense"))).isTrue();
 	}
 }
+
