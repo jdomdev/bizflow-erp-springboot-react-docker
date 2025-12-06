@@ -8,7 +8,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "react": "18.2.0",
@@ -29,6 +32,13 @@
     "autoprefixer": "10.4.0",
     "eslint": "8.54.0",
     "eslint-config-react-app": "7.0.1",
-    "@types/node": "20.10.0"
+    "@types/node": "20.10.0",
+    "vitest": "1.0.4",
+    "@testing-library/react": "14.1.2",
+    "@testing-library/jest-dom": "6.1.5",
+    "@testing-library/user-event": "14.5.1",
+    "jsdom": "23.0.1",
+    "@vitest/ui": "1.0.4",
+    "@vitest/coverage-v8": "1.0.4"
   }
 }

@@ -1,5 +1,9 @@
 # ENTERPRISE EXPENSE MANAGEMENT SYSTEM
 
+[![Backend CI](https://github.com/jdomdev/bizflow-erp-springboot-react-docker/workflows/Backend%20CI/badge.svg)](https://github.com/jdomdev/bizflow-erp-springboot-react-docker/actions/workflows/backend-ci.yml)
+[![Frontend CI](https://github.com/jdomdev/bizflow-erp-springboot-react-docker/workflows/Frontend%20CI/badge.svg)](https://github.com/jdomdev/bizflow-erp-springboot-react-docker/actions/workflows/frontend-ci.yml)
+[![Docker CD](https://github.com/jdomdev/bizflow-erp-springboot-react-docker/workflows/Docker%20CD/badge.svg)](https://github.com/jdomdev/bizflow-erp-springboot-react-docker/actions/workflows/docker-cd.yml)
+
 **Expense Note App v1.1.0** - Una aplicación moderna para gestión de gastos empresariales con backend Spring Boot 3.3.4 y frontend React 18.
 
 ## 🎯 Descripción General
@@ -13,6 +17,7 @@ ExpenseNoteApp es una solución completa para la administración de gastos corpo
 Para una guía completa, consulta los documentos en la carpeta `/docs`:
 - **[📖 INDEX.md](./docs/INDEX.md)** - Índice de documentación completo
 - **[🚀 QUICK_START.md](./docs/QUICK_START.md)** - Guía rápida de inicio
+- **[🔧 CICD.md](./docs/CICD.md)** - Documentación de CI/CD y workflows
 - **[🔍 ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md)** - Problemas encontrados y soluciones
 - **[✅ CAMBIOS_V2.md](./docs/CAMBIOS_V2.md)** - Documentación detallada de cambios
 
