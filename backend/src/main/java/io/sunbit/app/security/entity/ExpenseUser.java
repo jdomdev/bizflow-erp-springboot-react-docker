@@ -63,7 +63,7 @@ public class ExpenseUser implements UserDetails {
 	@NonNull
 	private String password;
 	@OneToOne
-	@JoinColumn(name = "employee_id", nullable = false)
+	@JoinColumn(name = "employee_id", nullable = true)
 	private Employee employee;
 
 	// Constructor without ID.
