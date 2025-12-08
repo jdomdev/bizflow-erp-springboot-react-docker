@@ -137,7 +137,8 @@ curl http://localhost:8080/api/v1/auth/check-email?email=test@example.com
 curl -X POST http://localhost:8080/api/v1/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser",
+    "name": "Nuevo",
+    "surname": "Usuario",
     "email": "newuser@example.com",
     "password": "SecurePassword123"
   }'

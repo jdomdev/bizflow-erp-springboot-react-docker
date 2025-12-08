@@ -34,7 +34,7 @@ Se han creado dos soluciones complementarias para inicializar datos en la base d
 
 ### Usuario Administrador Automático
 ```
-Username: admin
+Email: admin@yourcompany.com
 Password: <PASSWORD>
 Email:    admin@expenseapp.com
 Roles:    ADMIN
@@ -76,7 +76,7 @@ Cuando ves estos logs, significa que la inicialización funcionó:
 [2025-11-27 10:00:00] INFO  ... ✓ MANAGER role created
 [2025-11-27 10:00:00] INFO  ... Admin user not found. Creating default admin user...
 [2025-11-27 10:00:00] INFO  ... ✓ Admin user created successfully
-[2025-11-27 10:00:00] INFO  ...   Username: admin
+[2025-11-27 10:00:00] INFO  ...   Email: admin@yourcompany.com
 [2025-11-27 10:00:00] INFO  ...   Email: admin@expenseapp.com
 [2025-11-27 10:00:00] INFO  ... ⚠️ Default password: <PASSWORD> (CHANGE IN PRODUCTION)
 [2025-11-27 10:00:00] INFO  ... ========== DataLoader Completed Successfully ==========
@@ -90,7 +90,7 @@ Cuando ves estos logs, significa que la inicialización funcionó:
 ```
 1. Abre http://localhost en navegador
 2. Intenta login con:
-   - Username: admin
+   - Email: admin@yourcompany.com
    - Password: <PASSWORD>
 3. Deberías poder acceder
 4. Podrás crear nuevos usuarios desde el panel admin
@@ -112,7 +112,7 @@ SELECT * FROM user_role;               -- Ver asignaciones rol-usuario
 # Test login endpoint
 curl -X POST http://localhost:8080/api/v1/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"<PASSWORD>"}'
+   -d '{"email":"admin@yourcompany.com","password":"<PASSWORD>"}'
 
 # Deberías recibir un token JWT si es correcto
 ```
@@ -204,12 +204,12 @@ log.info("✓ SUPERVISOR role created");
 En `DataLoader.java`, en método `run()`:
 ```java
 // Después de createAdminUser()
-if (userRepository.findByUsername("testuser").isEmpty()) {
+if (userRepository.findByEmail("testuser@example.com").isEmpty()) {
     Role userRole = roleRepository.findByName("USER")
         .orElseThrow(() -> new RuntimeException("USER role not found"));
     
     User testUser = User.builder()
-        .username("testuser")
+      .name("Test").surname("User")
         .password(passwordEncoder.encode("test123"))
         .email("test@expenseapp.com")
         .enabled(true)
@@ -305,14 +305,14 @@ docker-compose logs -f backend
 **Causa:** Contraseña no está hasheada  
 **Solución:** Verifica que `PasswordEncoder` esté en SecurityConfiguration
 
-### Problema: "username admin already exists"
+### Problema: "email admin@yourcompany.com already exists"
 
 **Causa:** Usuario admin ya existe pero sin rol  
 **Solución:** Ejecuta manualmente:
 ```sql
 INSERT INTO user_role (user_id, role_id)
 SELECT u.id, r.id FROM "user" u, role r
-WHERE u.username = 'admin' AND r.name = 'ADMIN';
+WHERE u.email = 'admin@yourcompany.com' AND r.name = 'ADMIN';
 ```
 
 ---
@@ -326,10 +326,10 @@ WHERE u.username = 'admin' AND r.name = 'ADMIN';
 docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT * FROM role WHERE name IN ('ADMIN', 'USER', 'MANAGER');"
 
 # 2. ¿Usuario admin existe?
-docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT id, username, email FROM \"user\" WHERE username = 'admin';"
+docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT id, email FROM \"user\" WHERE email = 'admin@yourcompany.com';"
 
 # 3. ¿Rol asignado correctamente?
-docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT ur.* FROM user_role ur JOIN \"user\" u ON ur.user_id = u.id WHERE u.username = 'admin';"
+docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT ur.* FROM user_role ur JOIN \"user\" u ON ur.user_id = u.id WHERE u.email = 'admin@yourcompany.com';"
 
 # 4. ¿Posiciones de ejemplo existen?
 docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT * FROM position LIMIT 5;"
@@ -345,7 +345,7 @@ role:
  3  | MANAGER | Manager with team oversight permissions
 
 user:
- id | username | email
+ id | email
 ────┼──────────┼──────────────────────────
  1  | admin    | admin@expenseapp.com
 

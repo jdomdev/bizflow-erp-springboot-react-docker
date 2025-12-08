@@ -53,7 +53,7 @@ INSERT INTO role (id, name, description) VALUES
     (2, 'USER', 'Regular user role');
 
 -- Crear usuario admin por defecto
-INSERT INTO "user" (id, username, password, email, enabled) VALUES
+INSERT INTO "user" (id, name, surname, password, email, enabled) VALUES
     (1, 'admin', 'hashed_password_here', 'admin@app.com', true);
 
 -- Asignar rol ADMIN al usuario
@@ -107,7 +107,7 @@ public class DataLoader implements ApplicationRunner {
 
             // Crear usuario admin
             User admin = User.builder()
-                .username("admin")
+                .name("Admin").surname("User")
                 .password(passwordEncoder.encode("<PASSWORD>"))
                 .email("admin@expenseapp.com")
                 .enabled(true)
@@ -153,8 +153,7 @@ public class AuthController {
     public ResponseEntity<?> signup(@Valid @RequestBody SignUpRequest signupRequest) {
         
         // Validar input
-        if (userService.existsByUsername(signupRequest.getUsername())) {
-            throw new BadRequestException("Username already taken");
+        // Validación de nombre y apellido si es necesario
         }
 
         if (userService.existsByEmail(signupRequest.getEmail())) {
@@ -163,7 +162,7 @@ public class AuthController {
 
         // Crear usuario
         User newUser = User.builder()
-            .username(signupRequest.getUsername())
+            .name(signupRequest.getName()).surname(signupRequest.getSurname())
             .password(passwordEncoder.encode(signupRequest.getPassword()))
             .email(signupRequest.getEmail())
             .enabled(true)
@@ -244,8 +243,8 @@ INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
 
 ```java
 // API: POST /api/v1/auth/signup
-// Body: { "username": "user1", "password": "pass123", "email": "user@test.com" }
-// Response: { "id": 1, "username": "user1", "email": "user@test.com", "message": "Registered" }
+// Body: { "name": "User", "surname": "Test", "password": "pass123", "email": "user@test.com" }
+// Response: { "id": 1, "name": "User", "surname": "Test", "email": "user@test.com", "message": "Registered" }
 ```
 
 ### Paso 2: Crear DataLoader para Roles
@@ -264,7 +263,8 @@ public class RoleDataLoader implements ApplicationRunner {
 const handleSignup = async (formData) => {
     try {
         const response = await axios.post('/api/v1/auth/signup', {
-            username: formData.username,
+            name: formData.name,
+            surname: formData.surname,
             email: formData.email,
             password: formData.password
         });
@@ -286,9 +286,12 @@ const handleSignup = async (formData) => {
 
 ```java
 public class SignUpRequest {
-    @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 20, message = "Username must be 3-20 characters")
-    private String username;
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Name must be 2-50 characters")
+    private String name;
+    @NotBlank(message = "Surname is required")
+    @Size(min = 2, max = 128, message = "Surname must be 2-128 characters")
+    private String surname;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
@@ -312,7 +315,8 @@ docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT * F
 curl -X POST http://localhost:8080/api/v1/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "testuser",
+    "name": "Test",
+    "surname": "User",
     "email": "test@app.com",
     "password": "<PASSWORD>"
   }'
@@ -324,7 +328,8 @@ docker-compose exec postgres psql -U postgres -d expense_note_app -c "SELECT * F
 curl -X POST http://localhost:8080/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "testuser",
+    "name": "Test",
+    "surname": "User",
     "password": "<PASSWORD>"
   }'
 ```
@@ -346,7 +351,7 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 // ❌ NO HACER
 - Guardar contraseña en texto plano
 - Aceptar emails inválidos
-- Permitir usernames especiales
+-- Permitir nombres/apellidos especiales
 - Loguear contraseñas
 - Revelar si user existe
 ```

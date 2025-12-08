@@ -6,11 +6,11 @@
 
 ### 1. Automatización de Registro de Usuarios
 - Se revisó y actualizó el script `register_users.sh` para registrar usuarios en el sistema mediante la API REST (`/api/v1/auth/signup`).
-- Se detectó que el backend requería el campo `username` en el JSON de registro, por lo que se modificó el script para incluirlo, usando el prefijo del email como valor.
+- El backend requería el campo `username` en versiones previas, pero ahora solo se usan `name`, `surname` y `email`.
 - Se copió y ejecutó el script dentro del contenedor Docker `bizflowerp_backend`, verificando la respuesta de la API.
 
 ### 2. Diagnóstico y Resolución de Errores de Backend
-- Se identificó un error 400 en la API, primero por falta del campo `username` y después por un problema de base de datos: el backend intentaba acceder a la columna `employee_id` en la tabla `expense_user`, que no existe.
+- Se identificó un error 400 en la API por falta de campos requeridos y después por un problema de base de datos: el backend intentaba acceder a la columna `employee_id` en la tabla `expense_user`, que no existe.
 - Se revisó el modelo de datos en PostgreSQL y se confirmó que la tabla `expense_user` no tiene la columna `employee_id`, sino que la relación con empleados se gestiona por la tabla `user_role`.
 - Se analizó el modelo Java (`ExpenseUser`) y se detectó una referencia a `Employee` que no está alineada con la base de datos.
 - Se discutió si era necesario añadir la columna `employee_id` o eliminar la referencia en el modelo Java, recomendando que la estructura de datos y el modelo estén alineados según la lógica de negocio.
