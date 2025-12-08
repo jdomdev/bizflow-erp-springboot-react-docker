@@ -203,3 +203,20 @@ Variables de entorno y dependencias también usan estos nombres:
 
 - Backend conecta a DB con `jdbc:postgresql://erp-db-container:5432/erp_db`
 - Frontend usa `VITE_API_URL: http://erp-backend-container:8080`
+
+## 🗄️ Backups y Restauración de Base de Datos
+
+- **No se versionan backups en el repositorio.** Los archivos de backup deben almacenarse fuera de Git, en sistemas seguros y externos.
+- Antes de operaciones críticas (limpieza de volúmenes, migraciones, actualizaciones), realiza un backup manual:
+  ```bash
+  docker exec erp-db-container pg_dump -U postgres -d erp_db > backups/erpdb_backup_YYYYMMDD_HHMMSS.sql
+  ```
+- Para restaurar la base de datos:
+  ```bash
+  cat backups/erpdb_backup_YYYYMMDD_HHMMSS.sql | docker exec -i erp-db-container psql -U postgres -d erp_db
+  ```
+- Consulta el resumen de backups y estado de la base de datos en [`docs/DB_BACKUP_SUMMARY_20251209.md`](./docs/DB_BACKUP_SUMMARY_20251209.md).
+
+**Importante:** Mantén los backups fuera del repositorio y realiza copias frecuentes antes de cualquier cambio mayor.
+
+---
