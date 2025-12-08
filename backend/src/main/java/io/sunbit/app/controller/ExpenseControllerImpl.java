@@ -100,7 +100,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 		ResponseEntity<Boolean> responseEntity;
 		try {
 			Expense expense = expenseService.findById(expenseId, headerAuth);
-			Employee employee = expense.getEmployee();
+			Employee employee = expense.getExpenseUser().getEmployee();
 			employee.removeExpense(expense);// ******** Check if it's allow.......***********
 			responseEntity = ResponseEntity.status(HttpStatus.OK).body(expenseService.delete(expenseId));
 		} catch (Exception e) {
