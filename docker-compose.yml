@@ -45,9 +45,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: bizflowerp_backend
+    container_name: erp-backend-container
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://erp-db-container:5432/bizflow_erp
+      SPRING_DATASOURCE_URL: jdbc:postgresql://erp-db-container:5432/erp_db
       SPRING_DATASOURCE_USERNAME: ${DB_USER:-postgres}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-postgres}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
@@ -77,9 +77,9 @@ services:
       dockerfile: Dockerfile
       args:
         - VITE_API_URL=http://localhost:8081/api/v1
-    container_name: bizflowerp_frontend
+    container_name: erp-frontend-container
     environment:
-      VITE_API_URL: http://backend:8080
+        VITE_API_URL: http://erp-backend-container:8080
     ports:
       - "80:80"
     depends_on:

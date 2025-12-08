@@ -3,6 +3,7 @@ package io.sunbit.app.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import io.sunbit.app.security.entity.ExpenseUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -59,11 +60,28 @@ public class Expense implements Serializable {
 	private ExpenseUser expenseUser;
 
 	// Constructor without note.
-public Expense(Long id, String concept, LocalDateTime date, Double amount, ExpenseUser expenseUser) {
-    this.id = id;
-    this.concept = concept;
-    this.date = date;
-    this.amount = amount;
-    this.expenseUser = expenseUser;
-}
+
+	private Employee employee;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+	// Existing constructors...
+
+	// Add this constructor to match the usage in ExpenseMapper
+	public Expense(Long id, String concept, String note, LocalDateTime expenseDate, Double amount, ExpenseUser expenseUser) {
+		this.id = id;
+		this.concept = concept;
+		this.note = note;
+		this.expenseDate = expenseDate;
+		this.amount = amount;
+		this.expenseUser = expenseUser;
+	}
+
+	// getters and setters...
 }

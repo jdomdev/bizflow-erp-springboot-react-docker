@@ -1,3 +1,4 @@
+// import org.springframework.lang.NonNull;
 package io.sunbit.app.security.service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class RoleServiceImpl implements IRoleService {
 
 	@Override
 	@Transactional
+	@SuppressWarnings("null")
 	public Role save(Role role) throws Exception {
 		try {
 			return roleDao.save(role);
@@ -30,10 +32,11 @@ public class RoleServiceImpl implements IRoleService {
 
 	@Override
 	@Transactional
+	@SuppressWarnings("null")
 	public Role update(Long roleId, Role role) throws Exception {
 		Role updatedRole = null;
 		try {
-			Optional<Role> optionalRole = roleDao.findById(Long.valueOf(roleId));
+				Optional<Role> optionalRole = roleDao.findById(roleId);
 			if (!optionalRole.isEmpty()) {
 				updatedRole = roleDao.save(role);
 			}
@@ -55,10 +58,11 @@ public class RoleServiceImpl implements IRoleService {
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public Optional<Role> findById(Long id) throws Exception {
 		try {
-			Optional<Role> optionalRole = roleDao.findById(Long.valueOf(id));
-			return Optional.of(optionalRole.get());
+				Optional<Role> optionalRole = roleDao.findById(id);
+				return optionalRole;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());
@@ -67,11 +71,12 @@ public class RoleServiceImpl implements IRoleService {
 
 	@Override
 	@Transactional
+	@SuppressWarnings("null")
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		try {
-			if (roleDao.existsById(Long.valueOf(id))) {
-				roleDao.deleteById(Long.valueOf(id));
+				if (roleDao.existsById(id)) {
+					roleDao.deleteById(id);
 				isDeleted = true;
 			} else {
 				throw new Exception();

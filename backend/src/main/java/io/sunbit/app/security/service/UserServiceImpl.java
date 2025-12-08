@@ -1,3 +1,4 @@
+// import org.springframework.lang.NonNull;
 package io.sunbit.app.security.service;
 
 import java.util.Collection;
@@ -18,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import io.sunbit.app.entity.Employee;
 import io.sunbit.app.exception.RoleNotFoundException;
 import io.sunbit.app.security.dao.IRoleDao;
 import io.sunbit.app.security.dao.IUserDao;
@@ -44,33 +44,31 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	@Transactional
-	public ExpenseUser save(ExpenseUser user) throws Exception {
-		ExpenseUser savedUser = new ExpenseUser();
-		ExpenseUser settedUser = new ExpenseUser();
-		try {
-			// Try to find associated employee, but it's optional for signup
-			Employee employee = null;
-			try {
-				employee = employeeService.findByEmail(user.getEmail());
-			} catch (Exception e) {
-				// Employee not found, which is OK for signup
-				employee = null;
-			}
+		@SuppressWarnings("null")
+		public ExpenseUser save(ExpenseUser user) throws Exception {
+		       ExpenseUser savedUser = new ExpenseUser();
+		       ExpenseUser settedUser = new ExpenseUser();
+		       try {
+				       try {
+					       employeeService.findByEmail(user.getEmail());
+				       } catch (Exception e) {
+					       // Employee not found, which is OK for signup
+				       }
 
-			// Assign default USER role if not already assigned
-			if ((user.getRoles() == null) || (user.getRoles().size() == 0)) {
-				user.getRoles().add(roleDao.findByName(ROLE_USER).get());
-			}
+			       // Assign default USER role if not already assigned
+			       if ((user.getRoles() == null) || (user.getRoles().size() == 0)) {
+				       user.getRoles().add(roleDao.findByName(ROLE_USER).get());
+			       }
 
-			settedUser = setUser(user);
-			savedUser = userDao.save(settedUser);
-			// entityManager.persist(settedUser);
-		} catch (Exception e) {
-			// System.out.println("e.getCause(): " + e.getCause());
-			throw new Exception(e.getCause());
-		}
-		return savedUser;
-	}
+			       settedUser = setUser(user);
+			       savedUser = userDao.save(settedUser);
+			       // entityManager.persist(settedUser);
+		       } catch (Exception e) {
+			       // System.out.println("e.getCause(): " + e.getCause());
+			       throw new Exception(e.getCause());
+		       }
+		       return savedUser;
+	       }
 
 	private ExpenseUser setUser(ExpenseUser user) {
 		ExpenseUser settedUser = new ExpenseUser();
@@ -82,22 +80,25 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		// Password is already encoded in the caller, just use it as is
 		settedUser.setPassword(user.getPassword());
 
-		for (Role role : user.getRoles()) {
-			try {
-				if ((roleDao.findById(role.getId()) != null)) {
-					settedUser.getRoles().add(entityManager.merge(role));
-				}
-			} catch (RoleNotFoundException e) {
-				System.out.println(e.getMessage());
-				throw new RoleNotFoundException(
-						"The Role name: " + role.getName() + " with id: " + role.getId() + " IS NOT in Data Base");
-			}
-		}
+			       for (Role role : user.getRoles()) {
+				       try {
+					       @SuppressWarnings("null")
+					       Optional<Role> optRole = roleDao.findById(role.getId());
+					       if (optRole.isPresent()) {
+						       settedUser.getRoles().add(entityManager.merge(role));
+					       }
+				       } catch (RoleNotFoundException e) {
+					       System.out.println(e.getMessage());
+					       throw new RoleNotFoundException(
+							       "The Role name: " + role.getName() + " with id: " + role.getId() + " IS NOT in Data Base");
+				       }
+			       }
 		return settedUser;
 	}
 
 	@Override
 	@Transactional
+	@SuppressWarnings("null")
 	public ExpenseUser update(Long id, ExpenseUser user) throws Exception {
 		ExpenseUser updatedUser = new ExpenseUser();
 		try {
@@ -142,6 +143,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public Optional<ExpenseUser> findById(Long id) throws Exception {
 		Optional<ExpenseUser> optUser = userDao.findById(id);
 		return optUser;
@@ -149,6 +151,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	@Transactional
+	@SuppressWarnings("null")
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		Optional<ExpenseUser> optUser = userDao.findById(id);

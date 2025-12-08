@@ -5,19 +5,21 @@ import io.sunbit.app.entity.Payroll;
 public class PayrollMapper {
 	// Without ID.
 	    public static Payroll dtoToPayroll(PayrollDto dtoPayroll) {
-		    return new Payroll(
-			    dtoPayroll.getAmount(),
-			    dtoPayroll.getPayrollDate(),
-			    EmployeeMapper.dtoToEmployeeWithId(dtoPayroll.getEmployeeDto()),
-			    ExpenseUserMapper.dtoToExpenseUserWithId(dtoPayroll.getExpenseUserDto()));
+			Payroll payroll = new Payroll();
+			payroll.setAmount(dtoPayroll.getAmount());
+			payroll.setPayrollDate(dtoPayroll.getPayrollDate());
+			payroll.setEmployee(EmployeeMapper.dtoToEmployeeWithId(dtoPayroll.getEmployeeDto()));
+			payroll.setExpenseUser(ExpenseUserMapper.dtoToExpenseUserWithId(dtoPayroll.getExpenseUserDto()));
+			return payroll;
 	    }
 
 	    public static PayrollDto payrollToDto(Payroll payroll) {
-		    return new PayrollDto(
-			    payroll.getAmount(),
-			    payroll.getDate(),
-			    EmployeeMapper.employeeToDtoWithId(payroll.getEmployee()),
-			    ExpenseUserMapper.expenseUserToDtoWithId(payroll.getExpenseUser()));
+			return new PayrollDto(
+				payroll.getId(),
+				payroll.getAmount(),
+				payroll.getPayrollDate(),
+				EmployeeMapper.employeeToDtoWithId(payroll.getEmployee()),
+				ExpenseUserMapper.expenseUserToDtoWithId(payroll.getExpenseUser()));
 	    }
 
 	    // With ID.
@@ -34,7 +36,7 @@ public class PayrollMapper {
 		    return new PayrollDto(
 			    payroll.getId(),
 			    payroll.getAmount(),
-			    payroll.getDate(),
+			    payroll.getPayrollDate(),
 			    EmployeeMapper.employeeToDtoWithId(payroll.getEmployee()),
 			    ExpenseUserMapper.expenseUserToDtoWithId(payroll.getExpenseUser()));
 	    }

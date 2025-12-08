@@ -1,4 +1,3 @@
-
 # BIZFLOW ERP
 
 **Bizflow ERP v1.1.0** - Una aplicación moderna para gestión de gastos empresariales con backend Spring Boot 3.3.4 y frontend React 18.
@@ -155,6 +154,28 @@ The application uses **JWT** for secure authentication. Access is role-based, wi
 - `ROLE_ADMIN`: Full access to system resources and management capabilities.
 - `ROLE_USER`: Limited access, with permissions scoped to their own data.
 
+## 🔒 Seguridad avanzada: uso de spring-security-crypto
+
+La dependencia `spring-security-crypto` se utiliza **exclusivamente para el hash seguro de contraseñas de usuario** mediante `BCryptPasswordEncoder`. No se emplean los componentes de cifrado simétrico (como `AesBytesEncryptor` o `TextEncryptor`) que pueden estar afectados por vulnerabilidades reportadas en la librería.
+
+### Auditoría de uso
+- Se ha revisado todo el código fuente y **solo se utiliza `BCryptPasswordEncoder`** para el registro y autenticación de usuarios.
+- No se usan cifradores simétricos ni funciones de encriptación de datos sensibles de la librería.
+
+### Mitigación de vulnerabilidad
+- Las vulnerabilidades reportadas para `spring-security-crypto` 6.x afectan principalmente a los cifradores simétricos, no a `BCryptPasswordEncoder`.
+- El hash de contraseñas con BCrypt sigue siendo seguro y recomendado por la comunidad de seguridad.
+- Se recomienda mantener la dependencia actualizada y monitorizar los avisos de seguridad oficiales.
+
+### Recomendaciones
+- **No almacenar datos sensibles usando cifrado simétrico de esta librería.**
+- **Usar únicamente `BCryptPasswordEncoder` para contraseñas.**
+- Documentar este uso en el README y en auditorías de seguridad.
+
+Más detalles en [SECURITY_SPRING_CRYPTO.md](./SECURITY_SPRING_CRYPTO.md).
+
+---
+
 ## Future Enhancements
 
 - **Migration to Spring Boot 3**: Planned update to leverage new features and optimizations.
@@ -168,4 +189,17 @@ Feel free to submit issues and pull requests. For major changes, please discuss 
 ## License
 
 This project is licensed under the GNU General Public License v3.0. See the [LICENSE](./LICENSE) file for more details.
-With this update, it is specified that the application is under the **GPLv3** license. This informs contributors and users that they can modify and redistribute the software under the terms of this license.
+
+---
+
+## Revisión de nombres de contenedores y referencias en docker-compose.yml y archivos clave
+
+- **erp-db-container** (PostgreSQL)
+- **erp-backend-container** (Spring Boot backend)
+- **erp-frontend-container** (React frontend)
+- **bizflowerp_pgadmin** (pgAdmin)
+
+Variables de entorno y dependencias también usan estos nombres:
+
+- Backend conecta a DB con `jdbc:postgresql://erp-db-container:5432/erp_db`
+- Frontend usa `VITE_API_URL: http://erp-backend-container:8080`

@@ -40,7 +40,11 @@ import lombok.Setter;
 // @Builder
 
 public class ExpenseUser implements UserDetails {
-
+	@Override
+	public String getUsername() {
+		// Usamos el email como identificador único para Spring Security
+		return this.email;
+	}
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -22,7 +22,7 @@ import io.sunbit.app.service.PositionServiceImpl;
 @CrossOrigin(origins = "*")
 @RequestMapping("api/v1/position")
 @RestController
-public class PositionControllerImpl implements IPositionController<Position> {
+public class PositionControllerImpl implements IPositionController {
 
 	@Autowired
 	private PositionServiceImpl positionService;

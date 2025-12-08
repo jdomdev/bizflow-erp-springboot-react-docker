@@ -11,11 +11,11 @@ public class ExpenseUtil {
 	private static IExpenseDao expenseDao;
 
 	public static Expense existsExpenseInDb(Expense expense) {
-		Expense searchedExpense = expenseDao.findByAmountAndDateAndConceptAndEmployeeId(
-				expense.getAmount(),
-				expense.getDate(),
-				expense.getConcept(),
-				expense.getEmployee().getId()).get();
+		Expense searchedExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUser(
+			expense.getAmount(),
+			expense.getExpenseDate(),
+			expense.getConcept(),
+			expense.getExpenseUser()).orElse(null);
 		return searchedExpense;
 	}
 

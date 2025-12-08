@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.lang.NonNull;
 
 import io.jsonwebtoken.Claims;
 import io.sunbit.app.security.entity.ExpenseUser;
@@ -41,47 +42,61 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	/**
 	 * Procesa cada petición HTTP para validar el token JWT.
 	 */
-	@Override
-	protected void doFilterInternal(HttpServletRequest request,
-			HttpServletResponse response,
-			FilterChain filterChain)
-			throws ServletException, IOException {
-		
-		try {
-			// Verificar que el header de autorización exista
-			if (!hasAuthorizationHeader(request)) {
-				LOGGER.debug("Petición sin header de autorización: {}", request.getRequestURI());
-				filterChain.doFilter(request, response);
-				return;
-			}
+			       @Override
+			       protected void doFilterInternal(@NonNull HttpServletRequest request,
+							      @NonNull HttpServletResponse response,
+							      @NonNull FilterChain filterChain)
+				       throws ServletException, IOException {
+				       try {
+					       // Verificar que el header de autorización exista
+					       if (!hasAuthorizationHeader(request)) {
+						       LOGGER.debug("Petición sin header de autorización: {}", request.getRequestURI());
+						       filterChain.doFilter(request, response);
+						       return;
+					       }
 
-			// Extraer el token
-			String accessToken = getAccessToken(request);
-			
-			// Validar el token
-			if (!jwtAuthUtil.validateAccessToken(accessToken)) {
-				LOGGER.warn("Token JWT no válido para URI: {}", request.getRequestURI());
-				filterChain.doFilter(request, response);
-				return;
-			}
+					       // Extraer el token
+					       String accessToken = getAccessToken(request);
+                       
+					       // Validar el token
+					       if (!jwtAuthUtil.validateAccessToken(accessToken)) {
+						       LOGGER.warn("Token JWT no válido para URI: {}", request.getRequestURI());
+						       filterChain.doFilter(request, response);
+						       return;
+					       }
 
-			// Establecer contexto de seguridad
-			setAuthenticationContext(accessToken, request);
-			
-		} catch (Exception ex) {
-			LOGGER.error("Error en procesamiento de autenticación JWT", ex);
-			// Continuar sin autenticación en caso de error
-		}
+					       // Establecer contexto de seguridad
+					       setAuthenticationContext(accessToken, request);
+                       
+				       } catch (Exception ex) {
+					       LOGGER.error("Error en procesamiento de autenticación JWT", ex);
+					       // Continuar sin autenticación en caso de error
+				       }
 
-		filterChain.doFilter(request, response);
-	}
+				       filterChain.doFilter(request, response);
+			       }
+
+			       /**
+				* Verifica si la petición contiene un header de autorización válido.
+				* 
+				* @param request Petición HTTP
+				* @return true si el header existe y comienza con "Bearer"
+				*/
+			       private boolean hasAuthorizationHeader(HttpServletRequest request) {
+				       String header = request.getHeader(AUTHORIZATION_HEADER);
+				       return !ObjectUtils.isEmpty(header) && header.startsWith(BEARER_PREFIX);
+			       }
 
 	/**
 	 * Verifica si la petición contiene un header de autorización válido.
 	 * 
 	 * @param request Petición HTTP
 	 * @return true si el header existe y comienza con "Bearer"
-	 */
+					@Override
+					protected void doFilterInternal(@NonNull HttpServletRequest request,
+							@NonNull HttpServletResponse response,
+							@NonNull FilterChain filterChain)
+							throws ServletException, IOException {
 	private boolean hasAuthorizationHeader(HttpServletRequest request) {
 		String header = request.getHeader(AUTHORIZATION_HEADER);
 		return !ObjectUtils.isEmpty(header) && header.startsWith(BEARER_PREFIX);
