@@ -59,7 +59,7 @@ public class AppSecurityConfig {
             // Allow public endpoints
             .requestMatchers("/", "/health").permitAll()
             // Allow signup and login without authentication
-            .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/check-username", "/api/v1/auth/check-email", "/api/v1/auth/login").permitAll()
+            .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/check-email", "/api/v1/auth/login").permitAll()
             .requestMatchers("/actuator/**").permitAll()
             // All other requests require authentication
             .anyRequest().authenticated()

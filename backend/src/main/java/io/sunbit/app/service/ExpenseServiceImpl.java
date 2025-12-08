@@ -19,27 +19,26 @@ import io.sunbit.app.util.EmployeeUtil;
 @Service
 public class ExpenseServiceImpl implements IExpenseService {
 
-	@Autowired
-	private IEmployeeDao employeeDao;
-	@Autowired
-	private IExpenseDao expenseDao;
-	@Autowired
-	private JwtAuthenticationUtil jwtAuthUtil;
-	@Autowired
-	private static EmployeeUtil employeeUtil;
-
-	@Override
-	public List<Expense> findAllByEmployeeId(Long employeeId, String headerAuth) throws Exception {
-		List<Expense> expenses = null;
-		try {
-			String token = headerAuth.split(" ")[1].trim();
-			if (jwtAuthUtil.isAdminTokenUser(token)
-					|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).get(), token))
-				expenses = expenseDao.findAllByEmployeeId(employeeId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
+	    @Override
+	    public Expense findByAmountAndExpenseDateAndConceptAndEmployeeId(Double amount,
+		    LocalDateTime expenseDate,
+		    String concept,
+		    Long employeeId,
+		    String headerAuth) throws Exception {
+		Optional<Expense> optSearchedExpense = null;
+		String token = headerAuth.split(" ")[1].trim();
+		if (jwtAuthUtil.isAdminTokenUser(token)
+			|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).get(), token)) {
+		    optSearchedExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUserId(amount,
+			    expenseDate,
+			    concept,
+			    employeeId);
 		}
+		System.out.println("Searched Expense from ExpenseServiceImpl class\n"
+			+ "expenseDao.findByAmountAndExpenseDateAndConceptAndEmployeeIdAllIgnoreCase():\n"
+			+ "Concept: " + optSearchedExpense.get().getConcept());
+		return optSearchedExpense.get();
+	    }
 		return expenses;
 	}
 
@@ -53,7 +52,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 		String token = headerAuth.split(" ")[1].trim();
 		if (jwtAuthUtil.isAdminTokenUser(token)
 				|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).get(), token)) {
-			optSearchedExpense = expenseDao.findByAmountAndDateAndConceptAndEmployeeId(amount,
+			optSearchedExpense = expenseDao.findByAmountAndDateAndConceptAndExpenseUserId(amount,
 					date,
 					concept,
 					employeeId);

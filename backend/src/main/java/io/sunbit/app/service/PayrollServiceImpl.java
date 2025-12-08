@@ -16,6 +16,15 @@ import io.sunbit.app.util.DateUtil;
 
 @Service
 public class PayrollServiceImpl implements IPayrollService {
+	@Override
+	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception {
+		try {
+			return payrollDao.findAllByExpenseUserId(expenseUserId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
 
 	@Autowired
 	private IPayrollDao payrollDao;
@@ -32,8 +41,8 @@ public class PayrollServiceImpl implements IPayrollService {
 	}
 
 	@Override
-	public Boolean findByDateAndEmployeeAllIgnoreCase(LocalDateTime date, Employee employee) throws Exception {
-		return payrollDao.findByDateAndEmployeeAllIgnoreCase(date, employee);
+	public Boolean findByPayrollDateAndEmployeeAllIgnoreCase(LocalDateTime payrollDate, Employee employee) throws Exception {
+		return payrollDao.findByPayrollDateAndEmployeeAllIgnoreCase(payrollDate, employee);
 	}
 
 	@Override

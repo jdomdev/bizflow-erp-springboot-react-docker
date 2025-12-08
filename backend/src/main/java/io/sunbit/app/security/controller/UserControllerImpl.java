@@ -39,13 +39,12 @@ public class UserControllerImpl implements IUserController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getProfile(Authentication authentication) {
 		try {
+			// Usar email como identificador único
 			String email = authentication.getName();
 			ExpenseUser user = userService.findByEmail(email).orElseThrow(() -> new Exception("User not found"));
-
 			List<String> roles = user.getRoles().stream()
-					.map(Role::getName)
-					.collect(Collectors.toList());
-
+				.map(Role::getName)
+				.collect(Collectors.toList());
 			return ResponseEntity.ok(new UserProfileResponse(user.getEmail(), roles));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching profile");
@@ -56,22 +55,19 @@ public class UserControllerImpl implements IUserController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> updateProfile(@RequestBody UserUpdateRequest request, Authentication authentication) {
 		try {
+			// Usar email como identificador único
 			String email = authentication.getName();
 			ExpenseUser user = userService.findByEmail(email).orElseThrow(() -> new Exception("User not found"));
-
 			if (request.getEmail() != null && !request.getEmail().isEmpty()) {
 				user.setEmail(request.getEmail());
 			}
 			if (request.getPassword() != null && !request.getPassword().isEmpty()) {
 				user.setPassword(request.getPassword());
 			}
-
 			ExpenseUser updatedUser = userService.update(user.getId(), user);
-
 			List<String> roles = updatedUser.getRoles().stream()
-					.map(Role::getName)
-					.collect(Collectors.toList());
-
+				.map(Role::getName)
+				.collect(Collectors.toList());
 			return ResponseEntity.ok(new UserProfileResponse(updatedUser.getEmail(), roles));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error updating profile: " + e.getMessage());

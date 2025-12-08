@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	@Override
 	public Employee findById(Long id, String headerAuth) throws Exception {
 		try {
-			Optional<Employee> optionalEmployee = employeeDao.findById(id);
+			Optional<Employee> optionalEmployee = employeeDao.findById(Long.valueOf(id));
 			return optionalEmployee.get();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public Employee update(Long id, Employee employee) throws Exception {
 		Employee updatedEmployee = null;
 		try {
-			Optional<Employee> optionalEmployee = employeeDao.findById(id);
+			Optional<Employee> optionalEmployee = employeeDao.findById(Long.valueOf(id));
 			if (optionalEmployee != null) {
 				LocalDateTime parsedDate = DateUtil.formattingDate(employee.getBirthDate());
 				employee.setBirthDate(parsedDate);
@@ -89,8 +89,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		try {
-			if (employeeDao.existsById(id)) {
-				employeeDao.deleteById(id);
+			if (employeeDao.existsById(Long.valueOf(id))) {
+				employeeDao.deleteById(Long.valueOf(id));
 				isDeleted = true;
 			} else {
 				throw new Exception();
