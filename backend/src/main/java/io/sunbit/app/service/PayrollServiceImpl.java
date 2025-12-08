@@ -16,7 +16,6 @@ import io.sunbit.app.util.DateUtil;
 
 @Service
 public class PayrollServiceImpl implements IPayrollService {
-	@Override
 	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception {
 		try {
 			return payrollDao.findAllByExpenseUserId(expenseUserId);
@@ -41,8 +40,8 @@ public class PayrollServiceImpl implements IPayrollService {
 	}
 
 	@Override
-	public Boolean findByPayrollDateAndEmployeeAllIgnoreCase(LocalDateTime payrollDate, Employee employee) throws Exception {
-		return payrollDao.findByPayrollDateAndEmployeeAllIgnoreCase(payrollDate, employee);
+	public Boolean findByDateAndEmployeeAllIgnoreCase(LocalDateTime date, Employee employee) throws Exception {
+		return payrollDao.findByPayrollDateAndEmployeeAllIgnoreCase(date, employee);
 	}
 
 	@Override
@@ -54,24 +53,26 @@ public class PayrollServiceImpl implements IPayrollService {
 			throw new Exception(e.getMessage());
 		}
 	}
-
 	@Override
-	public Payroll findById(Long id) throws Exception {
-		try {
-			Optional<Payroll> optionalPayroll = payrollDao.findById(id);
-			return optionalPayroll.get();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-	}
+	       public Payroll findById(Long id) throws Exception {
+		       if (id == null) {
+			       throw new IllegalArgumentException("id no puede ser nulo");
+		       }
+		       try {
+			       Optional<Payroll> optionalPayroll = payrollDao.findById(id);
+			       return optionalPayroll.get();
+		       } catch (Exception e) {
+			       e.printStackTrace();
+			       throw new Exception(e.getMessage());
+		       }
+	       }
 
 	@Override
 	@Transactional
 	public Payroll save(Payroll payroll) throws Exception {
 		try {
-			LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getDate());
-			payroll.setDate(parsedDate);
+			LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getPayrollDate());
+			payroll.setPayrollDate(parsedDate);
 			return payrollDao.save(payroll);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,38 +82,44 @@ public class PayrollServiceImpl implements IPayrollService {
 
 	@Override
 	@Transactional
-	public Payroll update(Long id, Payroll payroll) throws Exception {
-		Payroll payrollUpdated = null;
-		try {
-			Optional<Payroll> optionalPayroll = payrollDao.findById(id);
-			Payroll oldPayroll = optionalPayroll.get();
-			if (oldPayroll != null) {
-				LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getDate());
-				payroll.setDate(parsedDate);
-				payrollUpdated = payrollDao.save(payroll);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-		return payrollUpdated;
-	}
+	       public Payroll update(Long id, Payroll payroll) throws Exception {
+		       if (id == null) {
+			       throw new IllegalArgumentException("id no puede ser nulo");
+		       }
+		       Payroll payrollUpdated = null;
+		       try {
+			       Optional<Payroll> optionalPayroll = payrollDao.findById(id);
+			       Payroll oldPayroll = optionalPayroll.get();
+			       if (oldPayroll != null) {
+				       LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getPayrollDate());
+				       payroll.setPayrollDate(parsedDate);
+				       payrollUpdated = payrollDao.save(payroll);
+			       }
+		       } catch (Exception e) {
+			       e.printStackTrace();
+			       throw new Exception(e.getMessage());
+		       }
+		       return payrollUpdated;
+	       }
 
 	@Override
 	@Transactional
-	public Boolean delete(Long id) throws Exception {
-		boolean isDeleted = false;
-		try {
-			if (payrollDao.existsById(id)) {
-				payrollDao.deleteById(id);
-				isDeleted = true;
-			} else {
-				throw new Exception();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-		return isDeleted;
-	}
+	       public Boolean delete(Long id) throws Exception {
+		       if (id == null) {
+			       throw new IllegalArgumentException("id no puede ser nulo");
+		       }
+		       boolean isDeleted = false;
+		       try {
+			       if (payrollDao.existsById(id)) {
+				       payrollDao.deleteById(id);
+				       isDeleted = true;
+			       } else {
+				       throw new Exception();
+			       }
+		       } catch (Exception e) {
+			       e.printStackTrace();
+			       throw new Exception(e.getMessage());
+		       }
+		       return isDeleted;
+	       }
 }

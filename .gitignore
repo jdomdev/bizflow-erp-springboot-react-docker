@@ -67,3 +67,10 @@ spring.log
 
 # Build outputs
 out/
+
+# Scripts con credenciales sensibles
+scripts/register_users.sh
+
+# Backups de base de datos
+backups/
+*.sql
