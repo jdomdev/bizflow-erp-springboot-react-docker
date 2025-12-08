@@ -25,7 +25,8 @@ public class EmployeeUtil {
 	public static Boolean existsInDb(Employee employee) {
 		boolean exists = false;
 		try {
-			if ((employeeDao.findById(employee.getId())) != null) {
+			Long employeeId = employee.getId();
+			if (employeeId != null && employeeDao.findById(employeeId).isPresent()) {
 				exists = true;
 			}
 		} catch (Exception e) {
