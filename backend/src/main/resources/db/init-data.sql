@@ -49,11 +49,11 @@ ON CONFLICT DO NOTHING;
 --          - CHANGE THE PASSWORD IMMEDIATELY IN PRODUCTION
 --
 -- For development/testing only (NEVER use in production with these credentials):
--- INSERT INTO "user" (username, password, email, enabled) 
--- VALUES ('admin', '${HASHED_PASSWORD}', 'admin@localhost', true)
+-- INSERT INTO "user" (password, email, enabled)
+-- VALUES ('${HASHED_PASSWORD}', 'admin@localhost', true)
 -- ON CONFLICT DO NOTHING;
--- 
+
 -- INSERT INTO user_role (user_id, role_id)
 -- SELECT u.id, r.id FROM "user" u, role r
--- WHERE u.username = 'admin' AND r.name = 'ADMIN'
+-- WHERE u.email = 'admin@localhost' AND r.name = 'ADMIN'
 -- ON CONFLICT DO NOTHING;
