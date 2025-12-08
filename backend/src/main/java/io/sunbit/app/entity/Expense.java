@@ -49,22 +49,21 @@ public class Expense implements Serializable {
 	@Column(name = "expense_date", nullable = false)
 	// @Temporal(TemporalType.TIMESTAMP)
 	@NonNull
-	private LocalDateTime date;
+	private LocalDateTime expenseDate;
 	@Column(name = "amount", nullable = false)
 	@NonNull
 	private Double amount;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id") // "id"->ERROR
-	// @JsonIgnore
+	@JoinColumn(name = "expense_user_id", nullable = false)
 	@NonNull
-	private Employee employee;
+	private ExpenseUser expenseUser;
 
 	// Constructor without note.
-	public Expense(Long id, String concept, LocalDateTime date, Double amount, Employee employee) {
-		this.id = id;
-		this.concept = concept;
-		this.date = date;
-		this.amount = amount;
-		this.employee = employee;
-	}
+public Expense(Long id, String concept, LocalDateTime date, Double amount, ExpenseUser expenseUser) {
+    this.id = id;
+    this.concept = concept;
+    this.date = date;
+    this.amount = amount;
+    this.expenseUser = expenseUser;
+}
 }

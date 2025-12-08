@@ -22,7 +22,7 @@ public class PayrollDto extends Payroll {
 	@NonNull
 	private Double amount;
 	@NonNull
-	private LocalDateTime date;
-	@NonNull
+	private LocalDateTime payrollDate;
 	private EmployeeDto employeeDto;
+	private ExpenseUserDto expenseUserDto;
 }
