@@ -127,10 +127,7 @@ public class ExpenseUser implements UserDetails {
 		return this.password;
 	}
 
-	@Override
-	public String getUsername() {
-		return this.email;
-	}
+	// Eliminado getUsername(). Spring Security usará getEmail() como identificador único.
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -154,6 +151,9 @@ public class ExpenseUser implements UserDetails {
 
 	public String getName() {
 		return this.name;
+	}
+	public String getEmail() {
+		return this.email;
 	}
 
 	public static Object withDefaultPasswordEncoder() {

@@ -33,7 +33,7 @@ public class RoleServiceImpl implements IRoleService {
 	public Role update(Long roleId, Role role) throws Exception {
 		Role updatedRole = null;
 		try {
-			Optional<Role> optionalRole = roleDao.findById(roleId);
+			Optional<Role> optionalRole = roleDao.findById(Long.valueOf(roleId));
 			if (!optionalRole.isEmpty()) {
 				updatedRole = roleDao.save(role);
 			}
@@ -57,7 +57,7 @@ public class RoleServiceImpl implements IRoleService {
 	@Override
 	public Optional<Role> findById(Long id) throws Exception {
 		try {
-			Optional<Role> optionalRole = roleDao.findById(id);
+			Optional<Role> optionalRole = roleDao.findById(Long.valueOf(id));
 			return Optional.of(optionalRole.get());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,8 +70,8 @@ public class RoleServiceImpl implements IRoleService {
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		try {
-			if (roleDao.existsById(id)) {
-				roleDao.deleteById(id);
+			if (roleDao.existsById(Long.valueOf(id))) {
+				roleDao.deleteById(Long.valueOf(id));
 				isDeleted = true;
 			} else {
 				throw new Exception();
