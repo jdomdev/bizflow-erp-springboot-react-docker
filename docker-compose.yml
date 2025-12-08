@@ -4,9 +4,9 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: bizflowerp_db
+    container_name: erp-db-container
     environment:
-      POSTGRES_DB: bizflow_erp
+      POSTGRES_DB: erp_db
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
@@ -47,7 +47,7 @@ services:
       dockerfile: Dockerfile
     container_name: bizflowerp_backend
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bizflow_erp
+      SPRING_DATASOURCE_URL: jdbc:postgresql://erp-db-container:5432/bizflow_erp
       SPRING_DATASOURCE_USERNAME: ${DB_USER:-postgres}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-postgres}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
