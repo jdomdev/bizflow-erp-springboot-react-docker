@@ -64,7 +64,8 @@ public class ExpenseServiceImpl implements IExpenseService {
 		LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
 		expense.setExpenseDate(parsedDate);
 		String token = headerAuth.split(" ")[1].trim();
-		if (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil.matchEmployeeUserEmail(expense.getEmployee(), token))
+		// Only admin can save expenses, or add custom user validation here if needed
+		if (jwtAuthUtil.isAdminTokenUser(token))
 			savedExpense = expenseDao.save(expense);
 		return savedExpense;
 	}
@@ -87,14 +88,11 @@ public class ExpenseServiceImpl implements IExpenseService {
 		String token = headerAuth.split(" ")[1].trim();
 		Optional<Expense> optExpense = expenseDao.findById(id);
 		if (optExpense.isPresent()) {
-			Long employeeId = optExpense.get().getEmployee() != null ? optExpense.get().getEmployee().getId() : null;
-			if (jwtAuthUtil.isAdminTokenUser(token) || (
-					employeeId != null &&
-					employeeUtil.matchEmployeeUserEmail(
-						employeeDao.findById(employeeId).get(), token)))
+			// Only admin can view any expense, or add custom user validation here if needed
+			if (jwtAuthUtil.isAdminTokenUser(token))
 				return optExpense.get();
 		}
-		return optExpense.get();
+		return optExpense.orElse(null);
 	}
 
 	@Override
@@ -109,9 +107,8 @@ public class ExpenseServiceImpl implements IExpenseService {
 		if (expenseId != null) {
 			Optional<Expense> optExpense = expenseDao.findById(expenseId);
 		if (optExpense.isPresent()) {
-			Long employeeId = optExpense.get().getEmployee() != null ? optExpense.get().getEmployee().getId() : null;
-			if (employeeId != null && (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil.matchEmployeeUserEmail(
-					employeeDao.findById(employeeId).get(), token))) {
+			// Only admin can update expenses, or add custom user validation here if needed
+			if (jwtAuthUtil.isAdminTokenUser(token)) {
 				LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
 				expense.setExpenseDate(parsedDate);
 				expenseUpdated = expenseDao.save(expense);
