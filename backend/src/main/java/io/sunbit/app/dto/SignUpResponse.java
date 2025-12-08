@@ -21,9 +21,14 @@ public class SignUpResponse {
     private Long id;
 
     /**
-     * Username
+     * Name
      */
-    private String username;
+    private String name;
+
+    /**
+     * Surname
+     */
+    private String surname;
 
     /**
      * Email

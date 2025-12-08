@@ -24,9 +24,9 @@ public class ExpenseDto extends Expense {
 	@NonNull
 	private String note;
 	@NonNull
-	private LocalDateTime date;
+	private LocalDateTime expenseDate;
 	@NonNull
 	private Double amount;
 	@NonNull
-	private EmployeeDto employeeDto;
+	private ExpenseUserDto expenseUserDto;
 }

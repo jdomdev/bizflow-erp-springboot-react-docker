@@ -40,10 +40,12 @@ public class Payroll implements Serializable {
 	@Column(name = "payroll_date", nullable = false)
 	// @Temporal(TemporalType.TIMESTAMP)
 	@NonNull
-	private LocalDateTime date;
+	private LocalDateTime payrollDate;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id") // "id"->ERROR
-	// @JsonIgnore
-	@NonNull
+	@JoinColumn(name = "employee_id", nullable = true)
 	private Employee employee;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "expense_user_id", nullable = true)
+	private ExpenseUser expenseUser;
 }

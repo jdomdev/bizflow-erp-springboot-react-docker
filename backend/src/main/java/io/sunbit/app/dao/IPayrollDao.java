@@ -17,6 +17,7 @@ public interface IPayrollDao extends JpaRepository<Payroll, Long> {
 	// List<Payroll> findAllPayrollByEmployeeId(Integer employeeId);
 
 	List<Payroll> findAllByEmployeeId(Long employeeId);
+	List<Payroll> findAllByExpenseUserId(Long expenseUserId);
 
-	Boolean findByDateAndEmployeeAllIgnoreCase(LocalDateTime payrollDate, Employee employee);
+	Boolean findByPayrollDateAndEmployeeAllIgnoreCase(LocalDateTime payrollDate, Employee employee);
 }
