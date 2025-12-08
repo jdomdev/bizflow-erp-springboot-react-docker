@@ -22,7 +22,7 @@ public class ExpenseUtil {
 	public static String giveMeExpenseEmployeeEmail(Expense expense) {
 		String email = null;
 		if (existsExpenseInDb(expense) != null) {
-			email = expense.getEmployee().getEmail();
+			email = expense.getExpenseUser().getEmail();
 		}
 		return email;
 	}
