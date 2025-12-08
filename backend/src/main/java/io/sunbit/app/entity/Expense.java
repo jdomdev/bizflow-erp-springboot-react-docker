@@ -61,27 +61,7 @@ public class Expense implements Serializable {
 
 	// Constructor without note.
 
-	private Employee employee;
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
 	// Existing constructors...
-
-	// Add this constructor to match the usage in ExpenseMapper
-	public Expense(Long id, String concept, String note, LocalDateTime expenseDate, Double amount, ExpenseUser expenseUser) {
-		this.id = id;
-		this.concept = concept;
-		this.note = note;
-		this.expenseDate = expenseDate;
-		this.amount = amount;
-		this.expenseUser = expenseUser;
-	}
 
 	// getters and setters...
 }
