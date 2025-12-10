@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.service.ExpenseServiceImpl;
 
@@ -99,9 +98,6 @@ public class ExpenseControllerImpl implements IExpenseController {
 			@RequestHeader("Authorization") String headerAuth) {
 		ResponseEntity<Boolean> responseEntity;
 		try {
-			Expense expense = expenseService.findById(expenseId, headerAuth);
-			Employee employee = expense.getExpenseUser().getEmployee();
-			employee.removeExpense(expense);// ******** Check if it's allow.......***********
 			responseEntity = ResponseEntity.status(HttpStatus.OK).body(expenseService.delete(expenseId));
 		} catch (Exception e) {
 			e.printStackTrace();
