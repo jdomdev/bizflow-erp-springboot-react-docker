@@ -37,17 +37,15 @@ public class EmployeeTest {
 			+ "1.1 - savedEmployee.isNotNull()\n"
 			+ "1.2 - savedEmployee.getId().isGreaterThan(0)\n")
 	public void testEmployeeSaving() {
-		List<Expense> expenses = new ArrayList<>();
 		List<Payroll> payrolls = new ArrayList<>();
 		// 1960-10-30 23:34:42', 25
 		Employee newEmployee = new Employee(
-				"Diego",
-				"Maradona",
-				DateUtil.formattingDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42)),
-				positionDao.findByNameIgnoreCase("Project Manager").get(),
-				"diegomaradona@mail.com",
-				expenses,
-				payrolls);
+			"Diego",
+			"Maradona",
+			DateUtil.formattingDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42)),
+			positionDao.findByNameIgnoreCase("Project Manager").get(),
+			"diegomaradona@mail.com",
+			payrolls);
 		Employee savedEmployee = employeeDao.save(newEmployee);
 
 		assertThat(savedEmployee).isNotNull();
