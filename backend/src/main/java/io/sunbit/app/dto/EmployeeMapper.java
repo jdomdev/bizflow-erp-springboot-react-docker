@@ -56,15 +56,14 @@ public class EmployeeMapper {
 		if (isNullList(employeeDto.getPayrollDtos())) {
 			employeeDto.setPayrollDtos(initializePayrollDtos(employeeDto.getPayrollDtos()));
 		}
-		Position employeeType = PositionMapper.dtoToPositionWithId(employeeDto.getPositionDto());
+		Position position = PositionMapper.dtoToPositionWithId(employeeDto.getPositionDto());
 		return new Employee(
-				employeeDto.getName(),
-				employeeDto.getSurname(),
-				employeeDto.getBirthDate(),
-				employeeType,
-				employeeDto.getEmail(),
-				dtosToExpenses(employeeDto.getExpenseDtos()),
-				dtosToPayrolls(employeeDto.getPayrollDtos()));
+			employeeDto.getName(),
+			employeeDto.getSurname(),
+			employeeDto.getBirthDate(),
+			position,
+			employeeDto.getEmail(),
+			dtosToPayrolls(employeeDto.getPayrollDtos()));
 	}
 
 	// B - Employee to DTO.
