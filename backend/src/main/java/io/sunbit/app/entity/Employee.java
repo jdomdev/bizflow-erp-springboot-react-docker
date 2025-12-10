@@ -80,41 +80,30 @@ public class Employee implements Serializable {
 	// @JsonBackReference
 	private List<Payroll> payrolls = new ArrayList<>();
 
-	// Constructor without id.
-	public Employee(String name, String surname, LocalDateTime birthDate, Position position, String email,
-			List<Expense> expenses, List<Payroll> payrolls) {
+
+	// Constructor sin id
+	public Employee(String name, String surname, LocalDateTime birthDate, Position position, String email, List<Payroll> payrolls) {
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.position = position;
 		this.email = email;
-		this.expenses = expenses;
 		this.payrolls = payrolls;
 	}
 
-	// Constructor with id.
-	public Employee(Long id, String name, String surname, LocalDateTime birthDate, Position position, String email,
-			List<Expense> expenses, List<Payroll> payrolls) {
+	// Constructor con id
+	public Employee(Long id, String name, String surname, LocalDateTime birthDate, Position position, String email, List<Payroll> payrolls) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.position = position;
 		this.email = email;
-		this.expenses = expenses;
 		this.payrolls = payrolls;
-	}
-
-	public void addExpense(Expense expense) {
-		expenses.add(expense);
 	}
 
 	public void addPayroll(Payroll payroll) {
 		payrolls.add(payroll);
-	}
-
-	public void removeExpense(Expense expense) {
-		expenses.remove(expense);
 	}
 
 	public void removePayroll(Payroll payroll) {
