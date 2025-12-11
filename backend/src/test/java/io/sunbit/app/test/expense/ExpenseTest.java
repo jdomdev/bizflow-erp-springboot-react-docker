@@ -32,63 +32,102 @@ public class ExpenseTest {
 	@Autowired
 	IPositionDao positionDao;
 
+
 	@Test
-	@DisplayName(value = "Test 1 -> test expense saving\n"
-			+ "1.1 - savedExpense.isNotNull()\n"
-			+ "1.2 - savedExpense.getId().isGreaterThan(0)\n")
+	@DisplayName("Test expense saving")
 	public void testExpenseSaving() {
-
+		ExpenseUser expenseUser = new ExpenseUser();
+		expenseUser.setId(58L);
+		expenseUser.setName("Sylvester");
+		expenseUser.setSurname("Stewart");
+		expenseUser.setEmail("slystone@gmail.com");
+		expenseUser.setPassword("dummyPassword");
 		Expense newExpense = new Expense(
-
+			null,
+			"Taxi",
+			"Nota de taxi",
+			DateUtil.formattingDate(LocalDateTime.of(2022, 3, 12, 10, 24, 0)),
+			46.1,
+			expenseUser
 		);
 		Expense savedExpense = expenseDao.save(newExpense);
-
 		assertThat(savedExpense).isNotNull();
 		assertThat(savedExpense.getId()).isGreaterThan(0);
 	}
 
+
 	@Test
+	@DisplayName("Test expense updating")
 	public void testExpenseUpdating() {
-		// Suponiendo que tienes un ExpenseUser de prueba:
 		ExpenseUser testUser = new ExpenseUser();
 		testUser.setId(58L);
 		Optional<Expense> optOldExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUser(
 			46.1,
-			DateUtil.formattingDate(LocalDateTime.of(2022, 03, 12, 10, 24, 00)),
+			DateUtil.formattingDate(LocalDateTime.of(2022, 3, 12, 10, 24, 0)),
 			"Taxi",
 			testUser);
+		assertThat(optOldExpense).isPresent();
+		Expense expense = optOldExpense.get();
+		expense.setConcept("Taxi actualizado");
+		Expense updatedExpense = expenseDao.save(expense);
+		assertThat(updatedExpense.getConcept()).isEqualTo("Taxi actualizado");
+	}
 
-		// Test.
-		System.out.println("TEST: Old Expense --> " + optOldExpense.get().toString());
+	@Test
+	@DisplayName("Test expense deleting")
+	public void testExpenseDeleting() {
+		ExpenseUser testUser = new ExpenseUser();
+		testUser.setId(58L);
+		Optional<Expense> optOldExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUser(
+			46.1,
+			DateUtil.formattingDate(LocalDateTime.of(2022, 3, 12, 10, 24, 0)),
+			"Taxi actualizado",
+			testUser);
+		assertThat(optOldExpense).isPresent();
+		Expense expense = optOldExpense.get();
+		Long id = expense.getId();
+		expenseDao.delete(expense);
+		assertThat(expenseDao.findById(id)).isEmpty();
+	}
 
-		Expense updatedExpense = null;
-		if (optOldExpense != null) {
-			// Expense expense = new
-			// Integer id,String concept,LocalDateTime date,Double amount,Employee employee
+	@Test
+	@DisplayName("Test expense finding by id")
+	public void testExpenseFindingById() {
+		ExpenseUser expenseUser = new ExpenseUser();
+		expenseUser.setId(59L);
+		Expense expense = new Expense(
+			null,
+			"Hotel",
+			"Nota de hotel",
+			DateUtil.formattingDate(LocalDateTime.of(2022, 4, 10, 12, 0, 0)),
+			120.0,
+			expenseUser
+		);
+		Expense savedExpense = expenseDao.save(expense);
+		Expense foundExpense = expenseDao.findById(savedExpense.getId()).orElse(null);
+		assertThat(foundExpense).isNotNull();
+		assertThat(foundExpense.getConcept()).isEqualTo("Hotel");
+	}
 
-			/*
-			 * public Employee(String name, String surname, LocalDateTime birthDate,
-			 * Position position, String email,
-			 * List<Expense> expenses, List<Payroll> payrolls)
-			 */
-			    ExpenseUser expenseUser = new ExpenseUser();
-			    expenseUser.setId(58L);
-			    expenseUser.setName("Sylvester");
-			    expenseUser.setSurname("Stewart");
-			    expenseUser.setEmail("slystone@gmail.com");
-			    expenseUser.setPassword("dummyPassword");
-			    // Puedes agregar roles si es necesario
-
-			    Expense expenseToUp = new Expense(
-				    13L,
-				    "Taxiiiiiiiii",
-				    "Nota de taxi actualizada",
-				    DateUtil.formattingDate(LocalDateTime.of(2022, 03, 12, 10, 24, 00)),
-				    46.1,
-				    expenseUser);
-			    updatedExpense = expenseDao.save(expenseToUp);
-		}
-		assertThat(updatedExpense).isNotNull();
-		assertThat(updatedExpense.getId()).isGreaterThan(0);
+	@Test
+	@DisplayName("Test expense-user relation")
+	public void testExpenseUserRelation() {
+		ExpenseUser expenseUser = new ExpenseUser();
+		expenseUser.setId(60L);
+		expenseUser.setName("Juan");
+		expenseUser.setSurname("Pérez");
+		expenseUser.setEmail("juanperez@gmail.com");
+		expenseUser.setPassword("dummyPassword");
+		Expense expense = new Expense(
+			null,
+			"Comida",
+			"Nota de comida",
+			DateUtil.formattingDate(LocalDateTime.of(2022, 5, 1, 14, 0, 0)),
+			30.0,
+			expenseUser
+		);
+		Expense savedExpense = expenseDao.save(expense);
+		assertThat(savedExpense.getExpenseUser()).isNotNull();
+		assertThat(savedExpense.getExpenseUser().getEmail()).isEqualTo("juanperez@gmail.com");
 	}
 }
