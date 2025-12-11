@@ -33,6 +33,16 @@ public class EmployeeDto extends Employee {
 	private List<ExpenseDto> expenseDtos;
 	private List<PayrollDto> payrollDtos;
 
+	// Constructor with id (for mappers that need it)
+	public EmployeeDto(Long id, String name, String surname, LocalDateTime birthDate, PositionDto positionDto, List<PayrollDto> payrollDtos) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+		this.positionDto = positionDto;
+		this.payrollDtos = payrollDtos;
+	}
+
 	// Constructor without id.
 	public EmployeeDto(String name, String surname, LocalDateTime birthDate, PositionDto positionDto,
 			List<ExpenseDto> expenseDtos, List<PayrollDto> payrollDtos) {
