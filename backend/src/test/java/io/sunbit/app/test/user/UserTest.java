@@ -114,17 +114,39 @@ public class UserTest {
 		}
 	}
 
-	/*
-	 * @Test
-	 * public void testAssignRoleToUser() {
-	 * Optional<ExpenseUser> optUser = userDao.findByEmail("rihannafenty@mail.com");
-	 * Optional<Role> optRole = roleDao.findByName("ROLE_ADMIN");
-	 * ExpenseUser user = optUser.get();
-	 * user.addRole(optRole.get());
-	 * ExpenseUser updatedUser = userDao.save(user);
-	 * 
-	 * assertThat(updatedUser.getRoles().size() == 2);
-	 * }
-	 */
+
+	@Test
+	public void testAssignRoleToUser() {
+		ensureRoleExist();
+		ExpenseUser user = new ExpenseUser();
+		user.setEmail("rihannafenty@mail.com");
+		user.setName("Rihanna");
+		user.setSurname("Fenty");
+		user.setPassword(new BCryptPasswordEncoder().encode("rihanna1234"));
+		Role adminRole = roleDao.findByName("ROLE_ADMIN").orElseThrow();
+		user.addRole(adminRole);
+		ExpenseUser savedUser = userDao.save(user);
+		assertThat(savedUser.getRoles()).isNotEmpty();
+	}
+
+	@Test
+	public void testUserAuthentication() {
+		String email = "akirakurosawa@sunbit.com";
+		String rawPassword = "kurosawa1234";
+		ExpenseUser user = userDao.findByEmail(email).orElse(null);
+		assertThat(user).isNotNull();
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		assertThat(encoder.matches(rawPassword, user.getPassword())).isTrue();
+	}
+
+	@Test
+	public void testUserDeleting() {
+		String email = "akirakurosawa@sunbit.com";
+		ExpenseUser user = userDao.findByEmail(email).orElse(null);
+		assertThat(user).isNotNull();
+		Long id = user.getId();
+		userDao.delete(user);
+			   assertThat(userDao.findById(java.util.Objects.requireNonNull(id))).isEmpty();
+	}
 
 }
