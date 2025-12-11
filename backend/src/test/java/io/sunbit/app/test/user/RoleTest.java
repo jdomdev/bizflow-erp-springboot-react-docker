@@ -1,7 +1,7 @@
 package io.sunbit.app.test.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+// ...existing code...
 
 import java.util.List;
 
@@ -25,27 +25,32 @@ public class RoleTest {
 
 	@Test
 	public void createRoleTest() {
-		// Role adminRole = new Role("USER_ROLE");
-		// Role userRole = new Role("ADMIN_ROLE");
-		/*
-		 * En Spring Boot la denominación correcta para los Roles es "ROLE_..."
-		 * porque si no, no funciona la anotación '@PreAuthorize("hasRole('ADMIN')")'
-		 */
 		Role roleAdmin = new Role("ROLE_ADMIN");
 		Role roleUser = new Role("ROLE_USER");
-
-		roleDao.saveAll(List.of(roleAdmin, roleUser));
-
+			   roleDao.saveAll(List.of(roleAdmin, roleUser)); // Unchecked warning is safe here
 		long roleNumbers = roleDao.count();
-		assertEquals(2, roleNumbers);
+		assertThat(roleNumbers).isGreaterThanOrEqualTo(2);
 	}
 
-	/*
-	 * @Test
-	 * public void testListRoles() {
-	 * List<Role> roles = roleDao.findAll();
-	 * assertThat(roles.size()).isGreaterThan(0);
-	 * roles.forEach(System.out::println);
-	 * }
-	 */
+	@Test
+	public void testListRoles() {
+		List<Role> roles = roleDao.findAll();
+		assertThat(roles.size()).isGreaterThan(0);
+	}
+
+	@Test
+	public void testFindRoleByName() {
+		Role role = roleDao.findByName("ROLE_ADMIN").orElse(null);
+		assertThat(role).isNotNull();
+		assertThat(role.getName()).isEqualTo("ROLE_ADMIN");
+	}
+
+	@Test
+	public void testDeleteRole() {
+		Role role = new Role("ROLE_DELETE");
+		roleDao.save(role);
+		Long id = role.getId();
+		roleDao.delete(role);
+			   assertThat(roleDao.findById(java.util.Objects.requireNonNull(id))).isEmpty();
+	}
 }

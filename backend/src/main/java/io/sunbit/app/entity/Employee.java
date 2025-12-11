@@ -68,11 +68,7 @@ public class Employee implements Serializable {
 	@NonNull
 	private Position position;
 
-	@OneToMany(mappedBy = "employee", targetEntity = Expense.class, cascade = { CascadeType.MERGE, CascadeType.REMOVE,
-			CascadeType.REFRESH, CascadeType.DETACH }, orphanRemoval = false)
-	// @JsonIgnore
-	@JsonBackReference
-	private List<Expense> expenses = new ArrayList<>();
+// Eliminada la relación con expenses para seguir el enfoque JOIN
 
 	@OneToMany(mappedBy = "employee", targetEntity = Payroll.class, cascade = { CascadeType.MERGE, CascadeType.REFRESH,
 			CascadeType.DETACH }, orphanRemoval = false)
