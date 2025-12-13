@@ -68,8 +68,8 @@ spring.log
 # Build outputs
 out/
 
-# Scripts con credenciales sensibles
-scripts/register_users.sh
+# Scripts con credenciales sensibles (contienen passwords y tokens)
+scripts/
 
 # Backups de base de datos
 backups/
