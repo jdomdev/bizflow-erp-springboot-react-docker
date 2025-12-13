@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import io.sunbit.app.dto.ExpenseCreateRequest;
 import io.sunbit.app.entity.Expense;
 
 public interface IExpenseController {
@@ -19,7 +20,7 @@ public interface IExpenseController {
 	public ResponseEntity<?> getExpenseById(@PathVariable Long expenseId,
 			@RequestHeader String token);
 
-	public ResponseEntity<?> saveExpense(@RequestBody @Valid Expense expense,
+	public ResponseEntity<?> saveExpense(@RequestBody @Valid ExpenseCreateRequest request,
 			@RequestHeader String token);
 
 	public ResponseEntity<?> updateExpense(@RequestBody @Valid Expense expense,
