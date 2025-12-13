@@ -1,3 +1,15 @@
+# Índice General de Documentación
+
+## Temáticas principales
+- [docker/](./docker/) — Guías y comandos Docker
+- [spring/](./spring/) — Guías Spring y seguridad
+- [entity/](./entity/) — Análisis/refactor de entidades
+- [sql/](./sql/) — Scripts y backups de ejemplo
+- [json/](./json/) — Datos de ejemplo en JSON
+- [planning/](./planning/) — Planificación y funcionalidades
+
+## Guía de Perfiles Spring Boot
+- [SPRING_PROFILES_GUIDE.md](./spring/SPRING_PROFILES_GUIDE.md) — Activación de perfiles y multi-entorno en Spring Boot
 # 📚 DOCUMENTACIÓN COMPLETA - ExpenseNoteApp
 
 ## 🎯 Índice por Sesión
