@@ -57,6 +57,30 @@ Para una guía completa, consulta los documentos en la carpeta `/docs`:
 | **Autenticación** | JWT (JJWT) | 0.12.6 |
 | **Build Backend** | Maven | 3.6+ |
 
+## 🌱 Configuración multi-entorno y perfiles Spring Boot
+
+La aplicación soporta perfiles para múltiples entornos (`dev`, `test`, `prod`) usando archivos de configuración dedicados:
+
+- `application-dev.properties`
+- `application-test.properties`
+- `application-prod.properties`
+
+Puedes activar un perfil de entorno de las siguientes formas:
+
+1. **Variable de entorno** (recomendado):
+  ```bash
+  export SPRING_PROFILES_ACTIVE=dev
+  export SPRING_PROFILES_ACTIVE=prod
+  export SPRING_PROFILES_ACTIVE=test
+  ```
+2. **Argumento JVM**:
+  ```bash
+  java -jar app.jar --spring.profiles.active=dev
+  ```
+3. **En los tests**: Usa `@ActiveProfiles("test")` en las clases de test para forzar el uso de la configuración de test.
+
+Consulta la guía completa en [`docs/SPRING_PROFILES_GUIDE.md`](./docs/SPRING_PROFILES_GUIDE.md).
+
 ## 🚀 Inicio Rápido
 
 ### Requisitos
