@@ -1,4 +1,6 @@
+
 package io.sunbit.app.test.expense;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,6 +22,7 @@ import io.sunbit.app.entity.Expense;
 import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.util.DateUtil;
 
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)

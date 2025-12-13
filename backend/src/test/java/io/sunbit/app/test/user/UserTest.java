@@ -1,4 +1,6 @@
+
 package io.sunbit.app.test.user;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,6 +29,7 @@ import io.sunbit.app.security.entity.Role;
 
 //@SpringBootTest
 // @TestPropertySource(locations = "classpath:application-sample.properties")
+@ActiveProfiles("test")
 @DataJpaTest
 /*
  * Spring Boot no intentará reemplazar tu base de datos real

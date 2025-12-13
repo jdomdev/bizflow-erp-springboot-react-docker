@@ -1,4 +1,6 @@
+
 package io.sunbit.app.test.user;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 // ...existing code...
@@ -15,6 +17,7 @@ import org.springframework.test.annotation.Rollback;
 import io.sunbit.app.security.dao.IRoleDao;
 import io.sunbit.app.security.entity.Role;
 
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
