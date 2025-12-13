@@ -1,4 +1,6 @@
+
 package io.sunbit.app.test.position;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +17,7 @@ import org.springframework.test.annotation.Rollback;
 import io.sunbit.app.dao.IPositionDao;
 import io.sunbit.app.entity.Position;
 
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
