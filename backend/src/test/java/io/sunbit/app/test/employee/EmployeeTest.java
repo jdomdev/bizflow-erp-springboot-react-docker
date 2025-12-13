@@ -1,4 +1,6 @@
+
 package io.sunbit.app.test.employee;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,6 +22,7 @@ import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Payroll;
 import io.sunbit.app.util.DateUtil;
 
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
