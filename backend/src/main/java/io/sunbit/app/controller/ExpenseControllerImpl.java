@@ -77,11 +77,23 @@ public class ExpenseControllerImpl implements IExpenseController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	@PostMapping("/")
 	// @ResponseBody
-	public ResponseEntity<?> saveExpense(@RequestBody @Valid Expense expense,
+	public ResponseEntity<?> saveExpense(@RequestBody @Valid io.sunbit.app.dto.ExpenseCreateRequest request,
 			@RequestHeader("Authorization") String headerAuth) {
 		ResponseEntity<?> responseEntity = null;
 		try {
-			responseEntity = ResponseEntity.status(HttpStatus.OK).body(expenseService.save(expense, headerAuth));
+			// Convertir ExpenseCreateRequest a Expense
+			io.sunbit.app.entity.Expense expense = new io.sunbit.app.entity.Expense();
+			expense.setConcept(request.getConcept());
+			expense.setNote(request.getNote());
+			expense.setExpenseDate(request.getExpenseDate());
+			expense.setAmount(request.getAmount());
+			
+			// Buscar el ExpenseUser por ID
+			io.sunbit.app.security.entity.ExpenseUser expenseUser = new io.sunbit.app.security.entity.ExpenseUser();
+			expenseUser.setId(request.getExpenseUserId());
+			expense.setExpenseUser(expenseUser);
+			
+			responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(expenseService.save(expense, headerAuth));
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST)
