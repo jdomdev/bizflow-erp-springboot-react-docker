@@ -1,20 +1,77 @@
-version: '3.9'
-
 services:
-  # PostgreSQL Database
-  postgres:
+  erp-prod-db-container:
+    profiles: ["prod"]
     image: postgres:16-alpine
-    container_name: erp-db-container
+    container_name: erp-prod-db-container
     environment:
-      POSTGRES_DB: erp_db
-      POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: erp_prod_db
+      POSTGRES_USER: erp_prod_user
+      POSTGRES_PASSWORD: prodpassword
+    ports:
+      - "5442:5432"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - ./sql/01_init_prod.sql:/docker-entrypoint-initdb.d/01_init_prod.sql:ro
+      - ./sql/02_positions_sample.sql:/docker-entrypoint-initdb.d/02_positions_sample.sql:ro
+      - ./sql/03_roles_sample.sql:/docker-entrypoint-initdb.d/03_roles_sample.sql:ro
+      - ./sql/04_employees_sample.sql:/docker-entrypoint-initdb.d/04_employees_sample.sql:ro
+      - ./sql/05_payrolls_sample.sql:/docker-entrypoint-initdb.d/05_payrolls_sample.sql:ro
+      - ./sql/06_expense_users_bootstrap.sql:/docker-entrypoint-initdb.d/06_expense_users_bootstrap.sql:ro  # Bootstrap admins with $2a$ hashes
+      # Expenses require expense_user which is created via API, not SQL
+      # - ./sql/07_expenses_sample.sql:/docker-entrypoint-initdb.d/07_expenses_sample.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U erp_prod_user" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bizflow_erp_network
+    restart: unless-stopped
+
+  erp-dev-db-container:
+    profiles: ["dev"]
+    image: postgres:16-alpine
+    container_name: erp-dev-db-container
+    environment:
+      POSTGRES_DB: erp_dev_db
+      POSTGRES_USER: erp_dev_user
+      POSTGRES_PASSWORD: devpassword
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./sql/01_init_dev.sql:/docker-entrypoint-initdb.d/01_init_dev.sql:ro
+      - ./sql/02_positions_sample.sql:/docker-entrypoint-initdb.d/02_positions_sample.sql:ro
+      - ./sql/03_roles_sample.sql:/docker-entrypoint-initdb.d/03_roles_sample.sql:ro
+      - ./sql/04_employees_sample.sql:/docker-entrypoint-initdb.d/04_employees_sample.sql:ro
+      - ./sql/05_payrolls_sample.sql:/docker-entrypoint-initdb.d/05_payrolls_sample.sql:ro
+      - ./sql/06_expense_users_bootstrap.sql:/docker-entrypoint-initdb.d/06_expense_users_bootstrap.sql:ro  # Bootstrap admins with $2a$ hashes
+      # Expenses require expense_user which is created via API, not SQL
+      # - ./sql/07_expenses_sample.sql:/docker-entrypoint-initdb.d/07_expenses_sample.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U erp_dev_user" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bizflow_erp_network
+    restart: unless-stopped
+
+  erp-test-db-container:
+    profiles: ["test"]
+    image: postgres:16-alpine
+    container_name: erp-test-db-container
+    environment:
+      POSTGRES_DB: erp_test_db
+      POSTGRES_USER: erp_test_user
+      POSTGRES_PASSWORD: <DB_PASSWORD>word
     ports:
       - "5434:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_test_data:/var/lib/postgresql/data
+      - ./sql/init_test.sql:/docker-entrypoint-initdb.d/init_test.sql:ro
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}" ]
+      test: [ "CMD-SHELL", "pg_isready -U erp_test_user" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -32,31 +89,30 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - postgres
+      - erp-prod-db-container
+      - erp-dev-db-container
+      - erp-test-db-container
     networks:
       - bizflow_erp_network
     restart: unless-stopped
     profiles:
       - debug
 
-  # Spring Boot Backend
-  backend:
+
+  backend-prod:
+    profiles: ["prod"]
     image: bizflow-erp-springboot-react-docker-backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: erp-backend-container
+    container_name: erp-backend-prod-container
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://erp-db-container:5432/erp_db
-      SPRING_DATASOURCE_USERNAME: ${DB_USER:-postgres}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-postgres}
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: prod
       APP_JWT_SECRET: ${JWT_SECRET:-kN8x9mK2p3L5q6R7sT8uV9wX0yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sTuVwXyZ1}
-      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE:-prod}
     ports:
-      - "8081:8080"
+      - "8181:8080"
     depends_on:
-      postgres:
+      erp-prod-db-container:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
@@ -70,20 +126,78 @@ services:
     volumes:
       - ./backend/logs:/app/logs
 
-  # React Frontend
-  frontend:
+  backend-dev:
+    profiles: ["dev"]
+    image: bizflow-erp-springboot-react-docker-backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: erp-backend-dev-container
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      APP_JWT_SECRET: ${JWT_SECRET:-kN8x9mK2p3L5q6R7sT8uV9wX0yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sTuVwXyZ1}
+    ports:
+      - "8082:8080"
+    depends_on:
+      erp-dev-db-container:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - bizflow_erp_network
+    restart: unless-stopped
+    volumes:
+      - ./backend/logs:/app/logs
+
+  backend-test:
+    profiles: ["test"]
+    image: bizflow-erp-springboot-react-docker-backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: erp-backend-test-container
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+      APP_JWT_SECRET: ${JWT_SECRET:-kN8x9mK2p3L5q6R7sT8uV9wX0yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sTuVwXyZ1}
+    ports:
+      - "8083:8080"
+    depends_on:
+      erp-test-db-container:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - bizflow_erp_network
+    restart: unless-stopped
+    volumes:
+      - ./backend/logs:/app/logs
+
+
+  # React Frontend (single container, configurable API URL)
+
+
+  frontend-prod:
+    profiles: ["prod"]
     build:
       context: ./frontend
       dockerfile: Dockerfile
       args:
         - VITE_API_URL=http://localhost:8081/api/v1
-    container_name: erp-frontend-container
+    container_name: erp-frontend-prod-container
     environment:
-        VITE_API_URL: http://erp-backend-container:8080
+      VITE_API_URL: http://localhost:8081/api/v1
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
-      backend:
+      backend-prod:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
@@ -95,8 +209,63 @@ services:
       - bizflow_erp_network
     restart: unless-stopped
 
+  frontend-dev:
+    profiles: ["dev"]
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8082/api/v1
+    container_name: erp-frontend-dev-container
+    environment:
+      VITE_API_URL: http://localhost:8082/api/v1
+    ports:
+      - "8085:80"
+    depends_on:
+      backend-dev:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - bizflow_erp_network
+    restart: unless-stopped
+
+  frontend-test:
+    profiles: ["test"]
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8083/api/v1
+    container_name: erp-frontend-test-container
+    environment:
+      VITE_API_URL: http://localhost:8083/api/v1
+    ports:
+      - "8086:80"
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - bizflow_erp_network
+    restart: unless-stopped
+
+
 volumes:
-  postgres_data:
+  postgres_prod_data:
+    driver: local
+  postgres_dev_data:
+    driver: local
+  postgres_test_data:
     driver: local
 
 networks:
