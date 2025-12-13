@@ -1,0 +1,23 @@
+# Dockerfile para ejecutar los tests del backend en el mismo entorno de red que las bases de datos
+FROM maven:3.9.5-eclipse-temurin-21-alpine
+
+WORKDIR /app
+
+
+# Copiar el wrapper, el pom y el directorio .mvn completo
+COPY mvnw* ./
+COPY pom.xml ./
+COPY .mvn ./.mvn
+
+# Asegurar permisos de ejecución para el wrapper
+RUN chmod +x mvnw
+
+# Descargar dependencias
+RUN ["./mvnw", "dependency:go-offline"]
+
+# Copiar el código fuente y recursos de test
+COPY src ./src
+COPY src/test/resources ./src/test/resources
+
+# Ejecutar los tests por defecto (se puede sobreescribir el ENTRYPOINT si se usa como runner)
+ENTRYPOINT ["./mvnw", "test"]
