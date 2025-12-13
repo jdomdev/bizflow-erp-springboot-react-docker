@@ -57,29 +57,133 @@ Para una guía completa, consulta los documentos en la carpeta `/docs`:
 | **Autenticación** | JWT (JJWT) | 0.12.6 |
 | **Build Backend** | Maven | 3.6+ |
 
-## 🌱 Configuración multi-entorno y perfiles Spring Boot
+## 🌱 Arquitectura Multi-Entorno
 
-La aplicación soporta perfiles para múltiples entornos (`dev`, `test`, `prod`) usando archivos de configuración dedicados:
+### Cambio de Paradigma: De Un Entorno a Tres
 
-- `application-dev.properties`
-- `application-test.properties`
-- `application-prod.properties`
+**Antes (Single Environment):**
+- Una sola base de datos compartida
+- Configuración única para todos los casos de uso
+- Riesgo de contaminar datos de producción durante desarrollo/testing
+- Imposibilidad de ejecutar tests en paralelo con desarrollo
 
-Puedes activar un perfil de entorno de las siguientes formas:
+**Ahora (Multi-Environment):**
+- **Tres entornos completamente aislados** con bases de datos dedicadas
+- **Desarrollo (dev):** Puerto 5433, configuración relajada para desarrollo rápido
+- **Testing (test):** Puerto 5434, ideal para tests de integración y CI/CD
+- **Producción (prod):** Puerto 5442, optimizado para rendimiento y seguridad
 
-1. **Variable de entorno** (recomendado):
-  ```bash
-  export SPRING_PROFILES_ACTIVE=dev
-  export SPRING_PROFILES_ACTIVE=prod
-  export SPRING_PROFILES_ACTIVE=test
-  ```
-2. **Argumento JVM**:
-  ```bash
-  java -jar app.jar --spring.profiles.active=dev
-  ```
-3. **En los tests**: Usa `@ActiveProfiles("test")` en las clases de test para forzar el uso de la configuración de test.
+### ¿Por qué Multi-Entorno?
 
-Consulta la guía completa en [`docs/SPRING_PROFILES_GUIDE.md`](./docs/SPRING_PROFILES_GUIDE.md).
+1. **🔒 Aislamiento Total:** Los cambios en desarrollo no afectan producción
+2. **🧪 Testing Seguro:** Ejecuta tests destructivos sin miedo a perder datos
+3. **⚡ Desarrollo Paralelo:** Múltiples desarrolladores trabajando simultáneamente
+4. **🎯 Configuración Específica:** Pools de conexiones, logging, timeouts personalizados por entorno
+5. **🚀 Migración de Esquemas:** Prueba cambios de base de datos en test antes de producción
+6. **📊 Datos Realistas:** Test con datos similares a producción sin riesgos
+
+### Configuración de Perfiles Spring Boot
+
+Cada entorno usa su propio perfil con configuración dedicada:
+
+| Perfil | Archivo | Base de Datos | Puerto DB | URL Backend |
+|--------|---------|---------------|-----------|-------------|
+| `dev` | `application-dev.properties` | `erp_dev_db` | 5433 | localhost:8080 |
+| `test` | `application-test.properties` | `erp_test_db` | 5434 | localhost:8282 |
+| `prod` | `application-prod.properties` | `erp_prod_db` | 5442 | localhost:8181 |
+
+### Activación de Perfiles
+
+#### 1. Variable de Entorno (Recomendado para Desarrollo)
+```bash
+# Desarrollo
+export SPRING_PROFILES_ACTIVE=dev
+./mvnw spring-boot:run
+
+# Producción
+export SPRING_PROFILES_ACTIVE=prod
+java -jar target/bizflowerp-1.1.0.jar
+```
+
+#### 2. Argumento JVM (Para Despliegue)
+```bash
+java -jar app.jar --spring.profiles.active=prod
+```
+
+#### 3. En Tests (Automático)
+```java
+@ActiveProfiles("test")
+public class EmployeeTest {
+    // Test usa automáticamente erp_test_db
+}
+```
+
+### Docker Compose con Perfiles
+
+Cada entorno tiene su propio perfil de Docker:
+
+```bash
+# Iniciar desarrollo
+docker compose --profile dev up -d
+
+# Iniciar testing
+docker compose --profile test up -d
+
+# Iniciar producción
+docker compose --profile prod up -d
+
+# Múltiples entornos simultáneos
+docker compose --profile dev --profile prod up -d
+```
+
+### Características Nuevas del Multi-Entorno
+
+#### ✅ Inicialización Automática de Datos
+- Scripts SQL ejecutados automáticamente al crear contenedores
+- Passwords pre-encriptadas con bcrypt ($2a$ format)
+- Datos de ejemplo (empleados, posiciones, nóminas) cargados por defecto
+
+#### ✅ Healthchecks Integrados
+- Cada base de datos tiene healthcheck (`pg_isready`)
+- Backends esperan a que DB esté lista antes de iniciar
+- Reinicio automático en caso de fallo
+
+#### ✅ Volúmenes Persistentes por Entorno
+- `postgres_dev_data` - Datos de desarrollo
+- `postgres_test_data` - Datos de testing (puede limpiarse frecuentemente)
+- `postgres_prod_data` - Datos de producción (persistencia crítica)
+
+#### ✅ Red Docker Aislada
+- Todos los servicios en `bizflow_erp_network`
+- Comunicación interna por nombre de servicio
+- Puertos expuestos solo a localhost
+
+### Migración desde Configuración Anterior
+
+Si vienes de la configuración anterior con un solo entorno:
+
+1. **Limpia volúmenes antiguos:**
+   ```bash
+   docker compose down -v
+   ```
+
+2. **Selecciona tu entorno:**
+   ```bash
+   docker compose --profile prod up -d
+   ```
+
+3. **Verifica la conexión:**
+   ```bash
+   docker compose --profile prod ps
+   docker compose --profile prod logs backend-prod
+   ```
+
+### Guías Completas
+
+- **📘 Guía de Perfiles Spring Boot:** [`docs/spring/SPRING_PROFILES_GUIDE.md`](./docs/spring/SPRING_PROFILES_GUIDE.md)
+- **🔄 Guía de Cambio de Entornos:** [`docs/guia_cambio_entornos.md`](./docs/guia_cambio_entornos.md)
+- **🐳 Comandos Docker:** [`docs/docker/docker_commands_session_6.md`](./docs/docker/docker_commands_session_6.md)
+- **🧪 Testing con Docker:** [`docs/docker/README_TESTS_DOCKER.md`](./docs/docker/README_TESTS_DOCKER.md)
 
 ## 🚀 Inicio Rápido
 
