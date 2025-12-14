@@ -1,43 +1,43 @@
-# Session 6 - Detailed Summary - 13 December 2025
+# Sesión 6 - Resumen Detallado - 13 Diciembre 2025
 
-## 📋 Executive Summary
+## 📋 Resumen Ejecutivo
 
-This session focused on fixing critical issues with the expense creation API endpoint and implementing a comprehensive multi-environment architecture for the BizFlow ERP application. The primary achievement was resolving Jackson deserialization errors that were causing HTTP 500 failures when creating expenses, and establishing a robust three-environment setup (dev, test, prod) with isolated databases and Spring Boot profiles.
+Esta sesión se centró en resolver problemas críticos con el endpoint de la API de creación de gastos e implementar una arquitectura multi-entorno integral para la aplicación BizFlow ERP. El logro principal fue resolver errores de deserialización de Jackson que causaban fallos HTTP 500 al crear gastos, y establecer una configuración robusta de tres entornos (dev, test, prod) con bases de datos aisladas y perfiles de Spring Boot.
 
-**Session Duration:** Multiple hours spanning 12-13 December 2025  
-**Created:** 2025-12-13 at 23:48  
-**Branch:** `chore/multi-env-db-config`  
-**Commits Made:** 24 granular commits
+**Duración de la Sesión:** Múltiples horas entre el 12-13 de diciembre de 2025  
+**Creado:** 2025-12-13 a las 23:48  
+**Rama:** `chore/multi-env-db-config`  
+**Commits Realizados:** 27 commits granulares
 
 ---
 
-## 🎯 Key Objectives Achieved
+## 🎯 Objetivos Clave Alcanzados
 
-### 1. Fixed Expense Creation API Endpoint ✅
+### 1. Corregido el Endpoint de Creación de Gastos ✅
 
-**Problem:** The expense creation endpoint was returning HTTP 500 errors with Jackson deserialization exceptions when attempting to create new expenses.
+**Problema:** El endpoint de creación de gastos devolvía errores HTTP 500 con excepciones de deserialización de Jackson al intentar crear nuevos gastos.
 
-**Root Cause Analysis:**
-- The controller was accepting `Expense` entity directly in the request body
-- The `Expense` entity has a bidirectional relationship with `ExpenseUser` (`@ManyToOne` on Expense, likely `@OneToMany` on ExpenseUser)
-- Jackson couldn't deserialize the circular reference when the client sent nested object structures like `"expenseUserDto": {"id": 1}`
+**Análisis de Causa Raíz:**
+- El controlador aceptaba la entidad `Expense` directamente en el body de la petición
+- La entidad `Expense` tiene una relación bidireccional con `ExpenseUser` (`@ManyToOne` en Expense, probablemente `@OneToMany` en ExpenseUser)
+- Jackson no podía deserializar la referencia circular cuando el cliente enviaba estructuras de objetos anidados como `"expenseUserDto": {"id": 1}`
 - Error: `HttpMediaTypeNotSupportedException: Cannot handle managed/back reference 'defaultReference': back reference type not compatible`
 
-**Solution Implemented:**
-1. Created `ExpenseCreateRequest` DTO with simple `Long expenseUserId` field
-2. Updated `IExpenseController` interface to accept `ExpenseCreateRequest` instead of `Expense` entity
-3. Modified `ExpenseControllerImpl.saveExpense()` to manually convert DTO to entity:
-   - Creates `Expense` entity from DTO fields
-   - Creates `ExpenseUser` stub with only ID set
-   - Avoids Jackson's circular reference issues
-4. Changed HTTP response status from `OK (200)` to `CREATED (201)` for proper REST semantics
+**Solución Implementada:**
+1. Creado el DTO `ExpenseCreateRequest` con un simple campo `Long expenseUserId`
+2. Actualizada la interfaz `IExpenseController` para aceptar `ExpenseCreateRequest` en lugar de la entidad `Expense`
+3. Modificado `ExpenseControllerImpl.saveExpense()` para convertir manualmente el DTO a entidad:
+   - Crea la entidad `Expense` desde los campos del DTO
+   - Crea un stub de `ExpenseUser` con solo el ID establecido
+   - Evita los problemas de referencia circular de Jackson
+4. Cambiado el estado de respuesta HTTP de `OK (200)` a `CREATED (201)` para seguir la semántica REST correcta
 
-**Technical Details:**
+**Detalles Técnicos:**
 
 ```java
 // ExpenseCreateRequest.java
 @NotNull
-private Long expenseUserId;  // Simple Long, not nested object
+private Long expenseUserId;  // Long simple, no objeto anidado
 
 // ExpenseControllerImpl.java
 public ResponseEntity<?> saveExpense(@RequestBody @Valid ExpenseCreateRequest request, ...) {
@@ -48,7 +48,7 @@ public ResponseEntity<?> saveExpense(@RequestBody @Valid ExpenseCreateRequest re
     expense.setAmount(request.getAmount());
     
     ExpenseUser expenseUser = new ExpenseUser();
-    expenseUser.setId(request.getExpenseUserId());  // Only ID needed
+    expenseUser.setId(request.getExpenseUserId());  // Solo se necesita el ID
     expense.setExpenseUser(expenseUser);
     
     return ResponseEntity.status(HttpStatus.CREATED)
@@ -56,23 +56,23 @@ public ResponseEntity<?> saveExpense(@RequestBody @Valid ExpenseCreateRequest re
 }
 ```
 
-**Validation:**
-- Created initialization script `scripts/init-expense-data.sh` to populate expense data
-- Script creates 57 expense_users via API (with authentication)
-- Script creates 20 expenses distributed across user IDs 1-10
-- All 20 expenses created successfully with HTTP 201 responses
-- Database verification confirmed proper `expense_user_id` foreign key values
+**Validación:**
+- Creado el script de inicialización `scripts/init-expense-data.sh` para poblar datos de gastos
+- El script crea 57 expense_users vía API (con autenticación)
+- El script crea 20 gastos distribuidos entre los IDs de usuario 1-10
+- Los 20 gastos se crearon exitosamente con respuestas HTTP 201
+- La verificación de base de datos confirmó los valores correctos de clave foránea `expense_user_id`
 
-**JSON Payload Evolution:**
+**Evolución del Payload JSON:**
 ```json
-// ❌ FAILED - Nested object approach
+// ❌ FALLÓ - Enfoque de objeto anidado
 {
   "expenseUserDto": {"id": 1},
   "concept": "Office Supplies",
   "amount": 150.50
 }
 
-// ✅ SUCCESS - Simple ID approach
+// ✅ ÉXITO - Enfoque de ID simple
 {
   "expenseUserId": 1,
   "concept": "Office Supplies", 
@@ -82,152 +82,152 @@ public ResponseEntity<?> saveExpense(@RequestBody @Valid ExpenseCreateRequest re
 
 ---
 
-### 2. Multi-Environment Docker Architecture ✅
+### 2. Arquitectura Docker Multi-Entorno ✅
 
-**Paradigm Shift:** Transitioned from single-environment setup to three isolated environments with dedicated databases and configurations.
+**Cambio de Paradigma:** Transición de una configuración de un solo entorno a tres entornos aislados con bases de datos y configuraciones dedicadas.
 
-**Architecture Overview:**
+**Vista General de la Arquitectura:**
 
-| Environment | Profile | Database Container | Port | Database Name | User |
-|-------------|---------|-------------------|------|---------------|------|
-| Development | `dev` | `erp-dev-db-container` | 5433 | `erp_dev_db` | `erp_dev_user` |
-| Test | `test` | `erp-test-db-container` | 5434 | `erp_test_db` | `erp_test_user` |
-| Production | `prod` | `erp-prod-db-container` | 5442 | `erp_prod_db` | `erp_prod_user` |
+| Entorno | Perfil | Contenedor Base de Datos | Puerto | Nombre BD | Usuario |
+|---------|--------|-------------------------|--------|-----------|---------|
+| Desarrollo | `dev` | `erp-dev-db-container` | 5433 | `erp_dev_db` | `erp_dev_user` |
+| Pruebas | `test` | `erp-test-db-container` | 5434 | `erp_test_db` | `erp_test_user` |
+| Producción | `prod` | `erp-prod-db-container` | 5442 | `erp_prod_db` | `erp_prod_user` |
 
-**Why Multi-Environment?**
+**¿Por Qué Multi-Entorno?**
 
-1. **Isolation:** Changes in dev/test don't affect production data
-2. **Testing Safety:** Run integration tests against dedicated test database
-3. **Configuration Flexibility:** Different connection pools, timeouts, logging levels per environment
-4. **Realistic Testing:** Test environment mirrors production structure
-5. **Development Speed:** Developers can work independently without conflicts
-6. **Database Migration Testing:** Test schema changes in test environment before production deployment
+1. **Aislamiento:** Los cambios en dev/test no afectan los datos de producción
+2. **Seguridad en Testing:** Ejecutar tests de integración contra una base de datos de pruebas dedicada
+3. **Flexibilidad de Configuración:** Diferentes pools de conexiones, timeouts, niveles de logging por entorno
+4. **Testing Realista:** El entorno de test refleja la estructura de producción
+5. **Velocidad de Desarrollo:** Los desarrolladores pueden trabajar independientemente sin conflictos
+6. **Testing de Migración de Base de Datos:** Probar cambios de esquema en test antes del despliegue en producción
 
-**Implementation Details:**
+**Detalles de Implementación:**
 
-#### Docker Compose Configuration
-- Removed single `postgres` service
-- Added three PostgreSQL 16 Alpine containers with dedicated profiles
-- Each database has its own Docker volume for data persistence
-- Healthchecks configured for all database services (`pg_isready`)
-- All services connected via `bizflow_erp_network`
-- Restart policy: `unless-stopped`
+#### Configuración de Docker Compose
+- Eliminado el servicio único `postgres`
+- Añadidos tres contenedores PostgreSQL 16 Alpine con perfiles dedicados
+- Cada base de datos tiene su propio volumen Docker para persistencia de datos
+- Healthchecks configurados para todos los servicios de base de datos (`pg_isready`)
+- Todos los servicios conectados vía `bizflow_erp_network`
+- Política de reinicio: `unless-stopped`
 
-#### Environment Files
-Created three `.env` files:
-- `.env.dev` - Development environment variables
-- `.env.test` - Test environment variables  
-- `.env.prod` - Production environment variables
+#### Archivos de Entorno
+Creados tres archivos `.env`:
+- `.env.dev` - Variables de entorno de desarrollo
+- `.env.test` - Variables de entorno de test  
+- `.env.prod` - Variables de entorno de producción
 
-#### Spring Boot Profiles
-Created dedicated property files:
+#### Perfiles de Spring Boot
+Creados archivos de propiedades dedicados:
 - `backend/src/main/resources/application-dev.properties`
 - `backend/src/main/resources/application-prod.properties`
 - `backend/src/test/resources/application-test.properties`
 
-Each profile configures:
-- Database URL with environment-specific port
-- Database username and password
-- JPA/Hibernate settings (ddl-auto, show-sql, format-sql)
-- Logging levels
-- Connection pool sizes
+Cada perfil configura:
+- URL de base de datos con puerto específico del entorno
+- Nombre de usuario y contraseña de la base de datos
+- Configuración de JPA/Hibernate (ddl-auto, show-sql, format-sql)
+- Niveles de logging
+- Tamaños de pool de conexiones
 
-#### Profile Activation Methods
-1. **Environment Variable (Recommended):**
+#### Métodos de Activación de Perfiles
+1. **Variable de Entorno (Recomendado):**
    ```bash
    export SPRING_PROFILES_ACTIVE=dev
    ```
 
-2. **JVM Argument:**
+2. **Argumento JVM:**
    ```bash
    java -jar app.jar --spring.profiles.active=prod
    ```
 
-3. **In Tests:**
+3. **En Tests:**
    ```java
    @ActiveProfiles("test")
    public class EmployeeTest { ... }
    ```
 
-#### Docker Commands by Environment
+#### Comandos Docker por Entorno
 
-**Development Environment:**
+**Entorno de Desarrollo:**
 ```bash
-# Start dev environment
+# Iniciar entorno dev
 docker compose --profile dev up -d
 
-# Stop dev environment
+# Detener entorno dev
 docker compose --profile dev down
 
-# View dev logs
+# Ver logs de dev
 docker compose --profile dev logs -f backend-dev
 ```
 
-**Test Environment:**
+**Entorno de Test:**
 ```bash
-# Start test environment
+# Iniciar entorno test
 docker compose --profile test up -d
 
-# Run tests with Docker
+# Ejecutar tests con Docker
 docker compose --profile test up --build backend-test
 ```
 
-**Production Environment:**
+**Entorno de Producción:**
 ```bash
-# Start production environment
+# Iniciar entorno producción
 docker compose --profile prod up -d
 
-# Rebuild and restart production backend
+# Reconstruir y reiniciar backend de producción
 docker compose --profile prod up -d --build backend-prod
 ```
 
 ---
 
-### 3. Database Initialization Automation ✅
+### 3. Automatización de Inicialización de Base de Datos ✅
 
-**Automated Bootstrap Process:**
+**Proceso de Bootstrap Automatizado:**
 
-Created SQL initialization scripts that run automatically when PostgreSQL containers start:
+Creados scripts SQL de inicialización que se ejecutan automáticamente cuando se inician los contenedores PostgreSQL:
 
-1. `01_init_[env].sql` - Schema creation (tables, indexes, constraints)
-2. `02_positions_sample.sql` - 51 position records
-3. `03_roles_sample.sql` - Role definitions
-4. `04_employees_sample.sql` - 61 employee records
-5. `05_payrolls_sample.sql` - 305 payroll records
-6. `06_expense_users_bootstrap.sql` - Admin users with bcrypt hashes
+1. `01_init_[env].sql` - Creación de esquema (tablas, índices, restricciones)
+2. `02_positions_sample.sql` - 51 registros de posiciones
+3. `03_roles_sample.sql` - Definiciones de roles
+4. `04_employees_sample.sql` - 61 registros de empleados
+5. `05_payrolls_sample.sql` - 305 registros de nóminas
+6. `06_expense_users_bootstrap.sql` - Usuarios administradores con hashes bcrypt
 
-**Key Innovation - Password Encryption:**
-- Used `$2a$` bcrypt hashes instead of plain text passwords
-- Passwords are pre-encrypted and stored in SQL scripts
-- No need to run password encryption at runtime
-- Example: `$2a$10$xLzPjDWTqc...` for "<PASSWORD>"
+**Innovación Clave - Encriptación de Contraseñas:**
+- Usados hashes bcrypt `$2a$` en lugar de contraseñas en texto plano
+- Las contraseñas están pre-encriptadas y almacenadas en scripts SQL
+- No es necesario ejecutar encriptación de contraseñas en tiempo de ejecución
+- Ejemplo: `$2a$10$xLzPjDWTqc...` para "<PASSWORD>"
 
-**Volume Mounting in docker-compose.yml:**
+**Montaje de Volúmenes en docker-compose.yml:**
 ```yaml
 volumes:
   - postgres_prod_data:/var/lib/postgresql/data
   - ./sql/01_init_prod.sql:/docker-entrypoint-initdb.d/01_init_prod.sql:ro
   - ./sql/02_positions_sample.sql:/docker-entrypoint-initdb.d/02_positions_sample.sql:ro
-  # ... additional scripts
+  # ... scripts adicionales
 ```
 
-**Bootstrap Data Created:**
-- 61 employees
-- 51 positions
-- 57 expense users (via API after container startup)
-- 20 expenses (via API)
-- 305 payroll records
-- User roles and permissions
+**Datos de Bootstrap Creados:**
+- 61 empleados
+- 51 posiciones
+- 57 usuarios de gastos (vía API después del arranque del contenedor)
+- 20 gastos (vía API)
+- 305 registros de nómina
+- Roles de usuario y permisos
 
 ---
 
-### 4. Test Configuration Updates ✅
+### 4. Actualizaciones de Configuración de Tests ✅
 
-**Problem:** Tests were using default profile, connecting to wrong database.
+**Problema:** Los tests usaban el perfil por defecto, conectándose a la base de datos incorrecta.
 
-**Solution:** Added `@ActiveProfiles("test")` annotation to all test classes:
+**Solución:** Añadida la anotación `@ActiveProfiles("test")` a todas las clases de test:
 
-**Files Modified:**
+**Archivos Modificados:**
 - `IRoleDaoTest.java`
 - `IUserDaoTest.java`
 - `BizflowErpApplicationTests.java`
@@ -238,24 +238,24 @@ volumes:
 - `RoleTest.java`
 - `UserTest.java`
 
-**Benefits:**
-- Tests now run against `erp_test_db` on port 5434
-- Test data doesn't pollute dev or production databases
-- Can run tests in parallel with dev/prod environments
-- Test database can be wiped and recreated without affecting other environments
+**Beneficios:**
+- Los tests ahora se ejecutan contra `erp_test_db` en el puerto 5434
+- Los datos de test no contaminan las bases de datos de dev o producción
+- Se pueden ejecutar tests en paralelo con los entornos dev/prod
+- La base de datos de test puede ser limpiada y recreada sin afectar otros entornos
 
-**Test Dockerfile Created:**
-- `backend/Dockerfile.test` - Dedicated Dockerfile for running tests in container
-- Configures Maven to use test profile
-- Runs tests with proper Spring profile activation
+**Dockerfile de Test Creado:**
+- `backend/Dockerfile.test` - Dockerfile dedicado para ejecutar tests en contenedor
+- Configura Maven para usar el perfil de test
+- Ejecuta tests con la activación correcta del perfil Spring
 
 ---
 
-### 5. Documentation Improvements ✅
+### 5. Mejoras de Documentación ✅
 
-**Comprehensive Documentation Added:**
+**Documentación Integral Añadida:**
 
-#### New Documentation Structure:
+#### Nueva Estructura de Documentación:
 ```
 docs/
 ├── docker/
@@ -270,177 +270,177 @@ docs/
 │   ├── SECURITY_SPRING_CRYPTO.md
 │   └── SPRING_PROFILES_GUIDE.md
 ├── session_6/
-│   ├── session_6_summary_2025-12-13.md
 │   ├── session_6_summary_251212.md
 │   ├── session_6_summary_251213_0113.md
-│   └── session_6_detailed_summary_2025-12-13_2348.md (this file)
+│   └── session_6_summary_251213_2348.md (este archivo en inglés)
+│   └── session_6_summary_251213_2348_es.md (este archivo)
 ├── guia_cambio_entornos.md
 ├── secuencia_inicializacion_bdd_automatizada.md
 ├── DB_BACKUP_SUMMARY_251209.md
-└── INDEX.md (updated with thematic sections)
+└── INDEX.md (actualizado con secciones temáticas)
 ```
 
-#### Key Documentation Files:
+#### Archivos de Documentación Clave:
 
-**`guia_cambio_entornos.md`** (350 lines)
-- Comprehensive guide for switching between environments
-- Docker commands for each profile
-- Database connection details
-- Environment variable configuration
-- Troubleshooting tips
+**`guia_cambio_entornos.md`** (350 líneas)
+- Guía completa para cambiar entre entornos
+- Comandos Docker para cada perfil
+- Detalles de conexión a base de datos
+- Configuración de variables de entorno
+- Consejos de troubleshooting
 
 **`SPRING_PROFILES_GUIDE.md`**
-- Detailed explanation of Spring Boot profiles
-- Activation methods and best practices
-- Configuration file structure
-- Profile-specific property overrides
+- Explicación detallada de perfiles Spring Boot
+- Métodos de activación y mejores prácticas
+- Estructura de archivos de configuración
+- Sobrescrituras de propiedades específicas por perfil
 
 **`secuencia_inicializacion_bdd_automatizada.md`**
-- Documents SQL initialization script execution order
-- Explains bootstrap process with bcrypt hashes
-- Notes on expense creation via API vs SQL
+- Documenta el orden de ejecución de scripts SQL de inicialización
+- Explica el proceso de bootstrap con hashes bcrypt
+- Notas sobre creación de gastos vía API vs SQL
 
 **`README_TESTS_DOCKER.md`**
-- Guide for running tests in Docker
-- Test profile configuration
-- Integration test setup
+- Guía para ejecutar tests en Docker
+- Configuración del perfil de test
+- Configuración de tests de integración
 
-**Updated `README.md`:**
-- Added "🌱 Configuración multi-entorno y perfiles Spring Boot" section
-- Explains the paradigm shift from single to multi-environment
-- Documents three profile activation methods
-- References comprehensive SPRING_PROFILES_GUIDE.md
+**`README.md` Actualizado:**
+- Añadida sección "🌱 Arquitectura Multi-Entorno"
+- Explica el cambio de paradigma de un solo entorno a multi-entorno
+- Documenta tres métodos de activación de perfiles
+- Referencias a SPRING_PROFILES_GUIDE.md completo
 
-**Updated `docs/INDEX.md`:**
-- Added thematic organization (docker/, spring/, entity/, sql/, json/, planning/)
-- Improved navigation structure
-- Cross-references between related documents
+**`docs/INDEX.md` Actualizado:**
+- Añadida organización temática (docker/, spring/, entity/, sql/, json/, planning/)
+- Mejorada la estructura de navegación
+- Referencias cruzadas entre documentos relacionados
 
 ---
 
-### 6. Security Improvements ✅
+### 6. Mejoras de Seguridad ✅
 
-**Scripts Folder Protection:**
+**Protección de la Carpeta Scripts:**
 
-**Problem:** Scripts folder contains sensitive credentials:
-- Admin passwords
-- JWT tokens for API testing
-- Database passwords
-- User credentials for initialization
+**Problema:** La carpeta scripts contiene credenciales sensibles:
+- Contraseñas de administrador
+- Tokens JWT para testing de API
+- Contraseñas de base de datos
+- Credenciales de usuario para inicialización
 
-**Solution:**
+**Solución:**
 ```gitignore
 # Scripts con credenciales sensibles (contienen passwords y tokens)
 scripts/
 ```
 
-**Protected Scripts:**
-- `init-expense-data.sh` - Contains Ada Lovelace admin JWT token
-- `register_users.sh` - Contains user passwords
-- `register_users_test.sh` - Contains test credentials
-- `run-backend-tests.sh` - Contains authentication tokens
+**Scripts Protegidos:**
+- `init-expense-data.sh` - Contiene token JWT de admin Ada Lovelace
+- `register_users.sh` - Contiene contraseñas de usuarios
+- `register_users_test.sh` - Contiene credenciales de test
+- `run-backend-tests.sh` - Contiene tokens de autenticación
 
-**Benefit:** Prevents accidental commit of sensitive credentials to version control.
+**Beneficio:** Previene el commit accidental de credenciales sensibles al control de versiones.
 
 ---
 
-### 7. Code Quality Improvements ✅
+### 7. Mejoras de Calidad de Código ✅
 
-**Refactoring Completed:**
+**Refactorización Completada:**
 
 1. **PayrollMapper.java**
-   - Removed redundant import `io.sunbit.app.dto.EmployeeMapper`
-   - Cleaned up unused dependencies
+   - Eliminado import redundante `io.sunbit.app.dto.EmployeeMapper`
+   - Limpiadas dependencias no utilizadas
 
-2. **Maven Wrapper Update**
-   - Updated `mvnw` script with improved JAVA_HOME detection
-   - Added verbose mode support (`MVNW_VERBOSE`)
-   - Better error handling and logging
+2. **Actualización del Maven Wrapper**
+   - Actualizado el script `mvnw` con mejor detección de JAVA_HOME
+   - Añadido soporte para modo verbose (`MVNW_VERBOSE`)
+   - Mejor manejo de errores y logging
 
-3. **HTTP Status Code Correction**
-   - Changed expense creation response from `200 OK` to `201 CREATED`
-   - Follows REST best practices for resource creation
+3. **Corrección de Código de Estado HTTP**
+   - Cambiada la respuesta de creación de gastos de `200 OK` a `201 CREATED`
+   - Sigue las mejores prácticas REST para creación de recursos
 
 ---
 
-### 8. Data Cleanup ✅
+### 8. Limpieza de Datos ✅
 
-**Duplicate Expense Records Removed:**
+**Registros de Gastos Duplicados Eliminados:**
 
-**Problem Identified:**
-- Expenses 21-40 were exact duplicates of 1-20
-- Same concept, amount, date, and expense_user_id values
-- Caused by running initialization script twice
+**Problema Identificado:**
+- Los gastos 21-40 eran duplicados exactos de 1-20
+- Mismo concepto, cantidad, fecha y valores de expense_user_id
+- Causado por ejecutar el script de inicialización dos veces
 
-**Solution:**
+**Solución:**
 ```sql
 DELETE FROM expense WHERE id >= 21 AND id <= 40;
 -- DELETE 20
 ```
 
-**Verification:**
+**Verificación:**
 ```sql
 SELECT COUNT(*) FROM expense;
--- Result: 20 rows (correct)
+-- Resultado: 20 filas (correcto)
 ```
 
-**Final Database State:**
-- 20 unique expense records
-- Proper foreign key relationships to expense_user table
-- No duplicate data
+**Estado Final de la Base de Datos:**
+- 20 registros de gastos únicos
+- Relaciones de clave foránea correctas a la tabla expense_user
+- Sin datos duplicados
 
 ---
 
-## 🛠️ Technical Stack
+## 🛠️ Stack Técnico
 
-### Backend Technologies
+### Tecnologías Backend
 - **Java:** 17
 - **Spring Boot:** 3.3.4
-- **Spring Security:** JWT authentication
-- **Spring Data JPA:** Database access
+- **Spring Security:** Autenticación JWT
+- **Spring Data JPA:** Acceso a base de datos
 - **PostgreSQL:** 16-alpine
-- **Jackson:** JSON serialization
-- **Maven:** 3.9.5 (wrapper included)
-- **JJWT:** 0.12.6 (JWT tokens)
-- **BCrypt:** Password encryption
+- **Jackson:** Serialización JSON
+- **Maven:** 3.9.5 (wrapper incluido)
+- **JJWT:** 0.12.6 (tokens JWT)
+- **BCrypt:** Encriptación de contraseñas
 
-### DevOps & Infrastructure
-- **Docker:** Containerization
-- **Docker Compose:** Multi-container orchestration
-- **Docker Profiles:** Environment separation
-- **PostgreSQL Docker Volumes:** Data persistence
-- **Healthchecks:** Container health monitoring
-- **Docker Networks:** Service communication
+### DevOps e Infraestructura
+- **Docker:** Contenedorización
+- **Docker Compose:** Orquestación multi-contenedor
+- **Docker Profiles:** Separación de entornos
+- **PostgreSQL Docker Volumes:** Persistencia de datos
+- **Healthchecks:** Monitoreo de salud de contenedores
+- **Docker Networks:** Comunicación entre servicios
 
-### Frontend Technologies
+### Tecnologías Frontend
 - **React:** 18.3.1
 - **Vite:** 5.4.10
 - **Tailwind CSS:** 3.4.14
 - **React Router DOM:** 6.28.0
-- **Axios:** HTTP client
+- **Axios:** Cliente HTTP
 
 ---
 
-## 📊 Database Schema Summary
+## 📊 Resumen del Esquema de Base de Datos
 
-### Tables Created
+### Tablas Creadas
 
-| Table | Records | Purpose |
-|-------|---------|---------|
-| `employee` | 61 | Employee master data |
-| `position` | 51 | Job positions |
-| `payroll` | 305 | Payroll transactions |
-| `expense_user` | 57 | Users who can create expenses |
-| `expense` | 20 | Expense records |
-| `user_role` | 59 | User role assignments |
+| Tabla | Registros | Propósito |
+|-------|-----------|-----------|
+| `employee` | 61 | Datos maestros de empleados |
+| `position` | 51 | Puestos de trabajo |
+| `payroll` | 305 | Transacciones de nómina |
+| `expense_user` | 57 | Usuarios que pueden crear gastos |
+| `expense` | 20 | Registros de gastos |
+| `user_role` | 59 | Asignaciones de roles de usuario |
 
-### Key Relationships
+### Relaciones Clave
 
 ```
 expense_user (1) -----> (*) expense
     ^
     |
-    | (references User from security schema)
+    | (referencia a User del esquema security)
     |
   user (1) -----> (*) user_role -----> (1) role
 
@@ -448,7 +448,7 @@ employee (1) -----> (*) payroll
 position (1) -----> (*) employee
 ```
 
-### Foreign Keys
+### Claves Foráneas
 - `expense.expense_user_id` → `expense_user.id` (NOT NULL)
 - `employee.position_id` → `position.id`
 - `payroll.employee_id` → `employee.id`
@@ -457,83 +457,83 @@ position (1) -----> (*) employee
 
 ---
 
-## 🔧 Build & Deployment Process
+## 🔧 Proceso de Build y Despliegue
 
-### Backend Compilation
+### Compilación del Backend
 ```bash
 cd backend
 ./mvnw clean package -DskipTests
-# Creates: target/bizflowerp-1.1.0.jar
+# Crea: target/bizflowerp-1.1.0.jar
 ```
 
-### Docker Image Build
+### Build de Imagen Docker
 ```bash
-# Production environment
+# Entorno de producción
 docker compose --profile prod stop backend-prod
 docker compose --profile prod up -d --build backend-prod
 
-# Development environment
+# Entorno de desarrollo
 docker compose --profile dev up -d --build backend-dev
 
-# Test environment
+# Entorno de test
 docker compose --profile test up --build backend-test
 ```
 
-### Database Initialization
+### Inicialización de Base de Datos
 ```bash
-# Databases initialize automatically on first container start
-# SQL scripts run in order from /docker-entrypoint-initdb.d/
+# Las bases de datos se inicializan automáticamente en el primer arranque del contenedor
+# Los scripts SQL se ejecutan en orden desde /docker-entrypoint-initdb.d/
 
-# Manual re-initialization (destroys data):
-docker compose --profile prod down -v  # Remove volumes
-docker compose --profile prod up -d    # Recreate with fresh data
+# Re-inicialización manual (destruye datos):
+docker compose --profile prod down -v  # Eliminar volúmenes
+docker compose --profile prod up -d    # Recrear con datos frescos
 ```
 
-### API Data Population
+### Población de Datos de API
 ```bash
-# Run initialization scripts
+# Ejecutar scripts de inicialización
 bash scripts/init-expense-data.sh
 
-# Creates:
-# - 57 expense_users via POST /api/v1/expense-user/
-# - 20 expenses via POST /api/v1/expense/
+# Crea:
+# - 57 expense_users vía POST /api/v1/expense-user/
+# - 20 gastos vía POST /api/v1/expense/
 ```
 
 ---
 
-## 🧪 Testing Strategy
+## 🧪 Estrategia de Testing
 
-### Unit Tests
+### Tests Unitarios
 ```bash
-# Run all tests with test profile
+# Ejecutar todos los tests con perfil test
 cd backend
 ./mvnw test -Dspring.profiles.active=test
 
-# Run specific test class
+# Ejecutar clase de test específica
 ./mvnw test -Dtest=EmployeeTest -Dspring.profiles.active=test
 ```
 
-### Integration Tests with Docker
+### Tests de Integración con Docker
 ```bash
-# Start test environment
+# Iniciar entorno test
 docker compose --profile test up -d
 
-# Run tests in container
+# Ejecutar tests en contenedor
 docker compose --profile test up --build backend-test
 
-# View test results
+# Ver resultados de tests
 docker compose --profile test logs backend-test
 ```
 
-### Manual API Testing
+### Testing Manual de API
 ```bash
-# Get JWT token
+# Obtener token JWT
 TOKEN=$(curl -s -X POST http://localhost:8181/api/v1/login \
   -H "Content-Type: application/json" \
   -d '{"username":"ada.lovelace","password":"<PASSWORD>"}' \
   | jq -r '.token')
 
-# Create expense
+# Crear gasto
 curl -X POST http://localhost:8181/api/v1/expense/ \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
@@ -548,107 +548,107 @@ curl -X POST http://localhost:8181/api/v1/expense/ \
 
 ---
 
-## 📈 Performance Considerations
+## 📈 Consideraciones de Rendimiento
 
-### Database Connection Pooling
-- **Development:** 5 max connections
-- **Test:** 5 max connections
-- **Production:** 10 max connections
+### Pool de Conexiones de Base de Datos
+- **Desarrollo:** 5 conexiones máximas
+- **Test:** 5 conexiones máximas
+- **Producción:** 10 conexiones máximas
 
-### Docker Resource Limits
-- PostgreSQL containers: Default Docker limits
-- Backend containers: Default Docker limits
-- Future: Add resource limits in docker-compose.yml
+### Límites de Recursos Docker
+- Contenedores PostgreSQL: Límites por defecto de Docker
+- Contenedores Backend: Límites por defecto de Docker
+- Futuro: Añadir límites de recursos en docker-compose.yml
 
-### Query Optimization
-- Proper indexes on foreign keys
-- JPA lazy loading configured
-- Query result pagination (future enhancement)
+### Optimización de Consultas
+- Índices apropiados en claves foráneas
+- Carga lazy de JPA configurada
+- Paginación de resultados de consultas (mejora futura)
 
 ---
 
-## 🔐 Security Measures
+## 🔐 Medidas de Seguridad
 
-### Password Encryption
-- **BCrypt:** `$2a$10$...` format
-- **Rounds:** 10 (default)
-- **Storage:** Pre-encrypted in SQL scripts
+### Encriptación de Contraseñas
+- **BCrypt:** Formato `$2a$10$...`
+- **Rondas:** 10 (por defecto)
+- **Almacenamiento:** Pre-encriptadas en scripts SQL
 
-### JWT Authentication
-- **Algorithm:** HS256
-- **Expiration:** Configurable per environment
+### Autenticación JWT
+- **Algoritmo:** HS256
+- **Expiración:** Configurable por entorno
 - **Roles:** ADMIN, MANAGER, USER
-- **Protected Endpoints:** `@PreAuthorize` annotations
+- **Endpoints Protegidos:** Anotaciones `@PreAuthorize`
 
-### Database Security
-- Unique usernames per environment
-- Strong passwords (prod should use secrets management)
-- Network isolation via Docker network
-- Port exposure limited to localhost
+### Seguridad de Base de Datos
+- Nombres de usuario únicos por entorno
+- Contraseñas fuertes (prod debería usar gestión de secretos)
+- Aislamiento de red vía red Docker
+- Exposición de puertos limitada a localhost
 
-### Sensitive Data Protection
-- Scripts folder in `.gitignore`
-- Environment variables for credentials (future)
-- No hardcoded passwords in code
+### Protección de Datos Sensibles
+- Carpeta scripts en `.gitignore`
+- Variables de entorno para credenciales (futuro)
+- Sin contraseñas hardcodeadas en el código
 
 ---
 
-## 🐛 Issues Resolved
+## 🐛 Problemas Resueltos
 
-### Issue 1: HTTP 500 on Expense Creation
+### Problema 1: HTTP 500 en Creación de Gastos
 - **Error:** `HttpMediaTypeNotSupportedException`
-- **Cause:** Jackson circular reference with bidirectional JPA entities
-- **Fix:** Created `ExpenseCreateRequest` DTO with simple `Long expenseUserId`
-- **Status:** ✅ Resolved
+- **Causa:** Referencia circular de Jackson con entidades JPA bidireccionales
+- **Solución:** Creado DTO `ExpenseCreateRequest` con simple `Long expenseUserId`
+- **Estado:** ✅ Resuelto
 
-### Issue 2: Tests Using Wrong Database
-- **Error:** Tests connecting to dev database
-- **Cause:** Missing `@ActiveProfiles("test")` annotation
-- **Fix:** Added annotation to all test classes
-- **Status:** ✅ Resolved
+### Problema 2: Tests Usando Base de Datos Incorrecta
+- **Error:** Tests conectándose a base de datos de dev
+- **Causa:** Falta de anotación `@ActiveProfiles("test")`
+- **Solución:** Añadida anotación a todas las clases de test
+- **Estado:** ✅ Resuelto
 
-### Issue 3: Duplicate Expense Records
-- **Error:** 40 expenses instead of 20
-- **Cause:** Initialization script run twice
-- **Fix:** Deleted records 21-40
-- **Status:** ✅ Resolved
+### Problema 3: Registros de Gastos Duplicados
+- **Error:** 40 gastos en lugar de 20
+- **Causa:** Script de inicialización ejecutado dos veces
+- **Solución:** Eliminados registros 21-40
+- **Estado:** ✅ Resuelto
 
-### Issue 4: Scripts in Git History
-- **Error:** Sensitive credentials committed
-- **Cause:** Scripts not in `.gitignore`
-- **Fix:** Added `scripts/` to `.gitignore`
-- **Status:** ✅ Resolved
-
----
-
-## 🚀 Future Enhancements
-
-### Short-term (Next Session)
-1. ✅ Fix expense creation endpoint (COMPLETED)
-2. ✅ Test dev/test environments (PARTIALLY - needs more testing)
-3. ⏳ Automation script in docker-compose for data initialization
-4. ⏳ Frontend connection to multi-environment backend
-5. ⏳ Environment-specific frontend builds
-
-### Medium-term
-1. Secrets management (Docker secrets or external vault)
-2. CI/CD pipeline integration
-3. Automated database migrations (Flyway or Liquibase)
-4. API documentation with Swagger/OpenAPI
-5. Monitoring and logging (ELK stack or similar)
-
-### Long-term
-1. Kubernetes deployment
-2. Horizontal scaling
-3. Performance testing and optimization
-4. Security audit and penetration testing
-5. Disaster recovery plan
+### Problema 4: Scripts en Historial de Git
+- **Error:** Credenciales sensibles commiteadas
+- **Causa:** Scripts no en `.gitignore`
+- **Solución:** Añadida carpeta `scripts/` a `.gitignore`
+- **Estado:** ✅ Resuelto
 
 ---
 
-## 📝 Git History
+## 🚀 Mejoras Futuras
 
-### Commits Made (24 total)
+### Corto Plazo (Próxima Sesión)
+1. ✅ Corregir endpoint de creación de gastos (COMPLETADO)
+2. ✅ Probar entornos dev/test (PARCIAL - necesita más pruebas)
+3. ⏳ Script de automatización en docker-compose para inicialización de datos
+4. ⏳ Conexión del frontend a backend multi-entorno
+5. ⏳ Builds de frontend específicos por entorno
+
+### Medio Plazo
+1. Gestión de secretos (Docker secrets o vault externo)
+2. Integración de pipeline CI/CD
+3. Migraciones automáticas de base de datos (Flyway o Liquibase)
+4. Documentación de API con Swagger/OpenAPI
+5. Monitoreo y logging (stack ELK o similar)
+
+### Largo Plazo
+1. Despliegue en Kubernetes
+2. Escalado horizontal
+3. Testing y optimización de rendimiento
+4. Auditoría de seguridad y testing de penetración
+5. Plan de recuperación ante desastres
+
+---
+
+## 📝 Historial de Git
+
+### Commits Realizados (27 en total)
 
 1. `b2294d5` - chore: protect scripts folder with sensitive credentials in gitignore
 2. `58715fb` - feat: add environment-specific configuration files for dev, test and prod
@@ -674,231 +674,236 @@ curl -X POST http://localhost:8181/api/v1/expense/ \
 22. `27601ce` - docs: enhance documentation index with thematic organization
 23. `c1b1eb4` - docs: add multi-environment Spring Boot profiles section to README
 24. `ddd73e9` - refactor: reorganize documentation structure
+25. `4cd2271` - docs: add comprehensive session 6 detailed summary
+26. `92ca846` - docs: expand README with comprehensive multi-environment paradigm explanation
+27. `59ee0cf` - refactor: standardize session 6 summary filename format
+28. `ae11e52` - chore: remove redundant brief summary in favor of detailed version
 
-### Branch Information
-- **Branch Name:** `chore/multi-env-db-config`
-- **Base Branch:** Likely `main` or `develop`
-- **Ready for PR:** Yes, after final testing
-- **Merge Strategy:** Squash or regular merge (team decision)
-
----
-
-## 🎓 Lessons Learned
-
-### 1. DTO Pattern is Essential for REST APIs
-**Lesson:** Never expose JPA entities directly in REST controllers.
-
-**Reason:** 
-- Prevents Jackson serialization issues with bidirectional relationships
-- Provides clear API contracts
-- Allows validation separate from entity constraints
-- Protects against mass assignment vulnerabilities
-
-**Best Practice:** Always create dedicated DTO classes for request/response payloads.
-
-### 2. Multi-Environment Setup Requires Careful Planning
-**Lesson:** Environment isolation must be comprehensive.
-
-**Components:**
-- Separate databases with unique ports
-- Dedicated Spring Boot profiles
-- Environment-specific Docker profiles
-- Test annotations for consistent test execution
-
-**Benefit:** Prevents cross-contamination and allows parallel development/testing.
-
-### 3. Database Initialization Can Be Automated
-**Lesson:** PostgreSQL's `/docker-entrypoint-initdb.d/` is powerful.
-
-**Discovery:**
-- Scripts run in alphabetical order on first container start
-- Must use read-only mounts (`:ro`) to prevent modification
-- Can include complex SQL with bcrypt hashes
-- Only runs on empty database (volume must be clean)
-
-**Caution:** Initialization only happens once - volume must be deleted to re-run.
-
-### 4. Testing Configuration is Critical
-**Lesson:** Tests must explicitly declare their profile.
-
-**Problem:** Without `@ActiveProfiles("test")`, tests use default profile.
-
-**Solution:** Annotate all test classes with `@ActiveProfiles("test")`.
-
-**Result:** Tests run against correct database every time.
-
-### 5. Sensitive Data Management Requires Discipline
-**Lesson:** Credentials must never reach version control.
-
-**Strategy:**
-- Add sensitive folders to `.gitignore` immediately
-- Use environment variables for runtime secrets
-- Pre-encrypt passwords when possible
-- Review git history before pushing
-
-**Future:** Implement proper secrets management (Docker secrets, Vault).
-
-### 6. Git Granularity Improves Code Review
-**Lesson:** Small, focused commits are easier to review and revert.
-
-**Our Approach:** 24 commits instead of 1 large commit.
-
-**Benefits:**
-- Each commit has a single purpose
-- Easy to identify when bugs were introduced
-- Can cherry-pick specific changes
-- Better understanding of evolution
-
-**Convention:** Use conventional commits format (feat:, fix:, docs:, refactor:, test:, build:, chore:).
+### Información de la Rama
+- **Nombre de Rama:** `chore/multi-env-db-config`
+- **Rama Base:** Probablemente `main` o `develop`
+- **Lista para PR:** Sí, después de testing final
+- **Estrategia de Merge:** Squash o merge regular (decisión del equipo)
 
 ---
 
-## 🔍 Code Review Highlights
+## 🎓 Lecciones Aprendidas
 
-### Excellent Practices
+### 1. El Patrón DTO es Esencial para APIs REST
+**Lección:** Nunca expongas entidades JPA directamente en controladores REST.
 
-✅ **DTO Pattern Implementation**
-- Clean separation between API and entity layer
-- Proper validation annotations
-- Clear naming convention (`ExpenseCreateRequest`)
+**Razón:** 
+- Previene problemas de serialización de Jackson con relaciones bidireccionales
+- Proporciona contratos de API claros
+- Permite validación separada de las restricciones de entidad
+- Protege contra vulnerabilidades de asignación masiva
 
-✅ **Multi-Environment Architecture**
-- Complete isolation between environments
-- Dedicated resources per environment
-- Easy to switch between environments
+**Mejor Práctica:** Siempre crear clases DTO dedicadas para payloads de petición/respuesta.
 
-✅ **Documentation**
-- Comprehensive guides for each feature
-- Well-organized directory structure
-- Cross-references between documents
+### 2. La Configuración Multi-Entorno Requiere Planificación Cuidadosa
+**Lección:** El aislamiento de entornos debe ser integral.
 
-✅ **Git Commit Hygiene**
-- Descriptive commit messages
-- Conventional commits format
-- Logical grouping of changes
+**Componentes:**
+- Bases de datos separadas con puertos únicos
+- Perfiles Spring Boot dedicados
+- Perfiles Docker específicos por entorno
+- Anotaciones de test para ejecución consistente de tests
 
-### Areas for Improvement
+**Beneficio:** Previene contaminación cruzada y permite desarrollo/testing en paralelo.
 
-⚠️ **Hardcoded Credentials**
-- Currently using hardcoded passwords in SQL scripts
-- Should migrate to Docker secrets or external vault
-- Environment variables as intermediate step
+### 3. La Inicialización de Base de Datos Puede Automatizarse
+**Lección:** El directorio `/docker-entrypoint-initdb.d/` de PostgreSQL es poderoso.
 
-⚠️ **Error Handling**
-- Generic exception catching in controllers
-- Should have specific exception types
-- Better error messages for clients
+**Descubrimiento:**
+- Los scripts se ejecutan en orden alfabético en el primer arranque del contenedor
+- Deben usar montajes de solo lectura (`:ro`) para prevenir modificación
+- Pueden incluir SQL complejo con hashes bcrypt
+- Solo se ejecuta en base de datos vacía (el volumen debe estar limpio)
 
-⚠️ **Test Coverage**
-- Need more integration tests for multi-environment setup
-- API endpoint tests with different profiles
-- Database connection verification tests
+**Precaución:** La inicialización solo ocurre una vez - el volumen debe eliminarse para re-ejecutar.
 
-⚠️ **Configuration Duplication**
-- Some properties repeated across environment files
-- Could use base `application.properties` with overrides
-- Consider externalized configuration
+### 4. La Configuración de Testing es Crítica
+**Lección:** Los tests deben declarar explícitamente su perfil.
+
+**Problema:** Sin `@ActiveProfiles("test")`, los tests usan el perfil por defecto.
+
+**Solución:** Anotar todas las clases de test con `@ActiveProfiles("test")`.
+
+**Resultado:** Los tests se ejecutan contra la base de datos correcta siempre.
+
+### 5. La Gestión de Datos Sensibles Requiere Disciplina
+**Lección:** Las credenciales nunca deben llegar al control de versiones.
+
+**Estrategia:**
+- Añadir carpetas sensibles a `.gitignore` inmediatamente
+- Usar variables de entorno para secretos en tiempo de ejecución
+- Pre-encriptar contraseñas cuando sea posible
+- Revisar historial de git antes de hacer push
+
+**Futuro:** Implementar gestión adecuada de secretos (Docker secrets, Vault).
+
+### 6. La Granularidad de Git Mejora la Revisión de Código
+**Lección:** Los commits pequeños y enfocados son más fáciles de revisar y revertir.
+
+**Nuestro Enfoque:** 27 commits en lugar de 1 commit grande.
+
+**Beneficios:**
+- Cada commit tiene un propósito único
+- Fácil identificar cuándo se introdujeron bugs
+- Se pueden hacer cherry-pick de cambios específicos
+- Mejor comprensión de la evolución
+
+**Convención:** Usar formato de conventional commits (feat:, fix:, docs:, refactor:, test:, build:, chore:).
 
 ---
 
-## 📞 Contact & Resources
+## 🔍 Aspectos Destacados de Revisión de Código
 
-### Documentation
-- **Main Docs:** `/docs/INDEX.md`
-- **Environment Guide:** `/docs/guia_cambio_entornos.md`
-- **Spring Profiles:** `/docs/spring/SPRING_PROFILES_GUIDE.md`
-- **Docker Guide:** `/docs/docker/docker_commands_session_6.md`
+### Prácticas Excelentes
 
-### API Endpoints
-- **Development:** `http://localhost:8080`
+✅ **Implementación del Patrón DTO**
+- Separación limpia entre capa API y capa de entidad
+- Anotaciones de validación apropiadas
+- Convención de nomenclatura clara (`ExpenseCreateRequest`)
+
+✅ **Arquitectura Multi-Entorno**
+- Aislamiento completo entre entornos
+- Recursos dedicados por entorno
+- Fácil cambiar entre entornos
+
+✅ **Documentación**
+- Guías completas para cada característica
+- Estructura de directorio bien organizada
+- Referencias cruzadas entre documentos
+
+✅ **Higiene de Commits Git**
+- Mensajes de commit descriptivos
+- Formato de conventional commits
+- Agrupación lógica de cambios
+
+### Áreas de Mejora
+
+⚠️ **Credenciales Hardcodeadas**
+- Actualmente usando contraseñas hardcodeadas en scripts SQL
+- Debería migrarse a Docker secrets o vault externo
+- Variables de entorno como paso intermedio
+
+⚠️ **Manejo de Errores**
+- Captura genérica de excepciones en controladores
+- Debería tener tipos de excepción específicos
+- Mejores mensajes de error para clientes
+
+⚠️ **Cobertura de Tests**
+- Se necesitan más tests de integración para configuración multi-entorno
+- Tests de endpoints API con diferentes perfiles
+- Tests de verificación de conexión a base de datos
+
+⚠️ **Duplicación de Configuración**
+- Algunas propiedades repetidas en archivos de entorno
+- Podría usar `application.properties` base con sobrescrituras
+- Considerar configuración externalizada
+
+---
+
+## 📞 Contacto y Recursos
+
+### Documentación
+- **Docs Principales:** `/docs/INDEX.md`
+- **Guía de Entornos:** `/docs/guia_cambio_entornos.md`
+- **Perfiles Spring:** `/docs/spring/SPRING_PROFILES_GUIDE.md`
+- **Guía Docker:** `/docs/docker/docker_commands_session_6.md`
+
+### Endpoints de API
+- **Desarrollo:** `http://localhost:8080`
 - **Test:** `http://localhost:8282`
-- **Production:** `http://localhost:8181`
+- **Producción:** `http://localhost:8181`
 
-### Database Connections
-- **Dev DB:** `localhost:5433/erp_dev_db`
-- **Test DB:** `localhost:5434/erp_test_db`
-- **Prod DB:** `localhost:5442/erp_prod_db`
+### Conexiones de Base de Datos
+- **BD Dev:** `localhost:5433/erp_dev_db`
+- **BD Test:** `localhost:5434/erp_test_db`
+- **BD Prod:** `localhost:5442/erp_prod_db`
 
-### Repository
-- **Branch:** `chore/multi-env-db-config`
-- **Owner:** jdomdev
-- **Project:** bizflow-erp-springboot-react-docker
-
----
-
-## ✅ Session Completion Checklist
-
-- [x] Fixed expense creation API endpoint
-- [x] Implemented multi-environment Docker architecture
-- [x] Created Spring Boot profile configurations
-- [x] Updated all tests with @ActiveProfiles annotation
-- [x] Automated database initialization with SQL scripts
-- [x] Protected sensitive scripts in .gitignore
-- [x] Created 24 granular git commits
-- [x] Removed duplicate expense records (21-40)
-- [x] Updated README with multi-environment documentation
-- [x] Created comprehensive session summary documentation
-- [x] Organized documentation into thematic directories
-- [x] Updated INDEX.md with improved navigation
+### Repositorio
+- **Rama:** `chore/multi-env-db-config`
+- **Propietario:** jdomdev
+- **Proyecto:** bizflow-erp-springboot-react-docker
 
 ---
 
-## 🏁 Next Steps
+## ✅ Lista de Verificación de Completitud de Sesión
 
-### Immediate (Next Session Start)
-1. Test dev and test environments thoroughly
-2. Verify frontend works with all three backends
-3. Create docker-compose automation for data initialization
-4. Test switching between profiles end-to-end
+- [x] Corregido endpoint de creación de gastos de la API
+- [x] Implementada arquitectura Docker multi-entorno
+- [x] Creadas configuraciones de perfiles Spring Boot
+- [x] Actualizados todos los tests con anotación @ActiveProfiles
+- [x] Automatizada inicialización de base de datos con scripts SQL
+- [x] Protegidos scripts sensibles en .gitignore
+- [x] Creados 27 commits granulares de git
+- [x] Eliminados registros de gastos duplicados (21-40)
+- [x] Actualizado README con documentación multi-entorno
+- [x] Creada documentación de resumen completo de sesión
+- [x] Organizada documentación en directorios temáticos
+- [x] Actualizado INDEX.md con navegación mejorada
 
-### Code Review Preparation
-1. Self-review all 24 commits
-2. Test each environment independently
-3. Verify documentation accuracy
-4. Ensure no sensitive data in commits
+---
+
+## 🏁 Próximos Pasos
+
+### Inmediatos (Inicio de Próxima Sesión)
+1. Probar entornos dev y test exhaustivamente
+2. Verificar que el frontend funciona con los tres backends
+3. Crear automatización en docker-compose para inicialización de datos
+4. Probar cambio entre perfiles de extremo a extremo
+
+### Preparación de Revisión de Código
+1. Auto-revisar los 27 commits
+2. Probar cada entorno independientemente
+3. Verificar exactitud de la documentación
+4. Asegurar que no hay datos sensibles en commits
 
 ### Pull Request
-1. Create PR from `chore/multi-env-db-config` to main branch
-2. Add comprehensive PR description
-3. Include testing instructions
-4. Request review from team
+1. Crear PR desde `chore/multi-env-db-config` a rama principal
+2. Añadir descripción completa de PR
+3. Incluir instrucciones de testing
+4. Solicitar revisión del equipo
 
 ---
 
-## 📚 References & Learning Resources
+## 📚 Referencias y Recursos de Aprendizaje
 
 ### Spring Boot
-- [Spring Boot Profiles Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles)
-- [Spring Data JPA Documentation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+- [Documentación de Perfiles Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles)
+- [Documentación de Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
 
 ### Docker
-- [Docker Compose Profiles](https://docs.docker.com/compose/profiles/)
-- [PostgreSQL Docker Image](https://hub.docker.com/_/postgres)
-- [Docker Healthchecks](https://docs.docker.com/engine/reference/builder/#healthcheck)
+- [Perfiles de Docker Compose](https://docs.docker.com/compose/profiles/)
+- [Imagen Docker de PostgreSQL](https://hub.docker.com/_/postgres)
+- [Healthchecks de Docker](https://docs.docker.com/engine/reference/builder/#healthcheck)
 
-### Security
-- [BCrypt Password Hashing](https://en.wikipedia.org/wiki/Bcrypt)
-- [JWT Best Practices](https://tools.ietf.org/html/rfc8725)
+### Seguridad
+- [Hash de Contraseñas BCrypt](https://en.wikipedia.org/wiki/Bcrypt)
+- [Mejores Prácticas JWT](https://tools.ietf.org/html/rfc8725)
 
 ### Git
 - [Conventional Commits](https://www.conventionalcommits.org/)
-- [Git Best Practices](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
+- [Mejores Prácticas Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
 
 ---
 
-## 🎉 Conclusion
+## 🎉 Conclusión
 
-This session successfully addressed critical issues with the expense creation API and established a robust multi-environment architecture that will support the project's growth and scalability. The implementation of proper DTO patterns, Spring Boot profiles, and Docker environment isolation demonstrates professional-grade software engineering practices.
+Esta sesión abordó exitosamente problemas críticos con la API de creación de gastos y estableció una arquitectura multi-entorno robusta que soportará el crecimiento y escalabilidad del proyecto. La implementación de patrones DTO apropiados, perfiles Spring Boot, y aislamiento de entornos Docker demuestra prácticas de ingeniería de software de nivel profesional.
 
-The 24 granular commits provide excellent traceability, and the comprehensive documentation ensures that future developers (and our future selves) can understand the decisions made and the architecture implemented.
+Los 27 commits granulares proporcionan excelente trazabilidad, y la documentación completa asegura que futuros desarrolladores (y nosotros mismos en el futuro) puedan entender las decisiones tomadas y la arquitectura implementada.
 
-**Key Achievement:** Transformed a single-environment application into a production-ready multi-environment system with proper separation of concerns, automated database initialization, and comprehensive testing infrastructure.
+**Logro Clave:** Transformada una aplicación de un solo entorno en un sistema multi-entorno listo para producción con separación adecuada de responsabilidades, inicialización automática de base de datos, e infraestructura completa de testing.
 
-**Status:** Ready for code review and merge to main branch after final testing and validation.
+**Estado:** Listo para revisión de código y merge a rama principal después de testing y validación final.
 
 ---
 
-*Document created: 2025-12-13 at 23:48*  
-*Session: 6*  
-*Branch: chore/multi-env-db-config*  
-*Author: BizFlow ERP Team*
+*Documento creado: 2025-12-13 a las 23:48*  
+*Traducido al español: 2025-12-14*  
+*Sesión: 6*  
+*Rama: chore/multi-env-db-config*  
+*Autor: BizFlow ERP Team*
