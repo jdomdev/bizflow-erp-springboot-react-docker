@@ -2,13 +2,13 @@ name: Build & Test - Backend (Maven)
 
 on:
   push:
-    branches: [ main, develop, fix/*, feature/* ]
+    branches: [ main, dev, fix/*, feature/* ]
     paths:
       - 'backend/**'
       - 'pom.xml'
       - '.github/workflows/backend-build-test.yml'
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
     paths:
       - 'backend/**'
       - 'pom.xml'
