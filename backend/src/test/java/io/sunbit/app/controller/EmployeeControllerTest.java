@@ -7,11 +7,13 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,14 +23,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.Mockito.doAnswer;
+import org.mockito.Mockito;
 
 import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Position;
 import io.sunbit.app.service.EmployeeServiceImpl;
+import io.sunbit.app.security.jwt.JwtAuthenticationFilter;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
+@TestPropertySource(properties = {
+    "spring.datasource.url=jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
+    "spring.datasource.driver-class-name=org.h2.Driver",
+    "spring.datasource.username=sa",
+    "spring.datasource.password=",
+    "spring.jpa.hibernate.ddl-auto=create-drop",
+    "spring.sql.init.mode=always"
+})
 public class EmployeeControllerTest {
 
     @Autowired
@@ -37,12 +54,28 @@ public class EmployeeControllerTest {
     @MockBean
     private EmployeeServiceImpl employeeService;
 
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     private Employee testEmployee1;
     private Employee testEmployee2;
     private Position testPosition;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
+        Mockito.reset(jwtAuthenticationFilter);
+        doAnswer(invocation -> {
+            HttpServletRequest request = invocation.getArgument(0);
+            HttpServletResponse response = invocation.getArgument(1);
+            FilterChain filterChain = invocation.getArgument(2);
+            try {
+                filterChain.doFilter(request, response);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            return null;
+        }).when(jwtAuthenticationFilter).doFilter(any(HttpServletRequest.class), any(HttpServletResponse.class), any(FilterChain.class));
+
         // Setup test position
         testPosition = new Position();
         testPosition.setId(1L);
@@ -140,7 +173,7 @@ public class EmployeeControllerTest {
                 "name": "New",
                 "surname": "Employee",
                 "email": "new.employee@test.com",
-                "birthDate": "1995-03-20",
+                "birthDate": "1995-03-20T00:00:00",
                 "position": {
                     "id": 1,
                     "name": "Software Engineer"
@@ -174,7 +207,7 @@ public class EmployeeControllerTest {
                 "name": "New",
                 "surname": "Employee",
                 "email": "new.employee@test.com",
-                "birthDate": "1995-03-20",
+                "birthDate": "1995-03-20T00:00:00",
                 "position": {"id": 1}
             }
             """;
@@ -194,17 +227,20 @@ public class EmployeeControllerTest {
             {
                 "id": 1,
                 "name": "John Updated",
-                "surname": "Doe",
+                "surname": "Doe Jr",
                 "email": "john.updated@test.com",
-                "birthDate": "1990-01-01",
-                "position": {"id": 1}
+                "birthDate": "1990-01-01T00:00:00",
+                "position": {
+                    "id": 1,
+                    "name": "Software Engineer"
+                }
             }
             """;
         
         Employee updatedEmployee = new Employee();
         updatedEmployee.setId(1L);
         updatedEmployee.setName("John Updated");
-        updatedEmployee.setSurname("Doe");
+        updatedEmployee.setSurname("Doe Jr");
         updatedEmployee.setEmail("john.updated@test.com");
         
         when(employeeService.update(anyLong(), any(Employee.class))).thenReturn(updatedEmployee);
