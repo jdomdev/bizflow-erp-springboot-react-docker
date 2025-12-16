@@ -4,6 +4,8 @@ import io.sunbit.app.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -119,6 +121,28 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
+
+        /**
+         * Handle AuthorizationDeniedException/AccessDeniedException (403 Forbidden)
+         */
+        @ExceptionHandler({ AuthorizationDeniedException.class, AccessDeniedException.class })
+        public ResponseEntity<ErrorResponse> handleAccessDeniedException(
+                        Exception ex,
+                        WebRequest request) {
+
+                log.warn("Access denied: {}", ex.getMessage());
+
+                ErrorResponse errorResponse = ErrorResponse.builder()
+                                .status(HttpStatus.FORBIDDEN.value())
+                                .message("Access denied")
+                                .errorCode("ACCESS_DENIED")
+                                .details(ex.getClass().getSimpleName())
+                                .timestamp(LocalDateTime.now())
+                                .path(request.getDescription(false).replace("uri=", ""))
+                                .build();
+
+                return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+        }
 
     /**
      * Handle InternalServerException (500 Internal Server Error)
