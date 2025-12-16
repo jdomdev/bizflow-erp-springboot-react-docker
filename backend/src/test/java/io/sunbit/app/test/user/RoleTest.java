@@ -7,7 +7,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -21,27 +24,34 @@ import io.sunbit.app.security.entity.Role;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RoleTest {
 
 	@Autowired
 	private IRoleDao roleDao;
 
 	@Test
+	@Order(1)
 	public void createRoleTest() {
-		Role roleAdmin = new Role("ROLE_ADMIN");
-		Role roleUser = new Role("ROLE_USER");
-			   roleDao.saveAll(List.of(roleAdmin, roleUser)); // Unchecked warning is safe here
+		if (!roleDao.existsByName("ROLE_ADMIN")) {
+			roleDao.save(new Role("ROLE_ADMIN"));
+		}
+		if (!roleDao.existsByName("ROLE_USER")) {
+			roleDao.save(new Role("ROLE_USER"));
+		}
 		long roleNumbers = roleDao.count();
 		assertThat(roleNumbers).isGreaterThanOrEqualTo(2);
 	}
 
 	@Test
+	@Order(2)
 	public void testListRoles() {
 		List<Role> roles = roleDao.findAll();
 		assertThat(roles.size()).isGreaterThan(0);
 	}
 
 	@Test
+	@Order(3)
 	public void testFindRoleByName() {
 		Role role = roleDao.findByName("ROLE_ADMIN").orElse(null);
 		assertThat(role).isNotNull();
@@ -49,6 +59,7 @@ public class RoleTest {
 	}
 
 	@Test
+	@Order(4)
 	public void testDeleteRole() {
 		Role role = new Role("ROLE_DELETE");
 		roleDao.save(role);

@@ -7,7 +7,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -21,6 +24,7 @@ import io.sunbit.app.entity.Position;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PositionTest {
 
     @Autowired
@@ -28,6 +32,7 @@ public class PositionTest {
 
     @Test
     @DisplayName("Test position saving")
+    @Order(1)
     public void testPositionSaving() {
         Position position = new Position();
         position.setName("QA Engineer");
@@ -38,6 +43,7 @@ public class PositionTest {
 
     @Test
     @DisplayName("Test position updating")
+    @Order(2)
     public void testPositionUpdating() {
         Position position = positionDao.findByNameIgnoreCase("QA Engineer").orElse(null);
         assertThat(position).isNotNull();
@@ -48,6 +54,7 @@ public class PositionTest {
 
     @Test
     @DisplayName("Test position deleting")
+    @Order(3)
     public void testPositionDeleting() {
         Position position = positionDao.findByNameIgnoreCase("QA Lead").orElse(null);
         assertThat(position).isNotNull();
@@ -58,6 +65,7 @@ public class PositionTest {
 
     @Test
     @DisplayName("Test position finding by id")
+    @Order(4)
     public void testPositionFindingById() {
         Position position = new Position();
         position.setName("Backend Developer");
@@ -69,6 +77,7 @@ public class PositionTest {
 
     @Test
     @DisplayName("Test list all positions")
+    @Order(5)
     public void testListAllPositions() {
         List<Position> positions = positionDao.findAll();
         assertThat(positions).isNotEmpty();
