@@ -8,7 +8,10 @@ import java.util.Optional;
 
 //import jakarta.transaction.Transactional;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -37,6 +40,7 @@ import io.sunbit.app.security.entity.Role;
  */
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserTest {
 
 	@Autowired
@@ -47,15 +51,19 @@ public class UserTest {
 	private TestEntityManager entityManager;
 
 	@Test
+	@Order(1)
 	public void createRoleTesting() {
-		Role roleAdmin = new Role("ROLE_ADMIN");
-		Role roleUser = new Role("ROLE_USER");
-		entityManager.persist(roleAdmin);
-		entityManager.persist(roleUser);
+		if (!roleDao.existsByName("ROLE_ADMIN")) {
+			entityManager.persist(new Role("ROLE_ADMIN"));
+		}
+		if (!roleDao.existsByName("ROLE_USER")) {
+			entityManager.persist(new Role("ROLE_USER"));
+		}
 	}
 
 	@Test
 	@Transactional
+	@Order(2)
 	public void testRolesExist() {
 		boolean roleAdminExists = roleDao.existsByName("ROLE_ADMIN");
 		boolean roleUserExists = roleDao.existsByName("ROLE_USER");
@@ -66,6 +74,7 @@ public class UserTest {
 
 	@Test
 	// @Transactional
+	@Order(3)
 	public void testUserSaving() {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		// 83 Rihanna Fenty 1988-02-20 18:22:17.000 17
@@ -119,6 +128,7 @@ public class UserTest {
 
 
 	@Test
+	@Order(4)
 	public void testAssignRoleToUser() {
 		ensureRoleExist();
 		ExpenseUser user = new ExpenseUser();
@@ -133,6 +143,7 @@ public class UserTest {
 	}
 
 	@Test
+	@Order(5)
 	public void testUserAuthentication() {
 		String email = "akirakurosawa@sunbit.com";
 		String rawPassword = "kurosawa1234";
@@ -143,6 +154,7 @@ public class UserTest {
 	}
 
 	@Test
+	@Order(6)
 	public void testUserDeleting() {
 		String email = "akirakurosawa@sunbit.com";
 		ExpenseUser user = userDao.findByEmail(email).orElse(null);

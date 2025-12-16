@@ -8,7 +8,10 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -26,6 +29,7 @@ import io.sunbit.app.util.DateUtil;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ExpenseTest {
 
 	@Autowired
@@ -38,6 +42,7 @@ public class ExpenseTest {
 
 	@Test
 	@DisplayName("Test expense saving")
+	@Order(1)
 	public void testExpenseSaving() {
 		ExpenseUser expenseUser = new ExpenseUser();
 		expenseUser.setId(58L);
@@ -61,6 +66,7 @@ public class ExpenseTest {
 
 	@Test
 	@DisplayName("Test expense updating")
+	@Order(2)
 	public void testExpenseUpdating() {
 		ExpenseUser testUser = new ExpenseUser();
 		testUser.setId(58L);
@@ -78,6 +84,7 @@ public class ExpenseTest {
 
 	@Test
 	@DisplayName("Test expense deleting")
+	@Order(3)
 	public void testExpenseDeleting() {
 		ExpenseUser testUser = new ExpenseUser();
 		testUser.setId(58L);
@@ -95,6 +102,7 @@ public class ExpenseTest {
 
 	@Test
 	@DisplayName("Test expense finding by id")
+	@Order(4)
 	public void testExpenseFindingById() {
 		ExpenseUser expenseUser = new ExpenseUser();
 		expenseUser.setId(59L);
@@ -114,6 +122,7 @@ public class ExpenseTest {
 
 	@Test
 	@DisplayName("Test expense-user relation")
+	@Order(5)
 	public void testExpenseUserRelation() {
 		ExpenseUser expenseUser = new ExpenseUser();
 		expenseUser.setId(60L);
