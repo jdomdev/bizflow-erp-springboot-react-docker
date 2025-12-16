@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -26,6 +29,7 @@ import io.sunbit.app.util.DateUtil;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeTest {
 
 	@Autowired
@@ -35,6 +39,7 @@ public class EmployeeTest {
 
 	@Test
 	@DisplayName("Test employee saving")
+	@Order(1)
 	public void testEmployeeSaving() {
 		List<Payroll> payrolls = new ArrayList<>();
 		Employee newEmployee = new Employee(
@@ -51,6 +56,7 @@ public class EmployeeTest {
 
 	@Test
 	@DisplayName("Test employee updating")
+	@Order(2)
 	public void testEmployeeUpdating() {
 		Employee employee = employeeDao.findByNameAndSurnameAllIgnoreCase("Diego", "Maradona").orElse(null);
 		assertThat(employee).isNotNull();
@@ -61,6 +67,7 @@ public class EmployeeTest {
 
 	@Test
 	@DisplayName("Test employee deleting")
+	@Order(3)
 	public void testEmployeeDeleting() {
 		Employee employee = employeeDao.findByNameAndSurnameAllIgnoreCase("Diego", "Maradona").orElse(null);
 		assertThat(employee).isNotNull();
@@ -71,6 +78,7 @@ public class EmployeeTest {
 
 	@Test
 	@DisplayName("Test employee finding by id")
+	@Order(4)
 	public void testEmployeeFindingById() {
 		Employee employee = new Employee(
 			"Lionel",
@@ -87,6 +95,7 @@ public class EmployeeTest {
 
 	@Test
 	@DisplayName("Test employee-payroll relation")
+	@Order(5)
 	public void testEmployeePayrollRelation() {
 		Employee employee = new Employee(
 			"Carlos",
