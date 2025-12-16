@@ -17,6 +17,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
+    # PostgreSQL service container for integration tests
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: erp_test_db
+          POSTGRES_USER: erp_test_user
+          POSTGRES_PASSWORD: testpassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     strategy:
       matrix:
         java-version: ['17']
@@ -47,11 +63,15 @@ jobs:
       run: |
         cd backend
         mvn test -Dtest="**/*Test" --no-transfer-progress
+      env:
+        DB_HOST: localhost
     
     - name: Run Integration Tests
       run: |
         cd backend
         mvn verify -DskipUnitTests --no-transfer-progress
+      env:
+        DB_HOST: localhost
     
     - name: Generate Coverage Report
       run: |
