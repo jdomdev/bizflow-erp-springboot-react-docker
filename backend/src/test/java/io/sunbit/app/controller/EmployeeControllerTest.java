@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +54,7 @@ public class EmployeeControllerTest {
         testEmployee1.setName("John");
         testEmployee1.setSurname("Doe");
         testEmployee1.setEmail("john.doe@test.com");
-        testEmployee1.setBirthDate(LocalDate.of(1990, 1, 1));
+        testEmployee1.setBirthDate(LocalDateTime.of(1990, 1, 1, 0, 0));
         testEmployee1.setPosition(testPosition);
 
         testEmployee2 = new Employee();
@@ -61,7 +62,7 @@ public class EmployeeControllerTest {
         testEmployee2.setName("Jane");
         testEmployee2.setSurname("Smith");
         testEmployee2.setEmail("jane.smith@test.com");
-        testEmployee2.setBirthDate(LocalDate.of(1992, 5, 15));
+        testEmployee2.setBirthDate(LocalDateTime.of(1992, 5, 15, 0, 0));
         testEmployee2.setPosition(testPosition);
     }
 
@@ -74,7 +75,7 @@ public class EmployeeControllerTest {
 
         // Act & Assert
         mockMvc.perform(get("/api/v1/employee/")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].name").value("John"))
@@ -87,7 +88,7 @@ public class EmployeeControllerTest {
     void testGetAllEmployees_Unauthorized() throws Exception {
         // Act & Assert - without authentication
         mockMvc.perform(get("/api/v1/employee/")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -96,7 +97,7 @@ public class EmployeeControllerTest {
     void testGetAllEmployees_Forbidden() throws Exception {
         // Act & Assert - with USER role (needs ADMIN)
         mockMvc.perform(get("/api/v1/employee/")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isForbidden());
     }
 
@@ -104,12 +105,12 @@ public class EmployeeControllerTest {
     @WithMockUser(roles = "ADMIN")
     void testGetEmployeeById_Success() throws Exception {
         // Arrange
-        when(employeeService.findById(anyLong(), anyString())).thenReturn(Optional.of(testEmployee1));
+        when(employeeService.findById(anyLong(), anyString())).thenReturn(testEmployee1);
 
         // Act & Assert
         mockMvc.perform(get("/api/v1/employee/1")
                 .header("Authorization", "Bearer fake-token")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("John"))
@@ -120,12 +121,12 @@ public class EmployeeControllerTest {
     @WithMockUser(roles = "USER")
     void testGetEmployeeById_AsUser_Success() throws Exception {
         // Arrange - USER role can also access this endpoint
-        when(employeeService.findById(anyLong(), anyString())).thenReturn(Optional.of(testEmployee1));
+        when(employeeService.findById(anyLong(), anyString())).thenReturn(testEmployee1);
 
         // Act & Assert
         mockMvc.perform(get("/api/v1/employee/1")
                 .header("Authorization", "Bearer fake-token")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John"));
     }
@@ -157,7 +158,7 @@ public class EmployeeControllerTest {
 
         // Act & Assert
         mockMvc.perform(post("/api/v1/employee/")
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(employeeJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("New"))
@@ -180,7 +181,7 @@ public class EmployeeControllerTest {
 
         // Act & Assert - USER role cannot create employees
         mockMvc.perform(post("/api/v1/employee/")
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(employeeJson))
                 .andExpect(status().isForbidden());
     }
@@ -210,7 +211,7 @@ public class EmployeeControllerTest {
 
         // Act & Assert
         mockMvc.perform(put("/api/v1/employee/1")
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(updatedEmployeeJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John Updated"));
@@ -224,7 +225,7 @@ public class EmployeeControllerTest {
 
         // Act & Assert
         mockMvc.perform(delete("/api/v1/employee/1")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 
@@ -233,7 +234,7 @@ public class EmployeeControllerTest {
     void testDeleteEmployee_Forbidden() throws Exception {
         // Act & Assert - USER role cannot delete employees
         mockMvc.perform(delete("/api/v1/employee/1")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isForbidden());
     }
 
@@ -242,12 +243,12 @@ public class EmployeeControllerTest {
     void testGetEmployeeByNameAndSurname_Success() throws Exception {
         // Arrange
         when(employeeService.findByNameAndSurnameAllIgnoreCase(anyString(), anyString(), anyString()))
-                .thenReturn(Optional.of(testEmployee1));
+                .thenReturn(testEmployee1);
 
         // Act & Assert
         mockMvc.perform(get("/api/v1/employee/John/Doe")
                 .header("Authorization", "Bearer fake-token")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John"))
                 .andExpect(jsonPath("$.surname").value("Doe"));
@@ -258,12 +259,12 @@ public class EmployeeControllerTest {
     void testGetEmployeeByNameAndSurname_AsUser_Success() throws Exception {
         // Arrange - USER role can also search employees
         when(employeeService.findByNameAndSurnameAllIgnoreCase(anyString(), anyString(), anyString()))
-                .thenReturn(Optional.of(testEmployee2));
+                .thenReturn(testEmployee2);
 
         // Act & Assert
         mockMvc.perform(get("/api/v1/employee/Jane/Smith")
                 .header("Authorization", "Bearer fake-token")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Jane"));
     }
