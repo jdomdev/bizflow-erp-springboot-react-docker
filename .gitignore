@@ -74,3 +74,4 @@ scripts/
 # Backups de base de datos
 backups/
 *.sql
+!backend/src/test/resources/data-test.sql
