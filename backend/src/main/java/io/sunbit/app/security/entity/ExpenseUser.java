@@ -21,6 +21,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.sunbit.app.entity.Employee;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -41,6 +45,7 @@ import lombok.Setter;
 
 public class ExpenseUser implements UserDetails {
 	@Override
+	@JsonIgnore
 	public String getUsername() {
 		// Usamos el email como identificador único para Spring Security
 		return this.email;
@@ -65,9 +70,11 @@ public class ExpenseUser implements UserDetails {
 	@Column(name = "password", nullable = false)
 	@Length(min = 4, max = 64)
 	@NonNull
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	@OneToOne
 	@JoinColumn(name = "employee_id", nullable = true)
+	@JsonIgnore
 	private Employee employee;
 
 	// Constructor without ID.
@@ -102,7 +109,7 @@ public class ExpenseUser implements UserDetails {
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	@com.fasterxml.jackson.annotation.JsonManagedReference
+	@JsonIgnoreProperties(value = { "users" }, allowSetters = true)
 	private Collection<Role> roles = new ArrayList<>();
 
 	public void addRole(Role role) {
@@ -114,6 +121,7 @@ public class ExpenseUser implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		   for (Role role : this.roles) {
@@ -127,6 +135,7 @@ public class ExpenseUser implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public String getPassword() {
 		return this.password;
 	}
@@ -134,21 +143,25 @@ public class ExpenseUser implements UserDetails {
 	// Eliminado getUsername(). Spring Security usará getEmail() como identificador único.
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
 	}
@@ -158,6 +171,22 @@ public class ExpenseUser implements UserDetails {
 	}
 	public String getEmail() {
 		return this.email;
+	}
+
+	@JsonProperty("employee_id")
+	public Long getEmployeeId() {
+		return (employee != null) ? employee.getId() : null;
+	}
+
+	@JsonProperty("employee_id")
+	public void setEmployeeId(Long employeeId) {
+		if (employeeId == null) {
+			this.employee = null;
+			return;
+		}
+		Employee reference = new Employee();
+		reference.setId(employeeId);
+		this.employee = reference;
 	}
 
 	public static Object withDefaultPasswordEncoder() {
