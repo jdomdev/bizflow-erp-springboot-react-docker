@@ -3,6 +3,8 @@ package io.sunbit.app.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.sunbit.app.security.entity.ExpenseUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,6 +58,7 @@ public class Expense implements Serializable {
 	private Double amount;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "expense_user_id", nullable = false)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@NonNull
 	private ExpenseUser expenseUser;
 
