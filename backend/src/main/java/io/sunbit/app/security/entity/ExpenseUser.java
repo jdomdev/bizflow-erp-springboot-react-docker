@@ -41,6 +41,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 // @Builder
 
 public class ExpenseUser implements UserDetails {
