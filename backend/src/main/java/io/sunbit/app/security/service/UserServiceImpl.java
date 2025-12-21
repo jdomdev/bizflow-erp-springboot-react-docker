@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -165,7 +166,8 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	public List<ExpenseUser> findAll() throws Exception {
-		return userDao.findAll();
+		// Ensure deterministic ordering so the newest ids appear at the end of the list
+		return userDao.findAll(Sort.by(Sort.Direction.ASC, "id"));
 	}
 
 	@Override
