@@ -44,17 +44,17 @@ public class ExpenseControllerImpl implements IExpenseController {
 
 	@Override
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-	@GetMapping("/employee/{employeeId}")
+	@GetMapping("/user/{expenseUserId}")
 	@ResponseBody
-	public ResponseEntity<?> getAllExpenseByEmployeeId(@PathVariable("employeeId") Long employeeId,
+	public ResponseEntity<?> getAllExpenseByExpenseUserId(@PathVariable("expenseUserId") Long expenseUserId,
 			@RequestHeader("Authorization") String headerAuth) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(expenseService.findAllByEmployeeId(employeeId, headerAuth));
+					.body(expenseService.findAllByExpenseUserId(expenseUserId, headerAuth));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the employee's expenses.\"}");
+					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the user's expenses.\"}");
 		}
 	}
 
