@@ -12,7 +12,7 @@ import io.sunbit.app.entity.Expense;
 
 public interface IExpenseController {
 
-	public ResponseEntity<?> getAllExpenseByEmployeeId(@PathVariable Long employeeId,
+	public ResponseEntity<?> getAllExpenseByExpenseUserId(@PathVariable Long expenseUserId,
 			@RequestHeader String token);
 
 	public ResponseEntity<?> getAllExpense();

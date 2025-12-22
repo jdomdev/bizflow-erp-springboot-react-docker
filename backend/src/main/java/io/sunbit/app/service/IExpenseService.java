@@ -17,10 +17,10 @@ public interface IExpenseService {
 
 	public Boolean delete(Long id) throws Exception;
 
-	public List<Expense> findAllByEmployeeId(Long employeeId, String headerAuth) throws Exception;
+	public List<Expense> findAllByExpenseUserId(Long expenseUserId, String headerAuth) throws Exception;
 
-	public Expense findByAmountAndDateAndConceptAndEmployeeId(Double amount,
+	public Expense findByAmountAndDateAndConceptAndExpenseUserId(Double amount,
 			LocalDateTime expenseDate, String concept,
-			Long employeeId,
+			Long expenseUserId,
 			String headerAuth) throws Exception;
 }

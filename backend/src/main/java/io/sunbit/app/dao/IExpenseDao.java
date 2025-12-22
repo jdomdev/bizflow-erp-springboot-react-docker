@@ -17,9 +17,6 @@ public interface IExpenseDao extends JpaRepository<Expense, Long> {
 	    @Query(value = "SELECT * FROM expense WHERE expense.expense_user_id=?1", nativeQuery = true)
 	    List<Expense> findAllByExpenseUserId(Long expenseUserId);
 
-		@Query(value = "SELECT * FROM expense WHERE expense.employee_id=?1", nativeQuery = true)
-		List<Expense> findAllByEmployeeId(Long employeeId);
-
 		Optional<Expense> findByAmountAndExpenseDateAndConceptAndExpenseUser(Double amount, LocalDateTime expenseDate, String concept, ExpenseUser expenseUser);
 
 		// Búsqueda directa por id (recomendado para búsquedas únicas)
