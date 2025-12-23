@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IUserDao extends JpaRepository<ExpenseUser, Long> {
     Optional<ExpenseUser> findByEmail(String email);
+
+    Optional<ExpenseUser> findByEmployee_Id(Long employeeId);
 }
