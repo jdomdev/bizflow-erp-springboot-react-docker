@@ -20,5 +20,7 @@ public interface IPayrollService {
 
 	public List<Payroll> findAllPayrollByEmployeeId(Long employeeId) throws Exception;
 
+	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception;
+
 	public Boolean findByDateAndEmployeeAllIgnoreCase(LocalDateTime PayrollDate, Employee employee) throws Exception;
 }
