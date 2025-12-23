@@ -85,9 +85,12 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	public ResponseEntity<?> savePayroll(@RequestBody @Valid Payroll payroll) {
 		ResponseEntity<Payroll> responseEntity;
 		try {
-			Employee employee = payroll.getEmployee();
-			responseEntity = ResponseEntity.status(HttpStatus.OK).body(payrollService.save(payroll));
-			employee.addPayroll(payroll);
+			Payroll savedPayroll = payrollService.save(payroll);
+			Employee employee = savedPayroll.getEmployee();
+			if (employee != null) {
+				employee.addPayroll(savedPayroll);
+			}
+			responseEntity = ResponseEntity.status(HttpStatus.OK).body(savedPayroll);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
