@@ -16,6 +16,7 @@ import io.sunbit.app.util.DateUtil;
 
 @Service
 public class PayrollServiceImpl implements IPayrollService {
+	@Override
 	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception {
 		try {
 			return payrollDao.findAllByExpenseUserId(expenseUserId);
