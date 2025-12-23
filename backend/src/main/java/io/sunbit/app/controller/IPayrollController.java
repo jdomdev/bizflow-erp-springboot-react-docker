@@ -10,6 +10,8 @@ public interface IPayrollController<Payroll> {
 
 	public ResponseEntity<?> getAllPayrollByEmployeeId(@PathVariable Long employeeId);
 
+	public ResponseEntity<?> getAllPayrollByExpenseUserId(@PathVariable Long expenseUserId);
+
 	public ResponseEntity<?> getAllPayroll();
 
 	public ResponseEntity<?> getPayrollById(@PathVariable Long payrollId);
