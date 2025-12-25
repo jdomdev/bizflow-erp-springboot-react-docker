@@ -84,9 +84,9 @@ public class PositionControllerImpl implements IPositionController {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PutMapping("/{positionId}")
-	public ResponseEntity<?> updatePosition(@RequestBody @Valid Position position,
-			@PathVariable("employeeTypeId") Long positionId) {
+	    @PutMapping("/{positionId}")
+	    public ResponseEntity<?> updatePosition(@RequestBody @Valid Position position,
+		    @PathVariable("positionId") Long positionId) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(positionService.update(positionId, position));
 		} catch (Exception e) {
