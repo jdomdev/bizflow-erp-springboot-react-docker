@@ -90,9 +90,9 @@ function DashboardPage() {
           <h1 className="gradient-text text-4xl font-bold mb-2">Dashboard</h1>
           <p className="text-slate-400">
             Bienvenido, <span className="text-white font-medium">{profile?.email}</span>
-            {profile?.roles && (
+            {profile?.roleIds && (
               <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-slate-800 text-slate-300 border border-slate-700">
-                {profile.roles.join(', ')}
+                {profile.roleIds.join(', ')}
               </span>
             )}
           </p>
