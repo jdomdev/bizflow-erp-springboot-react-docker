@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import io.sunbit.app.entity.Employee;
+import io.sunbit.app.dto.EmployeeDto;
 
 public interface IEmployeeController {
 
@@ -16,10 +16,10 @@ public interface IEmployeeController {
 	public ResponseEntity<?> getEmployeeById(@PathVariable Long employeeId,
 			@RequestHeader String headerAuth);
 
-	public ResponseEntity<?> saveEmployee(@RequestBody @Valid Employee employee);
+	public ResponseEntity<?> saveEmployee(@RequestBody @Valid EmployeeDto employeeDto);
 
-	public ResponseEntity<?> updateEmployee(@RequestBody @Valid Employee employee,
-			@PathVariable Long employeeId);
+	   public ResponseEntity<?> updateEmployee(@RequestBody @Valid EmployeeDto employeeDto,
+		   @PathVariable Long employeeId);
 
 	public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId);
 
