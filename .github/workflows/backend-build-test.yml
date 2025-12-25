@@ -73,6 +73,20 @@ jobs:
       env:
         DB_HOST: localhost
     
+    - name: Run Smoke API Tests
+      run: |
+        cd backend
+        mvn -P smoke-tests test --no-transfer-progress
+      env:
+        DB_HOST: localhost
+
+    - name: Run API Regression Tests
+      run: |
+        cd backend
+        mvn -P regression-tests test --no-transfer-progress
+      env:
+        DB_HOST: localhost
+
     - name: Generate Coverage Report
       run: |
         cd backend
