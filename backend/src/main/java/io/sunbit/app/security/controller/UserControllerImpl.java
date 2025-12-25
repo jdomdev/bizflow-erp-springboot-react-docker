@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.sunbit.app.security.dto.UserProfileResponse;
 import io.sunbit.app.security.dto.UserUpdateRequest;
-import io.sunbit.app.security.entity.ExpenseUser;
-import io.sunbit.app.security.entity.Role;
+import io.sunbit.app.dto.ExpenseUserDto;
+import io.sunbit.app.dto.ExpenseUserMapper;
 import io.sunbit.app.security.service.UserServiceImpl;
+import io.sunbit.app.security.entity.ExpenseUser;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -42,10 +42,8 @@ public class UserControllerImpl implements IUserController {
 			// Usar email como identificador único
 			String email = authentication.getName();
 			ExpenseUser user = userService.findByEmail(email).orElseThrow(() -> new Exception("User not found"));
-			List<String> roles = user.getRoles().stream()
-				.map(Role::getName)
-				.collect(Collectors.toList());
-			return ResponseEntity.ok(new UserProfileResponse(user.getEmail(), roles));
+			ExpenseUserDto dto = ExpenseUserMapper.expenseUserToDtoWithId(user);
+			return ResponseEntity.ok(dto);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching profile");
 		}
@@ -58,17 +56,16 @@ public class UserControllerImpl implements IUserController {
 			// Usar email como identificador único
 			String email = authentication.getName();
 			ExpenseUser user = userService.findByEmail(email).orElseThrow(() -> new Exception("User not found"));
+			// Adaptar para UserUpdateRequest: solo email y password, roles no se actualizan aquí
 			if (request.getEmail() != null && !request.getEmail().isEmpty()) {
 				user.setEmail(request.getEmail());
 			}
 			if (request.getPassword() != null && !request.getPassword().isEmpty()) {
 				user.setPassword(request.getPassword());
 			}
-			ExpenseUser updatedUser = userService.update(user.getId(), user);
-			List<String> roles = updatedUser.getRoles().stream()
-				.map(Role::getName)
-				.collect(Collectors.toList());
-			return ResponseEntity.ok(new UserProfileResponse(updatedUser.getEmail(), roles));
+			ExpenseUser updatedUser = userService.update(user.getId(), user, java.util.Collections.emptyList());
+			ExpenseUserDto dto = ExpenseUserMapper.expenseUserToDtoWithId(updatedUser);
+			return ResponseEntity.ok(dto);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error updating profile: " + e.getMessage());
 		}
@@ -84,33 +81,41 @@ public class UserControllerImpl implements IUserController {
 	@GetMapping("/")
 	public ResponseEntity<?> getAllUser() {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+			List<ExpenseUserDto> dtos = userService.findAll().stream()
+				.map(ExpenseUserMapper::expenseUserToDtoWithId)
+				.collect(Collectors.toList());
+			return ResponseEntity.status(HttpStatus.OK).body(dtos);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"error\":\"Error. Please, Try it later. It is NOT possible to SHOW all the users\"}");
+					.body("{\"error\":\"Error. Please, Try it later. It is NOT possible to SHOW all the users.\"}");
 		}
 	}
 
 	@Override
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	@GetMapping("/{userId}")
-	public ResponseEntity<?> getUserById(@PathVariable("userId") Long userId) {
+	public ResponseEntity<?> getUserById(@PathVariable Long userId) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(userService.findById(userId));
+			ExpenseUser user = userService.findById(userId).orElseThrow(() -> new Exception("User not found"));
+			ExpenseUserDto dto = ExpenseUserMapper.expenseUserToDtoWithId(user);
+			return ResponseEntity.status(HttpStatus.OK).body(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the user who you find.\"}");
+					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the user you are looking for.\"}");
 		}
 	}
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/")
-	public ResponseEntity<?> saveUser(@RequestBody @Valid ExpenseUser user) {
+	public ResponseEntity<?> saveUser(@RequestBody @Valid ExpenseUserDto userDto) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+			ExpenseUser user = ExpenseUserMapper.dtoToExpenseUserWithId(userDto);
+			ExpenseUser saved = userService.save(user, userDto.getRoleIds());
+			ExpenseUserDto dto = ExpenseUserMapper.expenseUserToDtoWithId(saved);
+			return ResponseEntity.status(HttpStatus.OK).body(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -121,27 +126,30 @@ public class UserControllerImpl implements IUserController {
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/{userId}")
-	public ResponseEntity<?> updateUser(@RequestBody @Valid ExpenseUser user,
-			@PathVariable("userId") Long userId) {
+	public ResponseEntity<?> updateUser(@RequestBody @Valid ExpenseUserDto userDto,
+			@PathVariable Long userId) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(userService.update(userId, user));
+			ExpenseUser user = ExpenseUserMapper.dtoToExpenseUserWithId(userDto);
+			ExpenseUser updated = userService.update(userId, user, userDto.getRoleIds());
+			ExpenseUserDto dto = ExpenseUserMapper.expenseUserToDtoWithId(updated);
+			return ResponseEntity.status(HttpStatus.OK).body(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-					"{\"error\":\"Error. Please, Try it later. it is NOT possible UPDATE the user who you looking for.\"}");
+					"{\"error\":\"Error. Please, Try it later. It is NOT possible to UPDATE the user you are looking for.\"}");
 		}
 	}
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<?> deleteUser(@PathVariable("userId") Long userId) {
+	public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(userService.delete(userId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-					"{\"error\":\"Error. Please, Try it later. It is NOT possible DELETE the user who you looking for.\"}");
+					"{\"error\":\"Error. Please, Try it later. It is NOT possible to DELETE the user you are looking for.\"}");
 		}
 	}
 }

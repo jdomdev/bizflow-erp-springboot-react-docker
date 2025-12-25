@@ -83,7 +83,7 @@ public class UserControllerTest {
         updatedUser.setRoles(testUser.getRoles());
 
         when(userService.findByEmail("test@example.com")).thenReturn(Optional.of(testUser));
-        when(userService.update(eq(1L), any(ExpenseUser.class))).thenReturn(updatedUser);
+        when(userService.update(eq(1L), any(ExpenseUser.class), any(List.class))).thenReturn(updatedUser);
 
         mockMvc.perform(put("/api/v1/user/profile")
                 .contentType(MediaType.APPLICATION_JSON)
