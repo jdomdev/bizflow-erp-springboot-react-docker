@@ -54,7 +54,9 @@ public class UserControllerIT {
             user.setPassword("password");
             user.setName("IT");
             user.setSurname("Test");
-            userService.save(user);
+            io.sunbit.app.security.entity.Role role = roleDao.findByName("ROLE_USER").orElseThrow();
+            java.util.List<Long> roleIds = java.util.Collections.singletonList(role.getId());
+            userService.save(user, roleIds);
         }
     }
 
