@@ -101,14 +101,12 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(listResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Map<String, Object>> expenses = listResponse.getBody();
         assertThat(expenses).isNotNull();
-        Map<String, Object> matching = null;
-        for (Map<String, Object> expense : expenses) {
-            if (((Number) expense.get("id")).longValue() == defaultExpenseId) {
-                matching = expense;
-                break;
-            }
-        }
-        assertThat(matching).isNotNull();
+        
+        Map<String, Object> matching = expenses.stream()
+            .filter(expense -> ((Number) expense.get("id")).longValue() == defaultExpenseId)
+            .findFirst()
+            .orElseThrow(() -> new AssertionError("Expected expense with id " + defaultExpenseId + " not found"));
+        
         assertThat(matching.get("concept")).isEqualTo("Team Lunch - Updated");
         assertThat(((Number) matching.get("expenseUserId")).longValue()).isEqualTo(defaultUserId);
     }
