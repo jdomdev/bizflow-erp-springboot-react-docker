@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -55,6 +55,9 @@ public abstract class AbstractApiIntegrationTest {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
+
     protected long defaultPositionId;
     protected long defaultEmployeeId;
     protected long defaultUserId;
@@ -63,7 +66,6 @@ public abstract class AbstractApiIntegrationTest {
     protected long adminEmployeeId;
     protected long adminUserId;
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private String cachedUserToken;
     private String cachedAdminToken;
 
@@ -269,6 +271,26 @@ public abstract class AbstractApiIntegrationTest {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new HttpEntity<>(body, headers);
+    }
+
+    /**
+     * Safely extracts a long value from a JSON response map.
+     * Handles various numeric types that JSON deserialization may produce (Integer, Long, etc.)
+     * @param map the JSON response map
+     * @param key the key to extract
+     * @return the long value
+     * @throws IllegalArgumentException if the value is not a number or is null
+     */
+    protected long extractLongValue(Map<String, Object> map, String key) {
+        Object value = map.get(key);
+        if (value == null) {
+            throw new IllegalArgumentException("Value for key '" + key + "' is null");
+        }
+        if (!(value instanceof Number)) {
+            throw new IllegalArgumentException(
+                "Value for key '" + key + "' is not a Number, got " + value.getClass().getName());
+        }
+        return ((Number) value).longValue();
     }
 
     @SpringBootConfiguration

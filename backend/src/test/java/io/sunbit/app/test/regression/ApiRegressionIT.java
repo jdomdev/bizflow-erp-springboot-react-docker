@@ -52,9 +52,9 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         Map<String, Object> created = createResponse.getBody();
         assertThat(created).isNotNull();
-        long expenseId = ((Number) created.get("id")).longValue();
+        long expenseId = extractLongValue(created, "id");
         assertThat(created.get("concept")).isEqualTo("Client Dinner");
-        assertThat(((Number) created.get("expenseUserId")).longValue()).isEqualTo(defaultUserId);
+        assertThat(extractLongValue(created, "expenseUserId")).isEqualTo(defaultUserId);
 
         ResponseEntity<Map<String, Object>> fetchResponse = restTemplate.exchange(
             "/api/v1/expense/" + expenseId,
@@ -65,7 +65,7 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(fetchResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         Map<String, Object> fetched = fetchResponse.getBody();
         assertThat(fetched).isNotNull();
-        assertThat(((Number) fetched.get("id")).longValue()).isEqualTo(expenseId);
+        assertThat(extractLongValue(fetched, "id")).isEqualTo(expenseId);
         assertThat(fetched.get("concept")).isEqualTo("Client Dinner");
     }
 
@@ -89,7 +89,7 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(updateResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         Map<String, Object> updated = updateResponse.getBody();
         assertThat(updated).isNotNull();
-        assertThat(((Number) updated.get("id")).longValue()).isEqualTo(defaultExpenseId);
+        assertThat(extractLongValue(updated, "id")).isEqualTo(defaultExpenseId);
         assertThat(updated.get("concept")).isEqualTo("Team Lunch - Updated");
 
         ResponseEntity<List<Map<String, Object>>> listResponse = restTemplate.exchange(
@@ -101,14 +101,16 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(listResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Map<String, Object>> expenses = listResponse.getBody();
         assertThat(expenses).isNotNull();
-        
-        Map<String, Object> matching = expenses.stream()
-            .filter(expense -> ((Number) expense.get("id")).longValue() == defaultExpenseId)
-            .findFirst()
-            .orElseThrow(() -> new AssertionError("Expected expense with id " + defaultExpenseId + " not found"));
-        
+        Map<String, Object> matching = null;
+        for (Map<String, Object> expense : expenses) {
+            if (extractLongValue(expense, "id") == defaultExpenseId) {
+                matching = expense;
+                break;
+            }
+        }
+        assertThat(matching).isNotNull();
         assertThat(matching.get("concept")).isEqualTo("Team Lunch - Updated");
-        assertThat(((Number) matching.get("expenseUserId")).longValue()).isEqualTo(defaultUserId);
+        assertThat(extractLongValue(matching, "expenseUserId")).isEqualTo(defaultUserId);
     }
 
     @Test
@@ -172,7 +174,7 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(expenses).isNotNull();
         boolean stillPresent = false;
         for (Map<String, Object> expense : expenses) {
-            if (((Number) expense.get("id")).longValue() == temporaryExpenseId) {
+            if (extractLongValue(expense, "id") == temporaryExpenseId) {
                 stillPresent = true;
                 break;
             }
@@ -197,8 +199,8 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         Map<String, Object> created = createResponse.getBody();
         assertThat(created).isNotNull();
-        long payrollId = ((Number) created.get("id")).longValue();
-        assertThat(((Number) created.get("employeeId")).longValue()).isEqualTo(defaultEmployeeId);
+        long payrollId = extractLongValue(created, "id");
+        assertThat(extractLongValue(created, "employeeId")).isEqualTo(defaultEmployeeId);
 
         ResponseEntity<List<Map<String, Object>>> listResponse = restTemplate.exchange(
             "/api/v1/payroll/user/" + defaultUserId,
@@ -211,7 +213,7 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(payrolls).isNotNull();
         boolean found = false;
         for (Map<String, Object> payroll : payrolls) {
-            if (((Number) payroll.get("id")).longValue() == payrollId) {
+            if (extractLongValue(payroll, "id") == payrollId) {
                 found = true;
                 break;
             }
