@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -55,6 +55,9 @@ public abstract class AbstractApiIntegrationTest {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
+
     protected long defaultPositionId;
     protected long defaultEmployeeId;
     protected long defaultUserId;
@@ -63,7 +66,6 @@ public abstract class AbstractApiIntegrationTest {
     protected long adminEmployeeId;
     protected long adminUserId;
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private String cachedUserToken;
     private String cachedAdminToken;
 
