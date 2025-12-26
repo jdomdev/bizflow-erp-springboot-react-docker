@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useExpenseStore } from '../store/authStore';
 
 vi.mock('../services/api', () => ({
   userService: {
@@ -37,7 +36,6 @@ describe('DashboardPage sanity suite', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    useExpenseStore.setState({ expenses: [], loading: false, error: null });
 
     expenseService.getAll.mockResolvedValue({
       data: [currentMonthExpense, previousExpense],
