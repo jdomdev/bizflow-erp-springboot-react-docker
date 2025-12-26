@@ -27,6 +27,8 @@ import io.sunbit.app.security.dao.IRoleDao;
 import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.security.entity.Role;
+import lombok.NonNull;
+import java.util.Objects;
 import io.sunbit.app.service.EmployeeServiceImpl;
 
 @Service
@@ -47,40 +49,44 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	@Transactional
-		@SuppressWarnings("null")
-		public ExpenseUser save(ExpenseUser user) throws Exception {
-		       ExpenseUser savedUser = new ExpenseUser();
-		       ExpenseUser settedUser = new ExpenseUser();
-		       try {
-			       try {
-				       employeeService.findByEmail(user.getEmail());
-			       } catch (Exception e) {
-				       // Employee not found, which is OK for signup
-			       }
+	public ExpenseUser save(@NonNull ExpenseUser user, @NonNull List<Long> roleIds) throws Exception {
+		ExpenseUser savedUser = new ExpenseUser();
+		ExpenseUser settedUser = new ExpenseUser();
+		try {
+			try {
+				employeeService.findByEmail(user.getEmail());
+			} catch (Exception e) {
+				// Employee not found, which is OK for signup
+			}
 
-			       if (user.getRoles() == null) {
-				       user.setRoles(new ArrayList<>());
-			       }
+			// Asignar roles a partir de roleIds
+			List<Role> roles = new ArrayList<>();
+			for (Long roleId : roleIds) {
+				Objects.requireNonNull(roleId, "Role id cannot be null");
+				Role role = roleDao.findById(roleId)
+					.orElseThrow(() -> new RoleNotFoundException("Role id " + roleId + " not found"));
+				roles.add(role);
+			}
+			if (roles.isEmpty()) {
+				Role defaultRole = roleDao.findByName(ROLE_USER)
+					.orElseThrow(() -> new RoleNotFoundException("Default role ROLE_USER is missing"));
+				roles.add(defaultRole);
+			}
+			user.setRoles(roles);
 
-			       if (user.getRoles().isEmpty()) {
-				       Role defaultRole = roleDao.findByName(ROLE_USER)
-					       .orElseThrow(() -> new RoleNotFoundException("Default role ROLE_USER is missing"));
-				       user.getRoles().add(defaultRole);
-			       }
+			if ((user.getPassword() != null) && !user.getPassword().startsWith("$2")) {
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
+			}
 
-			       if ((user.getPassword() != null) && !user.getPassword().startsWith("$2")) {
-				       user.setPassword(passwordEncoder.encode(user.getPassword()));
-			       }
+			settedUser = setUser(user);
+			savedUser = userDao.save(Objects.requireNonNull(settedUser));
+		} catch (Exception e) {
+			throw e;
+		}
+		return savedUser;
+	}
 
-			       settedUser = setUser(user);
-			       savedUser = userDao.save(settedUser);
-		       } catch (Exception e) {
-			       throw e;
-		       }
-		       return savedUser;
-	       }
-
-	private ExpenseUser setUser(ExpenseUser user) {
+	private ExpenseUser setUser(@NonNull ExpenseUser user) {
 		ExpenseUser settedUser = new ExpenseUser();
 		if (user.getId() != null)
 			settedUser.setId(user.getId());
@@ -100,10 +106,8 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		settedUser.setRoles(new ArrayList<>());
 		Collection<Role> requestRoles = (user.getRoles() != null) ? user.getRoles() : List.of();
 		for (Role role : requestRoles) {
-			if (role.getId() == null) {
-				throw new RoleNotFoundException("Role id is required for assignment");
-			}
-			Optional<Role> optRole = roleDao.findById(role.getId());
+			Objects.requireNonNull(role.getId(), "Role id is required for assignment");
+			Optional<Role> optRole = roleDao.findById(Objects.requireNonNull(role.getId()));
 			if (optRole.isEmpty()) {
 				throw new RoleNotFoundException(
 					"The Role id: " + role.getId() + " is not present in the database");
@@ -115,12 +119,11 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	@Transactional
-	@SuppressWarnings("null")
-	public ExpenseUser update(Long id, ExpenseUser user) throws Exception {
+	public ExpenseUser update(@NonNull Long id, @NonNull ExpenseUser user, @NonNull List<Long> roleIds) throws Exception {
 		ExpenseUser updatedUser = new ExpenseUser();
 		try {
-			Optional<ExpenseUser> optionalUser = userDao.findById(id);
-			if (!optionalUser.isEmpty()) {
+			Optional<ExpenseUser> optionalUser = userDao.findById(Objects.requireNonNull(id));
+			if (optionalUser.isPresent()) {
 				ExpenseUser currentUser = optionalUser.get();
 				if (user.getPassword() == null || user.getPassword().isBlank()) {
 					user.setPassword(currentUser.getPassword());
@@ -128,13 +131,24 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 					user.setPassword(passwordEncoder.encode(user.getPassword()));
 				}
 
-				if (user.getRoles() == null) {
-					user.setRoles(new ArrayList<>());
+				// Asignar roles a partir de roleIds
+				List<Role> roles = new ArrayList<>();
+				for (Long roleId : roleIds) {
+					Objects.requireNonNull(roleId, "Role id cannot be null");
+					Role role = roleDao.findById(roleId)
+						.orElseThrow(() -> new RoleNotFoundException("Role id " + roleId + " not found"));
+					roles.add(role);
 				}
+				if (roles.isEmpty()) {
+					Role defaultRole = roleDao.findByName(ROLE_USER)
+						.orElseThrow(() -> new RoleNotFoundException("Default role ROLE_USER is missing"));
+					roles.add(defaultRole);
+				}
+				user.setRoles(roles);
 
 				user.setId(currentUser.getId());
 				ExpenseUser settedUser = setUser(user);
-				updatedUser = userDao.save(settedUser);
+				updatedUser = userDao.save(Objects.requireNonNull(settedUser));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

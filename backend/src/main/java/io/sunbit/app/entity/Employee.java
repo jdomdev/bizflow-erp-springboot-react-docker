@@ -19,9 +19,10 @@ import jakarta.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -63,6 +64,7 @@ public class Employee implements Serializable {
 	@Length(min = 3, max = 255)
 	@NonNull
 	private String email;
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "position_id", nullable = false) // <-position_id(olds employee_type_id/employee_type_id_fk)
 	@NonNull
@@ -75,6 +77,22 @@ public class Employee implements Serializable {
 	@JsonIgnore
 	// @JsonBackReference
 	private List<Payroll> payrolls = new ArrayList<>();
+
+	@JsonGetter("positionId")
+	public Long getPositionId() {
+		return position != null ? position.getId() : null;
+	}
+
+	@JsonSetter("positionId")
+	public void setPositionId(Long positionId) {
+		if (positionId == null) {
+			this.position = null;
+			return;
+		}
+		Position reference = new Position();
+		reference.setId(positionId);
+		this.position = reference;
+	}
 
 
 	// Constructor sin id

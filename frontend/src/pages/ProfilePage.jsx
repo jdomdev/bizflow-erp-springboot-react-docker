@@ -84,9 +84,9 @@ function ProfilePage() {
                     <div>
                         <h2 className="text-2xl font-bold text-white">{profile?.email}</h2>
                         <div className="flex gap-2 mt-2">
-                            {profile?.roles?.map(role => (
-                                <span key={role} className="px-3 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-300 border border-slate-600">
-                                    {role}
+                            {profile?.roleIds?.map(roleId => (
+                                <span key={roleId} className="px-3 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-300 border border-slate-600">
+                                    {roleId}
                                 </span>
                             ))}
                         </div>

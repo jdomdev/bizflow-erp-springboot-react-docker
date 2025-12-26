@@ -13,6 +13,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,11 +46,45 @@ public class Payroll implements Serializable {
 	// @Temporal(TemporalType.TIMESTAMP)
 	@NonNull
 	private LocalDateTime payrollDate;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id", nullable = true)
 	private Employee employee;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "expense_user_id", nullable = true)
 	private ExpenseUser expenseUser;
+
+	@JsonGetter("employeeId")
+	public Long getEmployeeId() {
+		return employee != null ? employee.getId() : null;
+	}
+
+	@JsonSetter("employeeId")
+	public void setEmployeeId(Long employeeId) {
+		if (employeeId == null) {
+			this.employee = null;
+			return;
+		}
+		Employee reference = new Employee();
+		reference.setId(employeeId);
+		this.employee = reference;
+	}
+
+	@JsonGetter("expenseUserId")
+	public Long getExpenseUserId() {
+		return expenseUser != null ? expenseUser.getId() : null;
+	}
+
+	@JsonSetter("expenseUserId")
+	public void setExpenseUserId(Long expenseUserId) {
+		if (expenseUserId == null) {
+			this.expenseUser = null;
+			return;
+		}
+		ExpenseUser reference = new ExpenseUser();
+		reference.setId(expenseUserId);
+		this.expenseUser = reference;
+	}
 }
