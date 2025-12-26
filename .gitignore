@@ -75,6 +75,3 @@ scripts/
 backups/
 *.sql
 !backend/src/test/resources/data-test.sql
-
-# Node modules
-node_modules/
