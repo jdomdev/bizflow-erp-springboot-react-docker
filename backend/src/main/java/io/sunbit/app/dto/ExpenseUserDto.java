@@ -1,5 +1,7 @@
 package io.sunbit.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExpenseUserDto {
-    @NonNull
     private Long id;
     @NonNull
     private String email;
@@ -19,4 +20,7 @@ public class ExpenseUserDto {
     private String name;
     @NonNull
     private String surname;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+    private java.util.List<Long> roleIds;
 }
