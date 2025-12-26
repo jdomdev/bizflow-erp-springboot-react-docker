@@ -273,6 +273,26 @@ public abstract class AbstractApiIntegrationTest {
         return new HttpEntity<>(body, headers);
     }
 
+    /**
+     * Safely extracts a long value from a JSON response map.
+     * Handles various numeric types that JSON deserialization may produce (Integer, Long, etc.)
+     * @param map the JSON response map
+     * @param key the key to extract
+     * @return the long value
+     * @throws IllegalArgumentException if the value is not a number or is null
+     */
+    protected long extractLongValue(Map<String, Object> map, String key) {
+        Object value = map.get(key);
+        if (value == null) {
+            throw new IllegalArgumentException("Value for key '" + key + "' is null");
+        }
+        if (!(value instanceof Number)) {
+            throw new IllegalArgumentException(
+                "Value for key '" + key + "' is not a Number, got " + value.getClass().getName());
+        }
+        return ((Number) value).longValue();
+    }
+
     @SpringBootConfiguration
     @EnableAutoConfiguration
     @ComponentScan(basePackages = "io.sunbit.app")
