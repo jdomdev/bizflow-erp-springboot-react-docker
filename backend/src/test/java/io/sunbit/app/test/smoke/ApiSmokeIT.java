@@ -32,9 +32,9 @@ class ApiSmokeIT extends AbstractApiIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Map<String, Object> body = response.getBody();
         assertThat(body).isNotNull();
-        assertThat(((Number) body.get("id")).longValue()).isEqualTo(defaultEmployeeId);
+        assertThat(extractLongValue(body, "id")).isEqualTo(defaultEmployeeId);
         assertThat(body.get("email")).isEqualTo(DEFAULT_EMPLOYEE_EMAIL);
-        assertThat(((Number) body.get("positionId")).longValue()).isEqualTo(defaultPositionId);
+        assertThat(extractLongValue(body, "positionId")).isEqualTo(defaultPositionId);
     }
 
     @Test
@@ -51,7 +51,7 @@ class ApiSmokeIT extends AbstractApiIntegrationTest {
         assertThat(body).isNotEmpty();
         Map<String, Object> firstExpense = body.get(0);
         assertThat(firstExpense.get("concept")).isEqualTo("Team Lunch");
-        assertThat(((Number) firstExpense.get("expenseUserId")).longValue()).isEqualTo(defaultUserId);
+        assertThat(extractLongValue(firstExpense, "expenseUserId")).isEqualTo(defaultUserId);
     }
 
     @Test
@@ -67,7 +67,7 @@ class ApiSmokeIT extends AbstractApiIntegrationTest {
         assertThat(body).isNotNull();
         assertThat(body).isNotEmpty();
         Map<String, Object> firstPayroll = body.get(0);
-        assertThat(((Number) firstPayroll.get("expenseUserId")).longValue()).isEqualTo(defaultUserId);
-        assertThat(((Number) firstPayroll.get("employeeId")).longValue()).isEqualTo(defaultEmployeeId);
+        assertThat(extractLongValue(firstPayroll, "expenseUserId")).isEqualTo(defaultUserId);
+        assertThat(extractLongValue(firstPayroll, "employeeId")).isEqualTo(defaultEmployeeId);
     }
 }
