@@ -84,8 +84,9 @@ public class AuthController {
             roles.add(userRole);
             newUser.setRoles(roles);
 
-            // Save user
-            ExpenseUser savedUser = userService.save(newUser);
+            // Save user (pass roleIds)
+            java.util.List<Long> roleIds = java.util.Collections.singletonList(userRole.getId());
+            ExpenseUser savedUser = userService.save(newUser, roleIds);
             log.info("User registered successfully - name: {}, surname: {}, email: {}", 
                 savedUser.getName(), savedUser.getSurname(), savedUser.getEmail());
 

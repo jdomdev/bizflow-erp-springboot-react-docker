@@ -54,6 +54,11 @@ jobs:
         cd frontend
         npm test -- --coverage --watchAll=false
     
+    - name: Run Sanity Suite
+      run: |
+        cd frontend
+        npm run test:sanity
+
     - name: Archive build artifacts
       if: success()
       uses: actions/upload-artifact@v3
