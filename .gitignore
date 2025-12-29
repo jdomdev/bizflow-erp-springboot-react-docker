@@ -38,6 +38,13 @@ expensenoteapp.code-workspace
 application.properties
 application.yml
 
+# Environment files
+.env*
+
+# Spring Boot sensitive config
+backend/src/main/resources/application-*.properties
+backend/src/test/resources/application-*.properties
+
 # Maven / Gradle dependencies
 target/
 build/
@@ -75,3 +82,8 @@ scripts/
 backups/
 *.sql
 !backend/src/test/resources/data-test.sql
+
+# Environment overrides (not committed)
+.env.dev
+.env.prod
+.env.test
