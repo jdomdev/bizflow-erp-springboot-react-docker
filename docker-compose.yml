@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: erp_prod_db
       POSTGRES_USER: erp_prod_user
-      POSTGRES_PASSWORD: prodpassword
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5442:5432"
     volumes:
@@ -33,7 +33,7 @@ services:
     environment:
       POSTGRES_DB: erp_dev_db
       POSTGRES_USER: erp_dev_user
-      POSTGRES_PASSWORD: devpassword
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
@@ -60,7 +60,7 @@ services:
     environment:
       POSTGRES_DB: erp_test_db
       POSTGRES_USER: erp_test_user
-      POSTGRES_PASSWORD: <DB_PASSWORD>word
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5434:5432"
     volumes:
