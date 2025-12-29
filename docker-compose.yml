@@ -21,9 +21,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      bizflow_erp_network:
-        aliases:
-          - backend
+      - bizflow_erp_network
     restart: unless-stopped
 
   erp-dev-db-container:
@@ -48,9 +46,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      bizflow_erp_network:
-        aliases:
-          - backend
+      - bizflow_erp_network
     restart: unless-stopped
 
   erp-test-db-container:
@@ -74,9 +70,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      bizflow_erp_network:
-        aliases:
-          - backend
+      - bizflow_erp_network
     restart: unless-stopped
 
   # pgAdmin - PostgreSQL GUI (optional)
@@ -93,9 +87,7 @@ services:
       - erp-dev-db-container
       - erp-test-db-container
     networks:
-      bizflow_erp_network:
-        aliases:
-          - backend
+      - bizflow_erp_network
     restart: unless-stopped
     profiles:
       - debug
