@@ -101,8 +101,8 @@ Esto asegura que el frontend solo espere al backend correspondiente y evita erro
 6. **Comprueba que los datos iniciales se han cargado automáticamente.**
 7. **(Opcional) Pobla usuarios vía scripts si necesitas datos adicionales:**
 	```bash
-	./scripts/register_users.sh         # Para dev/prod
-	./scripts/register_users_test.sh    # Para test
+	./scripts/register_users.sh         # En prod/dev se ejecuta automáticamente; relanza si necesitas repetirlo
+	./scripts/register_users_test.sh    # Wrapper manual para test
 	```
 
 ---
@@ -111,10 +111,33 @@ Esto asegura que el frontend solo espere al backend correspondiente y evita erro
 
 # Secuencia de inicialización automatizada de la base de datos
 
-1. Al levantar la base de datos de cada entorno, el script SQL correspondiente (`init_prod.sql`, `init_dev.sql`, `init_test.sql`) se ejecuta automáticamente si el volumen está vacío.
-2. El backend debe estar en estado healthy antes de poblar usuarios vía scripts.
-3. Los scripts de usuarios usan el endpoint `/api/v1/auth/signup` para poblar la tabla de usuarios con contraseñas encriptadas.
-4. En test, la base de datos se reinicia cada vez; en prod y dev, los datos persisten.
+1. Al levantar la base de datos de cada entorno, el script SQL correspondiente (`01_init_prod.sql`, `01_init_dev.sql`, `01_init_test.sql`) delega inmediatamente en el archivo maestro del entorno (`sql/prod/00_master.sql`, `sql/dev/00_master.sql`, `sql/test/00_master.sql`).
+2. Cada `00_master.sql` orquesta los `.sql` necesarios importando primero los artefactos comunes (esquema, catálogos compartidos) y después los seeds propios del entorno. Así se evita duplicidad y se mantiene un orden seguro para las claves foráneas.
+3. El backend debe estar en estado healthy antes de poblar usuarios vía scripts.
+4. Los scripts de usuarios usan el endpoint `/api/v1/auth/signup` para poblar la tabla de usuarios con contraseñas encriptadas.
+5. En test, la base de datos se reinicia cada vez; en prod y dev, los datos persisten.
+
+### Organización actual de los scripts SQL
+
+- [sql/common](sql/common) agrupa piezas compartidas: [sql/common/01_schema.sql](sql/common/01_schema.sql) crea estructura y secuencias, [sql/common/02_positions.sql](sql/common/02_positions.sql) y [sql/common/03_roles.sql](sql/common/03_roles.sql) cargan catálogos, [sql/common/05_expense_admin_bootstrap.sql](sql/common/05_expense_admin_bootstrap.sql) registra los administradores Ada y Alan.
+- [sql/dev_prod](sql/dev_prod) aloja los volúmenes que solo necesitan desarrollo y producción: [sql/dev_prod/10_employees_full.sql](sql/dev_prod/10_employees_full.sql) carga la plantilla completa de empleados, [sql/dev_prod/20_payrolls_full.sql](sql/dev_prod/20_payrolls_full.sql) genera el histórico de nóminas y [sql/dev_prod/30_expenses_extended.sql](sql/dev_prod/30_expenses_extended.sql) mantiene el dataset extenso de gastos para cargas manuales.
+- [sql/test](sql/test) conserva únicamente [sql/test/00_master.sql](sql/test/00_master.sql); este master reutiliza los datasets de [sql/common](sql/common) y [sql/dev_prod](sql/dev_prod) para alinear el entorno de pruebas con dev/prod. Los usuarios de gastos adicionales se registran vía scripts que consumen la API.
+- [sql/dev/00_master.sql](sql/dev/00_master.sql) y [sql/prod/00_master.sql](sql/prod/00_master.sql) importan primero los archivos de [sql/common](sql/common), después los datasets de [sql/dev_prod](sql/dev_prod) y finalizan con el bootstrap administrativo.
+- [sql/test/00_master.sql](sql/test/00_master.sql) replica el patrón de prod/dev con empleados y nóminas completas; tras el arranque se ejecutan los scripts de API para poblar la tabla `expense_user` con contraseñas hasheadas.
+- Los perfiles `prod` y `dev` incluyen en `docker-compose.yml` los servicios efímeros `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan a que el backend esté healthy y lanzan `register_users.sh` dentro de la red interna. El script es idempotente y omite usuarios ya existentes (HTTP 409).
+- La raíz de [sql](sql) solo conserva los entrypoints [sql/01_init_prod.sql](sql/01_init_prod.sql), [sql/01_init_dev.sql](sql/01_init_dev.sql) y [sql/01_init_test.sql](sql/01_init_test.sql); todo el contenido real se aloja en las carpetas por entorno descritas arriba.
+
+### Orden de ejecución por entorno
+
+- **Producción y Desarrollo**: [sql/01_init_prod.sql](sql/01_init_prod.sql) o [sql/01_init_dev.sql](sql/01_init_dev.sql) son los entrypoints montados por Docker; ambos llaman a su respectivo [00_master.sql](sql/prod/00_master.sql) o [00_master.sql](sql/dev/00_master.sql), que ejecutan, en orden, esquema común → catálogos comunes → empleados completos → nóminas completas → bootstrap de administradores.
+- **Test**: [sql/01_init_test.sql](sql/01_init_test.sql) enlaza con [sql/test/00_master.sql](sql/test/00_master.sql); el master ejecuta el mismo orden que prod/dev (esquema común → catálogos comunes → empleados completos → nóminas completas → bootstrap de administradores). Después, registra los usuarios de gastos mediante los scripts curl antes de cargar datasets adicionales.
+- **Datasets opcionales**: [sql/dev_prod/30_expenses_extended.sql](sql/dev_prod/30_expenses_extended.sql) queda fuera de los masters. Cárgalo manualmente cuando necesites el histórico completo.
+
+> Para cargar el dataset extendido de gastos en una base ya inicializada ejecuta:
+> ```bash
+> docker compose exec <db-container> psql -U postgres -d <dbname> -f /docker-entrypoint-initdb.d/dev_prod/30_expenses_extended.sql
+> ```
+> Sustituye `<db-container>` por el contenedor en uso (por ejemplo `erp-dev-db-container`) y `<dbname>` por la base objetivo.
 
 ---
 
@@ -122,13 +145,13 @@ Cada entorno tiene su propia base de datos y comportamiento de persistencia:
 
 - **Producción y Desarrollo (prod/dev):**
 	- Los datos y tablas se mantienen entre reinicios gracias a los volúmenes Docker.
-	- El script de inicialización (`init_prod.sql` o `init_dev.sql`) solo se ejecuta la primera vez que se crea la base de datos (cuando el volumen está vacío).
+	- El script de inicialización (`01_init_prod.sql` o `01_init_dev.sql`) solo se ejecuta la primera vez que se crea la base de datos (cuando el volumen está vacío).
 	- Si ya existen tablas o datos, el script NO se vuelve a ejecutar.
 	- Así, los registros y cambios realizados en estos entornos son persistentes.
 
 - **Test:**
 	- La base de datos de test es efímera: se crea y destruye cada vez que levantas el entorno test.
-	- El script `init_test.sql` se ejecuta siempre que se crea la base de datos, por lo que los datos se reinicializan en cada ciclo.
+	- El script `01_init_test.sql` se ejecuta siempre que se crea la base de datos, por lo que los datos se reinicializan en cada ciclo.
 	- Útil para pruebas limpias y repetibles.
 
 **Resumen:**
@@ -245,7 +268,7 @@ docker compose logs backend-prod
 
 
 ### d) Usuarios y datos iniciales
-Los usuarios y datos definidos en el script de inicialización (`init_prod.sql`, `init_dev.sql`, `init_test.sql`) se crean automáticamente al levantar la base de datos por primera vez (o en cada ciclo en test).
+Los usuarios y datos definidos en el script de inicialización (`01_init_prod.sql`, `01_init_dev.sql`, `01_init_test.sql`) se crean automáticamente al levantar la base de datos por primera vez (o en cada ciclo en test).
 No es necesario ejecutar scripts manuales salvo que quieras añadir datos adicionales.
 
 ### e) Detén los contenedores antes de cambiar de entorno:
