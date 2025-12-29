@@ -15,7 +15,7 @@
 ## Registro de expense users vía API
 - Una vez que el backend esté healthy, ejecuta `./scripts/register_users.sh` (o `./scripts/register_users_test.sh` para apuntar automáticamente al perfil test). El script consume `/api/v1/auth/signup`, crea los usuarios vinculados a los empleados existentes y deja las contraseñas hasheadas por la aplicación.
 - Si un correo ya existe, el script informa la omisión (HTTP 409) y continúa; solo aborta ante códigos inesperados.
-- En los perfiles `prod` y `dev` el compose lanza automáticamente los servicios `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan al backend y ejecutan el script con la URL interna (`http://backend-*/:8080`). El script es idempotente: ignora respuestas 409 cuando los usuarios ya existen.
+- En los perfiles `prod` y `dev` el compose lanza automáticamente los servicios `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan al backend y ejecutan el script con la URL interna (`http://backend-*:8080`). El script es idempotente: ignora respuestas 409 cuando los usuarios ya existen.
 
 ## Carga del dataset extendido de gastos
 - [sql/dev_prod/30_expenses_extended.sql](../sql/dev_prod/30_expenses_extended.sql) queda fuera de los masters para evitar fallos por claves foráneas antes de tener usuarios de gastos. Ejecuta la carga manual únicamente cuando requieras el histórico completo.
