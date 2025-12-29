@@ -116,7 +116,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - backend-prod
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
@@ -144,7 +144,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - backend-dev
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
@@ -172,7 +172,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - backend-test
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
