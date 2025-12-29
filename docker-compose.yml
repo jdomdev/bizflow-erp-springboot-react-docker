@@ -23,7 +23,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - prod-db
     restart: unless-stopped
 
   erp-dev-db-container:
@@ -50,7 +50,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - dev-db
     restart: unless-stopped
 
   erp-test-db-container:
@@ -76,7 +76,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - test-db
     restart: unless-stopped
 
   # pgAdmin - PostgreSQL GUI (optional)
@@ -95,7 +95,7 @@ services:
     networks:
       bizflow_erp_network:
         aliases:
-          - backend
+          - pgadmin
     restart: unless-stopped
     profiles:
       - debug
