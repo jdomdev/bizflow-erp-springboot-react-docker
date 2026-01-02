@@ -45,21 +45,16 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 RUN mkdir -p /usr/share/nginx/html/health
 RUN echo "OK" > /usr/share/nginx/html/health/index.html
 
-# Create cache and temp directories with proper permissions
+# Create cache and temp directories with proper permissions for nginx user
 RUN mkdir -p /var/cache/nginx/client_temp /var/run/nginx \
-  && chmod -R 777 /var/cache/nginx /var/run/nginx \
   && touch /var/run/nginx.pid \
-  && chmod 666 /var/run/nginx.pid
+  && chown -R nginx:nginx /var/cache/nginx /var/run/nginx /var/run/nginx.pid \
+  && chmod -R 755 /var/cache/nginx /var/run/nginx \
+  && chmod 644 /var/run/nginx.pid
 
-# Create non-root user (handle if it already exists)
-RUN addgroup -g 1000 appuser && adduser -D -u 1000 -G appuser appuser || true
-
-# Change permissions
-RUN chown -R appuser:appuser /usr/share/nginx/html
-RUN chmod -R 755 /usr/share/nginx/html
-
-# Switch to non-root user
-USER appuser
+# Change ownership of web content to nginx user
+RUN chown -R nginx:nginx /usr/share/nginx/html \
+  && chmod -R 755 /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80
