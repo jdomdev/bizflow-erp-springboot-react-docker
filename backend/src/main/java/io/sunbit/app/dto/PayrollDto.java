@@ -25,4 +25,34 @@ public class PayrollDto extends Payroll {
 	private LocalDateTime payrollDate;
 	private EmployeeDto employeeDto;
 	private ExpenseUserDto expenseUserDto;
+
+	@Override
+	public LocalDateTime getPayrollDate() {
+		return payrollDate;
+	}
+
+	@Override
+	public void setPayrollDate(LocalDateTime payrollDate) {
+		this.payrollDate = payrollDate;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public Double getAmount() {
+		return amount;
+	}
+
+	@Override
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 }
