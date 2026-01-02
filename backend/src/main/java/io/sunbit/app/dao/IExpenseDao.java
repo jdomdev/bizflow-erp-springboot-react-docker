@@ -20,6 +20,7 @@ public interface IExpenseDao extends JpaRepository<Expense, Long> {
 		Optional<Expense> findByAmountAndExpenseDateAndConceptAndExpenseUser(Double amount, LocalDateTime expenseDate, String concept, ExpenseUser expenseUser);
 
 		// Búsqueda directa por id (recomendado para búsquedas únicas)
+		@Override
 		Optional<Expense> findById(Long id);
 		
 	    @Query(value = "SELECT * FROM expense WHERE expense.amount=?1 "
