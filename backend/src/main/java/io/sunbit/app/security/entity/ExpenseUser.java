@@ -2,6 +2,7 @@ package io.sunbit.app.security.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -89,7 +90,7 @@ public class ExpenseUser implements UserDetails {
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
-		this.roles = roles;
+		this.roles = roles != null ? new ArrayList<>(roles) : new ArrayList<>();
 	}
 
 	// Constructor with ID.
@@ -105,13 +106,29 @@ public class ExpenseUser implements UserDetails {
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
-		this.roles = roles;
+		this.roles = roles != null ? new ArrayList<>(roles) : new ArrayList<>();
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	@JsonIgnoreProperties(value = { "users" }, allowSetters = true)
+	@Getter(AccessLevel.NONE)
+	@Setter(AccessLevel.NONE)
 	private Collection<Role> roles = new ArrayList<>();
+
+	// Custom getter that returns an unmodifiable view
+	public Collection<Role> getRoles() {
+		return Collections.unmodifiableCollection(roles);
+	}
+
+	// Custom setter that creates a defensive copy
+	public void setRoles(Collection<Role> roles) {
+		if (roles == null) {
+			this.roles = new ArrayList<>();
+		} else {
+			this.roles = new ArrayList<>(roles);
+		}
+	}
 
 	public void addRole(Role role) {
 		this.roles.add(role);
