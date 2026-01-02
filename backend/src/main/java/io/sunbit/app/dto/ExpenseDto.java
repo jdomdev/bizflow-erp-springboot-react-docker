@@ -29,4 +29,9 @@ public class ExpenseDto extends Expense {
 	private Double amount;
 	@NonNull
 	private ExpenseUserDto expenseUserDto;
+
+	@Override
+	public LocalDateTime getExpenseDate() {
+		return expenseDate;
+	}
 }
