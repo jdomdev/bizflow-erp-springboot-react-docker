@@ -4,14 +4,10 @@ import java.time.LocalDateTime;
 
 import io.sunbit.app.entity.Payroll;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -25,16 +21,6 @@ public class PayrollDto extends Payroll {
 	private LocalDateTime payrollDate;
 	private EmployeeDto employeeDto;
 	private ExpenseUserDto expenseUserDto;
-
-	@Override
-	public LocalDateTime getPayrollDate() {
-		return payrollDate;
-	}
-
-	@Override
-	public void setPayrollDate(LocalDateTime payrollDate) {
-		this.payrollDate = payrollDate;
-	}
 
 	@Override
 	public Long getId() {
@@ -54,5 +40,31 @@ public class PayrollDto extends Payroll {
 	@Override
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+
+	@Override
+	public LocalDateTime getPayrollDate() {
+		return payrollDate;
+	}
+
+	@Override
+	public void setPayrollDate(LocalDateTime payrollDate) {
+		this.payrollDate = payrollDate;
+	}
+
+	public EmployeeDto getEmployeeDto() {
+		return employeeDto;
+	}
+
+	public void setEmployeeDto(EmployeeDto employeeDto) {
+		this.employeeDto = employeeDto;
+	}
+
+	public ExpenseUserDto getExpenseUserDto() {
+		return expenseUserDto;
+	}
+
+	public void setExpenseUserDto(ExpenseUserDto expenseUserDto) {
+		this.expenseUserDto = expenseUserDto;
 	}
 }
