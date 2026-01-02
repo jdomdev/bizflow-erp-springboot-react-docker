@@ -4,7 +4,6 @@ import { User, Mail, Shield, Save, X } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import { userService } from '../services/api';
-import { useAuthStore } from '../store/authStore';
 
 function ProfilePage() {
     const [profile, setProfile] = useState(null);
