@@ -21,6 +21,8 @@ Esta carpeta contiene la colección de Postman para probar los endpoints de la A
 
 ## Configuración de Entornos
 
+Define las variables de entorno en Postman (por ejemplo `{{base_url}}`, `{{db_port}}` y `{{jwt_token}}`) en lugar de mantener valores sensibles en los archivos de la colección.
+
 La aplicación tiene 3 entornos disponibles:
 
 ### Producción (prod)
@@ -38,7 +40,7 @@ La aplicación tiene 3 entornos disponibles:
 ## Uso Recomendado
 
 1. **Autenticación**: Ejecuta primero el endpoint de login para obtener el token JWT
-2. **Headers**: El token debe incluirse en el header `Authorization: Bearer {token}`
+2. **Headers**: El token debe incluirse en el header `Authorization: Bearer {{jwt_token}}`
 3. **Endpoints Principales**:
    - `/api/v1/auth/*` - Autenticación y registro
    - `/api/employees` - Gestión de empleados
@@ -51,6 +53,7 @@ La aplicación tiene 3 entornos disponibles:
 - Asegúrate de que los contenedores Docker estén corriendo antes de probar los endpoints
 - Para pruebas locales, usa el perfil correspondiente en `docker-compose.yml`
 - Los SQL scripts de inicialización se encuentran en `/sql/`
+- No almacenes tokens reales ni credenciales en esta carpeta; utiliza variables de entorno o Postman Env para gestionarlos.
 
 ## Última Actualización
 
