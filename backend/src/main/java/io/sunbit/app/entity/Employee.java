@@ -3,6 +3,7 @@ package io.sunbit.app.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -76,6 +78,7 @@ public class Employee implements Serializable {
 			CascadeType.DETACH }, orphanRemoval = false)
 	@JsonIgnore
 	// @JsonBackReference
+	@Getter(AccessLevel.NONE)
 	private List<Payroll> payrolls = new ArrayList<>();
 
 	@JsonGetter("positionId")
@@ -92,6 +95,10 @@ public class Employee implements Serializable {
 		Position reference = new Position();
 		reference.setId(positionId);
 		this.position = reference;
+	}
+
+	public List<Payroll> getPayrolls() {
+		return Collections.unmodifiableList(payrolls);
 	}
 
 

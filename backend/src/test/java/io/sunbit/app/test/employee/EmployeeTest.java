@@ -109,7 +109,7 @@ public class EmployeeTest {
 		payroll.setAmount(1000.0);
 		payroll.setPayrollDate(DateUtil.formattingDate(LocalDateTime.now()));
 		payroll.setEmployee(savedEmployee);
-		savedEmployee.getPayrolls().add(payroll);
+		savedEmployee.addPayroll(payroll);
 		employeeDao.save(savedEmployee);
 		assertThat(savedEmployee.getPayrolls()).isNotEmpty();
 		assertThat(savedEmployee.getPayrolls().get(0).getAmount()).isEqualTo(1000.0);
