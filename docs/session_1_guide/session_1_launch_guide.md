@@ -338,7 +338,7 @@ curl -X POST http://localhost:8080/api/authentication/login \
   -d '{"email":"admin@example.com","password":"admin123"}'
 
 # Esperado: JSON con token JWT
-# {"token":"eyJhbGciOiJIUzUxMiJ9...", "user": {...}}
+# {"token":"<JWT_TOKEN_PLACEHOLDER>", "user": {...}}
 ```
 
 ---

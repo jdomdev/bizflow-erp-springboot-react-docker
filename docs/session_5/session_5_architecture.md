@@ -478,7 +478,7 @@ Si válido:
 200 OK
 {
   "email": "user@example.com",
-  "accessToken": "eyJhbGciOiJIUzUxMiJ9..."
+  "accessToken": "<JWT_TOKEN_PLACEHOLDER>"
 }
 ```
 
@@ -488,7 +488,7 @@ Si válido:
 
 ```
 GET /api/v1/users/profile
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+Authorization: Bearer <JWT_TOKEN_PLACEHOLDER>
             ↓
 JwtAuthenticationFilter
   - Extrae token de header
