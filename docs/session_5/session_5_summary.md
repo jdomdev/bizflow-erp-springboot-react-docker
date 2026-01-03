@@ -266,7 +266,7 @@ Content-Type: application/json
 Response: 200 OK
 {
   "email": "testuser1@example.com",
-  "accessToken": "eyJhbGciOiJIUzUxMiJ9..."
+  "accessToken": "<JWT_TOKEN_PLACEHOLDER>"
 }
 
 # CHECK EMAIL AVAILABILITY

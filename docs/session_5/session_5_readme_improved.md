@@ -183,7 +183,7 @@ Content-Type: application/json
 Respuesta: 200 OK
 {
   "email": "usuario@example.com",
-  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLHVzdWFyaW9AZXhhbXBsZS5jb20iLCJyb2xlcyI6IltVU0VSXSIsImlzcyI6IkV4cGVuc2VOb3RlQXBwIiwiaWF0IjoxNzY0MjgyMDQyLCJleHAiOjE3NjQzNjg0NDJ9.KD0l0Evws4kTEbSNZMR8IzzLD999n1mHq8Cu4D-Zl3_a5YflkeVp1wWduKrz5Ed5T7hSjyqxxc7M7S-DH8eJpA"
+  "accessToken": "<JWT_TOKEN_PLACEHOLDER>"
 }
 ```
 
@@ -191,7 +191,7 @@ Respuesta: 200 OK
 
 ```bash
 GET /api/v1/users/profile
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...
+Authorization: Bearer <JWT_TOKEN_PLACEHOLDER>
 
 Respuesta: 200 OK
 {
