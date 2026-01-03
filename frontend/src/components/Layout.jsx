@@ -7,6 +7,7 @@ import {
   LogOut,
   Menu,
   Settings,
+  User,
   X,
 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
@@ -22,6 +23,7 @@ function Layout() {
     { icon: BarChart3, label: 'Dashboard', path: '/dashboard' },
     { icon: CreditCard, label: 'Gastos', path: '/expenses' },
     { icon: BarChart3, label: 'Nómina', path: '/payroll' },
+    { icon: User, label: 'Perfil', path: '/profile' },
     { icon: Settings, label: 'Configuración', path: '/settings' },
   ];
 
@@ -45,7 +47,7 @@ function Layout() {
             <div className="gradient-primary rounded-lg p-2">
               <CreditCard className="h-6 w-6 text-white" />
             </div>
-            <h1 className="gradient-text text-xl font-bold">ExpenseNote</h1>
+            <h1 className="gradient-text text-xl font-bold">Bizflow ERP</h1>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}

@@ -19,7 +19,7 @@ import io.sunbit.app.security.entity.ExpenseUser;
  * Maneja la generación, validación y extracción de información de tokens.
  * 
  * @version 2.0
- * @author ExpenseNoteApp Team
+ * @author Bizflow ERP Team
  */
 @Component
 public class JwtAuthenticationUtil {
@@ -48,14 +48,23 @@ public class JwtAuthenticationUtil {
 	public String generateAccessToken(ExpenseUser user) {
 		SecretKey key = getSigningKey();
 
-		return Jwts.builder()
-				.subject(user.getId() + "," + user.getEmail())
-				.claim("roles", user.getRoles().toString())
-				.issuer("ExpenseNoteApp")
-				.issuedAt(new Date())
-				.expiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
-				.signWith(key)
-				.compact();
+		   // Serializar roles con prefijo ROLE_
+		   java.util.List<String> roleNames = new java.util.ArrayList<>();
+		   for (var role : user.getRoles()) {
+			   String roleName = role.getName();
+			   if (!roleName.startsWith("ROLE_")) {
+				   roleName = "ROLE_" + roleName;
+			   }
+			   roleNames.add(roleName);
+		   }
+		   return Jwts.builder()
+				   .subject(user.getId() + "," + user.getEmail())
+				   .claim("roles", roleNames.toString())
+				   .issuer("ExpenseNoteApp")
+				   .issuedAt(new Date())
+				   .expiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
+				   .signWith(key)
+				   .compact();
 	}
 
 	/**

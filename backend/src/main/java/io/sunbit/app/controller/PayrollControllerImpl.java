@@ -53,6 +53,19 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 		}
 	}
 
+	@Override
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@GetMapping("/user/{expenseUserId}")
+	public ResponseEntity<?> getAllPayrollByExpenseUserId(@PathVariable("expenseUserId") Long expenseUserId) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(payrollService.findAllPayrollByExpenseUserId(expenseUserId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+					"{\"error\":\"Error. Please, Try it later. It is NOT possible to SHOW the user's payrolls.\"}");
+		}
+	}
+
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	@GetMapping("/{payrollId}")
 	// @ResponseBody
@@ -72,9 +85,12 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	public ResponseEntity<?> savePayroll(@RequestBody @Valid Payroll payroll) {
 		ResponseEntity<Payroll> responseEntity;
 		try {
-			Employee employee = payroll.getEmployee();
-			responseEntity = ResponseEntity.status(HttpStatus.OK).body(payrollService.save(payroll));
-			employee.addPayroll(payroll);
+			Payroll savedPayroll = payrollService.save(payroll);
+			Employee employee = savedPayroll.getEmployee();
+			if (employee != null) {
+				employee.addPayroll(savedPayroll);
+			}
+			responseEntity = ResponseEntity.status(HttpStatus.OK).body(savedPayroll);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)

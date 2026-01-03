@@ -18,6 +18,7 @@ import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Collections;
 
 /**
  * Authentication Controller
@@ -45,14 +46,14 @@ public class AuthController {
      * POST /api/v1/auth/signup
      * No authentication required
      * 
-     * @param signUpRequest containing username, email, password
+         * @param signUpRequest containing name, surname, email, password
      * @return SignUpResponse with user details
-     * @throws BadRequestException if username or email already exists
+         * @throws BadRequestException if email already exists
      */
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignUpRequest signUpRequest) {
         try {
-            log.info("Processing signup for username: {}", signUpRequest.getUsername());
+            log.info("Processing signup for email: {}", signUpRequest.getEmail());
 
             // Validate email not already taken
             Optional<ExpenseUser> existingUser = userService.findByEmail(signUpRequest.getEmail());
@@ -65,8 +66,8 @@ public class AuthController {
             // Create new user
             // Note: ExpenseUser requires name, surname, email, password
             ExpenseUser newUser = new ExpenseUser();
-            newUser.setName(signUpRequest.getUsername());
-            newUser.setSurname(signUpRequest.getUsername()); // Use username as surname
+            newUser.setName(signUpRequest.getName());
+            newUser.setSurname(signUpRequest.getSurname());
             newUser.setEmail(signUpRequest.getEmail());
             newUser.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
             // isEnabled() always returns true in ExpenseUser
@@ -83,20 +84,22 @@ public class AuthController {
             roles.add(userRole);
             newUser.setRoles(roles);
 
-            // Save user
-            ExpenseUser savedUser = userService.save(newUser);
-            log.info("User registered successfully - username: {}, email: {}", 
-                savedUser.getName(), savedUser.getEmail());
+            // Save user (pass roleIds)
+            java.util.List<Long> roleIds = java.util.Collections.singletonList(userRole.getId());
+            ExpenseUser savedUser = userService.save(newUser, roleIds);
+            log.info("User registered successfully - name: {}, surname: {}, email: {}", 
+                savedUser.getName(), savedUser.getSurname(), savedUser.getEmail());
 
             // Return response
-            SignUpResponse response = SignUpResponse.builder()
+                SignUpResponse response = SignUpResponse.builder()
                     .id(savedUser.getId())
-                    .username(savedUser.getName())
+                    .name(savedUser.getName())
+                    .surname(savedUser.getSurname())
                     .email(savedUser.getEmail())
                     .message("User registered successfully")
                     .build();
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+                return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
         } catch (BadRequestException e) {
             log.warn("Bad request during signup: {}", e.getMessage());
@@ -108,26 +111,7 @@ public class AuthController {
         }
     }
 
-    /**
-     * Check if username is available
-     * 
-     * GET /api/v1/auth/check-username?username=john
-     * No authentication required
-     * 
-     * @param username to check
-     * @return true if available, false if taken
-     */
-    @GetMapping("/check-username")
-    public ResponseEntity<?> checkUsername(@RequestParam String username) {
-        try {
-            Optional<ExpenseUser> user = userService.findByEmail(username + "@temp");
-            boolean available = user.isEmpty();
-            return ResponseEntity.ok().body(new CheckAvailabilityResponse(available));
-        } catch (Exception e) {
-            log.error("Error checking username availability", e);
-            return ResponseEntity.ok().body(new CheckAvailabilityResponse(false));
-        }
-    }
+
 
     /**
      * Check if email is available
@@ -143,25 +127,13 @@ public class AuthController {
         try {
             Optional<ExpenseUser> user = userService.findByEmail(email);
             boolean available = user.isEmpty();
-            return ResponseEntity.ok().body(new CheckAvailabilityResponse(available));
+            return ResponseEntity.ok().body(Collections.singletonMap("available", available));
         } catch (Exception e) {
             log.error("Error checking email availability", e);
-            return ResponseEntity.ok().body(new CheckAvailabilityResponse(false));
+            return ResponseEntity.ok().body(Collections.singletonMap("available", false));
         }
     }
 
-    /**
-     * Simple DTO for availability checks
-     */
-    public static class CheckAvailabilityResponse {
-        public boolean available;
 
-        public CheckAvailabilityResponse(boolean available) {
-            this.available = available;
-        }
 
-        public boolean isAvailable() {
-            return available;
-        }
-    }
 }

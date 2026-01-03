@@ -2,13 +2,13 @@ name: Build & Test - Backend (Maven)
 
 on:
   push:
-    branches: [ main, develop, fix/*, feature/* ]
+    branches: [ main, dev, fix/*, feature/* ]
     paths:
       - 'backend/**'
       - 'pom.xml'
       - '.github/workflows/backend-build-test.yml'
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
     paths:
       - 'backend/**'
       - 'pom.xml'
@@ -16,6 +16,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # PostgreSQL service container for integration tests
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: erp_test_db
+          POSTGRES_USER: erp_test_user
+          POSTGRES_PASSWORD: testpassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     
     strategy:
       matrix:
@@ -47,12 +63,30 @@ jobs:
       run: |
         cd backend
         mvn test -Dtest="**/*Test" --no-transfer-progress
+      env:
+        DB_HOST: localhost
     
     - name: Run Integration Tests
       run: |
         cd backend
         mvn verify -DskipUnitTests --no-transfer-progress
+      env:
+        DB_HOST: localhost
     
+    - name: Run Smoke API Tests
+      run: |
+        cd backend
+        mvn -P smoke-tests test --no-transfer-progress
+      env:
+        DB_HOST: localhost
+
+    - name: Run API Regression Tests
+      run: |
+        cd backend
+        mvn -P regression-tests test --no-transfer-progress
+      env:
+        DB_HOST: localhost
+
     - name: Generate Coverage Report
       run: |
         cd backend
@@ -102,7 +136,7 @@ jobs:
       run: |
         cd backend
         mvn clean verify sonar:sonar \
-          -Dsonar.projectKey=ExpenseNoteApp \
+          -Dsonar.projectKey=BizflowERP \
           -Dsonar.sources=src/main \
           -Dsonar.exclusions='src/test/**'
       if: env.SONAR_TOKEN != ''

@@ -3,6 +3,11 @@ package io.sunbit.app.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.sunbit.app.security.entity.ExpenseUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -49,22 +54,36 @@ public class Expense implements Serializable {
 	@Column(name = "expense_date", nullable = false)
 	// @Temporal(TemporalType.TIMESTAMP)
 	@NonNull
-	private LocalDateTime date;
+	private LocalDateTime expenseDate;
 	@Column(name = "amount", nullable = false)
 	@NonNull
 	private Double amount;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id") // "id"->ERROR
-	// @JsonIgnore
+	@JoinColumn(name = "expense_user_id", nullable = false)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@NonNull
-	private Employee employee;
+	private ExpenseUser expenseUser;
+
+	@JsonProperty("expenseUserId")
+	public Long getExpenseUserId() {
+		return expenseUser != null ? expenseUser.getId() : null;
+	}
+
+	@JsonProperty("expenseUserId")
+	public void setExpenseUserId(Long expenseUserId) {
+		if (expenseUserId == null) {
+			this.expenseUser = null;
+			return;
+		}
+		ExpenseUser reference = new ExpenseUser();
+		reference.setId(expenseUserId);
+		this.expenseUser = reference;
+	}
 
 	// Constructor without note.
-	public Expense(Long id, String concept, LocalDateTime date, Double amount, Employee employee) {
-		this.id = id;
-		this.concept = concept;
-		this.date = date;
-		this.amount = amount;
-		this.employee = employee;
-	}
+
+	// Existing constructors...
+
+	// getters and setters...
 }

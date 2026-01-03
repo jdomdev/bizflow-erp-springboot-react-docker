@@ -16,13 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 // @EnableTransactionManagement
 @EnableMethodSecurity(prePostEnabled = true)
 public class AppSecurityConfig {
-    /*
-     * @Autowired
-     * private IUserDao userDao;
-     * 
-     * @Autowired
-     * private JwtAuthenticationFilter jwtAuthFilter;
-     */
+    @org.springframework.beans.factory.annotation.Autowired
+    private io.sunbit.app.security.jwt.JwtAuthenticationFilter jwtAuthFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -58,20 +53,23 @@ public class AppSecurityConfig {
         }));
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(handling -> handling.authenticationEntryPoint(customAuthenticationEntryPoint));
-        
+
         // Configure authorization rules
         http.authorizeHttpRequests(auth -> auth
             // Allow public endpoints
             .requestMatchers("/", "/health").permitAll()
-            // Allow signup without authentication
-            .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/check-username", "/api/v1/auth/check-email").permitAll()
-            // Allow all other /api/v1/** endpoints (for now - will be secured later)
-            .requestMatchers("/api/v1/**").permitAll()
+            // Allow signup and login without authentication
+            .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/check-email", "/api/v1/auth/login").permitAll()
             .requestMatchers("/actuator/**").permitAll()
+            // Allow Swagger UI and API docs
+            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
             // All other requests require authentication
             .anyRequest().authenticated()
         );
-        
+
+        // Registrar el filtro JWT antes del UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 }

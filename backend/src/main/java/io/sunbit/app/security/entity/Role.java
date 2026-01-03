@@ -1,6 +1,7 @@
 package io.sunbit.app.security.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +13,8 @@ import jakarta.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "role")
 // @ToString(includeFieldNames = false)
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +50,7 @@ public class Role implements Serializable {
 	}
 
 	@ManyToMany(mappedBy = "roles")
+	@JsonIgnore
 	private List<ExpenseUser> users;
 
 	@Override

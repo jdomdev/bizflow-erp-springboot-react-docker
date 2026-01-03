@@ -102,7 +102,7 @@ function LoginPage() {
               </svg>
             </div>
           </div>
-          <h1 className="gradient-text text-4xl font-bold mb-2">ExpenseNote</h1>
+          <h1 className="gradient-text text-4xl font-bold mb-2">Bizflow ERP</h1>
           <p className="text-slate-400">Control de Gastos Empresariales</p>
         </motion.div>
 

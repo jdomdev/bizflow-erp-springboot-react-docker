@@ -4,7 +4,7 @@ import { TrendingUp, DollarSign, PlusCircle } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import { useExpenseStore } from '../store/authStore';
-import { expenseService } from '../services/api';
+import { userService, expenseService } from '../services/api';
 
 function DashboardPage() {
   const expenses = useExpenseStore((state) => state.expenses);
@@ -14,17 +14,23 @@ function DashboardPage() {
     thisMonth: 0,
     averageExpense: 0,
   });
+  const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    loadExpenses();
+    loadData();
   }, []);
 
-  const loadExpenses = async () => {
+  const loadData = async () => {
     try {
-      const response = await expenseService.getAll();
-      const data = response.data || [];
+      const [expensesResponse, profileResponse] = await Promise.all([
+        expenseService.getAll(),
+        userService.getProfile()
+      ]);
+
+      const data = expensesResponse.data || [];
       setExpenses(data);
+      setProfile(profileResponse.data);
 
       // Calcular estadísticas
       const totalExpenses = data.reduce((sum, exp) => sum + (exp.amount || 0), 0);
@@ -45,7 +51,7 @@ function DashboardPage() {
         averageExpense: data.length > 0 ? totalExpenses / data.length : 0,
       });
     } catch (error) {
-      console.error('Error cargando gastos:', error);
+      console.error('Error cargando datos:', error);
     } finally {
       setIsLoading(false);
     }
@@ -82,7 +88,14 @@ function DashboardPage() {
       >
         <div>
           <h1 className="gradient-text text-4xl font-bold mb-2">Dashboard</h1>
-          <p className="text-slate-400">Bienvenido de vuelta a tu panel de control</p>
+          <p className="text-slate-400">
+            Bienvenido, <span className="text-white font-medium">{profile?.email}</span>
+            {profile?.roleIds && (
+              <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-slate-800 text-slate-300 border border-slate-700">
+                {profile.roleIds.join(', ')}
+              </span>
+            )}
+          </p>
         </div>
         <Button variant="primary">
           <PlusCircle className="h-5 w-5" />

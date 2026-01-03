@@ -2,13 +2,13 @@ name: Build & Test - Frontend (React)
 
 on:
   push:
-    branches: [ main, develop, fix/*, feature/* ]
+    branches: [ main, dev, fix/*, feature/* ]
     paths:
       - 'frontend/**'
       - 'package.json'
       - '.github/workflows/frontend-build-test.yml'
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
     paths:
       - 'frontend/**'
       - 'package.json'
@@ -43,7 +43,6 @@ jobs:
       run: |
         cd frontend
         npm run lint
-      continue-on-error: true
     
     - name: Build
       run: |
@@ -54,8 +53,12 @@ jobs:
       run: |
         cd frontend
         npm test -- --coverage --watchAll=false
-      continue-on-error: true
     
+    - name: Run Sanity Suite
+      run: |
+        cd frontend
+        npm run test:sanity
+
     - name: Archive build artifacts
       if: success()
       uses: actions/upload-artifact@v3

@@ -1,4 +1,6 @@
+
 package io.sunbit.app.security.dao;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,6 +27,7 @@ import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.security.entity.Role;
 
+@ActiveProfiles("test")
 @DataJpaTest
 // @Rollback(false)
 // @AutoConfigureTestDatabase(replace = Replace.NONE)

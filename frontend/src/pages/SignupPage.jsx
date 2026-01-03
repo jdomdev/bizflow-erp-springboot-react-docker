@@ -12,7 +12,8 @@ function SignupPage() {
   const navigate = useNavigate();
   const { login } = useAuthStore();
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
+    surname: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -28,10 +29,8 @@ function SignupPage() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.username) newErrors.username = 'Usuario requerido';
-    if (formData.username && formData.username.length < 3) {
-      newErrors.username = 'Usuario debe tener mínimo 3 caracteres';
-    }
+    if (!formData.name) newErrors.name = 'Nombre requerido';
+    if (!formData.surname) newErrors.surname = 'Apellido requerido';
     if (!formData.email) newErrors.email = 'Email requerido';
     if (!formData.password) newErrors.password = 'Contraseña requerida';
     if (formData.password !== formData.confirmPassword) {
@@ -56,7 +55,8 @@ function SignupPage() {
 
     try {
       const response = await authService.signup({
-        username: formData.username,
+        name: formData.name,
+        surname: formData.surname,
         email: formData.email,
         password: formData.password,
       });
@@ -116,7 +116,7 @@ function SignupPage() {
         {/* Logo */}
         <motion.div variants={itemVariants} className="text-center mb-8">
           <h1 className="gradient-text text-3xl font-bold mb-2">Crear Cuenta</h1>
-          <p className="text-slate-400">Únete a ExpenseNote hoy</p>
+          <p className="text-slate-400">Únete a Bizflow ERP hoy</p>
         </motion.div>
 
         {/* Signup Card */}
@@ -128,13 +128,25 @@ function SignupPage() {
           >
             <motion.div variants={itemVariants}>
               <Input
-                label="Usuario"
+                label="Nombre"
                 type="text"
-                name="username"
-                value={formData.username}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                placeholder="juan_garcia"
-                error={errors.username}
+                placeholder="Juan"
+                error={errors.name}
+                required
+              />
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <Input
+                label="Apellido"
+                type="text"
+                name="surname"
+                value={formData.surname}
+                onChange={handleChange}
+                placeholder="García"
+                error={errors.surname}
                 required
               />
             </motion.div>

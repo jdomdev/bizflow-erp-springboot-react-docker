@@ -13,9 +13,9 @@ public interface IUserService {
 
 	public Boolean delete(Long id) throws Exception;
 
-	public ExpenseUser save(ExpenseUser user) throws Exception;
+	public ExpenseUser save(ExpenseUser user, List<Long> roleIds) throws Exception;
 
-	public ExpenseUser update(Long userId, ExpenseUser user) throws Exception;
+	public ExpenseUser update(Long userId, ExpenseUser user, List<Long> roleIds) throws Exception;
 
 	public Optional<ExpenseUser> findByEmail(String userEmail) throws Exception;
 }

@@ -4,42 +4,42 @@ import io.sunbit.app.entity.Expense;
 
 public class ExpenseMapper {
 	// Without ID.
-	public static Expense dtoToExpense(ExpenseDto expenseDto) {
-		return new Expense(
-				null, expenseDto.getConcept(),
-				expenseDto.getNote(),
-				expenseDto.getDate(),
+		public static Expense dtoToExpense(ExpenseDto expenseDto) {
+			return new Expense(
+				null,
+				expenseDto.getConcept(),
+				expenseDto.getNote(),				
+				expenseDto.getExpenseDate(),
 				expenseDto.getAmount(),
-				EmployeeMapper.dtoToEmployeeWithId(expenseDto.getEmployeeDto()));
-	}
-
-	public static ExpenseDto expenseToDto(Expense expense) {
-		return new ExpenseDto(
+				ExpenseUserMapper.dtoToExpenseUserWithId(expenseDto.getExpenseUserDto()));
+		}
+		public static ExpenseDto expenseToDto(Expense expense) {
+			return new ExpenseDto(
+				null,
 				expense.getConcept(),
 				expense.getNote(),
-				expense.getDate(),
+				expense.getExpenseDate(),
 				expense.getAmount(),
-				EmployeeMapper.employeeToDtoWithId(expense.getEmployee()));
-	}
-
-	// With ID.
-	public static Expense dtoToExpenseWithId(ExpenseDto expenseDto) {
-		return new Expense(
+				ExpenseUserMapper.expenseUserToDtoWithId(expense.getExpenseUser()));
+		}
+		// With ID.
+		public static Expense dtoToExpenseWithId(ExpenseDto expenseDto) {
+			return new Expense(
 				expenseDto.getId(),
 				expenseDto.getConcept(),
 				expenseDto.getNote(),
-				expenseDto.getDate(),
+				expenseDto.getExpenseDate(),
 				expenseDto.getAmount(),
-				EmployeeMapper.dtoToEmployeeWithId(expenseDto.getEmployeeDto()));
-	}
+				ExpenseUserMapper.dtoToExpenseUserWithId(expenseDto.getExpenseUserDto()));
+		}
 
-	public static ExpenseDto expenseToDtoWithId(Expense expense) {
-		return new ExpenseDto(
-				expense.getId(),
-				expense.getConcept(),
-				expense.getNote(),
-				expense.getDate(),
-				expense.getAmount(),
-				EmployeeMapper.employeeToDtoWithId(expense.getEmployee()));
-	}
+	    public static ExpenseDto expenseToDtoWithId(Expense expense) {
+		    return new ExpenseDto(
+			    expense.getId(),
+			    expense.getConcept(),
+			    expense.getNote(),
+			    expense.getExpenseDate(),
+			    expense.getAmount(),
+			    ExpenseUserMapper.expenseUserToDtoWithId(expense.getExpenseUser()));
+	    }
 }

@@ -55,7 +55,7 @@ public class PositionServiceImpl implements IPositionService {
 	public Position update(Long id, Position position) throws Exception {
 		Position updatedPosition = null;
 		try {
-			Optional<Position> optionalPosition = positionDao.findById(id);
+			Optional<Position> optionalPosition = positionDao.findById(Long.valueOf(id));
 			Position oldPosition = optionalPosition.get();
 			if (oldPosition != null) {
 				updatedPosition = positionDao.save(position);
@@ -72,8 +72,8 @@ public class PositionServiceImpl implements IPositionService {
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		try {
-			if (positionDao.existsById(id)) {
-				positionDao.deleteById(id);
+			if (positionDao.existsById(Long.valueOf(id))) {
+				positionDao.deleteById(Long.valueOf(id));
 				isDeleted = true;
 			} else {
 				throw new Exception();
