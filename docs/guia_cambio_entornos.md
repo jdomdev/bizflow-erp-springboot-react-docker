@@ -101,7 +101,7 @@ Esto asegura que el frontend solo espere al backend correspondiente y evita erro
 6. **Comprueba que los datos iniciales se han cargado automáticamente.**
 7. **(Opcional) Pobla usuarios vía scripts si necesitas datos adicionales:**
 	```bash
-	./scripts/register_users.sh         # En prod/dev se ejecuta automáticamente; relanza si necesitas repetirlo
+	./scripts/register_users.sh         # En prod/dev se ejecuta automáticamente si existe el archivo de semillas
 	./scripts/register_users_test.sh    # Wrapper manual para test
 	```
 
@@ -124,7 +124,7 @@ Esto asegura que el frontend solo espere al backend correspondiente y evita erro
 - [sql/test](sql/test) conserva únicamente [sql/test/00_master.sql](sql/test/00_master.sql); este master reutiliza los datasets de [sql/common](sql/common) y [sql/dev_prod](sql/dev_prod) para alinear el entorno de pruebas con dev/prod. Los usuarios de gastos adicionales se registran vía scripts que consumen la API.
 - [sql/dev/00_master.sql](sql/dev/00_master.sql) y [sql/prod/00_master.sql](sql/prod/00_master.sql) importan primero los archivos de [sql/common](sql/common), después los datasets de [sql/dev_prod](sql/dev_prod) y finalizan con el bootstrap administrativo.
 - [sql/test/00_master.sql](sql/test/00_master.sql) replica el patrón de prod/dev con empleados y nóminas completas; tras el arranque se ejecutan los scripts de API para poblar la tabla `expense_user` con contraseñas hasheadas.
-- Los perfiles `prod` y `dev` incluyen en `docker-compose.yml` los servicios efímeros `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan a que el backend esté healthy y lanzan `register_users.sh` dentro de la red interna. El script es idempotente y omite usuarios ya existentes (HTTP 409).
+- Los perfiles `prod` y `dev` incluyen en `docker-compose.yml` los servicios efímeros `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan a que el backend esté healthy y lanzan `register_users.sh` dentro de la red interna. El servicio comprueba que el archivo de semillas exista (`scripts/secrets/register_users_payloads.jsonl` o la ruta indicada en `REGISTER_USERS_SEED_FILE`); si falta, escribe un aviso y continúa con el arranque. El script es idempotente y omite usuarios ya existentes (HTTP 409).
 - La raíz de [sql](sql) solo conserva los entrypoints [sql/01_init_prod.sql](sql/01_init_prod.sql), [sql/01_init_dev.sql](sql/01_init_dev.sql) y [sql/01_init_test.sql](sql/01_init_test.sql); todo el contenido real se aloja en las carpetas por entorno descritas arriba.
 
 ### Orden de ejecución por entorno
