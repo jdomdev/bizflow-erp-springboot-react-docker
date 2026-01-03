@@ -9,71 +9,67 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IExpenseDao;
 import io.sunbit.app.entity.Expense;
+import io.sunbit.app.security.dao.IUserDao;
+import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.security.jwt.JwtAuthenticationUtil;
 import io.sunbit.app.util.DateUtil;
-import io.sunbit.app.util.EmployeeUtil;
 
 @Service
 public class ExpenseServiceImpl implements IExpenseService {
 
 	@Autowired
-	private IEmployeeDao employeeDao;
-	@Autowired
 	private IExpenseDao expenseDao;
+
 	@Autowired
 	private JwtAuthenticationUtil jwtAuthUtil;
+
 	@Autowired
-	private static EmployeeUtil employeeUtil;
+	private IUserDao userDao;
 
-	@Override
-	public List<Expense> findAllByEmployeeId(Long employeeId, String headerAuth) throws Exception {
-		List<Expense> expenses = null;
-		try {
-			String token = headerAuth.split(" ")[1].trim();
-			if (jwtAuthUtil.isAdminTokenUser(token)
-					|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).get(), token))
-				expenses = expenseDao.findAllByEmployeeId(employeeId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-		return expenses;
-	}
-
-	@Override
-	public Expense findByAmountAndDateAndConceptAndEmployeeId(Double amount,
-			LocalDateTime date,
-			String concept,
-			Long employeeId,
-			String headerAuth) throws Exception {
-		Optional<Expense> optSearchedExpense = null;
+	public Expense findByAmountAndExpenseDateAndConceptAndExpenseUserId(Double amount,
+		LocalDateTime expenseDate,
+		String concept,
+		Long expenseUserId,
+		String headerAuth) throws Exception {
+		Optional<Expense> optSearchedExpense = Optional.empty();
 		String token = headerAuth.split(" ")[1].trim();
 		if (jwtAuthUtil.isAdminTokenUser(token)
-				|| employeeUtil.matchEmployeeUserEmail(employeeDao.findById(employeeId).get(), token)) {
-			optSearchedExpense = expenseDao.findByAmountAndDateAndConceptAndEmployeeId(amount,
-					date,
-					concept,
-					employeeId);
-			// Test
-			System.out.println("Searched Expense from ExpenseServiceImpl class\n"
-					+ "expenseDao.findByAmountAndExpenseDateAndConceptAndEmployeeIdAllIgnoreCase():\n"
-					+ "Concept: " + optSearchedExpense.get().getConcept());
+			|| isRequestingOwnExpenses(expenseUserId, token)) {
+			optSearchedExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUserId(amount,
+				expenseDate,
+				concept,
+				expenseUserId);
+			// Remove misplaced @Override and method declarations from inside another method.
+			// The following methods should be declared at the class level, not nested inside another method.
 		}
-		return optSearchedExpense.get();
+		if (optSearchedExpense.isPresent()) {
+			Expense expense = optSearchedExpense.get();
+			loadExpenseUser(expense);
+			System.out.println("Searched Expense from ExpenseServiceImpl class\n"
+				+ "expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUserId():\n"
+				+ "Concept: " + expense.getConcept());
+			return expense;
+		} else {
+			throw new Exception("Expense not found");
+		}
 	}
 
 	@Override
 	@Transactional
 	public Expense save(Expense expense, String headerAuth) throws Exception {
 		Expense savedExpense = new Expense();
-		LocalDateTime parsedDate = DateUtil.formattingDate(expense.getDate());
-		expense.setDate(parsedDate);
+		LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
+		expense.setExpenseDate(parsedDate);
 		String token = headerAuth.split(" ")[1].trim();
-		if (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil.matchEmployeeUserEmail(expense.getEmployee(), token))
+		// Only admin can save expenses, or add custom user validation here if needed
+		if (jwtAuthUtil.isAdminTokenUser(token)) {
+			ExpenseUser expenseUser = resolveExpenseUser(expense.getExpenseUser());
+			expense.setExpenseUser(expenseUser);
 			savedExpense = expenseDao.save(expense);
+			savedExpense.setExpenseUser(expenseUser);
+		}
 		return savedExpense;
 	}
 
@@ -89,14 +85,20 @@ public class ExpenseServiceImpl implements IExpenseService {
 
 	@Override
 	public Expense findById(Long id, String headerAuth) throws Exception {
+		if (id == null) {
+			throw new IllegalArgumentException("Expense id must not be null");
+		}
 		String token = headerAuth.split(" ")[1].trim();
 		Optional<Expense> optExpense = expenseDao.findById(id);
 		if (optExpense.isPresent()) {
-			if (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil
-					.matchEmployeeUserEmail(employeeDao.findById(optExpense.get().getEmployee().getId()).get(), token))
-				return optExpense.get();
+			// Only admin can view any expense, or add custom user validation here if needed
+			if (jwtAuthUtil.isAdminTokenUser(token)) {
+				Expense expense = optExpense.get();
+				loadExpenseUser(expense);
+				return expense;
+			}
 		}
-		return optExpense.get();
+		return optExpense.orElse(null);
 	}
 
 	@Override
@@ -104,16 +106,25 @@ public class ExpenseServiceImpl implements IExpenseService {
 	public Expense update(Expense expense, String headerAuth) throws Exception {
 		Expense expenseUpdated = null;
 		String token = headerAuth.split(" ")[1].trim();
-		Optional<Expense> optExpense = expenseDao.findById(expense.getId());
+		if (expense.getId() == null) {
+			throw new IllegalArgumentException("Expense id must not be null");
+		}
+		Long expenseId = expense.getId();
+		if (expenseId != null) {
+			Optional<Expense> optExpense = expenseDao.findById(expenseId);
 		if (optExpense.isPresent()) {
-			if (jwtAuthUtil.isAdminTokenUser(token) || employeeUtil.matchEmployeeUserEmail(
-					employeeDao.findById(optExpense.get().getEmployee().getId()).get(), token)) {
-				LocalDateTime parsedDate = DateUtil.formattingDate(expense.getDate());
-				expense.setDate(parsedDate);
+			// Only admin can update expenses, or add custom user validation here if needed
+			if (jwtAuthUtil.isAdminTokenUser(token)) {
+				LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
+				expense.setExpenseDate(parsedDate);
+				ExpenseUser expenseUser = resolveExpenseUser(expense.getExpenseUser());
+				expense.setExpenseUser(expenseUser);
 				expenseUpdated = expenseDao.save(expense);
+				expenseUpdated.setExpenseUser(expenseUser);
 			}
 		}
 		return expenseUpdated;
+		}	throw new IllegalArgumentException("Expense id must not be null");
 	}
 
 	@Override
@@ -121,7 +132,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		try {
-			if (expenseDao.existsById(id)) {
+			if (id != null && expenseDao.existsById(id)) {
 				expenseDao.deleteById(id);
 				isDeleted = true;
 			} else {
@@ -132,5 +143,67 @@ public class ExpenseServiceImpl implements IExpenseService {
 			throw new Exception(e.getMessage());
 		}
 		return isDeleted;
+	}
+
+	@Override
+	public Expense findByAmountAndDateAndConceptAndExpenseUserId(Double amount, LocalDateTime expenseDate, String concept, Long expenseUserId, String headerAuth) throws Exception {
+		Optional<Expense> optSearchedExpense = Optional.empty();
+		String token = headerAuth.split(" ")[1].trim();
+		if (jwtAuthUtil.isAdminTokenUser(token)
+			|| isRequestingOwnExpenses(expenseUserId, token)) {
+			optSearchedExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUserId(amount,
+				expenseDate,
+				concept,
+				expenseUserId);
+		}
+		if (optSearchedExpense.isPresent()) {
+			Expense expense = optSearchedExpense.get();
+			loadExpenseUser(expense);
+			return expense;
+		} else {
+			throw new Exception("Expense not found");
+		}
+	}
+
+	@Override
+	public List<Expense> findAllByExpenseUserId(Long expenseUserId, String headerAuth) throws Exception {
+		String token = headerAuth.split(" ")[1].trim();
+		if (jwtAuthUtil.isAdminTokenUser(token)
+			|| isRequestingOwnExpenses(expenseUserId, token)) {
+			List<Expense> expenses = expenseDao.findAllByExpenseUserId(expenseUserId);
+			expenses.forEach(this::loadExpenseUser);
+			return expenses;
+		} else {
+			throw new Exception("Unauthorized access");
+		}
+	}
+
+	private boolean isRequestingOwnExpenses(Long expenseUserId, String token) {
+		if (expenseUserId == null || token == null || token.isBlank()) {
+			return false;
+		}
+		Integer tokenUserId = jwtAuthUtil.extractTokenUserId(token);
+		return tokenUserId != null && expenseUserId.equals(tokenUserId.longValue());
+	}
+
+	private ExpenseUser resolveExpenseUser(ExpenseUser expenseUser) {
+		if (expenseUser == null || expenseUser.getId() == null) {
+			throw new IllegalArgumentException("Expense user id must not be null");
+		}
+		return userDao.findById(expenseUser.getId())
+			.orElseThrow(() -> new IllegalArgumentException("Expense user not found"));
+	}
+
+	private void loadExpenseUser(Expense expense) {
+		if (expense == null) {
+			return;
+		}
+		ExpenseUser relatedUser = expense.getExpenseUser();
+		if (relatedUser != null && relatedUser.getId() != null) {
+			if (relatedUser.getEmail() != null && relatedUser.getName() != null) {
+				return;
+			}
+			expense.setExpenseUser(resolveExpenseUser(relatedUser));
+		}
 	}
 }

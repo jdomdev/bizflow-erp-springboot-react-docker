@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
  *   2. Manual database insertion with secure password
  *   3. Environment variables or config management
  */
+@Profile("!test")
 @Component
 @Slf4j
 public class DataLoader implements ApplicationRunner {
@@ -70,21 +72,21 @@ public class DataLoader implements ApplicationRunner {
     private void createDefaultRoles() {
         try {
             // Create ADMIN role
-            if (!roleRepository.findByName("ADMIN").isPresent()) {
+            if (roleRepository.findByName("ADMIN").isEmpty()) {
                 Role adminRole = new Role("ADMIN");
                 roleRepository.save(adminRole);
                 log.info("✓ ADMIN role created");
             }
 
             // Create USER role
-            if (!roleRepository.findByName("USER").isPresent()) {
+            if (roleRepository.findByName("USER").isEmpty()) {
                 Role userRole = new Role("USER");
                 roleRepository.save(userRole);
                 log.info("✓ USER role created");
             }
 
             // Create MANAGER role
-            if (!roleRepository.findByName("MANAGER").isPresent()) {
+            if (roleRepository.findByName("MANAGER").isEmpty()) {
                 Role managerRole = new Role("MANAGER");
                 roleRepository.save(managerRole);
                 log.info("✓ MANAGER role created");

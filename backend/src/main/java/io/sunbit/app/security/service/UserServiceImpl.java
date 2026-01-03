@@ -1,5 +1,7 @@
+// import org.springframework.lang.NonNull;
 package io.sunbit.app.security.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +12,7 @@ import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +27,8 @@ import io.sunbit.app.security.dao.IRoleDao;
 import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.security.entity.Role;
+import lombok.NonNull;
+import java.util.Objects;
 import io.sunbit.app.service.EmployeeServiceImpl;
 
 @Service
@@ -44,35 +49,44 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	@Transactional
-	public ExpenseUser save(ExpenseUser user) throws Exception {
+	public ExpenseUser save(@NonNull ExpenseUser user, @NonNull List<Long> roleIds) throws Exception {
 		ExpenseUser savedUser = new ExpenseUser();
 		ExpenseUser settedUser = new ExpenseUser();
 		try {
-			// Try to find associated employee, but it's optional for signup
-			Employee employee = null;
 			try {
-				employee = employeeService.findByEmail(user.getEmail());
+				employeeService.findByEmail(user.getEmail());
 			} catch (Exception e) {
 				// Employee not found, which is OK for signup
-				employee = null;
 			}
 
-			// Assign default USER role if not already assigned
-			if ((user.getRoles() == null) || (user.getRoles().size() == 0)) {
-				user.getRoles().add(roleDao.findByName(ROLE_USER).get());
+			// Asignar roles a partir de roleIds
+			List<Role> roles = new ArrayList<>();
+			for (Long roleId : roleIds) {
+				Objects.requireNonNull(roleId, "Role id cannot be null");
+				Role role = roleDao.findById(roleId)
+					.orElseThrow(() -> new RoleNotFoundException("Role id " + roleId + " not found"));
+				roles.add(role);
+			}
+			if (roles.isEmpty()) {
+				Role defaultRole = roleDao.findByName(ROLE_USER)
+					.orElseThrow(() -> new RoleNotFoundException("Default role ROLE_USER is missing"));
+				roles.add(defaultRole);
+			}
+			user.setRoles(roles);
+
+			if ((user.getPassword() != null) && !user.getPassword().startsWith("$2")) {
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
 			}
 
 			settedUser = setUser(user);
-			savedUser = userDao.save(settedUser);
-			// entityManager.persist(settedUser);
+			savedUser = userDao.save(Objects.requireNonNull(settedUser));
 		} catch (Exception e) {
-			// System.out.println("e.getCause(): " + e.getCause());
-			throw new Exception(e.getCause());
+			throw e;
 		}
 		return savedUser;
 	}
 
-	private ExpenseUser setUser(ExpenseUser user) {
+	private ExpenseUser setUser(@NonNull ExpenseUser user) {
 		ExpenseUser settedUser = new ExpenseUser();
 		if (user.getId() != null)
 			settedUser.setId(user.getId());
@@ -82,31 +96,59 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		// Password is already encoded in the caller, just use it as is
 		settedUser.setPassword(user.getPassword());
 
-		for (Role role : user.getRoles()) {
-			try {
-				if ((roleDao.findById(role.getId()) != null)) {
-					settedUser.getRoles().add(entityManager.merge(role));
-				}
-			} catch (RoleNotFoundException e) {
-				System.out.println(e.getMessage());
+		if ((user.getEmployee() != null) && (user.getEmployee().getId() != null)) {
+			Employee employeeRef = entityManager.getReference(Employee.class, user.getEmployee().getId());
+			settedUser.setEmployee(employeeRef);
+		} else {
+			settedUser.setEmployee(null);
+		}
+
+		settedUser.setRoles(new ArrayList<>());
+		Collection<Role> requestRoles = (user.getRoles() != null) ? user.getRoles() : List.of();
+		for (Role role : requestRoles) {
+			Objects.requireNonNull(role.getId(), "Role id is required for assignment");
+			Optional<Role> optRole = roleDao.findById(Objects.requireNonNull(role.getId()));
+			if (optRole.isEmpty()) {
 				throw new RoleNotFoundException(
-						"The Role name: " + role.getName() + " with id: " + role.getId() + " IS NOT in Data Base");
+					"The Role id: " + role.getId() + " is not present in the database");
 			}
+			settedUser.getRoles().add(optRole.get());
 		}
 		return settedUser;
 	}
 
 	@Override
 	@Transactional
-	public ExpenseUser update(Long id, ExpenseUser user) throws Exception {
+	public ExpenseUser update(@NonNull Long id, @NonNull ExpenseUser user, @NonNull List<Long> roleIds) throws Exception {
 		ExpenseUser updatedUser = new ExpenseUser();
 		try {
-			Optional<ExpenseUser> optionalUser = userDao.findById(id);
-			if (!optionalUser.isEmpty()) {
-				// User settedUser = setUser(optionalUser.get());
-				// updatedUser = userDao.save(settedUser);
-				user.setPassword(passwordEncoder.encode(user.getPassword()));
-				updatedUser = userDao.save(user);
+			Optional<ExpenseUser> optionalUser = userDao.findById(Objects.requireNonNull(id));
+			if (optionalUser.isPresent()) {
+				ExpenseUser currentUser = optionalUser.get();
+				if (user.getPassword() == null || user.getPassword().isBlank()) {
+					user.setPassword(currentUser.getPassword());
+				} else if (!user.getPassword().startsWith("$2")) {
+					user.setPassword(passwordEncoder.encode(user.getPassword()));
+				}
+
+				// Asignar roles a partir de roleIds
+				List<Role> roles = new ArrayList<>();
+				for (Long roleId : roleIds) {
+					Objects.requireNonNull(roleId, "Role id cannot be null");
+					Role role = roleDao.findById(roleId)
+						.orElseThrow(() -> new RoleNotFoundException("Role id " + roleId + " not found"));
+					roles.add(role);
+				}
+				if (roles.isEmpty()) {
+					Role defaultRole = roleDao.findByName(ROLE_USER)
+						.orElseThrow(() -> new RoleNotFoundException("Default role ROLE_USER is missing"));
+					roles.add(defaultRole);
+				}
+				user.setRoles(roles);
+
+				user.setId(currentUser.getId());
+				ExpenseUser settedUser = setUser(user);
+				updatedUser = userDao.save(Objects.requireNonNull(settedUser));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,7 +161,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 		Optional<ExpenseUser> optionalUser = userDao.findByEmail(userEmail);
-		if (optionalUser == null || optionalUser.isEmpty())
+		if (optionalUser.isEmpty())
 			throw new UsernameNotFoundException("User or Password INVALIDS");
 		return optionalUser.get();
 	}
@@ -132,20 +174,18 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	public Optional<ExpenseUser> findByEmail(String email) throws Exception {
-		ExpenseUser searchedUser = null;
 		Optional<ExpenseUser> optionalUser = userDao.findByEmail(email);
-		if (!optionalUser.isEmpty()) {
-			searchedUser = optionalUser.get();
-		}
-		return Optional.ofNullable(searchedUser);
+		return optionalUser;
 	}
 
 	@Override
 	public List<ExpenseUser> findAll() throws Exception {
-		return userDao.findAll();
+		// Ensure deterministic ordering so the newest ids appear at the end of the list
+		return userDao.findAll(Sort.by(Sort.Direction.ASC, "id"));
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public Optional<ExpenseUser> findById(Long id) throws Exception {
 		Optional<ExpenseUser> optUser = userDao.findById(id);
 		return optUser;
@@ -153,10 +193,11 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Override
 	@Transactional
+	@SuppressWarnings("null")
 	public Boolean delete(Long id) throws Exception {
 		boolean isDeleted = false;
 		Optional<ExpenseUser> optUser = userDao.findById(id);
-		if (optUser != null) {
+		if (optUser.isPresent()) {
 			optUser.get().getRoles().clear();
 			userDao.delete(optUser.get());
 			isDeleted = true;

@@ -1,4 +1,6 @@
+
 package io.sunbit.app.security.dao;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import io.sunbit.app.security.dao.IRoleDao;
 import io.sunbit.app.security.entity.Role;
 
+@ActiveProfiles("test")
 @DataJpaTest
 public class IRoleDaoTest {
     @Autowired

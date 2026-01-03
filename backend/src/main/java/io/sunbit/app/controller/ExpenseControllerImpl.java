@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.service.ExpenseServiceImpl;
 
@@ -45,17 +44,17 @@ public class ExpenseControllerImpl implements IExpenseController {
 
 	@Override
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-	@GetMapping("/employee/{employeeId}")
+	@GetMapping("/user/{expenseUserId}")
 	@ResponseBody
-	public ResponseEntity<?> getAllExpenseByEmployeeId(@PathVariable("employeeId") Long employeeId,
+	public ResponseEntity<?> getAllExpenseByExpenseUserId(@PathVariable("expenseUserId") Long expenseUserId,
 			@RequestHeader("Authorization") String headerAuth) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(expenseService.findAllByEmployeeId(employeeId, headerAuth));
+					.body(expenseService.findAllByExpenseUserId(expenseUserId, headerAuth));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the employee's expenses.\"}");
+					.body("{\"error\":\"Error. Please, Try it later. NOT possible to SHOW the user's expenses.\"}");
 		}
 	}
 
@@ -78,11 +77,23 @@ public class ExpenseControllerImpl implements IExpenseController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	@PostMapping("/")
 	// @ResponseBody
-	public ResponseEntity<?> saveExpense(@RequestBody @Valid Expense expense,
+	public ResponseEntity<?> saveExpense(@RequestBody @Valid io.sunbit.app.dto.ExpenseCreateRequest request,
 			@RequestHeader("Authorization") String headerAuth) {
 		ResponseEntity<?> responseEntity = null;
 		try {
-			responseEntity = ResponseEntity.status(HttpStatus.OK).body(expenseService.save(expense, headerAuth));
+			// Convertir ExpenseCreateRequest a Expense
+			io.sunbit.app.entity.Expense expense = new io.sunbit.app.entity.Expense();
+			expense.setConcept(request.getConcept());
+			expense.setNote(request.getNote());
+			expense.setExpenseDate(request.getExpenseDate());
+			expense.setAmount(request.getAmount());
+			
+			// Buscar el ExpenseUser por ID
+			io.sunbit.app.security.entity.ExpenseUser expenseUser = new io.sunbit.app.security.entity.ExpenseUser();
+			expenseUser.setId(request.getExpenseUserId());
+			expense.setExpenseUser(expenseUser);
+			
+			responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(expenseService.save(expense, headerAuth));
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -99,9 +110,6 @@ public class ExpenseControllerImpl implements IExpenseController {
 			@RequestHeader("Authorization") String headerAuth) {
 		ResponseEntity<Boolean> responseEntity;
 		try {
-			Expense expense = expenseService.findById(expenseId, headerAuth);
-			Employee employee = expense.getEmployee();
-			employee.removeExpense(expense);// ******** Check if it's allow.......***********
 			responseEntity = ResponseEntity.status(HttpStatus.OK).body(expenseService.delete(expenseId));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -22,7 +22,7 @@ import io.sunbit.app.service.PositionServiceImpl;
 @CrossOrigin(origins = "*")
 @RequestMapping("api/v1/position")
 @RestController
-public class PositionControllerImpl implements IPositionController<Position> {
+public class PositionControllerImpl implements IPositionController {
 
 	@Autowired
 	private PositionServiceImpl positionService;
@@ -84,9 +84,9 @@ public class PositionControllerImpl implements IPositionController<Position> {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PutMapping("/{positionId}")
-	public ResponseEntity<?> updatePosition(@RequestBody @Valid Position position,
-			@PathVariable("employeeTypeId") Long positionId) {
+	    @PutMapping("/{positionId}")
+	    public ResponseEntity<?> updatePosition(@RequestBody @Valid Position position,
+		    @PathVariable("positionId") Long positionId) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(positionService.update(positionId, position));
 		} catch (Exception e) {

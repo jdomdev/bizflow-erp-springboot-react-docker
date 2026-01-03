@@ -1,4 +1,6 @@
+
 package io.sunbit.app.test.user;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +8,10 @@ import java.util.Optional;
 
 //import jakarta.transaction.Transactional;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -27,6 +32,7 @@ import io.sunbit.app.security.entity.Role;
 
 //@SpringBootTest
 // @TestPropertySource(locations = "classpath:application-sample.properties")
+@ActiveProfiles("test")
 @DataJpaTest
 /*
  * Spring Boot no intentará reemplazar tu base de datos real
@@ -34,6 +40,7 @@ import io.sunbit.app.security.entity.Role;
  */
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserTest {
 
 	@Autowired
@@ -44,15 +51,19 @@ public class UserTest {
 	private TestEntityManager entityManager;
 
 	@Test
+	@Order(1)
 	public void createRoleTesting() {
-		Role roleAdmin = new Role("ROLE_ADMIN");
-		Role roleUser = new Role("ROLE_USER");
-		entityManager.persist(roleAdmin);
-		entityManager.persist(roleUser);
+		if (!roleDao.existsByName("ROLE_ADMIN")) {
+			entityManager.persist(new Role("ROLE_ADMIN"));
+		}
+		if (!roleDao.existsByName("ROLE_USER")) {
+			entityManager.persist(new Role("ROLE_USER"));
+		}
 	}
 
 	@Test
 	@Transactional
+	@Order(2)
 	public void testRolesExist() {
 		boolean roleAdminExists = roleDao.existsByName("ROLE_ADMIN");
 		boolean roleUserExists = roleDao.existsByName("ROLE_USER");
@@ -63,6 +74,7 @@ public class UserTest {
 
 	@Test
 	// @Transactional
+	@Order(3)
 	public void testUserSaving() {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		// 83 Rihanna Fenty 1988-02-20 18:22:17.000 17
@@ -114,17 +126,42 @@ public class UserTest {
 		}
 	}
 
-	/*
-	 * @Test
-	 * public void testAssignRoleToUser() {
-	 * Optional<ExpenseUser> optUser = userDao.findByEmail("rihannafenty@mail.com");
-	 * Optional<Role> optRole = roleDao.findByName("ROLE_ADMIN");
-	 * ExpenseUser user = optUser.get();
-	 * user.addRole(optRole.get());
-	 * ExpenseUser updatedUser = userDao.save(user);
-	 * 
-	 * assertThat(updatedUser.getRoles().size() == 2);
-	 * }
-	 */
+
+	@Test
+	@Order(4)
+	public void testAssignRoleToUser() {
+		ensureRoleExist();
+		ExpenseUser user = new ExpenseUser();
+		user.setEmail("rihannafenty@mail.com");
+		user.setName("Rihanna");
+		user.setSurname("Fenty");
+		user.setPassword(new BCryptPasswordEncoder().encode("rihanna1234"));
+		Role adminRole = roleDao.findByName("ROLE_ADMIN").orElseThrow();
+		user.addRole(adminRole);
+		ExpenseUser savedUser = userDao.save(user);
+		assertThat(savedUser.getRoles()).isNotEmpty();
+	}
+
+	@Test
+	@Order(5)
+	public void testUserAuthentication() {
+		String email = "akirakurosawa@sunbit.com";
+		String rawPassword = "kurosawa1234";
+		ExpenseUser user = userDao.findByEmail(email).orElse(null);
+		assertThat(user).isNotNull();
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		assertThat(encoder.matches(rawPassword, user.getPassword())).isTrue();
+	}
+
+	@Test
+	@Order(6)
+	public void testUserDeleting() {
+		String email = "akirakurosawa@sunbit.com";
+		ExpenseUser user = userDao.findByEmail(email).orElse(null);
+		assertThat(user).isNotNull();
+		Long id = user.getId();
+		userDao.delete(user);
+			   assertThat(userDao.findById(java.util.Objects.requireNonNull(id))).isEmpty();
+	}
 
 }

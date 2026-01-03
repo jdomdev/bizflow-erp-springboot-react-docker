@@ -1,14 +1,18 @@
+
 package io.sunbit.app.test.employee;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -18,13 +22,14 @@ import org.springframework.test.annotation.Rollback;
 import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IPositionDao;
 import io.sunbit.app.entity.Employee;
-import io.sunbit.app.entity.Expense;
 import io.sunbit.app.entity.Payroll;
 import io.sunbit.app.util.DateUtil;
 
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeTest {
 
 	@Autowired
@@ -33,52 +38,80 @@ public class EmployeeTest {
 	IPositionDao positionDao;
 
 	@Test
-	@DisplayName(value = "Test 1 -> test employee saving\n"
-			+ "1.1 - savedEmployee.isNotNull()\n"
-			+ "1.2 - savedEmployee.getId().isGreaterThan(0)\n")
+	@DisplayName("Test employee saving")
+	@Order(1)
 	public void testEmployeeSaving() {
-		List<Expense> expenses = new ArrayList<>();
 		List<Payroll> payrolls = new ArrayList<>();
-		// 1960-10-30 23:34:42', 25
 		Employee newEmployee = new Employee(
-				"Diego",
-				"Maradona",
-				DateUtil.formattingDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42)),
-				positionDao.findByNameIgnoreCase("Project Manager").get(),
-				"diegomaradona@mail.com",
-				expenses,
-				payrolls);
+			"Diego",
+			"Maradona",
+			DateUtil.formattingDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42)),
+			positionDao.findByNameIgnoreCase("Project Manager").get(),
+			"diegomaradona@mail.com",
+			payrolls);
 		Employee savedEmployee = employeeDao.save(newEmployee);
-
 		assertThat(savedEmployee).isNotNull();
 		assertThat(savedEmployee.getId()).isGreaterThan(0);
 	}
 
-	/*
-	 * @Test
-	 * public void testEmployeeUpdating() {
-	 * Optional<Employee> oldEmployee =
-	 * employeeDao.findByNameAndSurnameAllIgnoreCase("Diego", "Maradona");
-	 * 
-	 * // Test.
-	 * System.out.println("Old Employee --> " + oldEmployee.toString());
-	 * 
-	 * Employee updatedEmployee = null;
-	 * if (oldEmployee != null) {
-	 * Employee employeeToUp = new Employee(
-	 * // 56L,
-	 * "Diego",
-	 * "Maradona",
-	 * DateUtil.formattingDate(LocalDateTime.of(1978, 07, 22, 22, 35, 18)),
-	 * positionDao.findByNameIgnoreCase("devops").get(),
-	 * "diegomaradona@mail.com",
-	 * new ArrayList<Expense>(),
-	 * new ArrayList<Payroll>());
-	 * updatedEmployee = employeeDao.save(employeeToUp);
-	 * }
-	 * 
-	 * assertThat(updatedEmployee).isNotNull();
-	 * assertThat(updatedEmployee.getId()).isGreaterThan(0);
-	 * }
-	 */
+	@Test
+	@DisplayName("Test employee updating")
+	@Order(2)
+	public void testEmployeeUpdating() {
+		Employee employee = employeeDao.findByNameAndSurnameAllIgnoreCase("Diego", "Maradona").orElse(null);
+		assertThat(employee).isNotNull();
+		employee.setEmail("updatedmaradona@mail.com");
+		Employee updatedEmployee = employeeDao.save(employee);
+		assertThat(updatedEmployee.getEmail()).isEqualTo("updatedmaradona@mail.com");
+	}
+
+	@Test
+	@DisplayName("Test employee deleting")
+	@Order(3)
+	public void testEmployeeDeleting() {
+		Employee employee = employeeDao.findByNameAndSurnameAllIgnoreCase("Diego", "Maradona").orElse(null);
+		assertThat(employee).isNotNull();
+		Long id = employee.getId();
+		employeeDao.delete(employee);
+		assertThat(employeeDao.findById(id)).isEmpty();
+	}
+
+	@Test
+	@DisplayName("Test employee finding by id")
+	@Order(4)
+	public void testEmployeeFindingById() {
+		Employee employee = new Employee(
+			"Lionel",
+			"Messi",
+			DateUtil.formattingDate(LocalDateTime.of(1987, 6, 24, 0, 0, 0)),
+			positionDao.findByNameIgnoreCase("Developer").get(),
+			"lionelmessi@mail.com",
+			new ArrayList<>());
+		Employee savedEmployee = employeeDao.save(employee);
+		Employee foundEmployee = employeeDao.findById(savedEmployee.getId()).orElse(null);
+		assertThat(foundEmployee).isNotNull();
+		assertThat(foundEmployee.getName()).isEqualTo("Lionel");
+	}
+
+	@Test
+	@DisplayName("Test employee-payroll relation")
+	@Order(5)
+	public void testEmployeePayrollRelation() {
+		Employee employee = new Employee(
+			"Carlos",
+			"Tevez",
+			DateUtil.formattingDate(LocalDateTime.of(1984, 2, 5, 0, 0, 0)),
+			positionDao.findByNameIgnoreCase("Tester").get(),
+			"carlostevez@mail.com",
+			new ArrayList<>());
+		Employee savedEmployee = employeeDao.save(employee);
+		Payroll payroll = new Payroll();
+		payroll.setAmount(1000.0);
+		payroll.setPayrollDate(DateUtil.formattingDate(LocalDateTime.now()));
+		payroll.setEmployee(savedEmployee);
+		savedEmployee.getPayrolls().add(payroll);
+		employeeDao.save(savedEmployee);
+		assertThat(savedEmployee.getPayrolls()).isNotEmpty();
+		assertThat(savedEmployee.getPayrolls().get(0).getAmount()).isEqualTo(1000.0);
+	}
 }

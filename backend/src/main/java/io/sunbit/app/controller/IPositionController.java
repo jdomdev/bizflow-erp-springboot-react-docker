@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import io.sunbit.app.entity.Position;
 
-public interface IPositionController<Position> {
+public interface IPositionController {
 
 	public ResponseEntity<?> getAllPosition();
 

@@ -50,9 +50,10 @@ public class AuthenticationController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid AuthenticationRequest authRequest) {
 		try {
+			// Autenticación usando email como identificador único
 			Authentication authentication = authManager.authenticate(
-					new UsernamePasswordAuthenticationToken(
-							authRequest.getEmail(), authRequest.getPassword()));
+				new UsernamePasswordAuthenticationToken(
+					authRequest.getEmail(), authRequest.getPassword()));
 			ExpenseUser user = (ExpenseUser) authentication.getPrincipal();
 			String accessToken = jwtAuthUtil.generateAccessToken(user);
 			AuthenticationResponse authzResponse = new AuthenticationResponse(user.getEmail(), accessToken);

@@ -1,5 +1,7 @@
 package io.sunbit.app.util;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.security.jwt.JwtAuthenticationUtil;
 
+@Component
 public class EmployeeUtil {
 
 	@Autowired
@@ -22,7 +25,8 @@ public class EmployeeUtil {
 	public static Boolean existsInDb(Employee employee) {
 		boolean exists = false;
 		try {
-			if ((employeeDao.findById(employee.getId())) != null) {
+			Long employeeId = employee.getId();
+			if (employeeId != null && employeeDao.findById(employeeId).isPresent()) {
 				exists = true;
 			}
 		} catch (Exception e) {
