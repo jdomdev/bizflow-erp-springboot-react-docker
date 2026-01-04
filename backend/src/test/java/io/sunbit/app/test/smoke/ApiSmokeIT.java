@@ -32,15 +32,9 @@ class ApiSmokeIT extends AbstractApiIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Map<String, Object> body = response.getBody();
         assertThat(body).isNotNull();
-<<<<<<< HEAD
         assertThat(extractLongValue(body, "id")).isEqualTo(defaultEmployeeId);
         assertThat(body.get("email")).isEqualTo(DEFAULT_EMPLOYEE_EMAIL);
         assertThat(extractLongValue(body, "positionId")).isEqualTo(defaultPositionId);
-=======
-        assertThat(extractLongValue(body, "id")).isEqualTo(defaultEmployeeId);
-        assertThat(body.get("email")).isEqualTo(DEFAULT_EMPLOYEE_EMAIL);
-        assertThat(extractLongValue(body, "positionId")).isEqualTo(defaultPositionId);
->>>>>>> 7e68c41 (Improve JSON numeric type handling with extractLongValue helper)
     }
 
     @Test
@@ -57,11 +51,7 @@ class ApiSmokeIT extends AbstractApiIntegrationTest {
         assertThat(body).isNotEmpty();
         Map<String, Object> firstExpense = body.get(0);
         assertThat(firstExpense.get("concept")).isEqualTo("Team Lunch");
-<<<<<<< HEAD
         assertThat(extractLongValue(firstExpense, "expenseUserId")).isEqualTo(defaultUserId);
-=======
-        assertThat(extractLongValue(firstExpense, "expenseUserId")).isEqualTo(defaultUserId);
->>>>>>> 7e68c41 (Improve JSON numeric type handling with extractLongValue helper)
     }
 
     @Test
@@ -77,12 +67,7 @@ class ApiSmokeIT extends AbstractApiIntegrationTest {
         assertThat(body).isNotNull();
         assertThat(body).isNotEmpty();
         Map<String, Object> firstPayroll = body.get(0);
-<<<<<<< HEAD
         assertThat(extractLongValue(firstPayroll, "expenseUserId")).isEqualTo(defaultUserId);
         assertThat(extractLongValue(firstPayroll, "employeeId")).isEqualTo(defaultEmployeeId);
-=======
-        assertThat(extractLongValue(firstPayroll, "expenseUserId")).isEqualTo(defaultUserId);
-        assertThat(extractLongValue(firstPayroll, "employeeId")).isEqualTo(defaultEmployeeId);
->>>>>>> 7e68c41 (Improve JSON numeric type handling with extractLongValue helper)
     }
 }
