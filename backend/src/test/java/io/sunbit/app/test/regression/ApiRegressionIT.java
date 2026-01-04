@@ -103,7 +103,7 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(expenses).isNotNull();
         
         Map<String, Object> matching = expenses.stream()
-            .filter(expense -> ((Number) expense.get("id")).longValue() == defaultExpenseId)
+            .filter(expense -> extractLongValue(expense, "id") == defaultExpenseId)
             .findFirst()
             .orElseThrow(() -> new AssertionError("Expected expense with id " + defaultExpenseId + " not found"));
         
