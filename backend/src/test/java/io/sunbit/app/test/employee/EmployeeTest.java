@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -23,6 +24,7 @@ import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IPositionDao;
 import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Payroll;
+import io.sunbit.app.entity.Position;
 import io.sunbit.app.util.DateUtil;
 
 @ActiveProfiles("test")
@@ -42,11 +44,12 @@ public class EmployeeTest {
 	@Order(1)
 	public void testEmployeeSaving() {
 		List<Payroll> payrolls = new ArrayList<>();
+		Position position = createUniquePosition("saving");
 		Employee newEmployee = new Employee(
 			"Diego",
 			"Maradona",
 			DateUtil.formattingDate(LocalDateTime.of(1960, 10, 30, 23, 34, 42)),
-			positionDao.findByNameIgnoreCase("Project Manager").get(),
+			position,
 			"diegomaradona@mail.com",
 			payrolls);
 		Employee savedEmployee = employeeDao.save(newEmployee);
@@ -80,11 +83,12 @@ public class EmployeeTest {
 	@DisplayName("Test employee finding by id")
 	@Order(4)
 	public void testEmployeeFindingById() {
+		Position position = createUniquePosition("find-by-id");
 		Employee employee = new Employee(
 			"Lionel",
 			"Messi",
 			DateUtil.formattingDate(LocalDateTime.of(1987, 6, 24, 0, 0, 0)),
-			positionDao.findByNameIgnoreCase("Developer").get(),
+			position,
 			"lionelmessi@mail.com",
 			new ArrayList<>());
 		Employee savedEmployee = employeeDao.save(employee);
@@ -97,11 +101,12 @@ public class EmployeeTest {
 	@DisplayName("Test employee-payroll relation")
 	@Order(5)
 	public void testEmployeePayrollRelation() {
+		Position position = createUniquePosition("payroll");
 		Employee employee = new Employee(
 			"Carlos",
 			"Tevez",
 			DateUtil.formattingDate(LocalDateTime.of(1984, 2, 5, 0, 0, 0)),
-			positionDao.findByNameIgnoreCase("Tester").get(),
+			position,
 			"carlostevez@mail.com",
 			new ArrayList<>());
 		Employee savedEmployee = employeeDao.save(employee);
@@ -113,5 +118,11 @@ public class EmployeeTest {
 		employeeDao.save(savedEmployee);
 		assertThat(savedEmployee.getPayrolls()).isNotEmpty();
 		assertThat(savedEmployee.getPayrolls().get(0).getAmount()).isEqualTo(1000.0);
+	}
+
+	private Position createUniquePosition(String label) {
+		String uniqueName = "test-position-" + label + "-" + UUID.randomUUID();
+		Position position = new Position(uniqueName);
+		return positionDao.save(position);
 	}
 }
