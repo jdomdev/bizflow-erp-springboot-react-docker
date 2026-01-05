@@ -101,23 +101,12 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(listResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Map<String, Object>> expenses = listResponse.getBody();
         assertThat(expenses).isNotNull();
-<<<<<<< HEAD
         
         Map<String, Object> matching = expenses.stream()
             .filter(expense -> ((Number) expense.get("id")).longValue() == defaultExpenseId)
             .findFirst()
             .orElseThrow(() -> new AssertionError("Expected expense with id " + defaultExpenseId + " not found"));
         
-=======
-        Map<String, Object> matching = null;
-        for (Map<String, Object> expense : expenses) {
-            if (extractLongValue(expense, "id") == defaultExpenseId) {
-                matching = expense;
-                break;
-            }
-        }
-        assertThat(matching).isNotNull();
->>>>>>> 7e68c41 (Improve JSON numeric type handling with extractLongValue helper)
         assertThat(matching.get("concept")).isEqualTo("Team Lunch - Updated");
         assertThat(extractLongValue(matching, "expenseUserId")).isEqualTo(defaultUserId);
     }
@@ -181,13 +170,8 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
         assertThat(postDelete.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Map<String, Object>> expenses = postDelete.getBody();
         assertThat(expenses).isNotNull();
-        boolean stillPresent = false;
-        for (Map<String, Object> expense : expenses) {
-            if (extractLongValue(expense, "id") == temporaryExpenseId) {
-                stillPresent = true;
-                break;
-            }
-        }
+        boolean stillPresent = expenses.stream()
+            .anyMatch(expense -> extractLongValue(expense, "id") == temporaryExpenseId);
         assertThat(stillPresent).isFalse();
     }
 
@@ -218,11 +202,14 @@ class ApiRegressionIT extends AbstractApiIntegrationTest {
             LIST_TYPE);
 
         assertThat(listResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        List<Map<String, Object>> expenses = listResponse.getBody();
-        assertThat(expenses).isNotNull();
+        List<Map<String, Object>> payrolls = listResponse.getBody();
+        assertThat(payrolls).isNotNull();
 
-        Map<String, Object> matching = expenses.stream()
-            .filter(expense -> extractLongValue(expense, "id") == defaultExpenseId)
+        Map<String, Object> matching = payrolls.stream()
+            .filter(payroll -> extractLongValue(payroll, "id") == payrollId)
             .findFirst()
-            .orElseThrow(() -> new AssertionError("Expected expense with id " + defaultExpenseId + " not found"));
-            }
+            .orElseThrow(() -> new AssertionError("Expected payroll with id " + payrollId + " not found"));
+
+        assertThat(extractLongValue(matching, "employeeId")).isEqualTo(defaultEmployeeId);
+    }
+}
