@@ -9,12 +9,8 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,11 +23,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @ActiveProfiles("test")
 @SpringBootTest(
-    classes = AbstractApiIntegrationTest.IntegrationTestConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = "spring.main.allow-bean-definition-overriding=true")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -293,18 +287,4 @@ public abstract class AbstractApiIntegrationTest {
         return ((Number) value).longValue();
     }
 
-    @SpringBootConfiguration
-    @EnableAutoConfiguration
-    @ComponentScan(basePackages = "io.sunbit.app")
-    @EntityScan(basePackages = {
-        "io.sunbit.app.entity",
-        "io.sunbit.app.security.entity",
-        "io.sunbit.app.security.controller",
-        "io.sunbit.app.controller"})
-    @EnableJpaRepositories(basePackages = {
-        "io.sunbit.app.dao",
-        "io.sunbit.app.security.dao"})
-    static class IntegrationTestConfig {
-        // Shares application configuration for API integration tests
-    }
 }
