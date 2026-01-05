@@ -58,18 +58,6 @@ jobs:
           MAVEN_OPTS: "-Xmx1024m"
           DB_HOST: localhost
 
-      - name: Generate Coverage Report
-        run: ./mvnw -B -ntp jacoco:report
-        working-directory: backend
-
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./backend/target/site/jacoco/jacoco.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
-
       - name: Archive test results
         if: always()
         uses: actions/upload-artifact@v4
