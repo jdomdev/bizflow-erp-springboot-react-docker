@@ -110,8 +110,9 @@ class ExpenseTest {
 			"Nota de hotel",
 			LocalDateTime.of(2022, 4, 10, 12, 0),
 			120.0));
-		assertThat(expenseDao.findById(savedExpense.getId())).isPresent();
-		assertThat(expenseDao.findById(savedExpense.getId()).orElseThrow().getConcept()).isEqualTo("Hotel");
+		var foundExpense = expenseDao.findById(savedExpense.getId());
+		assertThat(foundExpense).isPresent();
+		assertThat(foundExpense.orElseThrow().getConcept()).isEqualTo("Hotel");
 	}
 
 	@Test
