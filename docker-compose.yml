@@ -166,6 +166,10 @@ services:
     container_name: erp-backend-test-container
     environment:
       SPRING_PROFILES_ACTIVE: test
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8083:8080"
     depends_on:

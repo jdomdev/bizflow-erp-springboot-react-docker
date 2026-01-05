@@ -52,8 +52,11 @@ public class UserControllerTest {
         testUser.setId(1L);
         testUser.setEmail("test@example.com");
         testUser.setPassword("password");
+        testUser.setName("Test");
+        testUser.setSurname("User");
 
         Role role = new Role();
+        role.setId(1L);
         role.setName("ROLE_USER");
         List<Role> roles = new ArrayList<>();
         roles.add(role);
@@ -67,8 +70,9 @@ public class UserControllerTest {
 
         mockMvc.perform(get("/api/v1/user/profile"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("test@example.com"))
-                .andExpect(jsonPath("$.roles[0]").value("ROLE_USER"));
+            .andExpect(jsonPath("$.email").value("test@example.com"))
+            .andExpect(jsonPath("$.name").value("Test"))
+            .andExpect(jsonPath("$.roleIds[0]").value(1));
     }
 
     @Test
@@ -80,6 +84,8 @@ public class UserControllerTest {
         ExpenseUser updatedUser = new ExpenseUser();
         updatedUser.setId(1L);
         updatedUser.setEmail("newemail@example.com");
+        updatedUser.setName("Test");
+        updatedUser.setSurname("User");
         updatedUser.setRoles(testUser.getRoles());
 
         when(userService.findByEmail("test@example.com")).thenReturn(Optional.of(testUser));
