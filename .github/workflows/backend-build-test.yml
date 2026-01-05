@@ -63,12 +63,12 @@ jobs:
         working-directory: backend
 
       - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        files: ./backend/target/site/jacoco/jacoco.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: false
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./backend/target/site/jacoco/jacoco.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
 
       - name: Archive test results
         if: always()
