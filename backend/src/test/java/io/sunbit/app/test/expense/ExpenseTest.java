@@ -1,36 +1,33 @@
-
 package io.sunbit.app.test.expense;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.UUID;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 
 import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IExpenseDao;
 import io.sunbit.app.dao.IPositionDao;
+import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Expense;
+import io.sunbit.app.entity.Position;
+import io.sunbit.app.security.dao.IRoleDao;
+import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
+import io.sunbit.app.security.entity.Role;
 import io.sunbit.app.util.DateUtil;
 
 @ActiveProfiles("test")
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE)
-@Rollback(false)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ExpenseTest {
+class ExpenseTest {
 
 	@Autowired
 	IExpenseDao expenseDao;
@@ -38,108 +35,110 @@ public class ExpenseTest {
 	IEmployeeDao employeeDao;
 	@Autowired
 	IPositionDao positionDao;
+	@Autowired
+	IUserDao userDao;
+	@Autowired
+	IRoleDao roleDao;
 
+	private ExpenseUser persistedUser;
 
-	@Test
-	@DisplayName("Test expense saving")
-	@Order(1)
-	public void testExpenseSaving() {
-		ExpenseUser expenseUser = new ExpenseUser();
-		expenseUser.setId(58L);
-		expenseUser.setName("Sylvester");
-		expenseUser.setSurname("Stewart");
-		expenseUser.setEmail("slystone@gmail.com");
-		expenseUser.setPassword("dummyPassword");
-		Expense newExpense = new Expense(
-			null,
-			"Taxi",
-			"Nota de taxi",
-			DateUtil.formattingDate(LocalDateTime.of(2022, 3, 12, 10, 24, 0)),
-			46.1,
-			expenseUser
-		);
-		Expense savedExpense = expenseDao.save(newExpense);
-		assertThat(savedExpense).isNotNull();
-		assertThat(savedExpense.getId()).isGreaterThan(0);
+	@BeforeEach
+	void setUp() {
+		Role role = roleDao.findByName("ROLE_USER").orElseGet(() -> roleDao.save(new Role("ROLE_USER")));
+		Position position = positionDao.save(new Position("QA Analyst"));
+		Employee employee = employeeDao.save(new Employee(
+			"Sylvester",
+			"Stewart",
+			LocalDateTime.of(1990, 1, 5, 0, 0),
+			position,
+			uniqueEmail(),
+			new ArrayList<>()));
+
+		ExpenseUser user = new ExpenseUser();
+		user.setName("Sylvester");
+		user.setSurname("Stewart");
+		user.setEmail(employee.getEmail());
+		user.setPassword("dummyPassword");
+		user.setEmployee(employee);
+		user.addRole(role);
+		persistedUser = userDao.save(user);
 	}
 
+	@Test
+	@DisplayName("Persists a new expense")
+	void saveExpensePersistsEntity() {
+		Expense savedExpense = expenseDao.save(createExpense(
+			"Taxi",
+			"Nota de taxi",
+			LocalDateTime.of(2022, 3, 12, 10, 24),
+			46.1));
+		assertThat(savedExpense.getId()).isNotNull();
+		assertThat(savedExpense.getExpenseUser().getId()).isEqualTo(persistedUser.getId());
+	}
 
 	@Test
-	@DisplayName("Test expense updating")
-	@Order(2)
-	public void testExpenseUpdating() {
-		ExpenseUser testUser = new ExpenseUser();
-		testUser.setId(58L);
-		Optional<Expense> optOldExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUser(
-			46.1,
-			DateUtil.formattingDate(LocalDateTime.of(2022, 3, 12, 10, 24, 0)),
+	@DisplayName("Updates an existing expense")
+	void updateExpenseChangesValues() {
+		Expense savedExpense = expenseDao.save(createExpense(
 			"Taxi",
-			testUser);
-		assertThat(optOldExpense).isPresent();
-		Expense expense = optOldExpense.get();
-		expense.setConcept("Taxi actualizado");
-		Expense updatedExpense = expenseDao.save(expense);
+			"Nota de taxi",
+			LocalDateTime.of(2022, 3, 12, 10, 24),
+			46.1));
+		savedExpense.setConcept("Taxi actualizado");
+		Expense updatedExpense = expenseDao.save(savedExpense);
 		assertThat(updatedExpense.getConcept()).isEqualTo("Taxi actualizado");
 	}
 
 	@Test
-	@DisplayName("Test expense deleting")
-	@Order(3)
-	public void testExpenseDeleting() {
-		ExpenseUser testUser = new ExpenseUser();
-		testUser.setId(58L);
-		Optional<Expense> optOldExpense = expenseDao.findByAmountAndExpenseDateAndConceptAndExpenseUser(
-			46.1,
-			DateUtil.formattingDate(LocalDateTime.of(2022, 3, 12, 10, 24, 0)),
-			"Taxi actualizado",
-			testUser);
-		assertThat(optOldExpense).isPresent();
-		Expense expense = optOldExpense.get();
-		Long id = expense.getId();
-		expenseDao.delete(expense);
+	@DisplayName("Deletes an expense")
+	void deleteExpenseRemovesEntity() {
+		Expense savedExpense = expenseDao.save(createExpense(
+			"Taxi",
+			"Nota de taxi",
+			LocalDateTime.of(2022, 3, 12, 10, 24),
+			46.1));
+		Long id = savedExpense.getId();
+		expenseDao.delete(savedExpense);
 		assertThat(expenseDao.findById(id)).isEmpty();
 	}
 
 	@Test
-	@DisplayName("Test expense finding by id")
-	@Order(4)
-	public void testExpenseFindingById() {
-		ExpenseUser expenseUser = new ExpenseUser();
-		expenseUser.setId(59L);
-		Expense expense = new Expense(
-			null,
+	@DisplayName("Finds an expense by id")
+	void findExpenseByIdReturnsEntity() {
+		Expense savedExpense = expenseDao.save(createExpense(
 			"Hotel",
 			"Nota de hotel",
-			DateUtil.formattingDate(LocalDateTime.of(2022, 4, 10, 12, 0, 0)),
-			120.0,
-			expenseUser
-		);
-		Expense savedExpense = expenseDao.save(expense);
-		Expense foundExpense = expenseDao.findById(savedExpense.getId()).orElse(null);
-		assertThat(foundExpense).isNotNull();
-		assertThat(foundExpense.getConcept()).isEqualTo("Hotel");
+			LocalDateTime.of(2022, 4, 10, 12, 0),
+			120.0));
+		assertThat(expenseDao.findById(savedExpense.getId())).isPresent();
+		assertThat(expenseDao.findById(savedExpense.getId()).orElseThrow().getConcept()).isEqualTo("Hotel");
 	}
 
 	@Test
-	@DisplayName("Test expense-user relation")
-	@Order(5)
-	public void testExpenseUserRelation() {
-		ExpenseUser expenseUser = new ExpenseUser();
-		expenseUser.setId(60L);
-		expenseUser.setName("Juan");
-		expenseUser.setSurname("Pérez");
-		expenseUser.setEmail("juanperez@gmail.com");
-		expenseUser.setPassword("dummyPassword");
-		Expense expense = new Expense(
-			null,
+	@DisplayName("Maintains the expense-user relation")
+	void saveExpenseKeepsUserRelation() {
+		Expense savedExpense = expenseDao.save(createExpense(
 			"Comida",
 			"Nota de comida",
-			DateUtil.formattingDate(LocalDateTime.of(2022, 5, 1, 14, 0, 0)),
-			30.0,
-			expenseUser
-		);
-		Expense savedExpense = expenseDao.save(expense);
+			LocalDateTime.of(2022, 5, 1, 14, 0),
+			30.0));
 		assertThat(savedExpense.getExpenseUser()).isNotNull();
-		assertThat(savedExpense.getExpenseUser().getEmail()).isEqualTo("juanperez@gmail.com");
+		assertThat(savedExpense.getExpenseUser().getEmail()).isEqualTo(persistedUser.getEmail());
+		assertThat(savedExpense.getExpenseUser().getRoles()).extracting(Role::getName).contains("ROLE_USER");
+	}
+
+	private Expense createExpense(String concept, String note, LocalDateTime expenseDate, double amount) {
+		return new Expense(
+			null,
+			concept,
+			note,
+			DateUtil.formattingDate(expenseDate),
+			amount,
+			persistedUser);
+	}
+
+	private String uniqueEmail() {
+		String token = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+		return "s.stewart_" + token + "@example.com";
 	}
 }
