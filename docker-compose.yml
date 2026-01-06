@@ -114,6 +114,7 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      # APP_JWT_SECRET is required for production - no default for security
       APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8181:8080"
@@ -147,7 +148,8 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      APP_JWT_SECRET: ${APP_JWT_SECRET}
+      # APP_JWT_SECRET has a default for dev convenience - override in production
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-dev6948fca3863629603d01d79794bcdb04ed5d85a69d00289c1e61d5290d335671}
     ports:
       - "8082:8080"
     depends_on:
@@ -180,7 +182,8 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      APP_JWT_SECRET: ${APP_JWT_SECRET}
+      # APP_JWT_SECRET has a default for test convenience - override in production
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-test49490a66ac01392ee5a1b2f4b38d67ab0e868d258d0b9b9ffbd565d094abed20}
     ports:
       - "8083:8080"
     depends_on:
@@ -296,7 +299,7 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      ${FRONTEND_DEPENDS_ON:-backend-prod}:
+      backend-prod:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
@@ -321,7 +324,7 @@ services:
     ports:
       - "8085:80"
     depends_on:
-      ${FRONTEND_DEPENDS_ON:-backend-dev}:
+      backend-dev:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
@@ -346,7 +349,7 @@ services:
     ports:
       - "8086:80"
     depends_on:
-      ${FRONTEND_DEPENDS_ON:-backend-test}:
+      backend-test:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
