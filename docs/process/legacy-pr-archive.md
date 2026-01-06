@@ -1,6 +1,6 @@
 # Archivo de Pull Requests Legado
 
-Esta nota documenta los pull requests generados por Copilot que permanecieron en borrador y se cerraron el 2026-01-05 para evitar volver a integrar código obsoleto en el proyecto. Cada PR hacía referencia a instantáneas antiguas del repositorio que chocan con el estado actual de la rama `dev`. Los hilos enlazados se reabrieron temporalmente para dejar un comentario de cierre que registrase el motivo.
+Esta nota documenta los pull requests generados por Copilot que permanecieron en borrador y se cerraron el 2026-01-05 para evitar volver a integrar código obsoleto en el proyecto. Cada PR hacía referencia a instantáneas antiguas del repositorio que chocan con el estado actual de la rama `dev`. Se prevé reabrir temporalmente los hilos enlazados para dejar un comentario de cierre que registre el motivo.
 
 | PR | Rama origen | Rama destino | Resolución | Notas |
 |----|--------------|--------------|------------|-------|
