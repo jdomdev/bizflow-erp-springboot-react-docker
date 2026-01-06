@@ -114,6 +114,7 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      # APP_JWT_SECRET is required for production - no default for security
       APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8181:8080"
@@ -147,7 +148,7 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      APP_JWT_SECRET: ${APP_JWT_SECRET}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-dev-jwt-secret-key-min-64-chars-long-for-hs512-algorithm-12345678901234567890}
     ports:
       - "8082:8080"
     depends_on:
@@ -180,7 +181,7 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      APP_JWT_SECRET: ${APP_JWT_SECRET}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-test-jwt-secret-key-min-64-chars-long-for-hs512-algorithm-12345678901234567890}
     ports:
       - "8083:8080"
     depends_on:
@@ -296,7 +297,7 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      ${FRONTEND_DEPENDS_ON:-backend-prod}:
+      backend-prod:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
@@ -321,7 +322,7 @@ services:
     ports:
       - "8085:80"
     depends_on:
-      ${FRONTEND_DEPENDS_ON:-backend-dev}:
+      backend-dev:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
@@ -346,7 +347,7 @@ services:
     ports:
       - "8086:80"
     depends_on:
-      ${FRONTEND_DEPENDS_ON:-backend-test}:
+      backend-test:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
