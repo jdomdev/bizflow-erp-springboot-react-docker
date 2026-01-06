@@ -142,6 +142,16 @@ docker compose --profile dev --profile prod up -d
 - Scripts SQL ejecutados automáticamente al crear contenedores
 - Passwords pre-encriptadas con bcrypt ($2a$ format)
 - Datos de ejemplo (empleados, posiciones, nóminas) cargados por defecto
+- Servicios efímeros `seed-expense-users-*` en los perfiles dev, test y prod que consumen [scripts/register_users.sh](scripts/register_users.sh) si está disponible el archivo de semillas
+
+#### 📁 Seeds de usuarios de gastos
+- Crea la carpeta [scripts/secrets](scripts/secrets) (gitignored) y prepara el archivo [scripts/secrets/register_users_payloads.jsonl](scripts/secrets/register_users_payloads.jsonl) con una línea JSON por usuario. Ejemplo:
+
+```jsonl
+{"email":"analista.gastos@example.com","name":"Analista","surname":"Gastos","password":"<CONTRASENA>","employee_id":7}
+```
+- Define la variable REGISTER_USERS_SEED_FILE en tus archivos .env* apuntando a /workspace/scripts/secrets/register_users_payloads.jsonl. Esa ruta coincide con el volumen montado por Docker; al ejecutar el script directamente en tu máquina puedes omitir la variable y el script tomará [scripts/secrets/register_users_payloads.jsonl](scripts/secrets/register_users_payloads.jsonl) automáticamente.
+- Si el archivo no existe, los contenedores seed-expense-users-* continuarán sin bloquear el arranque pero dejarán un aviso. Añade o actualiza el archivo cuando quieras poblar los usuarios de gastos.
 
 #### ✅ Healthchecks Integrados
 - Cada base de datos tiene healthcheck (`pg_isready`)
@@ -348,33 +358,4 @@ Variables de entorno y dependencias también usan estos nombres:
 **Importante:** Mantén los backups fuera del repositorio y realiza copias frecuentes antes de cualquier cambio mayor.
 
 ---
-
-## 📝 Session 6 Highlights (2025-12-10)
-
-- Deduplicated payroll table in PostgreSQL, ensuring only one record per employee and payroll date.
-- Created and verified database backups with datetime stamps using Docker and pg_dump.
-- Verified record counts for all main tables to ensure data integrity.
-- Committed granular changes to expenses_sample.sql, adding 100 new invented expenses and switching to expense_user_id references.
-- All commands and guides for Docker and database management are available in `docs/docker_commands_session_6.md`.
-
-### Key Docker Commands Used
-
-```bash
-# List all tables
-$ docker exec -it erp-db-container psql -U postgres -d erp_db -c "\dt"
-
-# List all payroll records
-$ docker exec -it erp-db-container psql -U postgres -d erp_db -c "SELECT * FROM payroll ORDER BY employee_id, payroll_date;"
-
-# Remove duplicates from payroll
-$ docker exec -it erp-db-container psql -U postgres -d erp_db -c "DELETE FROM payroll WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (PARTITION BY employee_id, payroll_date ORDER BY id DESC) AS rn FROM payroll) t WHERE t.rn > 1);"
-
-# Create a backup with datetime stamp
-$ docker exec -t erp-db-container pg_dump -U postgres -d erp_db > backups/erpdb_backup_$(date +%Y_%m_%d_%H%M%S).sql
-```
-
-For a full summary and all commands, see:
-- `docs/session_6/session_6_summary_2025_12_10.md`
-- `docs/docker_commands_session_6.md`
-
 ---

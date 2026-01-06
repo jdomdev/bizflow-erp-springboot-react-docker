@@ -67,9 +67,10 @@ services:
       - postgres_test_data:/var/lib/postgresql/data
       - ./sql/01_init_test.sql:/docker-entrypoint-initdb.d/01_init_test.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
+      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
       - ./sql/test:/docker-entrypoint-initdb.d/test:ro
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U erp_test_user" ]
+      test: [ "CMD-SHELL", "pg_isready -U erp_test_user -d erp_test_db" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -110,6 +111,9 @@ services:
     container_name: erp-backend-prod-container
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8181:8080"
@@ -124,8 +128,9 @@ services:
       start_period: 40s
     networks:
       bizflow_erp_network:
-        aliases:
-          - backend-prod
+          aliases:
+            - backend
+            - backend-prod
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
@@ -139,6 +144,9 @@ services:
     container_name: erp-backend-dev-container
     environment:
       SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8082:8080"
@@ -153,8 +161,9 @@ services:
       start_period: 40s
     networks:
       bizflow_erp_network:
-        aliases:
-          - backend-dev
+          aliases:
+            - backend
+            - backend-dev
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
@@ -185,8 +194,9 @@ services:
       start_period: 40s
     networks:
       bizflow_erp_network:
-        aliases:
-          - backend-test
+          aliases:
+            - backend
+            - backend-test
     restart: unless-stopped
     volumes:
       - ./backend/logs:/app/logs
@@ -243,6 +253,32 @@ services:
       - bizflow_erp_network
     restart: "no"
 
+  seed-expense-users-test:
+    profiles: ["test"]
+    image: alpine:3.19
+    container_name: erp-seed-expense-users-test
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    environment:
+      API_URL: http://backend-test:8080/api/v1/auth/signup
+      REGISTER_USERS_SEED_FILE: ${REGISTER_USERS_SEED_FILE:-}
+    volumes:
+      - ./scripts:/workspace/scripts:ro
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        apk add --no-cache bash curl >/dev/null 2>&1
+        if [ -n "${REGISTER_USERS_SEED_FILE}" ] || [ -f /workspace/scripts/secrets/register_users_payloads.jsonl ]; then
+          bash /workspace/scripts/register_users.sh
+        else
+          echo "REGISTER_USERS_SEED_FILE no definido y no existe scripts/secrets/register_users_payloads.jsonl; se omite el sembrado de usuarios."
+        fi
+    networks:
+      - bizflow_erp_network
+    restart: "no"
+
 
   # React Frontend (single container, configurable API URL)
 
@@ -260,8 +296,7 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      backend-prod:
-        condition: service_healthy
+      - ${FRONTEND_DEPENDS_ON}
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
       interval: 30s
@@ -285,8 +320,7 @@ services:
     ports:
       - "8085:80"
     depends_on:
-      backend-dev:
-        condition: service_healthy
+      - ${FRONTEND_DEPENDS_ON}
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
       interval: 30s
@@ -310,8 +344,7 @@ services:
     ports:
       - "8086:80"
     depends_on:
-      backend-test:
-        condition: service_healthy
+      - ${FRONTEND_DEPENDS_ON}
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
       interval: 30s
