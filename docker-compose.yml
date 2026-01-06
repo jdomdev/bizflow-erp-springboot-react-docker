@@ -321,7 +321,8 @@ services:
     ports:
       - "8085:80"
     depends_on:
-      - ${FRONTEND_DEPENDS_ON}
+      backend-dev:
+        condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
       interval: 30s
@@ -345,7 +346,8 @@ services:
     ports:
       - "8086:80"
     depends_on:
-      - ${FRONTEND_DEPENDS_ON}
+      backend-test:
+        condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
       interval: 30s
