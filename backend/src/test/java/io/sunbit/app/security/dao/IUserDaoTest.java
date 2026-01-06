@@ -29,8 +29,7 @@ import io.sunbit.app.security.entity.Role;
 
 @ActiveProfiles("test")
 @DataJpaTest
-// @Rollback(false)
-// @AutoConfigureTestDatabase(replace = Replace.NONE)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IUserDaoTest {
     @Autowired
     IRoleDao roleDao;
