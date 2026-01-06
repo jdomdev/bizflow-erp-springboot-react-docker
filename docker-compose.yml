@@ -110,6 +110,7 @@ services:
     container_name: erp-backend-prod-container
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8181:8080"
     depends_on:
@@ -138,6 +139,7 @@ services:
     container_name: erp-backend-dev-container
     environment:
       SPRING_PROFILES_ACTIVE: dev
+      APP_JWT_SECRET: ${APP_JWT_SECRET}
     ports:
       - "8082:8080"
     depends_on:
