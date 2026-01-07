@@ -13,7 +13,7 @@
 - **Test**: [sql/01_init_test.sql](../sql/01_init_test.sql) invoca [sql/test/00_master.sql](../sql/test/00_master.sql), reutilizando el mismo orden de prod/dev (esquema → catálogos → empleados completos → nóminas completas → bootstrap admin). Tras el arranque se deben registrar los usuarios de gastos vía API para habilitar posteriores cargas de gastos.
 
 ## Registro de expense users vía API
-- Una vez que el backend esté healthy, ejecuta `./scripts/register_users.sh` (o `./scripts/register_users_test.sh` para apuntar automáticamente al perfil test). El script consume `/api/v1/auth/signup`, crea los usuarios vinculados a los empleados existentes y deja las contraseñas hasheadas por la aplicación. Debes preparar un archivo JSON Lines con los payloads (por defecto se busca en `scripts/secrets/register_users_payloads.jsonl`, que está gitignored) o exportar la variable `REGISTER_USERS_SEED_FILE` apuntando a tu archivo externo.
+- Una vez que el backend esté healthy, ejecuta `./scripts/users/register_users.sh` (o `./scripts/users/register_users_test.sh` para apuntar automáticamente al perfil test). El script consume `/api/v1/auth/signup`, crea los usuarios vinculados a los empleados existentes y deja las contraseñas hasheadas por la aplicación. Debes preparar un archivo JSON Lines con los payloads (por defecto se busca en `scripts/secrets/register_users_payloads.jsonl`, que está gitignored) o exportar la variable `REGISTER_USERS_SEED_FILE` apuntando a tu archivo externo.
 - Si un correo ya existe, el script informa la omisión (HTTP 409) y continúa; solo aborta ante códigos inesperados.
 - En los perfiles `prod` y `dev` el compose lanza automáticamente los servicios `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan al backend y ejecutan el script con la URL interna (`http://backend-*:8080`). Si el archivo de semillas no está disponible dentro del volumen (`scripts/secrets/register_users_payloads.jsonl` o el que indiques mediante `REGISTER_USERS_SEED_FILE`), el servicio se omite sin bloquear el arranque. El script sigue siendo idempotente: ignora respuestas 409 cuando los usuarios ya existen.
 
@@ -28,4 +28,4 @@ docker compose exec <db-container> psql -U postgres -d <dbname> -f /docker-entry
 ## Consideraciones operativas
 - Prod y dev conservan datos entre reinicios; los masters solo se ejecutan cuando el volumen está vacío.
 - Test se recrea en cada arranque, por lo que la secuencia completa se repite automáticamente.
-- Antes de ejecutar scripts que dependen de la API, como [scripts/init-expense-data.sh](../scripts/init-expense-data.sh), verifica que el backend esté healthy.
+- Antes de ejecutar scripts que dependen de la API, como [scripts/data/init_expense_data.sh](../scripts/data/init_expense_data.sh), verifica que el backend esté healthy.

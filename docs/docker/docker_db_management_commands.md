@@ -13,7 +13,7 @@ Esta guía resume los comandos que permiten administrar las bases de datos del p
 
 ## Crear y restaurar backups
 - `docker exec erp-prod-db-container pg_dump -U erp_prod_user -d erp_prod_db -F c -Z 6 -f /tmp/prod_backup.dump` — Genera un dump comprimido dentro del contenedor.
-- `docker cp erp-prod-db-container:/tmp/prod_backup.dump backups/erp_db_backup_$(date +%Y%m%d_%H%M%S).dump` — Copia el dump al host y conserva el timestamp.
+- `docker cp erp-prod-db-container:/tmp/prod_backup.dump backups/prod/erp_prod_db_backup_$(date +%Y%m%d_%H%M%S).dump` — Copia el dump al host y conserva el timestamp.
 - `docker exec erp-dev-db-container pg_restore -U erp_dev_user -d erp_dev_db /tmp/prod_backup.dump` — Restaura un dump en la base dev (requerido: copiar el archivo antes con `docker cp`).
 - `docker exec erp-dev-db-container pg_restore -l /tmp/prod_backup.dump` — Lista el contenido de un dump sin restaurarlo.
 
