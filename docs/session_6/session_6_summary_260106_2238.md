@@ -13,7 +13,7 @@
 2. **Actualización de la rama fix/docker-compose-jwt-secret**
    - Se añadieron placeholders de `FRONTEND_DEPENDS_ON` en [.env.example](../../.env.example) y se ajustaron las dependencias de los servicios frontend en [docker-compose.yml](../../docker-compose.yml).
    - Se creó el commit `feat(docker): allow configuring frontend dependency via env var`, se resolvió el desfase con el remoto mediante `git pull --rebase origin fix/docker-compose-jwt-secret` y se empujó la rama.
-   - Tras el push se confirmó la fusión múltiple de sub-PRs (#49, #50, #51) que introducen los valores por defecto de `APP_JWT_SECRET` para dev/test, revierte el uso de `FRONTEND_DEPENDS_ON` en `depends_on` y eliminan documentación ajena (commit fbb0945 quedó revertido por incompatibilidad con Docker Compose).
+   - Tras el push se confirmó la fusión múltiple de sub-PRs (#49, #50, #51) que introducen los valores por defecto de `APP_JWT_SECRET` para dev/test. Estas sub-PRs también revierten el uso de `FRONTEND_DEPENDS_ON` en `depends_on` y eliminan documentación ajena (el commit fbb0945 quedó revertido por incompatibilidad con Docker Compose).
 
 3. **Documentación y comunicación**
    - Se redactó una descripción larga en inglés para la nueva PR y se entregó la versión en castellano, asegurando que los revisores entiendan el impacto del cambio en `FRONTEND_DEPENDS_ON` y los ajustes de secretos JWT.
