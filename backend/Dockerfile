@@ -1,40 +1,36 @@
-# Multi-stage build for backend
-# Stage 1: Build
-FROM maven:3.9.5-eclipse-temurin-21-alpine AS builder
+# syntax=docker/dockerfile:1.5
 
-WORKDIR /app
+ARG BACKEND_BUILDER_IMAGE=bizflow/backend-builder:local
+ARG BACKEND_RUNTIME_IMAGE=bizflow/backend-runtime:local
 
-# Copy pom.xml and download dependencies
-COPY pom.xml .
-RUN mvn dependency:go-offline
+FROM ${BACKEND_BUILDER_IMAGE} AS builder
 
-# Copy source code
+WORKDIR /workspace
+
+# Preload Maven wrapper and project metadata for dependency resolution
+COPY .mvn ./.mvn
+COPY mvnw ./mvnw
+COPY pom.xml ./
+RUN chmod +x mvnw \
+  && ./mvnw -B -ntp dependency:go-offline
+
+# Copy source code and build the executable JAR
 COPY src ./src
+RUN ./mvnw -B -ntp clean package -DskipTests
 
-# Build application
-RUN mvn clean package -DskipTests
+FROM ${BACKEND_RUNTIME_IMAGE}
 
-# Stage 2: Runtime
-FROM eclipse-temurin:21-jre-alpine
+USER root
 
-WORKDIR /app
+# Copy the application artifact produced in the builder stage
+COPY --from=builder /workspace/target/bizflowerp-*.jar /app/app.jar
+RUN chown app:app /app/app.jar
 
-# Install curl for health checks
-RUN apk add --no-cache curl
+USER app
 
-# Copy JAR from builder stage
-COPY --from=builder /build/backend/bizflowerp-*.jar app.jar
-
-# Create non-root user
-RUN addgroup -g 1000 spring && adduser -D -u 1000 -G spring spring
-USER spring
-
-# Expose port
 EXPOSE 8080
 
-# Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD curl -f http://localhost:8080/actuator/health || exit 1
 
-# Run application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
