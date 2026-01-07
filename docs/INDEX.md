@@ -12,6 +12,7 @@ Este índice enumera todos los archivos Markdown disponibles en la carpeta docs/
   - [docker/docker_commands_overview.md](docker/docker_commands_overview.md)
   - [docker/docker_commands_session6.md](docker/docker_commands_session6.md)
   - [docker/docker_db_management_commands.md](docker/docker_db_management_commands.md)
+  - [docker/docker_images_centralization_plan.md](docker/docker_images_centralization_plan.md)
   - [docker/fix_docker_cleanup.md](docker/fix_docker_cleanup.md)
 - entity/
   - [entity/employee-entity-join-vs-list-20251211-0935.md](entity/employee-entity-join-vs-list-20251211-0935.md)
@@ -114,4 +115,4 @@ Este índice enumera todos los archivos Markdown disponibles en la carpeta docs/
   - [spring/security_spring_crypto.md](spring/security_spring_crypto.md)
   - [spring/spring_profiles_guide.md](spring/spring_profiles_guide.md)
 
-**Total de documentos:** 92
+**Total de documentos:** 93
