@@ -32,7 +32,7 @@
 - Revisar si los cambios introducidos por las PR #49, #50 y #51 requieren documentación adicional en README o guías de despliegue para evitar malentendidos sobre los nuevos valores por defecto de `APP_JWT_SECRET`.
 
 ## Dudas y decisiones
-- Queda por decidir si el propio documento de resumen se subirá mediante una PR específica o si se mergeará directamente en dev tras su revisión rápida; conviene valorarlo al inicio de la próxima jornada en función de la cola de revisiones.
+- Se ha optado por subir el propio documento de resumen mediante una PR específica (esta PR), en lugar de mergearlo directamente en dev tras una revisión rápida.
 
 ---
 Actualizado: 06/01/2026 22:38
