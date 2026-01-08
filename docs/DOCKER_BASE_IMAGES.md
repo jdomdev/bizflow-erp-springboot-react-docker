@@ -41,7 +41,7 @@ make up-test
 # Construir solo una imagen base específica
 make build-backend-builder
 make build-backend-runtime
-make build-frontend-builder  
+make build-frontend-builder
 make build-frontend-runtime
 
 # Construir solo backend (base + app)

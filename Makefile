@@ -99,6 +99,12 @@ build-apps: ## Construye las aplicaciones backend y frontend (requiere imágenes
 	@$(DOCKER_COMPOSE) build
 	@echo "$(COLOR_GREEN)✓ Aplicaciones construidas exitosamente$(COLOR_RESET)"
 
+.PHONY: build-apps-clean
+build-apps-clean: ## Construye las aplicaciones sin cache (para builds limpios)
+	@echo "$(COLOR_BLUE)==> Construyendo aplicaciones (sin cache)...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) build --no-cache
+	@echo "$(COLOR_GREEN)✓ Aplicaciones construidas exitosamente$(COLOR_RESET)"
+
 .PHONY: build-backend
 build-backend: build-backend-builder build-backend-runtime ## Construye solo el backend (base + app)
 	@echo "$(COLOR_BLUE)==> Construyendo aplicación backend...$(COLOR_RESET)"
