@@ -146,7 +146,7 @@ docker compose --profile dev up --build
 
 Ya no necesitas construir manualmente las base images con comandos `docker build` largos. El Makefile y el script lo hacen automáticamente.
 
-###  ✅ Integración con CI/CD
+### ✅ Integración con CI/CD
 
 El script puede ser integrado fácilmente en pipelines de CI/CD:
 
@@ -214,6 +214,8 @@ bizflow-erp/
 │       ├── backend-runtime.Dockerfile
 │       ├── frontend-builder.Dockerfile
 │       └── frontend-runtime.Dockerfile
+├── docs/
+│   └── DOCKER_BASE_IMAGES.md              # Esta documentación
 ├── scripts/
 │   └── docker/
 │       └── build-base-images.sh           # Script de construcción
