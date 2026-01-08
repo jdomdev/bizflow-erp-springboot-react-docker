@@ -26,7 +26,7 @@ Estas variables se exportarán desde imágenes base en `docker/base/` y podrán 
    - `docker/base/backend-runtime.Dockerfile`: JRE ligero, instalación opcional de `curl`, creación del usuario aplicativo.
    - `docker/base/frontend-builder.Dockerfile` y `docker/base/frontend-runtime.Dockerfile`: Etapas separadas para Node y Nginx.
 2. **Adaptar Dockerfiles existentes**
-   - Refactorizar `backend/Dockerfile` para que consuma las bases nuevas (`FROM base` + copia del JAR desde `/app/target`).
+   - Refactorizar `backend/Dockerfile` para que consuma las bases nuevas (`FROM base` + copia del JAR desde `/workspace/target`).
    - Actualizar `backend/Dockerfile.test` reutilizando la misma etapa builder.
    - Ajustar `frontend/Dockerfile` para heredar de las imágenes base y centralizar scripts de healthcheck y creación de usuario.
 3. **Actualizar docker-compose**
