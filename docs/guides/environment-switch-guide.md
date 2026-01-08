@@ -1,82 +1,43 @@
-# Sobre los contenedores frontend
 
-Cada entorno tiene su propio contenedor frontend:
+# Cambio de entorno con Docker Compose
 
-- **frontend-prod** (puerto 8080)
-- **frontend-dev** (puerto 8085)
-- **frontend-test** (puerto 8086)
+## Estado actual
 
-Solo se levanta el frontend del perfil activo. Los otros frontends no se ejecutan ni ocupan recursos ni puertos.
+Ya no es necesario modificar ni renombrar el archivo `.env` para alternar entre entornos. Cada perfil de Docker Compose (`prod`, `dev`, `test`) carga automáticamente su archivo de variables correspondiente (`.env.prod`, `.env.dev`, `.env.test`) gracias a la directiva `env_file:` en el `docker-compose.yml`.
 
-Cuando cambias de entorno y ejecutas `docker compose down -v`, se eliminan los contenedores y volúmenes del entorno anterior, asegurando que solo esté activo el entorno que necesitas.
+## ¿Qué debes hacer para cambiar de entorno?
 
-Esto permite trabajar de forma limpia y eficiente, sin contenedores innecesarios en segundo plano.
-
-# Flujo multi-entorno con tres frontends
-
-Ahora cada entorno (prod, dev, test) tiene su propio servicio frontend, backend y base de datos. Solo se levanta el frontend del entorno activo, así no ocupas recursos innecesarios.
-
-
-# Puertos de las bases de datos
-
-- **Producción:** PostgreSQL en el puerto 5442
-- **Desarrollo:** PostgreSQL en el puerto 5433
-- **Test:** PostgreSQL en el puerto 5434
-
-Para levantar cada entorno desde cero:
-
-1. Elimina todos los contenedores y volúmenes previos:
-	 ```bash
-	 docker compose down -v
-	 ```
+1. Detén los contenedores activos:
+	```bash
+	docker compose down
+	```
 2. Levanta el entorno deseado:
-	   - **Producción:**
-		   ```bash
-		   docker compose --profile prod up -d
-		   # Accede al frontend en http://localhost:8080
-		   # El backend-prod escucha en http://localhost:8181
-		   # La base de datos prod escucha en el puerto 5442
-		   ```
-	 - **Desarrollo:**
-		 ```bash
-		 docker compose --profile dev up -d
-		 # Accede al frontend en http://localhost:8085
-		 ```
-	 - **Test:**
-		 ```bash
-		 docker compose --profile test up -d
-		 # Accede al frontend en http://localhost:8086
-		 ```
+	- **Producción:**
+	  ```bash
+	  docker compose --profile prod up -d
+	  ```
+	- **Desarrollo:**
+	  ```bash
+	  docker compose --profile dev up -d
+	  ```
+	- **Test:**
+	  ```bash
+	  docker compose --profile test up -d
+	  ```
 
-Solo se ejecutan los servicios del perfil activo. Los otros frontends y backends no ocupan recursos ni puertos.
-# Configuración de la variable FRONTEND_DEPENDS_ON
+No es necesario modificar ni copiar archivos `.env`. Solo asegúrate de tener los archivos `.env.prod`, `.env.dev` y `.env.test` configurados localmente (y nunca subidos al repositorio).
 
-Para que el frontend dependa del backend correcto según el entorno, antes de levantar los servicios ejecuta en la terminal:
+## Notas de seguridad
+- El archivo `.env` ya no es necesario y puede eliminarse.
+- Mantén solo `.env.example` en el repositorio como plantilla.
+- Los archivos de entorno reales deben estar en tu máquina local y estar listados en `.gitignore`.
 
-- **Producción:**
-	```bash
-	export FRONTEND_DEPENDS_ON=backend-prod
-	docker compose --profile prod up -d
-	```
-- **Desarrollo:**
-	```bash
-	export FRONTEND_DEPENDS_ON=backend-dev
-	docker compose --profile dev up -d
-	```
-- **Test:**
-	```bash
-	export FRONTEND_DEPENDS_ON=backend-test
-	docker compose --profile test up -d
-	```
-
-Esto asegura que el frontend solo espere al backend correspondiente y evita errores de dependencias.
-
-# Guía para probar los tres entornos: prod, dev y test
-
-> Esta guía incluye también la secuencia de inicialización automatizada de la base de datos y la configuración de dependencias frontend-backend.
 ---
 
-## Secuencia recomendada de inicialización y prueba de entornos
+> **Actualización:**
+> El método antiguo de renombrar o editar `.env` ya no aplica. Docker Compose gestiona automáticamente el entorno según el perfil seleccionado.
+
+---
 
 1. **Detén cualquier contenedor previo:**
 	```bash
