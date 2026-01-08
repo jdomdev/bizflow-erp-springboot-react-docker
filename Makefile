@@ -96,7 +96,7 @@ build-frontend-runtime: ## Construye la imagen base de runtime del frontend (ngi
 .PHONY: build-apps
 build-apps: ## Construye las aplicaciones backend y frontend (requiere imágenes base)
 	@echo "$(COLOR_BLUE)==> Construyendo aplicaciones...$(COLOR_RESET)"
-	@$(DOCKER_COMPOSE) build --no-cache
+	@$(DOCKER_COMPOSE) build
 	@echo "$(COLOR_GREEN)✓ Aplicaciones construidas exitosamente$(COLOR_RESET)"
 
 .PHONY: build-backend
