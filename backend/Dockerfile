@@ -23,7 +23,7 @@ FROM ${BACKEND_RUNTIME_IMAGE}
 USER root
 
 # Copy the application artifact produced in the builder stage
-COPY --from=builder /workspace/target/bizflowerp-*.jar /app/app.jar
+COPY --from=builder /build/backend/bizflowerp-*.jar /app/app.jar
 RUN chown app:app /app/app.jar
 
 USER app

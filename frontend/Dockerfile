@@ -23,7 +23,7 @@ FROM ${FRONTEND_RUNTIME_IMAGE}
 USER root
 
 # Configuración de Nginx y artefactos estáticos generados
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /workspace/dist /usr/share/nginx/html
 RUN printf "OK" > /usr/share/nginx/html/health/index.html \
   && chown -R appuser:appuser /usr/share/nginx/html
