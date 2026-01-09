@@ -1,4 +1,4 @@
-docs/SESSION_6/SESSION_6_RESUMEN_25_12_05.md
+docs/sessions/2025-12/2025-12-05-6-summary.md
 # Funcionalidad y planificación ERP - 6 de diciembre de 2025
 
 ## Petición del usuario

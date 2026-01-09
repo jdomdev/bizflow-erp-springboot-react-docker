@@ -80,25 +80,15 @@ No es necesario modificar ni copiar archivos `.env`. Solo asegúrate de tener lo
 
 ### Organización actual de los scripts SQL
 
-- [sql/common](sql/common) agrupa piezas compartidas: [sql/common/01_schema.sql](sql/common/01_schema.sql) crea estructura y secuencias, [sql/common/02_positions.sql](sql/common/02_positions.sql) y [sql/common/03_roles.sql](sql/common/03_roles.sql) cargan catálogos, [sql/common/05_expense_admin_bootstrap.sql](sql/common/05_expense_admin_bootstrap.sql) registra los administradores Ada y Alan.
-- [sql/dev_prod](sql/dev_prod) aloja los volúmenes que solo necesitan desarrollo y producción: [sql/dev_prod/10_employees_full.sql](sql/dev_prod/10_employees_full.sql) carga la plantilla completa de empleados, [sql/dev_prod/20_payrolls_full.sql](sql/dev_prod/20_payrolls_full.sql) genera el histórico de nóminas y [sql/dev_prod/30_expenses_extended.sql](sql/dev_prod/30_expenses_extended.sql) mantiene el dataset extenso de gastos para cargas manuales.
-- [sql/test](sql/test) conserva únicamente [sql/test/00_master.sql](sql/test/00_master.sql); este master reutiliza los datasets de [sql/common](sql/common) y [sql/dev_prod](sql/dev_prod) para alinear el entorno de pruebas con dev/prod. Los usuarios de gastos adicionales se registran vía scripts que consumen la API.
-- [sql/dev/00_master.sql](sql/dev/00_master.sql) y [sql/prod/00_master.sql](sql/prod/00_master.sql) importan primero los archivos de [sql/common](sql/common), después los datasets de [sql/dev_prod](sql/dev_prod) y finalizan con el bootstrap administrativo.
-- [sql/test/00_master.sql](sql/test/00_master.sql) replica el patrón de prod/dev con empleados y nóminas completas; tras el arranque se ejecutan los scripts de API para poblar la tabla `expense_user` con contraseñas hasheadas.
-- Los perfiles `prod` y `dev` incluyen en `docker-compose.yml` los servicios efímeros `seed-expense-users-prod` y `seed-expense-users-dev`, que esperan a que el backend esté healthy y lanzan `scripts/users/register_users.sh` dentro de la red interna. El servicio comprueba que el archivo de semillas exista (`scripts/secrets/register_users_payloads.jsonl` o la ruta indicada en `REGISTER_USERS_SEED_FILE`); si falta, escribe un aviso y continúa con el arranque. El script es idempotente y omite usuarios ya existentes (HTTP 409).
-- La raíz de [sql](sql) solo conserva los entrypoints [sql/01_init_prod.sql](sql/01_init_prod.sql), [sql/01_init_dev.sql](sql/01_init_dev.sql) y [sql/01_init_test.sql](sql/01_init_test.sql); todo el contenido real se aloja en las carpetas por entorno descritas arriba.
-
-### Orden de ejecución por entorno
-
-- **Producción y Desarrollo**: [sql/01_init_prod.sql](sql/01_init_prod.sql) o [sql/01_init_dev.sql](sql/01_init_dev.sql) son los entrypoints montados por Docker; ambos llaman a su respectivo [00_master.sql](sql/prod/00_master.sql) o [00_master.sql](sql/dev/00_master.sql), que ejecutan, en orden, esquema común → catálogos comunes → empleados completos → nóminas completas → bootstrap de administradores.
-- **Test**: [sql/01_init_test.sql](sql/01_init_test.sql) enlaza con [sql/test/00_master.sql](sql/test/00_master.sql); el master ejecuta el mismo orden que prod/dev (esquema común → catálogos comunes → empleados completos → nóminas completas → bootstrap de administradores). Después, registra los usuarios de gastos mediante los scripts curl antes de cargar datasets adicionales.
-- **Datasets opcionales**: [sql/dev_prod/30_expenses_extended.sql](sql/dev_prod/30_expenses_extended.sql) queda fuera de los masters. Cárgalo manualmente cuando necesites el histórico completo.
-
-> Para cargar el dataset extendido de gastos en una base ya inicializada ejecuta:
-> ```bash
-> docker compose exec <db-container> psql -U postgres -d <dbname> -f /docker-entrypoint-initdb.d/dev_prod/30_expenses_extended.sql
-> ```
-> Sustituye `<db-container>` por el contenedor en uso (por ejemplo `erp-dev-db-container`) y `<dbname>` por la base objetivo.
+- [sql/common](../../sql/common) agrupa los artefactos compartidos: [sql/common/01_schema.sql](../../sql/common/01_schema.sql) define tablas base, [sql/common/02_positions.sql](../../sql/common/02_positions.sql) y [sql/common/03_roles.sql](../../sql/common/03_roles.sql) cargan catálogos, y [sql/common/05_expense_admin_bootstrap.sql](../../sql/common/05_expense_admin_bootstrap.sql) crea los administradores Ada y Alan.
+- [sql/dev_prod](../../sql/dev_prod) concentra los datasets voluminosos para dev/prod: [sql/dev_prod/10_employees_full.sql](../../sql/dev_prod/10_employees_full.sql), [sql/dev_prod/20_payrolls_full.sql](../../sql/dev_prod/20_payrolls_full.sql) y [sql/dev_prod/30_expenses_extended.sql](../../sql/dev_prod/30_expenses_extended.sql).
+- [sql/test](../../sql/test) reutiliza los recursos anteriores mediante [sql/test/00_master.sql](../../sql/test/00_master.sql) y mantiene alineado el entorno de pruebas.
+- [sql/dev/00_master.sql](../../sql/dev/00_master.sql) y [sql/prod/00_master.sql](../../sql/prod/00_master.sql) importan primero los scripts comunes y después los datasets específicos.
+- [sql/test/00_master.sql](../../sql/test/00_master.sql) replica el orden de prod/dev; tras su ejecución se registran los usuarios de gastos vía scripts API.
+- Los perfiles `prod` y `dev` incluyen servicios efímeros (`seed-expense-users-*`) que ejecutan `scripts/users/register_users.sh` dentro del contenedor; si el archivo `scripts/secrets/register_users_payloads.jsonl` (o la ruta indicada en `REGISTER_USERS_SEED_FILE`) no existe, se omite sin bloquear el arranque.
+- La raíz de [sql](../../sql) solo conserva los entrypoints [sql/01_init_prod.sql](../../sql/01_init_prod.sql), [sql/01_init_dev.sql](../../sql/01_init_dev.sql) y [sql/01_init_test.sql](../../sql/01_init_test.sql); el resto de datasets viven en las carpetas anteriores.
+- **Producción y Desarrollo:** [sql/01_init_prod.sql](../../sql/01_init_prod.sql) y [sql/01_init_dev.sql](../../sql/01_init_dev.sql) montan el entrypoint que delega en [sql/prod/00_master.sql](../../sql/prod/00_master.sql) o [sql/dev/00_master.sql](../../sql/dev/00_master.sql) para ejecutar esquema → catálogos → empleados → nóminas → bootstrap.
+- **Testing:** [sql/01_init_test.sql](../../sql/01_init_test.sql) invoca [sql/test/00_master.sql](../../sql/test/00_master.sql) con la misma secuencia; al completar, se pueden cargar datasets adicionales con `docker compose exec <db-container> psql -U postgres -d <dbname> -f /docker-entrypoint-initdb.d/dev_prod/30_expenses_extended.sql`.
 
 ---
 
