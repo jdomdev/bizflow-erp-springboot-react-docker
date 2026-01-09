@@ -57,7 +57,7 @@ x-seed-entrypoint: &seed-entrypoint
   - -c
   - |
     apk add --no-cache bash curl >/dev/null 2>&1
-    if [ -n "${REGISTER_USERS_SEED_FILE}" ] || [ -f /workspace/scripts/secrets/register_users_payloads.jsonl ]; then
+    if [ -n "$${REGISTER_USERS_SEED_FILE}" ] || [ -f /workspace/scripts/secrets/register_users_payloads.jsonl ]; then
       bash /workspace/scripts/users/register_users.sh
     else
       echo "REGISTER_USERS_SEED_FILE no definido y no existe scripts/secrets/register_users_payloads.jsonl; se omite el sembrado de usuarios."
