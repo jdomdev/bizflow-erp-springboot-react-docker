@@ -96,12 +96,13 @@ function ProfilePage() {
                 {isEditing ? (
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label htmlFor="profile-email" className="block text-sm font-medium text-slate-300 mb-2">
                                 Email
                             </label>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                                 <input
+                                    id="profile-email"
                                     type="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -112,12 +113,13 @@ function ProfilePage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label htmlFor="profile-password" className="block text-sm font-medium text-slate-300 mb-2">
                                 Nueva Contraseña (opcional)
                             </label>
                             <div className="relative">
                                 <Shield className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                                 <input
+                                    id="profile-password"
                                     type="password"
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -129,12 +131,13 @@ function ProfilePage() {
 
                         {formData.password && (
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
+                                <label htmlFor="profile-confirm-password" className="block text-sm font-medium text-slate-300 mb-2">
                                     Confirmar Contraseña
                                 </label>
                                 <div className="relative">
                                     <Shield className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                                     <input
+                                        id="profile-confirm-password"
                                         type="password"
                                         value={formData.confirmPassword}
                                         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
