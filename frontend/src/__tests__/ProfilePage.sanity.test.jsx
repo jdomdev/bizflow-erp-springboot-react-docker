@@ -10,7 +10,9 @@ vi.mock('../services/api', () => ({
   },
 }));
 
+// eslint-disable-next-line import/first
 import ProfilePage from '../pages/ProfilePage.jsx';
+// eslint-disable-next-line import/first
 import { userService } from '../services/api';
 
 describe('ProfilePage sanity suite', () => {
@@ -49,30 +51,15 @@ describe('ProfilePage sanity suite', () => {
 
     await user.click(screen.getByRole('button', { name: /Editar Perfil/i }));
 
-    const emailLabel = screen.getByText(/^Email$/);
-    const emailContainer = emailLabel.closest('div');
-    const emailInput = emailContainer?.querySelector('input');
-    if (!emailInput) {
-      throw new Error('No se encontró el campo de email');
-    }
+    const emailInput = screen.getByLabelText(/^Email$/i);
     await user.clear(emailInput);
     await user.type(emailInput, 'updated@example.com');
 
-    const passwordLabel = screen.getByText('Nueva Contraseña (opcional)');
-    const passwordContainer = passwordLabel.closest('div');
-    const passwordInput = passwordContainer?.querySelector('input');
-    if (!passwordInput) {
-      throw new Error('No se encontró el campo de contraseña');
-    }
+    const passwordInput = screen.getByLabelText(/Nueva Contraseña/i);
     const updatedPassword = `sanity-${Date.now().toString(36)}`;
     await user.type(passwordInput, updatedPassword);
 
-    const confirmLabel = await screen.findByText('Confirmar Contraseña');
-    const confirmContainer = confirmLabel.closest('div');
-    const confirmInput = confirmContainer?.querySelector('input');
-    if (!confirmInput) {
-      throw new Error('No se encontró el campo de confirmación');
-    }
+    const confirmInput = await screen.findByLabelText(/Confirmar Contraseña/i);
     await user.type(confirmInput, updatedPassword);
 
     await user.click(screen.getByRole('button', { name: /Guardar Cambios/i }));
