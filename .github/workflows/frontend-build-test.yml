@@ -61,14 +61,14 @@ jobs:
 
     - name: Archive build artifacts
       if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: frontend-build-${{ matrix.node-version }}
         path: frontend/dist/
     
     - name: Archive test coverage
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: frontend-coverage-${{ matrix.node-version }}
         path: frontend/coverage/
