@@ -52,7 +52,7 @@ jobs:
     - name: Run Tests
       run: |
         cd frontend
-        npm test -- --coverage --watchAll=false
+        npm test -- --watchAll=false
     
     - name: Run Sanity Suite
       run: |
