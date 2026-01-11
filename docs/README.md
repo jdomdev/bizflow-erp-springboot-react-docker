@@ -1,252 +1,106 @@
-# 📚 Documentación - Expense Note App
+# 📚 Documentación - BizFlow ERP
 
-**Última actualización:** 27 Noviembre 2025  
-**Status:** Sesión 4 - Implementación  
-
----
-
-## 📁 Estructura de Documentación
-
-La documentación está organizada en 4 categorías principales:
-
-```
-docs/
-├── 01-GUIDE/              📖 Guías de usuario y setup
-├── 02-ANALYSIS/           🔍 Análisis técnicos y problemas
-├── 03-ARCHITECTURE/       🏗️ Arquitectura y diseño
-└── 04-SETUP/              ⚙️ Configuración e inicialización
-```
+**Última actualización:** 06 Enero 2026  
+**Estado:** Sesión 6 - Roadmap y pruebas
 
 ---
 
-## 🗂️ Contenido por Carpeta
-
-### 📖 **01-GUIDE** - Guías de Usuario y Startup
-
-Documentos para empezar a usar la aplicación:
-
-| Archivo | Propósito | Lectura |
-|---------|-----------|---------|
-| **LAUNCH_GUIDE.md** | Cómo iniciar la aplicación | 5 min |
-| **QUICK_START_SESSION3.md** | Quick reference rápida | 5 min |
-| **WELCOME_SESSION4.md** | Bienvenida a Sesión 4 | 3 min |
-| **SESSION4_STARTUP_GUIDE.md** | Guía detallada de startup | 10 min |
-| **MAÑANA_EMPIEZA_AQUI.md** | Transición entre sesiones | 5 min |
-| **VSCODE_KEEP_BUTTON_EXPLAINED.md** | Explicación UI VS Code | 5 min |
-
-**Para empezar:** Lee primero `WELCOME_SESSION4.md` y luego `LAUNCH_GUIDE.md`
+## 🗂️ Directorios Principales
+- [sessions/README.md](sessions/README.md) — Cronología completa de sesiones con índices mensuales.
+- [guides](guides) — Guías operativas (entornos, inicialización de BD, testing).
+- [docker](docker) — Procedimientos Docker y ejecución en contenedores.
+- [planning](planning) — Planificación funcional y hojas de ruta.
+- [postman](postman) — Colecciones y guías para pruebas de API.
+- [json](json) — Datos de ejemplo para cargas masivas o pruebas.
+- [process](process) — Historial de procesos y sesiones legacy.
+- [spring](spring) — Referencias específicas de Spring Boot y seguridad.
 
 ---
 
-### 🔍 **02-ANALYSIS** - Análisis y Problemas Identificados
+## 📅 Sesiones Recientes
+- [sessions/2026-01/README.md](sessions/2026-01/README.md) — Avances de enero 2026 (sesión 6 en curso).
+- [sessions/2025-12/README.md](sessions/2025-12/README.md) — Cierre de fase 1 y guías de pruebas.
+- [sessions/2025-11/README.md](sessions/2025-11/README.md) — Consolidación de la sesión 5 y roadmap inicial.
+- [sessions/2024-11/README.md](sessions/2024-11/README.md) — Inicios de la migración y contexto histórico.
 
-Análisis detallados de problemas, soluciones y planes:
-
-| Archivo | Propósito | Lectura |
-|---------|-----------|---------|
-| **CLOUD_DEPLOYMENT_ANALYSIS.md** | Opciones cloud, costos, escalabilidad | 20 min |
-| **EXCEPTION_HANDLING_PLAN.md** | Plan excepciones backend | 15 min |
-| **SIGNUP_ISSUE_ANALYSIS.md** | Problema signup + 4 soluciones | 15 min |
-| **ANALISIS_DETALLADO.md** | Análisis técnico completo | 20 min |
-| **CAMBIOS_V2.md** | Cambios version 2 | 15 min |
-| **MIGRATION_SESSION_2025_11_26.md** | Resumen Sesión 2 | 20 min |
-| **SESSION2_FAQ.md** | Preguntas frecuentes Sesión 2 | 10 min |
-| **SESSION3_SUMMARY.md** | Resumen Sesión 3 | 15 min |
-
-**Para entender problemas:** `SIGNUP_ISSUE_ANALYSIS.md` → `EXCEPTION_HANDLING_PLAN.md`
+**Documento clave:** [sessions/2025-11/2025-11-26-2-migration.md](sessions/2025-11/2025-11-26-2-migration.md) concentra los cambios críticos de la migración inicial.
 
 ---
 
-### 🏗️ **03-ARCHITECTURE** - Arquitectura y Diseño
+## 🧭 Rutas Recomendadas
 
-Documentación técnica de la arquitectura:
+### 🚀 Primer día en el proyecto
+1. [sessions/2025-11/2025-11-27-5-start-here.md](sessions/2025-11/2025-11-27-5-start-here.md)
+2. [sessions/2025-11/2025-11-27-5-summary.md](sessions/2025-11/2025-11-27-5-summary.md)
+3. [sessions/2025-11/2025-11-27-5-architecture.md](sessions/2025-11/2025-11-27-5-architecture.md)
+4. [sessions/2025-11/2025-11-27-5-debugging-guide.md](sessions/2025-11/2025-11-27-5-debugging-guide.md)
 
-| Archivo | Propósito | Lectura |
-|---------|-----------|---------|
-| **ARCHITECTURE.md** | Arquitectura completa full-stack | 25 min |
-| **SECURITY.md** | Seguridad y autenticación | 15 min |
-| **DOCKER.md** | Docker setup y compose | 10 min |
-| **FEATURES_ROADMAP.md** | Features planeadas | 10 min |
-| **DOCUMENTACION_INDEX.md** | Índice anterior (legacy) | 5 min |
-| **INDEX.md** | Índice anterior (legacy) | 5 min |
+### 🔁 Repasar el roadmap actual
+1. [sessions/2025-11/2025-11-27-6-roadmap.md](sessions/2025-11/2025-11-27-6-roadmap.md)
+2. [sessions/2025-12/2025-12-06-6-phase-1-work-completed.md](sessions/2025-12/2025-12-06-6-phase-1-work-completed.md)
+3. [sessions/2026-01/2026-01-05-6-summary-2233.md](sessions/2026-01/2026-01-05-6-summary-2233.md)
 
-**Para entender el sistema:** `ARCHITECTURE.md` → `SECURITY.md` → `DOCKER.md`
-
----
-
-### ⚙️ **04-SETUP** - Configuración e Inicialización
-
-Guías técnicas para setup y configuración:
-
-| Archivo | Propósito | Lectura |
-|---------|-----------|---------|
-| **DATABASE_INITIALIZATION.md** | Inicialización BD + DataLoader | 15 min |
+### 🧪 Preparar entorno de pruebas
+- [guides/environment-switch-guide.md](guides/environment-switch-guide.md)
+- [guides/automated-db-initialization-sequence.md](guides/automated-db-initialization-sequence.md)
+- [docker/backend_tests_docker_guide.md](docker/backend_tests_docker_guide.md)
+- [guides/testing_strategy_explained_251215.md](guides/testing_strategy_explained_251215.md)
 
 ---
 
-## 🎯 Rutas de Lectura Recomendadas
-
-### 🚀 **Para Empezar (Primera Vez)**
-1. `01-GUIDE/WELCOME_SESSION4.md` - Introducción
-2. `01-GUIDE/LAUNCH_GUIDE.md` - Cómo iniciar
-3. `03-ARCHITECTURE/ARCHITECTURE.md` - Entender el sistema
-4. `04-SETUP/DATABASE_INITIALIZATION.md` - Setup datos
-
-### 🔧 **Para Desarrolladores**
-1. `03-ARCHITECTURE/ARCHITECTURE.md` - Estructura full-stack
-2. `02-ANALYSIS/EXCEPTION_HANDLING_PLAN.md` - Manejo errores
-3. `02-ANALYSIS/CLOUD_DEPLOYMENT_ANALYSIS.md` - Deploy
-4. `03-ARCHITECTURE/SECURITY.md` - Seguridad
-
-### 🐛 **Para Resolver Problemas**
-1. `01-GUIDE/QUICK_START_SESSION3.md` - Troubleshooting rápido
-2. `02-ANALYSIS/SIGNUP_ISSUE_ANALYSIS.md` - Si problema con signup
-3. `04-SETUP/DATABASE_INITIALIZATION.md` - Si problema con datos
-4. `02-ANALYSIS/EXCEPTION_HANDLING_PLAN.md` - Si error 500
-
-### ☁️ **Para Deploy en Cloud**
-1. `02-ANALYSIS/CLOUD_DEPLOYMENT_ANALYSIS.md` - Opciones y costos
-2. `03-ARCHITECTURE/DOCKER.md` - Docker preparation
-3. `03-ARCHITECTURE/ARCHITECTURE.md` - Entender dependencies
-4. `03-ARCHITECTURE/SECURITY.md` - Consideraciones seguridad
-
-### 📈 **Para Entender Evolución del Proyecto**
-1. `02-ANALYSIS/MIGRATION_SESSION_2025_11_26.md` - Sesión 2
-2. `02-ANALYSIS/SESSION3_SUMMARY.md` - Sesión 3
-3. `02-ANALYSIS/SESSION2_FAQ.md` - Preguntas respondidas
-4. `02-ANALYSIS/CAMBIOS_V2.md` - Cambios v2
+## 🔍 Referencias Destacadas
+- [INDEX.md](INDEX.md) — Índice maestro (102 documentos catalogados).
+- [sessions/2025-11/2025-11-27-5-index.md](sessions/2025-11/2025-11-27-5-index.md) — Navegación por roles y tiempos estimados.
+- [postman/postman_collection_guide.md](postman/postman_collection_guide.md) — Uso de la colección Postman oficial.
+- [planning/erp_functionality_251206.md](planning/erp_functionality_251206.md) — Plan funcional por módulos.
 
 ---
 
-## 📊 Estadísticas de Documentación
-
-| Métrica | Valor |
-|---------|-------|
-| Total documentos | 21 |
-| Documentos por categoría | 6 / 8 / 6 / 1 |
-| Tamaño total | ~250 KB |
-| Tiempo lectura completa | ~3-4 horas |
-| Tiempo lectura esencial | ~1-1.5 horas |
-
----
-
-## 🔗 Referencias Rápidas
-
-### 🚀 Empezar Aplicación
+## 🛠️ Ejecutar el Proyecto
 ```bash
-cd /home/bytetech/code/java/ExpenseNoteApp
+cd /home/bytetech/code/java/bizflow-erp-springboot-react-docker
 docker-compose up -d
 # Frontend: http://localhost
 # Backend: http://localhost:8080
 # BD: localhost:5433
 ```
 
-### 👤 Credenciales por Defecto
+### Logs y pruebas rápidas
+```bash
+docker-compose ps
+docker-compose logs backend | tail -50
+docker-compose exec backend mvn test
+```
+
+---
+
+## 👤 Credenciales por Defecto
 ```
 Username: admin
 Password: admin123
 Email: admin@expenseapp.com
 ```
 
-### 🔐 Datos Iniciales Automáticos
+### Datos iniciales
 ```
-Roles: ADMIN, USER, MANAGER (creados por DataLoader)
-Admin user: creado automáticamente en startup
-Posiciones: 3 ejemplos incluidas
-```
-
-### 🧪 Verificar BD
-```bash
-docker-compose exec postgres psql -U postgres -d expense_note_app
-SELECT * FROM role;
-SELECT * FROM "user";
-SELECT * FROM position;
+Roles: ADMIN, USER, MANAGER (cargados por DataLoader)
+Usuario admin: creado automáticamente en el arranque
+Posiciones: 3 ejemplos incluidos
 ```
 
 ---
 
-## 📝 Cómo Actualizar Documentación
-
-### Agregar Nuevo Documento
-1. Crea archivo en carpeta apropiada (01-04)
-2. Agrégalo a esta tabla de contenidos
-3. Usa el formato: `**ARCHIVO.md**` - Descripción
-
-### Actualizar Ruta de Lectura
-1. Edita sección "Rutas de Lectura Recomendadas"
-2. Mantén orden lógico
-3. Incluye tiempo estimado
-
-### Mover Documento
-1. Mueve archivo a nueva carpeta
-2. Actualiza referencias en este índice
-3. Verifica links en otros documentos
+## ✅ Checklist Esencial
+- [ ] Seguí la ruta "Primer día en el proyecto"
+- [ ] Revisé el roadmap vigente
+- [ ] Ejecuté docker-compose up -d y verifiqué servicios
+- [ ] Probé el login con admin/admin123
+- [ ] Revisé la colección Postman oficial
+- [ ] Consulté el índice maestro para profundizar
 
 ---
 
-## ✅ Checklist de Lectura
-
-Para verificar que has leído la documentación necesaria:
-
-- [ ] Leí `WELCOME_SESSION4.md`
-- [ ] Leí `ARCHITECTURE.md`
-- [ ] Leí `DATABASE_INITIALIZATION.md`
-- [ ] Ejecuté `docker-compose up -d`
-- [ ] Verifiqué que servicios están corriendo
-- [ ] Hice login con admin/admin123
-- [ ] Exploré frontend
-- [ ] Probé algún endpoint API
-
----
-
+¿Necesitas localizar un documento específico? Empieza por [INDEX.md](INDEX.md) o el índice mensual correspondiente en [sessions/README.md](sessions/README.md).
 ## 🎓 Glosario de Términos
 
-| Término | Definición | Referencia |
-|---------|-----------|-----------|
-| **DataLoader** | Bean que inicializa datos automáticamente | 04-SETUP/DATABASE_INITIALIZATION.md |
-| **JWT Token** | Token de autenticación | 03-ARCHITECTURE/SECURITY.md |
-| **Docker Volume** | Persistencia de datos en Docker | 03-ARCHITECTURE/DOCKER.md |
-| **Spring Security** | Framework seguridad en Spring | 03-ARCHITECTURE/SECURITY.md |
-| **Hibernate** | ORM para BD | 03-ARCHITECTURE/ARCHITECTURE.md |
-| **DTO** | Data Transfer Object | 02-ANALYSIS/EXCEPTION_HANDLING_PLAN.md |
-
----
-
-## 🆘 Soporte Rápido
-
-**¿Problema con...?**
-
-| Problema | Solución | Documento |
-|----------|----------|-----------|
-| No puedo hacer login | Revisa credenciales (admin/admin123) | 04-SETUP/DATABASE_INITIALIZATION.md |
-| BD no tiene datos | Ejecuta DataLoader (reinicia app) | 04-SETUP/DATABASE_INITIALIZATION.md |
-| Error 500 en API | Revisa logs, ver EXCEPTION_HANDLING_PLAN | 02-ANALYSIS/EXCEPTION_HANDLING_PLAN.md |
-| No entiendo arquitectura | Lee ARCHITECTURE.md | 03-ARCHITECTURE/ARCHITECTURE.md |
-| Quiero deployar | Lee CLOUD_DEPLOYMENT_ANALYSIS | 02-ANALYSIS/CLOUD_DEPLOYMENT_ANALYSIS.md |
-| Docker no inicia | Revisa DOCKER.md troubleshooting | 03-ARCHITECTURE/DOCKER.md |
-
----
-
-## 🔄 Historial de Cambios
-
-| Fecha | Cambio | Versión |
-|-------|--------|---------|
-| 2025-11-27 | Creado sistema de organización en carpetas | 1.0 |
-| 2025-11-27 | Agregado DATABASE_INITIALIZATION.md | 1.0 |
-| 2025-11-27 | Creado este índice maestro | 1.0 |
-
----
-
-## 📞 Información de Contacto
-
-**Proyecto:** Expense Note App  
-**Versión:** 1.1.0  
-**Rama Activa:** `fix/api-endpoint-authorization`  
-**Última Actualización:** 27 Noviembre 2025
-
----
-
-**¡Bienvenido a la documentación de Expense Note App!** 🚀
-
-Comienza con `01-GUIDE/WELCOME_SESSION4.md` →
 

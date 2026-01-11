@@ -23,9 +23,30 @@ export default defineConfig({
       },
     },
   },
+  // ✅ CONFIGURACIÓN DE VITEST
   test: {
+    globals: true,
     environment: 'jsdom',
-    setupFiles: './src/setupTests.js',
-    css: false,
+    setupFiles: './src/__tests__/setup.js',
+    css: true,
+    // ✅ Configuración de coverage
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      exclude: [
+        'node_modules/',
+        'src/__tests__/',
+        '**/*.config.js',
+        '**/dist/**',
+      ],
+      reportsDirectory: './coverage',
+      all: true,
+      lines: 60,
+      functions: 60,
+      branches: 60,
+      statements: 60,
+    },
+    // ✅ Reporter para CI
+    reporters: process.env.CI ? ['verbose', 'json'] : ['default'],
   },
 });

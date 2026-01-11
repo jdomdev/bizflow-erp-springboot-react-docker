@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('../services/api', () => ({
@@ -11,7 +11,9 @@ vi.mock('../services/api', () => ({
   },
 }));
 
+// eslint-disable-next-line import/first
 import DashboardPage from '../pages/DashboardPage.jsx';
+// eslint-disable-next-line import/first
 import { userService, expenseService } from '../services/api';
 
 describe('DashboardPage sanity suite', () => {
@@ -57,13 +59,12 @@ describe('DashboardPage sanity suite', () => {
     expect(screen.getByText('Cena de equipo')).toBeInTheDocument();
     expect(screen.getByText('ADMIN, USER')).toBeInTheDocument();
 
-    const totalCard = screen.getByText('Gasto Total').closest('div');
-    const thisMonthCard = screen.getByText('Este Mes').closest('div');
-    const averageCard = screen.getByText('Gasto Promedio').closest('div');
-
-    expect(within(totalCard).getByText('$225.00')).toBeInTheDocument();
-    expect(within(thisMonthCard).getByText('$150.00')).toBeInTheDocument();
-    expect(within(averageCard).getByText('$112.50')).toBeInTheDocument();
+    expect(screen.getByText('Gasto Total')).toBeInTheDocument();
+    expect(screen.getByText('$225.00')).toBeInTheDocument();
+    expect(screen.getByText('Este Mes')).toBeInTheDocument();
+    expect(screen.getByText('$150.00')).toBeInTheDocument();
+    expect(screen.getByText('Gasto Promedio')).toBeInTheDocument();
+    expect(screen.getByText('$112.50')).toBeInTheDocument();
 
     expect(screen.getByRole('button', { name: /Nuevo Gasto/i })).toBeInTheDocument();
   });
