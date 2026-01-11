@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.metadata/
 
 ### IntelliJ IDEA ###
 .idea
@@ -37,6 +38,8 @@ expensenoteapp.code-workspace
 # Configuration
 application.properties
 application.yml
+.env
+.env.*
 
 # Environment files
 .env*

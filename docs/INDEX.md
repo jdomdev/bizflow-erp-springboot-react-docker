@@ -1,205 +1,122 @@
-# Índice General de Documentación
+# Índice completo de documentación
 
-## Temáticas principales
-- [docker/](./docker/) — Guías y comandos Docker
-- [spring/](./spring/) — Guías Spring y seguridad
-- [entity/](./entity/) — Análisis/refactor de entidades
-- [sql/](./sql/) — Scripts y backups de ejemplo
-- [json/](./json/) — Datos de ejemplo en JSON
-- [planning/](./planning/) — Planificación y funcionalidades
+Este índice enumera todos los archivos Markdown disponibles en la carpeta docs/ y mantiene los enlaces relativos actualizados.
 
-## Guía de Perfiles Spring Boot
-- [SPRING_PROFILES_GUIDE.md](./spring/SPRING_PROFILES_GUIDE.md) — Activación de perfiles y multi-entorno en Spring Boot
-# 📚 DOCUMENTACIÓN COMPLETA - ExpenseNoteApp
+## Listado jerárquico
 
-## 🎯 Índice por Sesión
+- [INDEX.md](INDEX.md)
+- [README.md](README.md)
+- docker/
+  - [docker/backend_tests_docker_guide.md](docker/backend_tests_docker_guide.md)
+  - [docker/docker_base_images.md](docker/docker_base_images.md)
+  - [docker/docker_cleanup_recovery_guide.md](docker/docker_cleanup_recovery_guide.md)
+  - [docker/docker_commands_overview.md](docker/docker_commands_overview.md)
+  - [docker/docker_commands_session6.md](docker/docker_commands_session6.md)
+  - [docker/docker_db_management_commands.md](docker/docker_db_management_commands.md)
+  - [docker/docker_images_centralization_plan.md](docker/docker_images_centralization_plan.md)
+  - [docker/fix_docker_cleanup.md](docker/fix_docker_cleanup.md)
+- entity/
+  - [entity/employee-entity-join-vs-list-20251211-0935.md](entity/employee-entity-join-vs-list-20251211-0935.md)
+  - [entity/fix_bean_employeeutil.md](entity/fix_bean_employeeutil.md)
+- guides/
+  - [guides/automated-db-initialization-sequence.md](guides/automated-db-initialization-sequence.md)
+  - [guides/e2e_testing_guide_playwright_251216.md](guides/e2e_testing_guide_playwright_251216.md)
+  - [guides/environment-switch-guide.md](guides/environment-switch-guide.md)
+  - [guides/testing_strategy_explained_251215.md](guides/testing_strategy_explained_251215.md)
+- planning/
+  - [planning/erp_functionality_251206.md](planning/erp_functionality_251206.md)
+- postman/
+  - [postman/postman_collection_guide.md](postman/postman_collection_guide.md)
+- process/
+  - [process/legacy_pr_archive.md](process/legacy_pr_archive.md)
+  - [process/session_6_branch_cleanup.md](process/session_6_branch_cleanup.md)
+- researching/
+  - [researching/env_password_handling.md](researching/env_password_handling.md)
+  - [researching/foreign_keys_vs_entities.md](researching/foreign_keys_vs_entities.md)
+  - [researching/github_actions_analysis_251216.md](researching/github_actions_analysis_251216.md)
+  - [researching/kubernetes_adoption_report.md](researching/kubernetes_adoption_report.md)
+- sessions/
+  - [sessions/README.md](sessions/README.md)
+  - 2024-11/
+    - [sessions/2024-11/README.md](sessions/2024-11/README.md)
+    - [sessions/2024-11/2024-11-26-1-launch-guide.md](sessions/2024-11/2024-11-26-1-launch-guide.md)
+    - [sessions/2024-11/2024-11-26-1-quick-start.md](sessions/2024-11/2024-11-26-1-quick-start.md)
+    - [sessions/2024-11/2024-11-26-3-docker.md](sessions/2024-11/2024-11-26-3-docker.md)
+    - [sessions/2024-11/2024-11-26-3-features-roadmap.md](sessions/2024-11/2024-11-26-3-features-roadmap.md)
+    - [sessions/2024-11/2024-11-26-3-index.md](sessions/2024-11/2024-11-26-3-index.md)
+    - [sessions/2024-11/2024-11-26-3-security.md](sessions/2024-11/2024-11-26-3-security.md)
+    - [sessions/2024-11/2024-11-26-5-file-manifest-v110.md](sessions/2024-11/2024-11-26-5-file-manifest-v110.md)
+    - [sessions/2024-11/2024-11-26-5-release-notes-v110.md](sessions/2024-11/2024-11-26-5-release-notes-v110.md)
+  - 2025-11/
+    - [sessions/2025-11/README.md](sessions/2025-11/README.md)
+    - [sessions/2025-11/2025-11-26-2-migration.md](sessions/2025-11/2025-11-26-2-migration.md)
+    - [sessions/2025-11/2025-11-27-1-manana-empieza-aqui.md](sessions/2025-11/2025-11-27-1-manana-empieza-aqui.md)
+    - [sessions/2025-11/2025-11-27-1-quick-start.md](sessions/2025-11/2025-11-27-1-quick-start.md)
+    - [sessions/2025-11/2025-11-27-1-startup-guide.md](sessions/2025-11/2025-11-27-1-startup-guide.md)
+    - [sessions/2025-11/2025-11-27-1-vscode-keep-button-explained.md](sessions/2025-11/2025-11-27-1-vscode-keep-button-explained.md)
+    - [sessions/2025-11/2025-11-27-1-welcome.md](sessions/2025-11/2025-11-27-1-welcome.md)
+    - [sessions/2025-11/2025-11-27-2-analisis-detallado.md](sessions/2025-11/2025-11-27-2-analisis-detallado.md)
+    - [sessions/2025-11/2025-11-27-2-cambios-v2.md](sessions/2025-11/2025-11-27-2-cambios-v2.md)
+    - [sessions/2025-11/2025-11-27-2-cloud-deployment-analysis.md](sessions/2025-11/2025-11-27-2-cloud-deployment-analysis.md)
+    - [sessions/2025-11/2025-11-27-2-exception-handling-plan.md](sessions/2025-11/2025-11-27-2-exception-handling-plan.md)
+    - [sessions/2025-11/2025-11-27-2-faq.md](sessions/2025-11/2025-11-27-2-faq.md)
+    - [sessions/2025-11/2025-11-27-2-signup-issue-analysis.md](sessions/2025-11/2025-11-27-2-signup-issue-analysis.md)
+    - [sessions/2025-11/2025-11-27-2-summary.md](sessions/2025-11/2025-11-27-2-summary.md)
+    - [sessions/2025-11/2025-11-27-3-architecture.md](sessions/2025-11/2025-11-27-3-architecture.md)
+    - [sessions/2025-11/2025-11-27-3-documentacion-index.md](sessions/2025-11/2025-11-27-3-documentacion-index.md)
+    - [sessions/2025-11/2025-11-27-4-database-initialization.md](sessions/2025-11/2025-11-27-4-database-initialization.md)
+    - [sessions/2025-11/2025-11-27-5-architecture.md](sessions/2025-11/2025-11-27-5-architecture.md)
+    - [sessions/2025-11/2025-11-27-5-debugging-guide.md](sessions/2025-11/2025-11-27-5-debugging-guide.md)
+    - [sessions/2025-11/2025-11-27-5-documentation-complete.md](sessions/2025-11/2025-11-27-5-documentation-complete.md)
+    - [sessions/2025-11/2025-11-27-5-index.md](sessions/2025-11/2025-11-27-5-index.md)
+    - [sessions/2025-11/2025-11-27-5-overview.md](sessions/2025-11/2025-11-27-5-overview.md)
+    - [sessions/2025-11/2025-11-27-5-pull-request-description.md](sessions/2025-11/2025-11-27-5-pull-request-description.md)
+    - [sessions/2025-11/2025-11-27-5-readme-improved.md](sessions/2025-11/2025-11-27-5-readme-improved.md)
+    - [sessions/2025-11/2025-11-27-5-start-here.md](sessions/2025-11/2025-11-27-5-start-here.md)
+    - [sessions/2025-11/2025-11-27-5-summary-technical.md](sessions/2025-11/2025-11-27-5-summary-technical.md)
+    - [sessions/2025-11/2025-11-27-5-summary.md](sessions/2025-11/2025-11-27-5-summary.md)
+    - [sessions/2025-11/2025-11-27-6-roadmap.md](sessions/2025-11/2025-11-27-6-roadmap.md)
+    - [sessions/2025-11/2025-11-28-6-phase-1-testing-report.md](sessions/2025-11/2025-11-28-6-phase-1-testing-report.md)
+    - [sessions/2025-11/2025-11-28-6-roadmap-sessions-6-15.md](sessions/2025-11/2025-11-28-6-roadmap-sessions-6-15.md)
+    - [sessions/2025-11/2025-11-29-6-phase-1-implementation-docs.md](sessions/2025-11/2025-11-29-6-phase-1-implementation-docs.md)
+    - [sessions/2025-11/2025-11-30-6-summary.md](sessions/2025-11/2025-11-30-6-summary.md)
+  - 2025-12/
+    - [sessions/2025-12/README.md](sessions/2025-12/README.md)
+    - [sessions/2025-12/2025-12-01-6-summary.md](sessions/2025-12/2025-12-01-6-summary.md)
+    - [sessions/2025-12/2025-12-05-6-summary.md](sessions/2025-12/2025-12-05-6-summary.md)
+    - [sessions/2025-12/2025-12-05-6-summary-1.md](sessions/2025-12/2025-12-05-6-summary-1.md)
+    - [sessions/2025-12/2025-12-06-6-phase-1-quick-reference.md](sessions/2025-12/2025-12-06-6-phase-1-quick-reference.md)
+    - [sessions/2025-12/2025-12-06-6-phase-1-work-completed.md](sessions/2025-12/2025-12-06-6-phase-1-work-completed.md)
+    - [sessions/2025-12/2025-12-06-6-phase-2-walkthrough.md](sessions/2025-12/2025-12-06-6-phase-2-walkthrough.md)
+    - [sessions/2025-12/2025-12-06-6-summary.md](sessions/2025-12/2025-12-06-6-summary.md)
+    - [sessions/2025-12/2025-12-07-6-summary.md](sessions/2025-12/2025-12-07-6-summary.md)
+    - [sessions/2025-12/2025-12-09-6-summary.md](sessions/2025-12/2025-12-09-6-summary.md)
+    - [sessions/2025-12/2025-12-10-6-summary.md](sessions/2025-12/2025-12-10-6-summary.md)
+    - [sessions/2025-12/2025-12-11-6-summary-0035.md](sessions/2025-12/2025-12-11-6-summary-0035.md)
+    - [sessions/2025-12/2025-12-12-6-summary.md](sessions/2025-12/2025-12-12-6-summary.md)
+    - [sessions/2025-12/2025-12-13-6-summary-0113.md](sessions/2025-12/2025-12-13-6-summary-0113.md)
+    - [sessions/2025-12/2025-12-13-6-summary-2348.md](sessions/2025-12/2025-12-13-6-summary-2348.md)
+    - [sessions/2025-12/2025-12-14-6-summary-2330.md](sessions/2025-12/2025-12-14-6-summary-2330.md)
+    - [sessions/2025-12/2025-12-16-6-summary-0130.md](sessions/2025-12/2025-12-16-6-summary-0130.md)
+    - [sessions/2025-12/2025-12-17-6-summary-0032.md](sessions/2025-12/2025-12-17-6-summary-0032.md)
+    - [sessions/2025-12/2025-12-17-6-summary-2342.md](sessions/2025-12/2025-12-17-6-summary-2342.md)
+    - [sessions/2025-12/2025-12-19-6-summary-0049.md](sessions/2025-12/2025-12-19-6-summary-0049.md)
+    - [sessions/2025-12/2025-12-20-6-summary-0100.md](sessions/2025-12/2025-12-20-6-summary-0100.md)
+    - [sessions/2025-12/2025-12-22-6-summary-0040.md](sessions/2025-12/2025-12-22-6-summary-0040.md)
+    - [sessions/2025-12/2025-12-24-6-summary-0059.md](sessions/2025-12/2025-12-24-6-summary-0059.md)
+    - [sessions/2025-12/2025-12-25-6-summary-0115.md](sessions/2025-12/2025-12-25-6-summary-0115.md)
+    - [sessions/2025-12/2025-12-26-6-summary-0117.md](sessions/2025-12/2025-12-26-6-summary-0117.md)
+    - [sessions/2025-12/2025-12-27-6-summary-0043.md](sessions/2025-12/2025-12-27-6-summary-0043.md)
+    - [sessions/2025-12/2025-12-29-6-summary.md](sessions/2025-12/2025-12-29-6-summary.md)
+  - 2026-01/
+    - [sessions/2026-01/README.md](sessions/2026-01/README.md)
+    - [sessions/2026-01/2026-01-03-6-summary.md](sessions/2026-01/2026-01-03-6-summary.md)
+    - [sessions/2026-01/2026-01-05-6-summary-2233.md](sessions/2026-01/2026-01-05-6-summary-2233.md)
+    - [sessions/2026-01/2026-01-06-6-summary-2238.md](sessions/2026-01/2026-01-06-6-summary-2238.md)
+    - [sessions/2026-01/2026-01-07-6-summary-2326.md](sessions/2026-01/2026-01-07-6-summary-2326.md)
+    - [sessions/2026-01/2026-01-08-6-summary-2252.md](sessions/2026-01/2026-01-08-6-summary-2252.md)
+- spring/
+  - [spring/security_spring_crypto.md](spring/security_spring_crypto.md)
+  - [spring/spring_profiles_guide.md](spring/spring_profiles_guide.md)
 
-### 📌 Session 1 - Guía Inicial
-**Carpeta:** `SESSION_1_GUIDE/`
-
-Documentos para el onboarding inicial del proyecto:
-- [SESSION_1_LAUNCH_GUIDE.md](./SESSION_1_GUIDE/SESSION_1_LAUNCH_GUIDE.md) - Guía de lanzamiento
-- [SESSION_1_MAÑANA_EMPIEZA_AQUI.md](./SESSION_1_GUIDE/SESSION_1_MAÑANA_EMPIEZA_AQUI.md) - Inicio rápido
-- [SESSION_1_QUICK_START.md](./SESSION_1_GUIDE/SESSION_1_QUICK_START.md) - Setup rápido
-- [SESSION_1_WELCOME_SESSION4.md](./SESSION_1_GUIDE/SESSION_1_WELCOME_SESSION4.md) - Bienvenida
-- [SESSION_1_VSCODE_KEEP_BUTTON_EXPLAINED.md](./SESSION_1_GUIDE/SESSION_1_VSCODE_KEEP_BUTTON_EXPLAINED.md) - Tips VS Code
-- Y más...
-
-**Propósito:** Setupeo inicial, primeros pasos, configuración básica
-
----
-
-### 📊 Session 2 - Análisis Detallado
-**Carpeta:** `SESSION_2_ANALYSIS/`
-
-Análisis técnico, problemas encontrados y soluciones:
-- [SESSION_2_ANALISIS_DETALLADO.md](./SESSION_2_ANALYSIS/SESSION_2_ANALISIS_DETALLADO.md) - Análisis profundo
-- [SESSION_2_CAMBIOS_V2.md](./SESSION_2_ANALYSIS/SESSION_2_CAMBIOS_V2.md) - Versión 2 cambios
-- [SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md) - Deploy cloud
-- [SESSION_2_EXCEPTION_HANDLING_PLAN.md](./SESSION_2_ANALYSIS/SESSION_2_EXCEPTION_HANDLING_PLAN.md) - Manejo excepciones
-- [SESSION_2_MIGRATION_SESSION_2025_11_26.md](./SESSION_2_ANALYSIS/SESSION_2_MIGRATION_SESSION_2025_11_26.md) - Migración
-- [SESSION_2_SESSION2_FAQ.md](./SESSION_2_ANALYSIS/SESSION_2_SESSION2_FAQ.md) - FAQ Session 2
-- [SESSION_2_SESSION3_SUMMARY.md](./SESSION_2_ANALYSIS/SESSION_2_SESSION3_SUMMARY.md) - Resumen Session 3
-- [SESSION_2_SIGNUP_ISSUE_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_SIGNUP_ISSUE_ANALYSIS.md) - Análisis problemas signup
-
-**Propósito:** Documentar issues encontrados, análisis técnico, soluciones implementadas
-
----
-
-### 🏗️ Session 3 - Arquitectura
-**Carpeta:** `SESSION_3_ARCHITECTURE/`
-
-Diseño arquitectónico y decisiones técnicas:
-- [SESSION_3_ARCHITECTURE.md](./SESSION_3_ARCHITECTURE/SESSION_3_ARCHITECTURE.md) - Arquitectura general
-- [SESSION_3_DOCKER.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCKER.md) - Configuración Docker
-- [SESSION_3_DOCUMENTACION_INDEX.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCUMENTACION_INDEX.md) - Índice documentación
-- [SESSION_3_FEATURES_ROADMAP.md](./SESSION_3_ARCHITECTURE/SESSION_3_FEATURES_ROADMAP.md) - Roadmap features
-- [SESSION_3_INDEX.md](./SESSION_3_ARCHITECTURE/SESSION_3_INDEX.md) - Índice archivos
-- [SESSION_3_SECURITY.md](./SESSION_3_ARCHITECTURE/SESSION_3_SECURITY.md) - Seguridad
-
-**Propósito:** Diseño técnico, patrones arquitectónicos, decisiones de seguridad
-
----
-
-### ⚙️ Session 4 - Setup
-**Carpeta:** `SESSION_4_SETUP/`
-
-Guías de setup y configuración:
-- [SESSION_4_DATABASE_INITIALIZATION.md](./SESSION_4_SETUP/SESSION_4_DATABASE_INITIALIZATION.md) - Inicialización BD
-
-**Propósito:** Setup ambiente, configuración base de datos, inicialización
-
----
-
-### 🔐 Session 5 - Autenticación JWT
-**Carpeta:** `SESSION_5/`
-
-Documentación completa de implementación de autenticación:
-- [SESSION_5_SUMMARY.md](./SESSION_5/SESSION_5_SUMMARY.md) - Resumen Session 5 (600+ líneas)
-- [SESSION_5_ARCHITECTURE.md](./SESSION_5/SESSION_5_ARCHITECTURE.md) - Arquitectura JWT (900+ líneas)
-- [SESSION_5_DEBUGGING_GUIDE.md](./SESSION_5/SESSION_5_DEBUGGING_GUIDE.md) - Debugging (500+ líneas)
-- [SESSION_5_START_HERE.md](./SESSION_5/SESSION_5_START_HERE.md) - Inicio rápido (250+ líneas)
-- [SESSION_5_OVERVIEW.md](./SESSION_5/SESSION_5_OVERVIEW.md) - Resumen ejecutivo
-- [SESSION_5_README_IMPROVED.md](./SESSION_5/SESSION_5_README_IMPROVED.md) - README mejorado
-- [SESSION_5_INDEX.md](./SESSION_5/SESSION_5_INDEX.md) - Navegación por roles
-- [SESSION_5_DOCUMENTATION_COMPLETE.md](./SESSION_5/SESSION_5_DOCUMENTATION_COMPLETE.md) - Meta-documentación
-
-**Propósito:** JWT implementation, Spring Security, autenticación usuario
-
-**¿Por dónde empezar?**
-1. Lee: `SESSION_5_START_HERE.md` (5 min)
-2. Luego: `SESSION_5_INDEX.md` (elige tu rol)
-3. Profundiza: `SESSION_5_ARCHITECTURE.md` (si es técnico)
-
----
-
-### 🚀 Session 6 - Dashboard & Expense Management
-**Carpeta:** `SESSION_6/`
-
-Implementación de Dashboard y módulo de gastos:
-- [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Plan 4 fases (50+ ejemplos código)
-
-**Fases:**
-1. **Dashboard Development** - Vistas empleados/gastos
-2. **Expense CRUD** - Create, Read, Update, Delete
-3. **Reporting** - Reportes y estadísticas
-4. **Testing & Deployment** - Suite tests + Docker
-
-**¿Por dónde empezar?**
-- Lee: `SESSION_6_ROADMAP.md` para plan detallado
-
----
-
-## 📖 Guía por Rol
-
-### 👨‍💻 Developer Nuevo
-1. [SESSION_1_QUICK_START.md](./SESSION_1_GUIDE/SESSION_1_QUICK_START.md) - 5 min setup
-2. [SESSION_5_START_HERE.md](./SESSION_5/SESSION_5_START_HERE.md) - Arquitectura actual
-3. [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Plan siguiente
-
-### 🏗️ Arquitecto/Tech Lead
-1. [SESSION_3_ARCHITECTURE.md](./SESSION_3_ARCHITECTURE/SESSION_3_ARCHITECTURE.md) - Diseño actual
-2. [SESSION_5_ARCHITECTURE.md](./SESSION_5/SESSION_5_ARCHITECTURE.md) - Autenticación
-3. [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Próximas fases
-
-### 🐛 QA/Debugger
-1. [SESSION_5_DEBUGGING_GUIDE.md](./SESSION_5/SESSION_5_DEBUGGING_GUIDE.md) - Problemas comunes
-2. [SESSION_2_EXCEPTION_HANDLING_PLAN.md](./SESSION_2_ANALYSIS/SESSION_2_EXCEPTION_HANDLING_PLAN.md) - Manejo errores
-3. [SESSION_3_DOCKER.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCKER.md) - Docker troubleshooting
-
-### 📊 Project Manager
-1. [SESSION_5_OVERVIEW.md](./SESSION_5/SESSION_5_OVERVIEW.md) - Status Session 5
-2. [SESSION_6_ROADMAP.md](./SESSION_6/SESSION_6_ROADMAP.md) - Plan detallado Session 6
-3. Ver GitHub Projects Kanban para tasks
-
-### 🔒 Security/DevSecOps
-1. [SESSION_3_SECURITY.md](./SESSION_3_ARCHITECTURE/SESSION_3_SECURITY.md) - Seguridad actual
-2. [SESSION_5_ARCHITECTURE.md](./SESSION_5/SESSION_5_ARCHITECTURE.md) - JWT seguridad
-3. [SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md) - Deploy seguro
-
-### 🚀 DevOps/Infrastructure
-1. [SESSION_3_DOCKER.md](./SESSION_3_ARCHITECTURE/SESSION_3_DOCKER.md) - Configuración Docker
-2. [SESSION_4_DATABASE_INITIALIZATION.md](./SESSION_4_SETUP/SESSION_4_DATABASE_INITIALIZATION.md) - BD setup
-3. [SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md](./SESSION_2_ANALYSIS/SESSION_2_CLOUD_DEPLOYMENT_ANALYSIS.md) - Cloud deploy
-
----
-
-## 📊 Estadísticas
-
-| Métrica | Valor |
-|---------|-------|
-| Total Sesiones Documentadas | 6 |
-| Sesiones en Planificación | Session 7+ |
-| Total de Documentos | 30+ |
-| Líneas de Documentación | 4,300+ |
-| Sesión más Documentada | Session 5 (8 docs) |
-
----
-
-## 🔗 Referencias Rápidas
-
-### Configuración
-- Backend: `/backend/`
-- Frontend: `/frontend/`
-- Docker: `docker-compose.yml`
-- Maven: `backend/pom.xml`
-
-### Ejecución
-```bash
-# Con Docker (recomendado)
-docker-compose up -d
-
-# Sin Docker
-mvn clean install
-npm install && npm run dev
-```
-
-### Documentación
-- README: Proyecto root (`README.md`)
-- Todos los docs: En esta carpeta (`/docs/`)
-- Por Session: `SESSION_X_XXXXXX/`
-
----
-
-## 🎯 Próximos Pasos
-
-### Inmediatos (Session 6)
-- [ ] Dashboard development
-- [ ] Expense CRUD module
-- [ ] Reporting system
-- [ ] Test suite
-
-### Planificados (Session 7-10)
-- [ ] API documentation (OpenAPI/Swagger)
-- [ ] Frontend improvements
-- [ ] Performance optimization
-- [ ] CI/CD automation
-
-Ver `SESSION_6_ROADMAP.md` para detalles completos.
-
----
-
-**Última actualización:** 28 Noviembre 2025  
-**Status:** Documentación Session 5 completa, Session 6 en planificación
-
-Para navegación rápida por rol, ver sección "Guía por Rol" arriba.
+**Total de documentos:** 102

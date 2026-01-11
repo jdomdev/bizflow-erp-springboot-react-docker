@@ -67,6 +67,9 @@ frontend/
 │   ├── App.jsx             # Componente principal
 │   ├── main.jsx            # Entry point
 │   └── index.css           # Estilos globales
+├── config/
+│   └── nginx/
+│       └── nginx.conf      # Configuración para el contenedor Nginx
 ├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
@@ -146,6 +149,10 @@ http://localhost:8080/api/v1
 - `DELETE /expenses/{id}` - Eliminar gasto
 - `GET /payroll` - Obtener nóminas
 - `GET /employees` - Obtener empleados
+
+## 🌐 Despliegue en Nginx
+
+El contenedor runtime usa la configuración ubicada en `config/nginx/nginx.conf`. Si necesitas variaciones (por ejemplo, staging o producción), duplica ese archivo en el mismo directorio y actualiza el Dockerfile o los scripts de deploy para seleccionar la variante adecuada.
 
 ## 🧪 Testing
 

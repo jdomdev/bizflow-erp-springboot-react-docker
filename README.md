@@ -102,7 +102,7 @@ export SPRING_PROFILES_ACTIVE=dev
 
 # Producción
 export SPRING_PROFILES_ACTIVE=prod
-java -jar target/bizflowerp-1.1.0.jar
+java -jar build/backend/bizflowerp-1.1.0.jar
 ```
 
 #### 2. Argumento JVM (Para Despliegue)
@@ -142,7 +142,7 @@ docker compose --profile dev --profile prod up -d
 - Scripts SQL ejecutados automáticamente al crear contenedores
 - Passwords pre-encriptadas con bcrypt ($2a$ format)
 - Datos de ejemplo (empleados, posiciones, nóminas) cargados por defecto
-- Servicios efímeros `seed-expense-users-*` en los perfiles dev, test y prod que consumen [scripts/register_users.sh](scripts/register_users.sh) si está disponible el archivo de semillas
+- Servicios efímeros `seed-expense-users-*` en los perfiles dev, test y prod que consumen [scripts/users/register_users.sh](scripts/users/register_users.sh) si está disponible el archivo de semillas
 
 #### 📁 Seeds de usuarios de gastos
 - Crea la carpeta [scripts/secrets](scripts/secrets) (gitignored) y prepara el archivo [scripts/secrets/register_users_payloads.jsonl](scripts/secrets/register_users_payloads.jsonl) con una línea JSON por usuario. Ejemplo:
@@ -191,9 +191,9 @@ Si vienes de la configuración anterior con un solo entorno:
 ### Guías Completas
 
 - **📘 Guía de Perfiles Spring Boot:** [`docs/spring/SPRING_PROFILES_GUIDE.md`](./docs/spring/SPRING_PROFILES_GUIDE.md)
-- **🔄 Guía de Cambio de Entornos:** [`docs/guia_cambio_entornos.md`](./docs/guia_cambio_entornos.md)
+- **🔄 Guía de Cambio de Entornos:** [`docs/guides/environment-switch-guide.md`](./docs/guides/environment-switch-guide.md)
 - **🐳 Comandos Docker:** [`docs/docker/docker_commands_session_6.md`](./docs/docker/docker_commands_session_6.md)
-- **🧪 Testing con Docker:** [`docs/docker/README_TESTS_DOCKER.md`](./docs/docker/README_TESTS_DOCKER.md)
+- **🧪 Testing con Docker:** [`docs/docker/backend_tests_docker_guide.md`](./docs/docker/backend_tests_docker_guide.md)
 
 ## 🚀 Inicio Rápido
 
