@@ -1,0 +1,111 @@
+name: Frontend Build and Test
+
+on:
+  push:
+    branches: [ main, dev ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-build-test.yml'
+  pull_request:
+    branches: [ main, dev ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-build-test.yml'
+
+jobs:
+  build-and-test:
+    name: Build and Test on Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['18.x']  # Temporalmente limitado a 18.x - Se agregará 20.x después de configurar Vitest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint code
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Run tests
+        run: |
+          if grep -q '"test"' package.json; then
+            npm test
+          else
+            echo "Tests not yet configured - skipping"
+          fi
+        continue-on-error: true
+
+      - name: Generate coverage report
+        run: |
+          if grep -q '"test:coverage"' package.json; then
+            npm run test:coverage
+          else
+            echo "Coverage not yet configured - skipping"
+          fi
+        continue-on-error: true
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: frontend-build-node18
+          path: frontend/dist
+          retention-days: 7
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frontend-coverage-node18
+          path: frontend/coverage
+          retention-days: 7
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'  # Temporalmente usando 18.x
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Check for outdated packages
+        run: npm outdated
+        continue-on-error: true
