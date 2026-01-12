@@ -44,6 +44,9 @@ application.yml
 # Environment files
 .env*
 !.env.example
+!frontend/.env.dev
+!frontend/.env.prod
+!frontend/.env.test
 
 # Spring Boot sensitive config
 backend/src/main/resources/application-*.properties
