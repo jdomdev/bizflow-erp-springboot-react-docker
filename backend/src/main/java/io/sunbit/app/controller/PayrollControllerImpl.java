@@ -47,7 +47,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllPayroll() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(payrollService.findAll());
