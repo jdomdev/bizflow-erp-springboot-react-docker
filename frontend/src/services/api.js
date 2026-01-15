@@ -43,16 +43,16 @@ export const authService = {
 
 // Servicios de gastos
 export const expenseService = {
-  getAll: () => apiClient.get('/expense/'),
+  getAll: () => apiClient.get('/expense'),
   getById: (id) => apiClient.get(`/expense/${id}`),
-  create: (data) => apiClient.post('/expense/', data),
-  update: (id, data) => apiClient.put(`/expense/`, data),
+  create: (data) => apiClient.post('/expense', data),
+  update: (id, data) => apiClient.put('/expense', data),
   delete: (id) => apiClient.delete(`/expense/${id}`),
 };
 
 // Servicios de nómina
 export const payrollService = {
-  getAll: () => apiClient.get('/payroll/'),
+  getAll: () => apiClient.get('/payroll'),
   getMy: () => apiClient.get('/payroll/my'),
   getById: (id) => apiClient.get(`/payroll/${id}`),
   getByUserId: (userId) => apiClient.get(`/payroll/user/${userId}`),
@@ -61,7 +61,7 @@ export const payrollService = {
 
 // Servicios de empleados
 export const employeeService = {
-  getAll: () => apiClient.get('/employee/'),
+  getAll: () => apiClient.get('/employee'),
   getById: (id) => apiClient.get(`/employee/${id}`),
   update: (id, data) => apiClient.put(`/employee/${id}`, data),
 };

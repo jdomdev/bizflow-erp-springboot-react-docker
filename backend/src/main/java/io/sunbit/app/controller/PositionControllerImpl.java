@@ -29,7 +29,7 @@ public class PositionControllerImpl implements IPositionController {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllPosition() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(positionService.findAll());

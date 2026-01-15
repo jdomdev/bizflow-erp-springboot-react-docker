@@ -31,7 +31,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllExpense() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(expenseService.findAll());
