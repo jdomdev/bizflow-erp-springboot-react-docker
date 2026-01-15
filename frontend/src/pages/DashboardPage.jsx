@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   TrendingUp, 
   DollarSign, 
@@ -9,7 +10,10 @@ import {
   Calendar,
   MoreHorizontal,
   Eye,
-  Download
+  Download,
+  X,
+  Edit,
+  Trash2
 } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
@@ -17,6 +21,7 @@ import { useExpenseStore } from '../store/authStore';
 import { userService, expenseService } from '../services/api';
 
 function DashboardPage() {
+  const navigate = useNavigate();
   const expenses = useExpenseStore((state) => state.expenses);
   const setExpenses = useExpenseStore((state) => state.setExpenses);
   const [stats, setStats] = useState({
@@ -27,6 +32,9 @@ function DashboardPage() {
   });
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedExpense, setSelectedExpense] = useState(null);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [showActionsMenu, setShowActionsMenu] = useState(null);
 
   useEffect(() => {
     loadData();
@@ -84,6 +92,57 @@ function DashboardPage() {
   const monthlyChange = stats.lastMonth > 0 
     ? ((stats.thisMonth - stats.lastMonth) / stats.lastMonth * 100).toFixed(1)
     : 0;
+
+  // Función para exportar gastos a CSV
+  const handleExportCSV = () => {
+    if (expenses.length === 0) {
+      alert('No hay gastos para exportar');
+      return;
+    }
+    const headers = ['ID', 'Descripción', 'Monto', 'Fecha', 'Estado'];
+    const csvContent = [
+      headers.join(','),
+      ...expenses.map(exp => [
+        exp.id,
+        `"${exp.description?.replace(/"/g, '""') || ''}"`,
+        exp.amount,
+        new Date(exp.date).toLocaleDateString('es-ES'),
+        exp.status || 'approved'
+      ].join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `gastos_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+  };
+
+  // Función para ver detalle de un gasto
+  const handleViewExpense = (expense) => {
+    setSelectedExpense(expense);
+    setShowDetailModal(true);
+    setShowActionsMenu(null);
+  };
+
+  // Función para eliminar un gasto
+  const handleDeleteExpense = async (expense) => {
+    if (window.confirm(`¿Eliminar el gasto "${expense.description}"?`)) {
+      try {
+        await expenseService.delete(expense.id);
+        setExpenses(expenses.filter(e => e.id !== expense.id));
+        setShowActionsMenu(null);
+      } catch (error) {
+        console.error('Error eliminando gasto:', error);
+        alert('Error al eliminar el gasto');
+      }
+    }
+  };
+
+  // Función para editar (navegar a expenses con el gasto)
+  const handleEditExpense = (expense) => {
+    navigate('/expenses', { state: { editExpense: expense } });
+  };
 
   const statCards = [
     {
@@ -156,11 +215,11 @@ function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" size="sm">
+          <Button variant="secondary" size="sm" onClick={handleExportCSV}>
             <Download className="h-4 w-4" />
             <span className="hidden sm:inline">Exportar</span>
           </Button>
-          <Button variant="primary" size="sm">
+          <Button variant="primary" size="sm" onClick={() => navigate('/expenses')}>
             <PlusCircle className="h-4 w-4" />
             Nuevo Gasto
           </Button>
@@ -213,7 +272,7 @@ function DashboardPage() {
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-slate-800">Gastos Recientes</h2>
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/expenses')}>
             Ver todos
             <ArrowUpRight className="h-4 w-4" />
           </Button>
@@ -262,7 +321,7 @@ function DashboardPage() {
                           <p className="text-slate-700 font-medium">No hay gastos registrados</p>
                           <p className="text-sm text-slate-500">Comienza agregando tu primer gasto</p>
                         </div>
-                        <Button variant="primary" size="sm" className="mt-2">
+                        <Button variant="primary" size="sm" className="mt-2" onClick={() => navigate('/expenses')}>
                           <PlusCircle className="h-4 w-4" />
                           Agregar gasto
                         </Button>
@@ -307,13 +366,47 @@ function DashboardPage() {
                         {getStatusBadge(expense.status || 'approved')}
                       </td>
                       <td className="px-4 sm:px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-1">
-                          <button className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+                        <div className="flex items-center justify-end gap-1 relative">
+                          <button 
+                            className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                            onClick={() => handleViewExpense(expense)}
+                            title="Ver detalle"
+                          >
                             <Eye className="h-4 w-4" />
                           </button>
-                          <button className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+                          <button 
+                            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                            onClick={() => setShowActionsMenu(showActionsMenu === expense.id ? null : expense.id)}
+                            title="Más acciones"
+                          >
                             <MoreHorizontal className="h-4 w-4" />
                           </button>
+                          {/* Menú contextual */}
+                          <AnimatePresence>
+                            {showActionsMenu === expense.id && (
+                              <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-10 min-w-[140px]"
+                              >
+                                <button
+                                  onClick={() => handleEditExpense(expense)}
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
+                                >
+                                  <Edit className="h-4 w-4" />
+                                  Editar
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteExpense(expense)}
+                                  className="w-full px-4 py-2 text-left text-sm text-rose-600 hover:bg-rose-50 flex items-center gap-2"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                  Eliminar
+                                </button>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </div>
                       </td>
                     </motion.tr>
@@ -324,6 +417,99 @@ function DashboardPage() {
           </div>
         </Card>
       </motion.div>
+
+      {/* Modal de detalle de gasto */}
+      <AnimatePresence>
+        {showDetailModal && selectedExpense && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            onClick={() => setShowDetailModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-slate-800">Detalle del Gasto</h3>
+                <button
+                  onClick={() => setShowDetailModal(false)}
+                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <X className="h-5 w-5 text-slate-500" />
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl">
+                  <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                    <DollarSign className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Monto</p>
+                    <p className="text-2xl font-bold text-slate-800">
+                      ${selectedExpense.amount?.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-slate-500 mb-1">Descripción</p>
+                    <p className="font-medium text-slate-800">{selectedExpense.description}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500 mb-1">Estado</p>
+                    {getStatusBadge(selectedExpense.status || 'approved')}
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500 mb-1">Fecha</p>
+                    <p className="font-medium text-slate-800">
+                      {new Date(selectedExpense.date).toLocaleDateString('es-ES', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                      })}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500 mb-1">ID</p>
+                    <p className="font-medium text-slate-800">#{selectedExpense.id}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 mt-6">
+                <Button 
+                  variant="secondary" 
+                  size="sm" 
+                  className="flex-1"
+                  onClick={() => {
+                    setShowDetailModal(false);
+                    handleEditExpense(selectedExpense);
+                  }}
+                >
+                  <Edit className="h-4 w-4" />
+                  Editar
+                </Button>
+                <Button 
+                  variant="primary" 
+                  size="sm" 
+                  className="flex-1"
+                  onClick={() => setShowDetailModal(false)}
+                >
+                  Cerrar
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

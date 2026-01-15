@@ -44,9 +44,9 @@ application.yml
 # Environment files
 .env*
 !.env.example
-!frontend/.env.dev
-!frontend/.env.prod
-!frontend/.env.test
+frontend/.env.development
+frontend/.env.production
+frontend/.env.test
 
 # Spring Boot sensitive config
 backend/src/main/resources/application-*.properties
@@ -94,7 +94,3 @@ backups/
 *.sql
 !backend/src/test/resources/data-test.sql
 
-# Environment overrides (not committed)
-.env.dev
-.env.prod
-.env.test
