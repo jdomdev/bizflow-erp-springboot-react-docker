@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
+import { Eye, EyeOff } from 'lucide-react';
 
 function Input({
   label,
@@ -8,8 +9,13 @@ function Input({
   isLoading = false,
   containerClassName,
   icon: Icon,
+  type = 'text',
   ...inputProps
 }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const isPasswordType = type === 'password';
+  const inputType = isPasswordType ? (showPassword ? 'text' : 'password') : type;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -29,6 +35,7 @@ function Input({
           </div>
         )}
         <input
+          type={inputType}
           disabled={isLoading}
           className={clsx(
             'w-full rounded-xl border-2 py-3 text-slate-700 placeholder-slate-400 transition-all duration-200',
@@ -36,11 +43,26 @@ function Input({
             'border-slate-200 hover:border-slate-300 focus:border-blue-500',
             'focus:outline-none focus:ring-4 focus:ring-blue-500/10',
             'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-slate-100',
-            Icon ? 'pl-12 pr-4' : 'px-4',
+            Icon ? 'pl-12' : 'px-4',
+            isPasswordType ? 'pr-12' : (Icon ? 'pr-4' : ''),
             error && 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/10'
           )}
           {...inputProps}
         />
+        {isPasswordType && (
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
+            tabIndex={-1}
+          >
+            {showPassword ? (
+              <EyeOff className="h-5 w-5" />
+            ) : (
+              <Eye className="h-5 w-5" />
+            )}
+          </button>
+        )}
       </div>
       {error && (
         <motion.p
