@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,24 @@ import io.sunbit.app.service.PayrollServiceImpl;
 public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	@Autowired
 	private PayrollServiceImpl payrollService;
+
+	/**
+	 * Obtiene todas las nóminas del usuario autenticado.
+	 * Busca por expense_user_id Y por employee_id (si el usuario tiene empleado vinculado).
+	 * Esto cubre tanto freelances como empleados internos.
+	 */
+	@GetMapping("/my")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getMyPayrolls(Authentication authentication) {
+		try {
+			String email = authentication.getName();
+			return ResponseEntity.status(HttpStatus.OK).body(payrollService.findAllByUserEmail(email));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. Please, try again later. It is NOT possible to SHOW your payrolls.\"}");
+		}
+	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/")
