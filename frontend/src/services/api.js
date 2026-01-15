@@ -52,15 +52,18 @@ export const expenseService = {
 
 // Servicios de nómina
 export const payrollService = {
-  getAll: () => apiClient.get('/payroll'),
+  getAll: () => apiClient.get('/payroll/'),
+  getMy: () => apiClient.get('/payroll/my'),
   getById: (id) => apiClient.get(`/payroll/${id}`),
+  getByUserId: (userId) => apiClient.get(`/payroll/user/${userId}`),
+  getByEmployeeId: (employeeId) => apiClient.get(`/payroll/employee/${employeeId}`),
 };
 
 // Servicios de empleados
 export const employeeService = {
-  getAll: () => apiClient.get('/employees'),
-  getById: (id) => apiClient.get(`/employees/${id}`),
-  update: (id, data) => apiClient.put(`/employees/${id}`, data),
+  getAll: () => apiClient.get('/employee/'),
+  getById: (id) => apiClient.get(`/employee/${id}`),
+  update: (id, data) => apiClient.put(`/employee/${id}`, data),
 };
 
 // Servicios de usuario
