@@ -3,11 +3,14 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BarChart3,
+  Briefcase,
   CreditCard,
   LogOut,
   Menu,
   Settings,
   User,
+  UserCog,
+  Users,
   X,
   Home,
   Wallet,
@@ -40,10 +43,17 @@ function Layout() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const isAdmin = user?.roleId === 1;
+
   const menuItems = [
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
     { icon: CreditCard, label: 'Gastos', path: '/expenses' },
     { icon: Wallet, label: 'Nómina', path: '/payroll' },
+    ...(isAdmin ? [
+      { icon: Briefcase, label: 'Cargos', path: '/positions' },
+      { icon: Users, label: 'Empleados', path: '/employees' },
+      { icon: UserCog, label: 'Usuarios', path: '/users' },
+    ] : []),
     { icon: User, label: 'Perfil', path: '/profile' },
     { icon: Settings, label: 'Configuración', path: '/settings' },
   ];
