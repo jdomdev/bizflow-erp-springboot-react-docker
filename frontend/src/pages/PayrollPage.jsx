@@ -12,11 +12,15 @@ import {
   ChevronLeft,
   ChevronRight,
   Users,
-  UserCheck
+  UserCheck,
+  Plus,
+  Pencil,
+  Trash2,
+  Save
 } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
-import { payrollService, employeeService, userService } from '../services/api';
+import { payrollService, payrollAdminService, employeeService, userService } from '../services/api';
 import { useAuthStore } from '../store/authStore';
 
 function PayrollPage() {
@@ -30,6 +34,18 @@ function PayrollPage() {
   const [viewMode, setViewMode] = useState('mine'); // 'mine' or 'all' (admin only)
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(15);
+  
+  // CRUD State
+  const [showForm, setShowForm] = useState(false);
+  const [editingPayroll, setEditingPayroll] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [formData, setFormData] = useState({
+    employeeId: '',
+    amount: '',
+    payrollDate: ''
+  });
+  const [formErrors, setFormErrors] = useState({});
+  
   const [stats, setStats] = useState({
     totalPayrolls: 0,
     totalAmount: 0,
@@ -164,6 +180,99 @@ function PayrollPage() {
     link.click();
   };
 
+  // CRUD Functions
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.employeeId) {
+      errors.employeeId = 'El empleado es requerido';
+    }
+    if (!formData.amount || parseFloat(formData.amount) <= 0) {
+      errors.amount = 'El monto debe ser mayor a 0';
+    }
+    if (!formData.payrollDate) {
+      errors.payrollDate = 'La fecha es requerida';
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleOpenForm = (payroll = null) => {
+    if (payroll) {
+      setEditingPayroll(payroll);
+      // Parse date
+      let dateStr = '';
+      if (payroll.payrollDate) {
+        if (Array.isArray(payroll.payrollDate)) {
+          const [year, month, day] = payroll.payrollDate;
+          dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        } else {
+          dateStr = payroll.payrollDate.split('T')[0];
+        }
+      }
+      setFormData({
+        employeeId: payroll.employeeId?.toString() || '',
+        amount: payroll.amount?.toString() || '',
+        payrollDate: dateStr
+      });
+    } else {
+      setEditingPayroll(null);
+      setFormData({ employeeId: '', amount: '', payrollDate: '' });
+    }
+    setFormErrors({});
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingPayroll(null);
+    setFormData({ employeeId: '', amount: '', payrollDate: '' });
+    setFormErrors({});
+  };
+
+  const handleSubmitPayroll = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setSaving(true);
+    try {
+      const payrollDate = new Date(formData.payrollDate);
+      payrollDate.setHours(12, 0, 0, 0);
+
+      const payload = {
+        employeeId: parseInt(formData.employeeId),
+        amount: parseFloat(formData.amount),
+        payrollDate: payrollDate.toISOString()
+      };
+
+      if (editingPayroll) {
+        await payrollAdminService.update(editingPayroll.id, payload);
+      } else {
+        await payrollAdminService.create(payload);
+      }
+      
+      handleCloseForm();
+      loadData(); // Reload data
+    } catch (err) {
+      console.error('Error saving payroll:', err);
+      setError(err.response?.data?.message || 'Error al guardar la nómina');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeletePayroll = async (id) => {
+    if (!window.confirm('¿Estás seguro de que deseas eliminar esta nómina?')) {
+      return;
+    }
+    try {
+      await payrollAdminService.delete(id);
+      setPayrolls(payrolls.filter(p => p.id !== id));
+    } catch (err) {
+      console.error('Error deleting payroll:', err);
+      alert(err.response?.data?.message || 'Error al eliminar la nómina');
+    }
+  };
+
   const statCards = [
     {
       icon: Briefcase,
@@ -240,6 +349,12 @@ function PayrollPage() {
                 <span className="hidden sm:inline">Todas</span>
               </button>
             </div>
+          )}
+          {isAdmin && (
+            <Button variant="primary" size="sm" onClick={() => handleOpenForm()}>
+              <Plus className="h-4 w-4" />
+              <span className="hidden sm:inline">Nueva Nómina</span>
+            </Button>
           )}
           <Button variant="secondary" size="sm" onClick={handleExportCSV}>
             <Download className="h-4 w-4" />
@@ -371,13 +486,33 @@ function PayrollPage() {
                         })}
                       </td>
                       <td className="px-4 sm:px-6 py-4 text-right">
-                        <button 
-                          className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-                          onClick={() => handleViewPayroll(payroll)}
-                          title="Ver detalle"
-                        >
-                          <Eye className="h-4 w-4" />
-                        </button>
+                        <div className="flex items-center justify-end gap-1">
+                          <button 
+                            className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                            onClick={() => handleViewPayroll(payroll)}
+                            title="Ver detalle"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </button>
+                          {isAdmin && (
+                            <>
+                              <button 
+                                className="p-2 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors"
+                                onClick={() => handleOpenForm(payroll)}
+                                title="Editar"
+                              >
+                                <Pencil className="h-4 w-4" />
+                              </button>
+                              <button 
+                                className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                onClick={() => handleDeletePayroll(payroll.id)}
+                                title="Eliminar"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                            </>
+                          )}
+                        </div>
                       </td>
                     </motion.tr>
                   ))
@@ -441,6 +576,133 @@ function PayrollPage() {
           )}
         </Card>
       </motion.div>
+
+      {/* Modal de crear/editar nómina */}
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            onClick={handleCloseForm}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-slate-800">
+                  {editingPayroll ? 'Editar Nómina' : 'Nueva Nómina'}
+                </h3>
+                <button
+                  onClick={handleCloseForm}
+                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <X className="h-5 w-5 text-slate-500" />
+                </button>
+              </div>
+
+              <form onSubmit={handleSubmitPayroll} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Empleado *
+                  </label>
+                  <select
+                    value={formData.employeeId}
+                    onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })}
+                    className={`w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                      formErrors.employeeId ? 'border-red-300 bg-red-50' : 'border-slate-200'
+                    }`}
+                  >
+                    <option value="">Seleccionar empleado...</option>
+                    {employees.map((emp) => (
+                      <option key={emp.id} value={emp.id}>
+                        {emp.name} {emp.surname}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.employeeId && (
+                    <p className="mt-1 text-sm text-red-600">{formErrors.employeeId}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Monto ($) *
+                  </label>
+                  <div className="relative">
+                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formData.amount}
+                      onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                      className={`w-full pl-10 pr-3 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                        formErrors.amount ? 'border-red-300 bg-red-50' : 'border-slate-200'
+                      }`}
+                      placeholder="0.00"
+                    />
+                  </div>
+                  {formErrors.amount && (
+                    <p className="mt-1 text-sm text-red-600">{formErrors.amount}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Fecha de Pago *
+                  </label>
+                  <div className="relative">
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input
+                      type="date"
+                      value={formData.payrollDate}
+                      onChange={(e) => setFormData({ ...formData, payrollDate: e.target.value })}
+                      className={`w-full pl-10 pr-3 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                        formErrors.payrollDate ? 'border-red-300 bg-red-50' : 'border-slate-200'
+                      }`}
+                    />
+                  </div>
+                  {formErrors.payrollDate && (
+                    <p className="mt-1 text-sm text-red-600">{formErrors.payrollDate}</p>
+                  )}
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="flex-1"
+                    onClick={handleCloseForm}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    className="flex-1"
+                    disabled={saving}
+                  >
+                    {saving ? (
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Save className="h-4 w-4" />
+                        {editingPayroll ? 'Guardar' : 'Crear'}
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Modal de detalle de nómina */}
       <AnimatePresence>
