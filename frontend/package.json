@@ -16,6 +16,8 @@
     "test:ci": "vitest run --reporter=verbose"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@stomp/stompjs": "^7.0.0",
     "axios": "^1.13.2",
     "clsx": "2.0.0",
     "date-fns": "2.30.0",
@@ -24,6 +26,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.30.3",
+    "sockjs-client": "^1.6.1",
     "zustand": "4.4.7"
   },
   "devDependencies": {

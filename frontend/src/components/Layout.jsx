@@ -11,19 +11,34 @@ import {
   X,
   Home,
   Wallet,
-  Bell,
   Search,
   ChevronRight,
 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import Button from './Button';
-import { useState } from 'react';
+import NotificationBell from './NotificationBell';
+import { useState, useRef, useEffect } from 'react';
 
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout, user } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  
+  const userDropdownRef = useRef(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+        setUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const menuItems = [
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
@@ -226,20 +241,76 @@ function Layout() {
 
             <div className="flex items-center gap-3">
               {/* Notifications */}
-              <button className="relative p-2 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors">
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
-              </button>
+              <NotificationBell />
 
-              {/* User Avatar */}
-              <button className="flex items-center gap-3 p-1.5 pr-4 rounded-xl hover:bg-slate-100 transition-colors">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
-                  {user?.email?.charAt(0).toUpperCase() || 'U'}
-                </div>
-                <span className="hidden sm:block text-sm font-medium text-slate-700">
-                  {user?.email?.split('@')[0] || 'Usuario'}
-                </span>
-              </button>
+              {/* User Avatar & Dropdown */}
+              <div className="relative" ref={userDropdownRef}>
+                <button 
+                  onClick={() => {
+                    setUserDropdownOpen(!userDropdownOpen);
+                  }}
+                  className="flex items-center gap-3 p-1.5 pr-4 rounded-xl hover:bg-slate-100 transition-colors"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
+                    {user?.email?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <span className="hidden sm:block text-sm font-medium text-slate-700">
+                    {user?.email?.split('@')[0] || 'Usuario'}
+                  </span>
+                </button>
+
+                {/* User Dropdown */}
+                <AnimatePresence>
+                  {userDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200/80 overflow-hidden z-50"
+                    >
+                      <div className="p-3 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+                        <p className="text-sm font-semibold text-slate-800">{user?.email || 'Usuario'}</p>
+                        <p className="text-xs text-slate-500">Administrador</p>
+                      </div>
+                      <div className="p-2">
+                        <button
+                          onClick={() => {
+                            navigate('/profile');
+                            setUserDropdownOpen(false);
+                          }}
+                          className="flex w-full items-center gap-3 px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                        >
+                          <User className="h-4 w-4" />
+                          Ver perfil
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigate('/settings');
+                            setUserDropdownOpen(false);
+                          }}
+                          className="flex w-full items-center gap-3 px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                        >
+                          <Settings className="h-4 w-4" />
+                          Configuración
+                        </button>
+                      </div>
+                      <div className="p-2 border-t border-slate-100">
+                        <button
+                          onClick={() => {
+                            handleLogout();
+                            setUserDropdownOpen(false);
+                          }}
+                          className="flex w-full items-center gap-3 px-3 py-2 text-sm text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                        >
+                          <LogOut className="h-4 w-4" />
+                          Cerrar sesión
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </header>
