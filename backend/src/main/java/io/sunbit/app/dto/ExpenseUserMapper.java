@@ -14,6 +14,7 @@ public class ExpenseUserMapper {
         user.setEmail(dto.getEmail());
         user.setName(dto.getName());
         user.setSurname(dto.getSurname());
+        user.setPassword(dto.getPassword());
         // roles no se asignan aquí, solo por id
         return user;
     }
