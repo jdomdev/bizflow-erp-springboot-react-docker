@@ -60,7 +60,15 @@ function SignupPage() {
         email: formData.email,
         password: formData.password,
       });
-      login({ email: formData.email }, response.data.accessToken);
+      login(
+        { 
+          id: response.data.id,
+          email: response.data.email,
+          roleId: response.data.roleId,
+          roleName: response.data.roleName
+        }, 
+        response.data.accessToken
+      );
       navigate('/dashboard');
     } catch (error) {
       setErrors({

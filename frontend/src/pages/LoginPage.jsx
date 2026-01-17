@@ -28,7 +28,12 @@ function LoginPage() {
     try {
       const response = await authService.login(formData.email, formData.password);
       login(
-        { email: formData.email },
+        { 
+          id: response.data.id,
+          email: response.data.email,
+          roleId: response.data.roleId,
+          roleName: response.data.roleName
+        },
         response.data.accessToken
       );
       navigate('/dashboard');
