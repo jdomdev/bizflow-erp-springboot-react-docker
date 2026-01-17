@@ -127,7 +127,9 @@ public class PayrollServiceImpl implements IPayrollService {
 			syncAssociations(payroll);
 			LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getPayrollDate());
 			payroll.setPayrollDate(parsedDate);
-			return payrollDao.save(payroll);
+			Payroll savedPayroll = payrollDao.save(payroll);
+			// Notification is handled in PayrollControllerImpl
+			return savedPayroll;
 		} catch (BadRequestException | ResourceNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
