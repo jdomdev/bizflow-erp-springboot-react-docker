@@ -11,6 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthenticationResponse {
 
+	private Long id;
 	private String email;
 	private String accessToken;
+	private Long roleId;
+	private String roleName;
 }
