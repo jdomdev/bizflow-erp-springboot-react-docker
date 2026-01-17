@@ -61,6 +61,8 @@ public class AppSecurityConfig {
             // Allow signup and login without authentication
             .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/check-email", "/api/v1/auth/login").permitAll()
             .requestMatchers("/actuator/**").permitAll()
+            // Allow WebSocket endpoints
+            .requestMatchers("/ws/**").permitAll()
             // Allow Swagger UI and API docs
             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
             // All other requests require authentication
