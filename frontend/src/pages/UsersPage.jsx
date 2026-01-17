@@ -81,13 +81,13 @@ export default function UsersPage() {
 
     setSaving(true);
     try {
-      const selectedRole = roles.find(r => r.id === parseInt(formData.roleId));
+      const selectedRoleId = formData.roleId ? parseInt(formData.roleId) : null;
       
       const payload = {
         name: formData.name.trim(),
         surname: formData.surname.trim(),
         email: formData.email.trim(),
-        roleDtos: selectedRole ? [{ id: selectedRole.id, name: selectedRole.name }] : [],
+        roleIds: selectedRoleId ? [selectedRoleId] : [],
       };
 
       // Only include password if provided
