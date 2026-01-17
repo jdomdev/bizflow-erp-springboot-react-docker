@@ -39,14 +39,17 @@ export const authService = {
     apiClient.post('/auth/login', { email, password }),
   signup: (userData) =>
     apiClient.post('/auth/signup', userData),
+  checkEmail: (email) =>
+    apiClient.get('/auth/check-email', { params: { email } }),
 };
 
 // Servicios de gastos
 export const expenseService = {
   getAll: () => apiClient.get('/expense'),
+  getByUserId: (userId) => apiClient.get(`/expense/user/${userId}`),
   getById: (id) => apiClient.get(`/expense/${id}`),
-  create: (data) => apiClient.post('/expense', data),
-  update: (id, data) => apiClient.put('/expense', data),
+  create: (data) => apiClient.post('/expense/', data),
+  update: (id, data) => apiClient.put('/expense/', data),
   delete: (id) => apiClient.delete(`/expense/${id}`),
 };
 
@@ -63,12 +66,62 @@ export const payrollService = {
 export const employeeService = {
   getAll: () => apiClient.get('/employee'),
   getById: (id) => apiClient.get(`/employee/${id}`),
+  getByName: (name, surname) => apiClient.get(`/employee/${name}/${surname}`),
+  create: (data) => apiClient.post('/employee/', data),
   update: (id, data) => apiClient.put(`/employee/${id}`, data),
+  delete: (id) => apiClient.delete(`/employee/${id}`),
 };
 
 // Servicios de usuario
 export const userService = {
+  getAll: () => apiClient.get('/user'),
+  getById: (id) => apiClient.get(`/user/${id}`),
   getProfile: () => apiClient.get('/user/profile'),
+  create: (data) => apiClient.post('/user/', data),
+  update: (id, data) => apiClient.put(`/user/${id}`, data),
   updateProfile: (data) => apiClient.put('/user/profile', data),
+  delete: (id) => apiClient.delete(`/user/${id}`),
   logout: () => apiClient.post('/user/logout'),
+};
+
+// Servicios de posiciones
+export const positionService = {
+  getAll: () => apiClient.get('/position'),
+  getById: (id) => apiClient.get(`/position/${id}`),
+  create: (data) => apiClient.post('/position/', data),
+  update: (id, data) => apiClient.put(`/position/${id}`, data),
+  delete: (id) => apiClient.delete(`/position/${id}`),
+};
+
+// Servicios de roles
+export const roleService = {
+  getAll: () => apiClient.get('/role'),
+  getById: (id) => apiClient.get(`/role/${id}`),
+  create: (data) => apiClient.post('/role/', data),
+  update: (id, data) => apiClient.put(`/role/${id}`, data),
+  delete: (id) => apiClient.delete(`/role/${id}`),
+};
+
+// Servicios de nómina - CRUD completo
+export const payrollAdminService = {
+  create: (data) => apiClient.post('/payroll/', data),
+  update: (id, data) => apiClient.put(`/payroll/${id}`, data),
+  delete: (id) => apiClient.delete(`/payroll/${id}`),
+};
+
+// Servicios de notificaciones
+export const notificationService = {
+  getAll: () => apiClient.get('/notifications'),
+  getUnread: () => apiClient.get('/notifications/unread'),
+  getUnreadCount: () => apiClient.get('/notifications/unread/count'),
+  markAsRead: (id) => apiClient.put(`/notifications/${id}/read`),
+  markAllAsRead: () => apiClient.put('/notifications/read-all'),
+  delete: (id) => apiClient.delete(`/notifications/${id}`),
+};
+
+// WebSocket configuration
+export const getWebSocketUrl = () => {
+  const baseUrl = API_BASE_URL.replace('/api/v1', '');
+  const wsProtocol = baseUrl.startsWith('https') ? 'wss' : 'ws';
+  return baseUrl.replace(/^https?/, wsProtocol) + '/ws';
 };
