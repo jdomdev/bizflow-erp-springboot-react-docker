@@ -8,7 +8,11 @@ import {
   Eye,
   X,
   TrendingUp,
-  Briefcase
+  Briefcase,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+  UserCheck
 } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
@@ -23,6 +27,9 @@ function PayrollPage() {
   const [selectedPayroll, setSelectedPayroll] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [profile, setProfile] = useState(null);
+  const [viewMode, setViewMode] = useState('mine'); // 'mine' or 'all' (admin only)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(15);
   const [stats, setStats] = useState({
     totalPayrolls: 0,
     totalAmount: 0,
@@ -32,12 +39,13 @@ function PayrollPage() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [viewMode]);
 
   const loadData = async () => {
     try {
       setIsLoading(true);
       setError(null);
+      setCurrentPage(1);
       
       // Cargar perfil del usuario
       const profileResponse = await userService.getProfile();
@@ -49,13 +57,12 @@ function PayrollPage() {
       
       let payrollData = [];
       
-      if (isAdmin) {
-        // Admin ve todas las nóminas con el endpoint /payroll/
+      // Admin puede elegir ver todas o solo las suyas
+      if (isAdmin && viewMode === 'all') {
         const response = await payrollService.getAll();
         payrollData = response.data || [];
       } else {
-        // Usuario normal ve solo sus nóminas con el endpoint /payroll/my
-        // Este endpoint busca por expense_user_id Y employee_id (si está vinculado)
+        // Usuario normal o admin viendo "mis nóminas"
         const response = await payrollService.getMy();
         payrollData = response.data || [];
       }
@@ -95,9 +102,38 @@ function PayrollPage() {
     }
   };
 
-  const getEmployeeName = (employeeId) => {
-    const employee = employees.find(e => e.id === employeeId);
-    return employee ? `${employee.name} ${employee.surname}` : `Empleado #${employeeId}`;
+  const getEmployeeName = (payroll) => {
+    // Primero intentar con employeeName/employeeSurname si vienen en el payload
+    if (payroll.employeeName && payroll.employeeSurname) {
+      return `${payroll.employeeName} ${payroll.employeeSurname}`;
+    }
+    // Luego buscar en la lista de empleados cargada
+    const employee = employees.find(e => e.id === payroll.employeeId);
+    if (employee) {
+      return `${employee.name} ${employee.surname}`;
+    }
+    // Si estamos en modo "mis nóminas" y no encontramos el empleado, usar el nombre del perfil
+    if (viewMode === 'mine' && profile?.name && profile?.surname) {
+      return `${profile.name} ${profile.surname}`;
+    }
+    // Fallback: si hay employeeId mostrar el ID, sino indicar freelance
+    if (payroll.employeeId) {
+      return `Empleado #${payroll.employeeId}`;
+    }
+    return 'Freelance';
+  };
+
+  // Paginación
+  const isAdmin = profile?.roleIds?.includes(1);
+  const totalPages = Math.ceil(payrolls.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPayrolls = payrolls.slice(startIndex, endIndex);
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const handleViewPayroll = (payroll) => {
@@ -115,7 +151,7 @@ function PayrollPage() {
       headers.join(','),
       ...payrolls.map(p => [
         p.id,
-        `"${getEmployeeName(p.employeeId)}"`,
+        `"${getEmployeeName(p)}"`,
         p.amount,
         new Date(p.payrollDate).toLocaleDateString('es-ES')
       ].join(','))
@@ -172,15 +208,44 @@ function PayrollPage() {
             Nóminas 💰
           </h1>
           <p className="text-slate-500">
-            {profile?.roleIds?.includes(1) 
+            {isAdmin && viewMode === 'all'
               ? 'Gestión de nóminas de todos los empleados' 
               : 'Historial de tus pagos'}
           </p>
         </div>
-        <Button variant="secondary" size="sm" onClick={handleExportCSV}>
-          <Download className="h-4 w-4" />
-          <span className="hidden sm:inline">Exportar</span>
-        </Button>
+        <div className="flex gap-2">
+          {/* Admin Toggle */}
+          {isAdmin && (
+            <div className="flex bg-slate-100 rounded-xl p-1">
+              <button
+                onClick={() => setViewMode('mine')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  viewMode === 'mine'
+                    ? 'bg-white text-blue-600 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                <UserCheck className="h-4 w-4" />
+                <span className="hidden sm:inline">Mis nóminas</span>
+              </button>
+              <button
+                onClick={() => setViewMode('all')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  viewMode === 'all'
+                    ? 'bg-white text-blue-600 shadow-sm'
+                    : 'text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                <Users className="h-4 w-4" />
+                <span className="hidden sm:inline">Todas</span>
+              </button>
+            </div>
+          )}
+          <Button variant="secondary" size="sm" onClick={handleExportCSV}>
+            <Download className="h-4 w-4" />
+            <span className="hidden sm:inline">Exportar</span>
+          </Button>
+        </div>
       </motion.div>
 
       {/* Stats Cards */}
@@ -272,7 +337,7 @@ function PayrollPage() {
                     </td>
                   </tr>
                 ) : (
-                  payrolls.slice(0, 20).map((payroll, idx) => (
+                  currentPayrolls.map((payroll, idx) => (
                     <motion.tr 
                       key={payroll.id}
                       initial={{ opacity: 0 }}
@@ -286,7 +351,7 @@ function PayrollPage() {
                             <User className="h-5 w-5 text-emerald-600" />
                           </div>
                           <div>
-                            <p className="font-medium text-slate-800">{getEmployeeName(payroll.employeeId)}</p>
+                            <p className="font-medium text-slate-800">{getEmployeeName(payroll)}</p>
                             <p className="text-xs text-slate-500 sm:hidden">
                               {new Date(payroll.payrollDate).toLocaleDateString('es-ES')}
                             </p>
@@ -321,11 +386,57 @@ function PayrollPage() {
             </table>
           </div>
           
-          {payrolls.length > 20 && (
-            <div className="px-6 py-4 border-t border-slate-100 text-center">
+          {/* Paginación */}
+          {payrolls.length > 0 && (
+            <div className="px-6 py-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-sm text-slate-500">
-                Mostrando 20 de {payrolls.length} nóminas
+                Mostrando {startIndex + 1}-{Math.min(endIndex, payrolls.length)} de {payrolls.length} nóminas
               </p>
+              {totalPages > 1 && (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="p-2 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <div className="flex items-center gap-1">
+                    {[...Array(Math.min(5, totalPages))].map((_, i) => {
+                      let pageNum;
+                      if (totalPages <= 5) {
+                        pageNum = i + 1;
+                      } else if (currentPage <= 3) {
+                        pageNum = i + 1;
+                      } else if (currentPage >= totalPages - 2) {
+                        pageNum = totalPages - 4 + i;
+                      } else {
+                        pageNum = currentPage - 2 + i;
+                      }
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => goToPage(pageNum)}
+                          className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                            currentPage === pageNum
+                              ? 'bg-blue-600 text-white'
+                              : 'text-slate-600 hover:bg-slate-100'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <button
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="p-2 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </Card>
@@ -374,7 +485,7 @@ function PayrollPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-slate-500 mb-1">Empleado</p>
-                    <p className="font-medium text-slate-800">{getEmployeeName(selectedPayroll.employeeId)}</p>
+                    <p className="font-medium text-slate-800">{getEmployeeName(selectedPayroll)}</p>
                   </div>
                   <div>
                     <p className="text-sm text-slate-500 mb-1">ID Nómina</p>
