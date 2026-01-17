@@ -28,6 +28,6 @@ public class ExpenseCreateRequest {
     @NotNull(message = "Amount is required")
     private Double amount;
     
-    @NotNull(message = "ExpenseUser ID is required")
+    // Optional: if not provided, will be extracted from JWT token
     private Long expenseUserId;
 }

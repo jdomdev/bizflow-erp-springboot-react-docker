@@ -1,5 +1,8 @@
 package io.sunbit.app.controller;
 
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.sunbit.app.entity.Employee;
+import io.sunbit.app.entity.NotificationType;
 import io.sunbit.app.entity.Payroll;
+import io.sunbit.app.security.dao.IUserDao;
+import io.sunbit.app.security.entity.ExpenseUser;
+import io.sunbit.app.service.INotificationService;
 import io.sunbit.app.service.PayrollServiceImpl;
 
 @CrossOrigin(origins = "*")
@@ -27,6 +34,12 @@ import io.sunbit.app.service.PayrollServiceImpl;
 public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	@Autowired
 	private PayrollServiceImpl payrollService;
+	
+	@Autowired
+	private INotificationService notificationService;
+	
+	@Autowired
+	private IUserDao userDao;
 
 	/**
 	 * Obtiene todas las nóminas del usuario autenticado.
@@ -98,17 +111,51 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 		}
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/")
-	// @ResponseBody
 	public ResponseEntity<?> savePayroll(@RequestBody @Valid Payroll payroll) {
 		ResponseEntity<Payroll> responseEntity;
 		try {
+			// Capture employee ID before saving (proxy may not be loaded after save)
+			Long employeeId = payroll.getEmployeeId();
+			Long expenseUserId = payroll.getExpenseUserId();
+			
 			Payroll savedPayroll = payrollService.save(payroll);
 			Employee employee = savedPayroll.getEmployee();
 			if (employee != null) {
 				employee.addPayroll(savedPayroll);
 			}
+			
+			// Send notification to the employee/user about new payroll
+			try {
+				ExpenseUser targetUser = null;
+				
+				// First try by employeeId
+				if (employeeId != null) {
+					targetUser = userDao.findByEmployee_Id(employeeId).orElse(null);
+				}
+				// If not found and expenseUserId provided, use that
+				if (targetUser == null && expenseUserId != null) {
+					targetUser = userDao.findById(expenseUserId).orElse(null);
+				}
+				
+				if (targetUser != null) {
+					String monthName = savedPayroll.getPayrollDate() != null 
+						? savedPayroll.getPayrollDate().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))
+						: "este mes";
+					
+					notificationService.createForUser(
+						targetUser.getId(),
+						NotificationType.PAYROLL_AVAILABLE,
+						"Nómina disponible",
+						String.format("Tu nómina de %s está disponible. Importe: %.2f€", 
+							monthName, savedPayroll.getAmount())
+					);
+				}
+			} catch (Exception notifError) {
+				notifError.printStackTrace();
+			}
+			
 			responseEntity = ResponseEntity.status(HttpStatus.OK).body(savedPayroll);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,18 +167,56 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{payrollId}")
-	// @ResponseBody
 	public ResponseEntity<?> deletePayroll(@PathVariable("payrollId") Long payrollId) {
 		ResponseEntity<Boolean> responseEntity;
 		try {
 			Payroll payroll = payrollService.findById(payrollId);
+			
+			// Store info for notification before deletion
+			Long employeeId = payroll.getEmployeeId();
+			Long expenseUserId = payroll.getExpenseUserId();
+			String monthName = payroll.getPayrollDate() != null 
+				? payroll.getPayrollDate().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))
+				: "reciente";
+			Double salary = payroll.getAmount();
+			
 			Employee employee = payroll.getEmployee();
-			employee.removePayroll(payroll);// ******** Check if it's allow.......***********
-			responseEntity = ResponseEntity.status(HttpStatus.OK).body(payrollService.delete(payrollId));
+			if (employee != null) {
+				employee.removePayroll(payroll);
+			}
+			Boolean deleted = payrollService.delete(payrollId);
+			
+			// Notify employee/user about deleted payroll
+			if (deleted) {
+				try {
+					ExpenseUser targetUser = null;
+					
+					if (employeeId != null) {
+						targetUser = userDao.findByEmployee_Id(employeeId).orElse(null);
+					}
+					if (targetUser == null && expenseUserId != null) {
+						targetUser = userDao.findById(expenseUserId).orElse(null);
+					}
+					
+					if (targetUser != null) {
+						notificationService.createForUser(
+							targetUser.getId(),
+							NotificationType.PAYROLL_REMINDER,
+							"Nómina eliminada",
+							String.format("Tu nómina de %s (%.2f€) ha sido eliminada del sistema.", 
+								monthName, salary)
+						);
+					}
+				} catch (Exception notifError) {
+					notifError.printStackTrace();
+				}
+			}
+			
+			responseEntity = ResponseEntity.status(HttpStatus.OK).body(deleted);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"error\":\"Error. Please, Try it later. It is NOT possible to SAVE the payroll.\"}");
+					.body("{\"error\":\"Error. Please, Try it later. It is NOT possible to DELETE the payroll.\"}");
 		}
 		return responseEntity;
 	}
@@ -141,7 +226,41 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	public ResponseEntity<?> updatePayroll(@RequestBody @Valid Payroll payroll,
 			@PathVariable("payrollId") Long payrollId) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(payrollService.update(payrollId, payroll));
+			Payroll updatedPayroll = payrollService.update(payrollId, payroll);
+			
+			// Notify employee/user about updated payroll
+			if (updatedPayroll != null) {
+				try {
+					Long employeeId = updatedPayroll.getEmployeeId();
+					Long expenseUserId = updatedPayroll.getExpenseUserId();
+					
+					ExpenseUser targetUser = null;
+					if (employeeId != null) {
+						targetUser = userDao.findByEmployee_Id(employeeId).orElse(null);
+					}
+					if (targetUser == null && expenseUserId != null) {
+						targetUser = userDao.findById(expenseUserId).orElse(null);
+					}
+					
+					if (targetUser != null) {
+						String monthName = updatedPayroll.getPayrollDate() != null 
+							? updatedPayroll.getPayrollDate().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))
+							: "reciente";
+						
+						notificationService.createForUser(
+							targetUser.getId(),
+							NotificationType.PAYROLL_AVAILABLE,
+							"Nómina actualizada",
+							String.format("Tu nómina de %s ha sido actualizada. Nuevo importe: %.2f€", 
+								monthName, updatedPayroll.getAmount())
+						);
+					}
+				} catch (Exception notifError) {
+					notifError.printStackTrace();
+				}
+			}
+			
+			return ResponseEntity.status(HttpStatus.OK).body(updatedPayroll);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
