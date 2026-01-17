@@ -42,14 +42,23 @@ function DashboardPage() {
 
   const loadData = async () => {
     try {
-      const [expensesResponse, profileResponse] = await Promise.all([
-        expenseService.getAll(),
-        userService.getProfile()
-      ]);
+      // Primero cargar perfil para saber el rol
+      const profileResponse = await userService.getProfile();
+      const userProfile = profileResponse.data;
+      setProfile(userProfile);
+      
+      // Admin (roleId 1) ve todos los gastos, usuarios normales solo los suyos
+      const isAdmin = userProfile.roleIds?.includes(1);
+      let expensesResponse;
+      
+      if (isAdmin) {
+        expensesResponse = await expenseService.getAll();
+      } else {
+        expensesResponse = await expenseService.getByUserId(userProfile.id);
+      }
 
       const data = expensesResponse.data || [];
       setExpenses(data);
-      setProfile(profileResponse.data);
 
       // Calcular estadísticas
       const totalExpenses = data.reduce((sum, exp) => sum + (exp.amount || 0), 0);
@@ -57,7 +66,7 @@ function DashboardPage() {
       
       const thisMonth = data
         .filter((exp) => {
-          const expDate = new Date(exp.date);
+          const expDate = new Date(exp.expenseDate);
           return (
             expDate.getMonth() === now.getMonth() &&
             expDate.getFullYear() === now.getFullYear()
@@ -67,7 +76,7 @@ function DashboardPage() {
 
       const lastMonth = data
         .filter((exp) => {
-          const expDate = new Date(exp.date);
+          const expDate = new Date(exp.expenseDate);
           const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1);
           return (
             expDate.getMonth() === lastMonthDate.getMonth() &&
@@ -104,9 +113,9 @@ function DashboardPage() {
       headers.join(','),
       ...expenses.map(exp => [
         exp.id,
-        `"${exp.description?.replace(/"/g, '""') || ''}"`,
+        `"${exp.concept?.replace(/"/g, '""') || ''}"`,
         exp.amount,
-        new Date(exp.date).toLocaleDateString('es-ES'),
+        new Date(exp.expenseDate).toLocaleDateString('es-ES'),
         exp.status || 'approved'
       ].join(','))
     ].join('\n');
@@ -127,7 +136,7 @@ function DashboardPage() {
 
   // Función para eliminar un gasto
   const handleDeleteExpense = async (expense) => {
-    if (window.confirm(`¿Eliminar el gasto "${expense.description}"?`)) {
+    if (window.confirm(`¿Eliminar el gasto "${expense.concept}"?`)) {
       try {
         await expenseService.delete(expense.id);
         setExpenses(expenses.filter(e => e.id !== expense.id));
@@ -343,9 +352,9 @@ function DashboardPage() {
                             <DollarSign className="h-5 w-5 text-blue-600" />
                           </div>
                           <div>
-                            <p className="font-medium text-slate-800">{expense.description}</p>
+                            <p className="font-medium text-slate-800">{expense.concept}</p>
                             <p className="text-xs text-slate-500 sm:hidden">
-                              {new Date(expense.date).toLocaleDateString('es-ES')}
+                              {new Date(expense.expenseDate).toLocaleDateString('es-ES')}
                             </p>
                           </div>
                         </div>
@@ -356,7 +365,7 @@ function DashboardPage() {
                         </span>
                       </td>
                       <td className="hidden sm:table-cell px-4 sm:px-6 py-4 text-slate-500">
-                        {new Date(expense.date).toLocaleDateString('es-ES', {
+                        {new Date(expense.expenseDate).toLocaleDateString('es-ES', {
                           day: 'numeric',
                           month: 'short',
                           year: 'numeric'
@@ -461,7 +470,7 @@ function DashboardPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-slate-500 mb-1">Descripción</p>
-                    <p className="font-medium text-slate-800">{selectedExpense.description}</p>
+                    <p className="font-medium text-slate-800">{selectedExpense.concept}</p>
                   </div>
                   <div>
                     <p className="text-sm text-slate-500 mb-1">Estado</p>
@@ -470,7 +479,7 @@ function DashboardPage() {
                   <div>
                     <p className="text-sm text-slate-500 mb-1">Fecha</p>
                     <p className="font-medium text-slate-800">
-                      {new Date(selectedExpense.date).toLocaleDateString('es-ES', {
+                      {new Date(selectedExpense.expenseDate).toLocaleDateString('es-ES', {
                         day: 'numeric',
                         month: 'long',
                         year: 'numeric'

@@ -10,8 +10,27 @@ export default function ExpenseList({ expenses, onDelete, onEdit }) {
     }
 
     const formatDate = (dateString) => {
+        if (!dateString) return 'Fecha no disponible';
+        
         try {
+            // Handle array format from Java LocalDateTime [year, month, day, hour, minute, second, nano]
+            if (Array.isArray(dateString)) {
+                const [year, month, day, hour = 0, minute = 0] = dateString;
+                const date = new Date(year, month - 1, day, hour, minute);
+                return date.toLocaleString('es-ES', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // Handle ISO string or other string formats
             const date = new Date(dateString);
+            if (isNaN(date.getTime())) {
+                return 'Fecha no válida';
+            }
             return date.toLocaleString('es-ES', {
                 year: 'numeric',
                 month: 'short',
@@ -20,7 +39,7 @@ export default function ExpenseList({ expenses, onDelete, onEdit }) {
                 minute: '2-digit'
             });
         } catch {
-            return dateString;
+            return 'Fecha no válida';
         }
     };
 
@@ -41,7 +60,7 @@ export default function ExpenseList({ expenses, onDelete, onEdit }) {
                                     )}
                                     <div className="mt-2 flex items-center text-sm text-gray-500">
                                         <Calendar className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
-                                        <p>{formatDate(expense.date)}</p>
+                                        <p>{formatDate(expense.expenseDate || expense.date)}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center">
