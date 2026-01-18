@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, ArrowRight, BarChart3, Shield, Zap, Users, TrendingUp, PieChart } from 'lucide-react';
+import { Mail, Lock, ArrowRight, BarChart3, Shield, Zap } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { authService } from '../services/api';
 import Button from '../components/Button';
