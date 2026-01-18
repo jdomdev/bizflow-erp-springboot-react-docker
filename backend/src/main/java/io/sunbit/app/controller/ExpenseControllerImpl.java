@@ -226,7 +226,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 			@RequestHeader("Authorization") String headerAuth) {
 		try {
 			String token = headerAuth.replace("Bearer ", "");
-			Long editorId = jwtAuthUtil.extractTokenUserId(token).longValue();
+			long editorId = jwtAuthUtil.extractTokenUserId(token).longValue();
 			
 			Object updatedExpense = expenseService.update(expense, headerAuth);
 			
