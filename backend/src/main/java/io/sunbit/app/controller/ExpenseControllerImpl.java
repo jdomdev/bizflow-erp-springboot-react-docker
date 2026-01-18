@@ -160,7 +160,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 		try {
 			// Get expense info before deletion for notification
 			String token = headerAuth.replace("Bearer ", "");
-			Long deleterId = jwtAuthUtil.extractTokenUserId(token).longValue();
+			long deleterId = jwtAuthUtil.extractTokenUserId(token).longValue();
 			
 			// Get expense details before deletion
 			Object expenseData = expenseService.findById(expenseId, headerAuth);
