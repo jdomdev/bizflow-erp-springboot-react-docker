@@ -99,7 +99,7 @@ public class EmployeeControllerTest {
         when(employeeService.findAll()).thenReturn(employees);
 
         // Act & Assert
-        mockMvc.perform(get("/api/v1/employee/")
+        mockMvc.perform(get("/api/v1/employee")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
@@ -112,7 +112,7 @@ public class EmployeeControllerTest {
     @Test
     void testGetAllEmployees_Unauthorized() throws Exception {
         // Act & Assert - without authentication
-        mockMvc.perform(get("/api/v1/employee/")
+        mockMvc.perform(get("/api/v1/employee")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isUnauthorized());
     }
@@ -121,7 +121,7 @@ public class EmployeeControllerTest {
     @WithMockUser(roles = "USER")
     void testGetAllEmployees_Forbidden() throws Exception {
         // Act & Assert - with USER role (needs ADMIN)
-        mockMvc.perform(get("/api/v1/employee/")
+        mockMvc.perform(get("/api/v1/employee")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isForbidden());
     }
