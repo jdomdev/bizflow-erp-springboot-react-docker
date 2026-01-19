@@ -78,7 +78,7 @@ public class UserControllerImpl implements IUserController {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllUser() {
 		try {
 			List<ExpenseUserDto> dtos = userService.findAll().stream()

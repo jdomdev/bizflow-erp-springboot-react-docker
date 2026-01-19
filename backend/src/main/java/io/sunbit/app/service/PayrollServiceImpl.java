@@ -1,8 +1,11 @@
 package io.sunbit.app.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import jakarta.transaction.Transactional;
 
@@ -21,15 +24,6 @@ import io.sunbit.app.util.DateUtil;
 
 @Service
 public class PayrollServiceImpl implements IPayrollService {
-	@Override
-	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception {
-		try {
-			return payrollDao.findAllByExpenseUser_Id(expenseUserId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-	}
 
 	@Autowired
 	private IPayrollDao payrollDao;
@@ -39,6 +33,54 @@ public class PayrollServiceImpl implements IPayrollService {
 
 	@Autowired
 	private IUserDao userDao;
+
+	/**
+	 * Obtiene todas las nóminas del usuario por su email.
+	 * Busca por expense_user_id Y por employee_id (si el usuario tiene empleado vinculado).
+	 * Esto cubre tanto freelances (solo expense_user_id) como empleados internos (employee_id).
+	 * 
+	 * @param email El email del usuario autenticado
+	 * @return Lista de nóminas del usuario (sin duplicados)
+	 */
+	public List<Payroll> findAllByUserEmail(String email) throws Exception {
+		try {
+			Optional<ExpenseUser> userOpt = userDao.findByEmail(email);
+			if (userOpt.isEmpty()) {
+				throw new ResourceNotFoundException("User", "email", email);
+			}
+			
+			ExpenseUser user = userOpt.get();
+			Set<Payroll> payrollSet = new HashSet<>();
+			
+			// Buscar nóminas por expense_user_id (freelances y usuarios con nóminas directas)
+			List<Payroll> byUserId = payrollDao.findAllByExpenseUser_Id(user.getId());
+			payrollSet.addAll(byUserId);
+			
+			// Si el usuario tiene empleado vinculado, buscar también por employee_id
+			Employee employee = user.getEmployee();
+			if (employee != null) {
+				List<Payroll> byEmployeeId = payrollDao.findAllByEmployee_Id(employee.getId());
+				payrollSet.addAll(byEmployeeId);
+			}
+			
+			return new ArrayList<>(payrollSet);
+		} catch (ResourceNotFoundException e) {
+			throw e;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception {
+		try {
+			return payrollDao.findAllByExpenseUser_Id(expenseUserId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
 
 	@Override
 	public List<Payroll> findAllPayrollByEmployeeId(Long id) throws Exception {
@@ -85,7 +127,9 @@ public class PayrollServiceImpl implements IPayrollService {
 			syncAssociations(payroll);
 			LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getPayrollDate());
 			payroll.setPayrollDate(parsedDate);
-			return payrollDao.save(payroll);
+			Payroll savedPayroll = payrollDao.save(payroll);
+			// Notification is handled in PayrollControllerImpl
+			return savedPayroll;
 		} catch (BadRequestException | ResourceNotFoundException e) {
 			throw e;
 		} catch (Exception e) {

@@ -30,7 +30,7 @@ public class RoleControllerImpl implements IRoleController {
 	private RoleServiceImpl roleService;
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllRole() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(roleService.findAll());

@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import io.sunbit.app.security.entity.ExpenseUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -70,6 +71,10 @@ public class Employee implements Serializable {
 	@NonNull
 	private Position position;
 
+	@OneToOne(mappedBy = "employee")
+	@JsonIgnore
+	private ExpenseUser expenseUser;
+
 // Eliminada la relación con expenses para seguir el enfoque JOIN
 
 	@OneToMany(mappedBy = "employee", targetEntity = Payroll.class, cascade = { CascadeType.MERGE, CascadeType.REFRESH,
@@ -92,6 +97,11 @@ public class Employee implements Serializable {
 		Position reference = new Position();
 		reference.setId(positionId);
 		this.position = reference;
+	}
+
+	@JsonGetter("expenseUserId")
+	public Long getExpenseUserId() {
+		return expenseUser != null ? expenseUser.getId() : null;
 	}
 
 

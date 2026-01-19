@@ -75,6 +75,8 @@ public abstract class AbstractApiIntegrationTest {
     }
 
     protected void purgeData() {
+        // Delete from tables with FK dependencies first
+        jdbcTemplate.update("DELETE FROM notifications");
         jdbcTemplate.update("DELETE FROM payroll");
         jdbcTemplate.update("DELETE FROM expense");
         jdbcTemplate.update("DELETE FROM user_role");

@@ -2,6 +2,7 @@ package io.sunbit.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.sunbit.app.security.dto.RoleDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,16 @@ public class ExpenseUserDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private java.util.List<Long> roleIds;
+    private java.util.List<RoleDto> roleDtos;
+
+    // Constructor sin roleDtos para compatibilidad
+    public ExpenseUserDto(Long id, String email, String name, String surname, String password, java.util.List<Long> roleIds) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.roleIds = roleIds;
+        this.roleDtos = null;
+    }
 }
