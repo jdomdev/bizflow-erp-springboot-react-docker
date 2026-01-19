@@ -87,10 +87,17 @@ spring.log
 out/
 
 # Scripts con credenciales sensibles (contienen passwords y tokens)
-scripts/
+scripts/secrets/
 
 # Backups de base de datos
 backups/
-*.sql
+
+# SQL backups (not seed files)
+backups/**/*.sql
 !backend/src/test/resources/data-test.sql
+
+# Credential files (keep secrets safe)
+*_credentials.md
+*_passwords.md
+
 
