@@ -30,6 +30,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Maven build output bug (IDE/plugin issue)
+.._build_backend_test-classes/
+
 ### VS Code ###
 .vscode/
 

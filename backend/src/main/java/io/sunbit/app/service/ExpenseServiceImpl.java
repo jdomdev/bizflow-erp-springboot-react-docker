@@ -110,21 +110,38 @@ public class ExpenseServiceImpl implements IExpenseService {
 			throw new IllegalArgumentException("Expense id must not be null");
 		}
 		Long expenseId = expense.getId();
-		if (expenseId != null) {
-			Optional<Expense> optExpense = expenseDao.findById(expenseId);
+		Optional<Expense> optExpense = expenseDao.findById(expenseId);
+		
 		if (optExpense.isPresent()) {
-			// Only admin can update expenses, or add custom user validation here if needed
-			if (jwtAuthUtil.isAdminTokenUser(token)) {
+			Expense existingExpense = optExpense.get();
+			Long existingOwnerId = existingExpense.getExpenseUser().getId();
+			
+			// Allow update if user is admin OR if user is the owner of the expense
+			boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+			boolean isOwner = isRequestingOwnExpenses(existingOwnerId, token);
+			
+			if (isAdmin || isOwner) {
 				LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
 				expense.setExpenseDate(parsedDate);
-				ExpenseUser expenseUser = resolveExpenseUser(expense.getExpenseUser());
+				
+				// If expenseUser is not provided in the request, use the existing one
+				ExpenseUser expenseUser;
+				if (expense.getExpenseUser() != null && expense.getExpenseUser().getId() != null) {
+					expenseUser = resolveExpenseUser(expense.getExpenseUser());
+				} else {
+					expenseUser = existingExpense.getExpenseUser();
+				}
 				expense.setExpenseUser(expenseUser);
+				
 				expenseUpdated = expenseDao.save(expense);
 				expenseUpdated.setExpenseUser(expenseUser);
+			} else {
+				throw new SecurityException("User is not authorized to update this expense");
 			}
+		} else {
+			throw new IllegalArgumentException("Expense not found with id: " + expenseId);
 		}
 		return expenseUpdated;
-		}	throw new IllegalArgumentException("Expense id must not be null");
 	}
 
 	@Override

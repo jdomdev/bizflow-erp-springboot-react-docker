@@ -56,7 +56,23 @@ public class AuthenticationController {
 					authRequest.getEmail(), authRequest.getPassword()));
 			ExpenseUser user = (ExpenseUser) authentication.getPrincipal();
 			String accessToken = jwtAuthUtil.generateAccessToken(user);
-			AuthenticationResponse authzResponse = new AuthenticationResponse(user.getEmail(), accessToken);
+			
+			// Get the first role (users typically have one role)
+			Long roleId = null;
+			String roleName = null;
+			if (user.getRoles() != null && !user.getRoles().isEmpty()) {
+				var firstRole = user.getRoles().iterator().next();
+				roleId = firstRole.getId();
+				roleName = firstRole.getName();
+			}
+			
+			AuthenticationResponse authzResponse = new AuthenticationResponse(
+				user.getId(),
+				user.getEmail(), 
+				accessToken,
+				roleId,
+				roleName
+			);
 			return ResponseEntity.ok(authzResponse);
 		} catch (BadCredentialsException ex) {
 			ex.printStackTrace();

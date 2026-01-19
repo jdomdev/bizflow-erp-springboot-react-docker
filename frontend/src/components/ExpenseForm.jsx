@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { expenseService } from '../services/api';
 import { X } from 'lucide-react';
 
-export default function ExpenseForm({ onSuccess, onCancel }) {
+export default function ExpenseForm({ expense, onSuccess, onCancel }) {
+    const isEditing = Boolean(expense?.id);
+    
     const [formData, setFormData] = useState({
         concept: '',
         note: '',
@@ -12,24 +14,61 @@ export default function ExpenseForm({ onSuccess, onCancel }) {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    // Initialize form with expense data when editing
+    useEffect(() => {
+        if (expense) {
+            // Handle both expenseDate (from backend) and date formats
+            const dateValue = expense.expenseDate || expense.date;
+            let expenseDate;
+            
+            if (Array.isArray(dateValue)) {
+                // Java LocalDateTime array format [year, month, day, hour, minute]
+                const [year, month, day, hour = 0, minute = 0] = dateValue;
+                expenseDate = new Date(year, month - 1, day, hour, minute).toISOString().slice(0, 16);
+            } else if (dateValue) {
+                expenseDate = new Date(dateValue).toISOString().slice(0, 16);
+            } else {
+                expenseDate = new Date().toISOString().slice(0, 16);
+            }
+            
+            setFormData({
+                concept: expense.concept || '',
+                note: expense.note || '',
+                amount: expense.amount?.toString() || '',
+                date: expenseDate,
+            });
+        }
+    }, [expense]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
         try {
-            // Convert datetime-local to LocalDateTime format for backend
+            // Convert datetime-local to ISO format for backend
             const dateTime = new Date(formData.date).toISOString();
 
-            const response = await expenseService.create({
-                ...formData,
-                date: dateTime,
+            const expenseData = {
+                concept: formData.concept,
+                note: formData.note,
+                expenseDate: dateTime,  // Backend expects expenseDate, not date
                 amount: parseFloat(formData.amount)
-            });
-            onSuccess(response.data);
+            };
+
+            let response;
+            if (isEditing) {
+                response = await expenseService.update(expense.id, {
+                    ...expenseData,
+                    id: expense.id
+                });
+            } else {
+                response = await expenseService.create(expenseData);
+            }
+            onSuccess(response.data, isEditing);
         } catch (err) {
-            console.error('Error creating expense:', err);
-            setError(err.response?.data?.error || 'Error al crear el gasto');
+            console.error(`Error ${isEditing ? 'updating' : 'creating'} expense:`, err);
+            setError(err.response?.data?.error || `Error al ${isEditing ? 'actualizar' : 'crear'} el gasto`);
         } finally {
             setLoading(false);
         }
@@ -39,7 +78,9 @@ export default function ExpenseForm({ onSuccess, onCancel }) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md overflow-hidden">
                 <div className="flex justify-between items-center p-4 border-b">
-                    <h2 className="text-xl font-semibold text-gray-800">Nuevo Gasto</h2>
+                    <h2 className="text-xl font-semibold text-gray-800">
+                        {isEditing ? 'Editar Gasto' : 'Nuevo Gasto'}
+                    </h2>
                     <button onClick={onCancel} className="text-gray-500 hover:text-gray-700">
                         <X size={24} />
                     </button>
@@ -117,7 +158,7 @@ export default function ExpenseForm({ onSuccess, onCancel }) {
                             disabled={loading}
                             className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors disabled:bg-blue-400"
                         >
-                            {loading ? 'Guardando...' : 'Guardar Gasto'}
+                            {loading ? 'Guardando...' : isEditing ? 'Actualizar Gasto' : 'Guardar Gasto'}
                         </button>
                     </div>
                 </form>

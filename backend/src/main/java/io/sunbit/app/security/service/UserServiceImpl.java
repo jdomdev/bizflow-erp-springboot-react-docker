@@ -53,10 +53,18 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		ExpenseUser savedUser = new ExpenseUser();
 		ExpenseUser settedUser = new ExpenseUser();
 		try {
+			// Vinculación automática: Si existe un empleado con el mismo email, vincularlo
+			// NOTA: Un usuario puede NO ser empleado (freelance) - esto es válido
+			Employee matchingEmployee = null;
 			try {
-				employeeService.findByEmail(user.getEmail());
+				matchingEmployee = employeeService.findByEmail(user.getEmail());
 			} catch (Exception e) {
-				// Employee not found, which is OK for signup
+				// Employee not found, which is OK - user can be a freelance
+			}
+			
+			// Si encontramos un empleado con el mismo email y el usuario no tiene employee asignado
+			if (matchingEmployee != null && user.getEmployee() == null) {
+				user.setEmployee(matchingEmployee);
 			}
 
 			// Asignar roles a partir de roleIds
@@ -129,6 +137,22 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 					user.setPassword(currentUser.getPassword());
 				} else if (!user.getPassword().startsWith("$2")) {
 					user.setPassword(passwordEncoder.encode(user.getPassword()));
+				}
+
+				// Vinculación automática: Si el usuario no tiene employee y hay uno con el mismo email, vincularlo
+				// Esto permite vincular usuarios existentes con empleados que se crearon después
+				if (user.getEmployee() == null && currentUser.getEmployee() == null) {
+					try {
+						Employee matchingEmployee = employeeService.findByEmail(user.getEmail());
+						if (matchingEmployee != null) {
+							user.setEmployee(matchingEmployee);
+						}
+					} catch (Exception e) {
+						// Employee not found, which is OK - user can be a freelance
+					}
+				} else if (user.getEmployee() == null && currentUser.getEmployee() != null) {
+					// Mantener el employee actual si no se especificó uno nuevo
+					user.setEmployee(currentUser.getEmployee());
 				}
 
 				// Asignar roles a partir de roleIds

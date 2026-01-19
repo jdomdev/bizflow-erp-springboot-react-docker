@@ -29,7 +29,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllEmployee() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(employeeService.findAll());
