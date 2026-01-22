@@ -106,8 +106,8 @@ services:
       - postgres_prod_data:/var/lib/postgresql/data
       - ./sql/01_init_prod.sql:/docker-entrypoint-initdb.d/01_init_prod.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
-      - ./sql/prod:/docker-entrypoint-initdb.d/prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/_legacy_prod:/docker-entrypoint-initdb.d/prod:ro
     healthcheck:
       <<: *db-health
       test:
@@ -131,7 +131,7 @@ services:
       - postgres_dev_data:/var/lib/postgresql/data
       - ./sql/01_init_dev.sql:/docker-entrypoint-initdb.d/01_init_dev.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
       - ./sql/dev:/docker-entrypoint-initdb.d/dev:ro
     healthcheck:
       <<: *db-health
@@ -156,7 +156,7 @@ services:
       - postgres_test_data:/var/lib/postgresql/data
       - ./sql/01_init_test.sql:/docker-entrypoint-initdb.d/01_init_test.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
       - ./sql/test:/docker-entrypoint-initdb.d/test:ro
     healthcheck:
       <<: *db-health
