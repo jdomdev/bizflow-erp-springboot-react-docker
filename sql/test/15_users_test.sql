@@ -4,17 +4,15 @@
 -- Password format: [rol 3 letters][surname 3 letters][3 digits]
 -- Passwords are BCrypt hashed (cost 10)
 -- =========================================================
+-- NOTE: Ada Lovelace (id=1) and Alan Turing (id=2) are already 
+-- created by 05_expense_admin_bootstrap.sql. We start from id=3.
+-- =========================================================
 
 -- ===========================================
 -- LINKED USERS (have corresponding employee)
 -- ===========================================
 
--- ADMINS (2)
-INSERT INTO expense_user (name, surname, email, password, employee_id) VALUES
-('Ada', 'Lovelace', 'ada.lovelace@bizflowerp.com', '$2a$10$d7wIIjI/4Ebe8W0pSoOz9e4RJWJ/sk2FLpcubp4ZFBm4ceF0qkYWy', 1),
-('Alan', 'Turing', 'alan.turing@bizflowerp.com', '$2a$10$w7sOwNUnxcmQGwcIZDkXsu9zpHGAF.7ANqeXGfRi2kstvB2ChrBuG', 2);
-
--- MANAGERS (2)
+-- MANAGERS (2) - ids 3-4
 INSERT INTO expense_user (name, surname, email, password, employee_id) VALUES
 ('Marie', 'Curie', 'marie.curie@bizflowerp.com', '$2a$10$XdTjiogQZG12ugDTdGmU/u6tca1SNUY6GVQ7gysPFFbcf.qC4IcUq', 3),
 ('Albert', 'Einstein', 'albert.einstein@bizflowerp.com', '$2a$10$5aXNQ0cAkknUkPOdsVkolOEA3bGImiNgCDLm45N5c844aI5ZjjBx6', 4);
@@ -46,9 +44,7 @@ INSERT INTO expense_user (name, surname, email, password, employee_id) VALUES
 -- ===========================================
 -- ROLE ASSIGNMENTS
 -- ===========================================
-
--- Admins (user_id 1-2) -> role_id 1 = ADMIN
-INSERT INTO user_role (user_id, role_id) VALUES (1, 1), (2, 1);
+-- NOTE: Admins (user_id 1-2) already have roles from 05_expense_admin_bootstrap.sql
 
 -- Managers (user_id 3-4) -> role_id 3 = MANAGER
 INSERT INTO user_role (user_id, role_id) VALUES (3, 3), (4, 3);
