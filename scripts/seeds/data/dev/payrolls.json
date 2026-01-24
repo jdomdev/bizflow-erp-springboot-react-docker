@@ -1,1502 +1,1502 @@
 [
   {
     "amount": 2989,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 1
   },
   {
     "amount": 2966,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 1
   },
   {
     "amount": 3026,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 1
   },
   {
     "amount": 3032,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 1
   },
   {
     "amount": 2951,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 1
   },
   {
     "amount": 2896,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 1
   },
   {
     "amount": 2983,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 2
   },
   {
     "amount": 2885,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 2
   },
   {
     "amount": 2908,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 2
   },
   {
     "amount": 2904,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 2
   },
   {
     "amount": 2922,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 2
   },
   {
     "amount": 2955,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 2
   },
   {
     "amount": 3055,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 3
   },
   {
     "amount": 3030,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 3
   },
   {
     "amount": 2910,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 3
   },
   {
     "amount": 2967,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 3
   },
   {
     "amount": 3005,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 3
   },
   {
     "amount": 2925,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 3
   },
   {
     "amount": 2910,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 4
   },
   {
     "amount": 2847,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 4
   },
   {
     "amount": 2787,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 4
   },
   {
     "amount": 2918,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 4
   },
   {
     "amount": 2843,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 4
   },
   {
     "amount": 2809,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 4
   },
   {
     "amount": 2893,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 5
   },
   {
     "amount": 2867,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 5
   },
   {
     "amount": 2878,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 5
   },
   {
     "amount": 2846,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 5
   },
   {
     "amount": 2831,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 5
   },
   {
     "amount": 2864,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 5
   },
   {
     "amount": 2957,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 6
   },
   {
     "amount": 2859,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 6
   },
   {
     "amount": 2845,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 6
   },
   {
     "amount": 2872,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 6
   },
   {
     "amount": 2897,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 6
   },
   {
     "amount": 2874,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 6
   },
   {
     "amount": 2777,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 7
   },
   {
     "amount": 2803,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 7
   },
   {
     "amount": 2793,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 7
   },
   {
     "amount": 2721,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 7
   },
   {
     "amount": 2790,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 7
   },
   {
     "amount": 2729,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 7
   },
   {
     "amount": 2791,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 8
   },
   {
     "amount": 2664,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 8
   },
   {
     "amount": 2777,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 8
   },
   {
     "amount": 2663,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 8
   },
   {
     "amount": 2782,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 8
   },
   {
     "amount": 2791,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 8
   },
   {
     "amount": 2869,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 9
   },
   {
     "amount": 2837,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 9
   },
   {
     "amount": 2873,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 9
   },
   {
     "amount": 2792,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 9
   },
   {
     "amount": 2739,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 9
   },
   {
     "amount": 2770,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 9
   },
   {
     "amount": 2624,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 10
   },
   {
     "amount": 2655,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 10
   },
   {
     "amount": 2735,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 10
   },
   {
     "amount": 2648,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 10
   },
   {
     "amount": 2613,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 10
   },
   {
     "amount": 2638,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 10
   },
   {
     "amount": 2686,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 11
   },
   {
     "amount": 2783,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 11
   },
   {
     "amount": 2749,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 11
   },
   {
     "amount": 2666,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 11
   },
   {
     "amount": 2750,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 11
   },
   {
     "amount": 2677,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 11
   },
   {
     "amount": 2714,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 12
   },
   {
     "amount": 2661,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 12
   },
   {
     "amount": 2748,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 12
   },
   {
     "amount": 2758,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 12
   },
   {
     "amount": 2775,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 12
   },
   {
     "amount": 2747,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 12
   },
   {
     "amount": 2585,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 13
   },
   {
     "amount": 2577,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 13
   },
   {
     "amount": 2613,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 13
   },
   {
     "amount": 2628,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 13
   },
   {
     "amount": 2648,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 13
   },
   {
     "amount": 2580,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 13
   },
   {
     "amount": 2700,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 14
   },
   {
     "amount": 2736,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 14
   },
   {
     "amount": 2622,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 14
   },
   {
     "amount": 2726,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 14
   },
   {
     "amount": 2663,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 14
   },
   {
     "amount": 2709,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 14
   },
   {
     "amount": 2450,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 15
   },
   {
     "amount": 2545,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 15
   },
   {
     "amount": 2523,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 15
   },
   {
     "amount": 2450,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 15
   },
   {
     "amount": 2426,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 15
   },
   {
     "amount": 2443,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 15
   },
   {
     "amount": 2619,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 16
   },
   {
     "amount": 2552,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 16
   },
   {
     "amount": 2644,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 16
   },
   {
     "amount": 2684,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 16
   },
   {
     "amount": 2588,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 16
   },
   {
     "amount": 2616,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 16
   },
   {
     "amount": 2563,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 17
   },
   {
     "amount": 2606,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 17
   },
   {
     "amount": 2556,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 17
   },
   {
     "amount": 2578,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 17
   },
   {
     "amount": 2541,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 17
   },
   {
     "amount": 2542,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 17
   },
   {
     "amount": 2352,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 18
   },
   {
     "amount": 2384,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 18
   },
   {
     "amount": 2421,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 18
   },
   {
     "amount": 2321,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 18
   },
   {
     "amount": 2443,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 18
   },
   {
     "amount": 2430,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 18
   },
   {
     "amount": 2489,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 19
   },
   {
     "amount": 2411,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 19
   },
   {
     "amount": 2421,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 19
   },
   {
     "amount": 2371,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 19
   },
   {
     "amount": 2493,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 19
   },
   {
     "amount": 2441,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 19
   },
   {
     "amount": 2407,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 20
   },
   {
     "amount": 2443,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 20
   },
   {
     "amount": 2408,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 20
   },
   {
     "amount": 2421,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 20
   },
   {
     "amount": 2365,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 20
   },
   {
     "amount": 2461,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 20
   },
   {
     "amount": 2325,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 21
   },
   {
     "amount": 2316,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 21
   },
   {
     "amount": 2326,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 21
   },
   {
     "amount": 2414,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 21
   },
   {
     "amount": 2288,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 21
   },
   {
     "amount": 2422,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 21
   },
   {
     "amount": 2268,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 22
   },
   {
     "amount": 2329,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 22
   },
   {
     "amount": 2265,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 22
   },
   {
     "amount": 2398,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 22
   },
   {
     "amount": 2406,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 22
   },
   {
     "amount": 2289,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 22
   },
   {
     "amount": 2453,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 23
   },
   {
     "amount": 2376,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 23
   },
   {
     "amount": 2461,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 23
   },
   {
     "amount": 2365,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 23
   },
   {
     "amount": 2403,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 23
   },
   {
     "amount": 2348,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 23
   },
   {
     "amount": 2273,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 24
   },
   {
     "amount": 2177,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 24
   },
   {
     "amount": 2255,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 24
   },
   {
     "amount": 2269,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 24
   },
   {
     "amount": 2162,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 24
   },
   {
     "amount": 2215,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 24
   },
   {
     "amount": 2256,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 25
   },
   {
     "amount": 2222,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 25
   },
   {
     "amount": 2210,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 25
   },
   {
     "amount": 2222,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 25
   },
   {
     "amount": 2302,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 25
   },
   {
     "amount": 2279,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 25
   },
   {
     "amount": 2171,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 26
   },
   {
     "amount": 2183,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 26
   },
   {
     "amount": 2167,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 26
   },
   {
     "amount": 2191,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 26
   },
   {
     "amount": 2185,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 26
   },
   {
     "amount": 2170,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 26
   },
   {
     "amount": 2127,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 27
   },
   {
     "amount": 2168,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 27
   },
   {
     "amount": 2225,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 27
   },
   {
     "amount": 2222,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 27
   },
   {
     "amount": 2135,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 27
   },
   {
     "amount": 2187,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 27
   },
   {
     "amount": 2137,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 28
   },
   {
     "amount": 2120,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 28
   },
   {
     "amount": 2190,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 28
   },
   {
     "amount": 2190,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 28
   },
   {
     "amount": 2193,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 28
   },
   {
     "amount": 2234,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 28
   },
   {
     "amount": 2084,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 29
   },
   {
     "amount": 1986,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 29
   },
   {
     "amount": 1987,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 29
   },
   {
     "amount": 2099,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 29
   },
   {
     "amount": 2036,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 29
   },
   {
     "amount": 1990,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 29
   },
   {
     "amount": 2127,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 30
   },
   {
     "amount": 2056,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 30
   },
   {
     "amount": 2013,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 30
   },
   {
     "amount": 2061,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 30
   },
   {
     "amount": 2034,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 30
   },
   {
     "amount": 2079,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 30
   },
   {
     "amount": 2048,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 31
   },
   {
     "amount": 2081,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 31
   },
   {
     "amount": 2079,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 31
   },
   {
     "amount": 2073,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 31
   },
   {
     "amount": 2128,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 31
   },
   {
     "amount": 2094,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 31
   },
   {
     "amount": 2002,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 32
   },
   {
     "amount": 2068,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 32
   },
   {
     "amount": 1941,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 32
   },
   {
     "amount": 2045,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 32
   },
   {
     "amount": 1969,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 32
   },
   {
     "amount": 1943,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 32
   },
   {
     "amount": 2040,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 33
   },
   {
     "amount": 1958,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 33
   },
   {
     "amount": 1998,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 33
   },
   {
     "amount": 2041,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 33
   },
   {
     "amount": 2024,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 33
   },
   {
     "amount": 1959,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 33
   },
   {
     "amount": 2056,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 34
   },
   {
     "amount": 2062,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 34
   },
   {
     "amount": 2062,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 34
   },
   {
     "amount": 2015,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 34
   },
   {
     "amount": 2049,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 34
   },
   {
     "amount": 2120,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 34
   },
   {
     "amount": 1954,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 35
   },
   {
     "amount": 1977,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 35
   },
   {
     "amount": 2074,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 35
   },
   {
     "amount": 1982,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 35
   },
   {
     "amount": 1963,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 35
   },
   {
     "amount": 1952,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 35
   },
   {
     "amount": 1903,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 36
   },
   {
     "amount": 1829,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 36
   },
   {
     "amount": 1850,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 36
   },
   {
     "amount": 1819,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 36
   },
   {
     "amount": 1847,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 36
   },
   {
     "amount": 1788,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 36
   },
   {
     "amount": 1945,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 37
   },
   {
     "amount": 2038,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 37
   },
   {
     "amount": 2040,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 37
   },
   {
     "amount": 1991,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 37
   },
   {
     "amount": 2047,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 37
   },
   {
     "amount": 2057,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 37
   },
   {
     "amount": 1834,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 38
   },
   {
     "amount": 1861,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 38
   },
   {
     "amount": 1793,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 38
   },
   {
     "amount": 1840,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 38
   },
   {
     "amount": 1795,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 38
   },
   {
     "amount": 1833,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 38
   },
   {
     "amount": 1940,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 39
   },
   {
     "amount": 1928,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 39
   },
   {
     "amount": 1827,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 39
   },
   {
     "amount": 1937,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 39
   },
   {
     "amount": 1816,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 39
   },
   {
     "amount": 1851,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 39
   },
   {
     "amount": 1757,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 40
   },
   {
     "amount": 1852,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 40
   },
   {
     "amount": 1724,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 40
   },
   {
     "amount": 1725,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 40
   },
   {
     "amount": 1789,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 40
   },
   {
     "amount": 1821,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 40
   },
   {
     "amount": 1870,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 41
   },
   {
     "amount": 1807,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 41
   },
   {
     "amount": 1874,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 41
   },
   {
     "amount": 1764,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 41
   },
   {
     "amount": 1848,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 41
   },
   {
     "amount": 1811,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 41
   },
   {
     "amount": 1851,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 42
   },
   {
     "amount": 1780,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 42
   },
   {
     "amount": 1907,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 42
   },
   {
     "amount": 1829,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 42
   },
   {
     "amount": 1810,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 42
   },
   {
     "amount": 1848,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 42
   },
   {
     "amount": 1759,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 43
   },
   {
     "amount": 1704,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 43
   },
   {
     "amount": 1790,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 43
   },
   {
     "amount": 1739,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 43
   },
   {
     "amount": 1746,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 43
   },
   {
     "amount": 1776,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 43
   },
   {
     "amount": 1796,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 44
   },
   {
     "amount": 1809,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 44
   },
   {
     "amount": 1818,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 44
   },
   {
     "amount": 1698,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 44
   },
   {
     "amount": 1758,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 44
   },
   {
     "amount": 1762,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 44
   },
   {
     "amount": 1660,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 45
   },
   {
     "amount": 1616,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 45
   },
   {
     "amount": 1625,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 45
   },
   {
     "amount": 1580,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 45
   },
   {
     "amount": 1592,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 45
   },
   {
     "amount": 1645,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 45
   },
   {
     "amount": 1773,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 46
   },
   {
     "amount": 1762,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 46
   },
   {
     "amount": 1677,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 46
   },
   {
     "amount": 1761,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 46
   },
   {
     "amount": 1795,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 46
   },
   {
     "amount": 1771,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 46
   },
   {
     "amount": 1615,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 47
   },
   {
     "amount": 1592,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 47
   },
   {
     "amount": 1571,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 47
   },
   {
     "amount": 1604,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 47
   },
   {
     "amount": 1618,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 47
   },
   {
     "amount": 1620,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 47
   },
   {
     "amount": 1601,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 48
   },
   {
     "amount": 1702,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 48
   },
   {
     "amount": 1645,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 48
   },
   {
     "amount": 1747,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 48
   },
   {
     "amount": 1671,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 48
   },
   {
     "amount": 1742,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 48
   },
   {
     "amount": 1571,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 49
   },
   {
     "amount": 1595,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 49
   },
   {
     "amount": 1556,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 49
   },
   {
     "amount": 1595,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 49
   },
   {
     "amount": 1556,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 49
   },
   {
     "amount": 1597,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 49
   },
   {
     "amount": 1515,
-    "payrollDate": "2025-12-01",
+    "payrollDate": "2025-12-01T10:00:00",
     "employeeId": 50
   },
   {
     "amount": 1500,
-    "payrollDate": "2025-12-16",
+    "payrollDate": "2025-12-16T10:00:00",
     "employeeId": 50
   },
   {
     "amount": 1576,
-    "payrollDate": "2025-12-31",
+    "payrollDate": "2025-12-31T10:00:00",
     "employeeId": 50
   },
   {
     "amount": 1507,
-    "payrollDate": "2026-01-15",
+    "payrollDate": "2026-01-15T10:00:00",
     "employeeId": 50
   },
   {
     "amount": 1561,
-    "payrollDate": "2026-01-30",
+    "payrollDate": "2026-01-30T10:00:00",
     "employeeId": 50
   },
   {
     "amount": 1532,
-    "payrollDate": "2026-02-14",
+    "payrollDate": "2026-02-14T10:00:00",
     "employeeId": 50
   }
 ]

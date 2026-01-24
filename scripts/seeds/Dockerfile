@@ -14,12 +14,12 @@ COPY seed_runner.py .
 COPY config/ ./config/
 COPY data/ ./data/
 
-# Default environment variables
+# Default environment variables (overridden by docker-compose from .env files)
 ENV SEED_ENV=dev
 ENV API_URL=http://backend:8080
-ENV ADMIN_EMAIL=admin@bizflow.com
-ENV ADMIN_PASSWORD=<PASSWORD>
-ENV WAIT_FOR_BACKEND=true
+ENV ADMIN_EMAIL=ada.lovelace@bizflowerp.com
+ENV ADMIN_PASSWORD=""
+ENV WAIT_SECONDS=60
 
 # Run seeder
-CMD ["sh", "-c", "python seed_runner.py --env ${SEED_ENV} --api-url ${API_URL} --admin-email ${ADMIN_EMAIL} --admin-password ${ADMIN_PASSWORD} ${WAIT_FOR_BACKEND:+--wait}"]
+CMD ["sh", "-c", "python seed_runner.py --env ${SEED_ENV} --api-url ${API_URL} --admin-email ${ADMIN_EMAIL} --admin-password ${ADMIN_PASSWORD} --wait ${WAIT_SECONDS}"]
