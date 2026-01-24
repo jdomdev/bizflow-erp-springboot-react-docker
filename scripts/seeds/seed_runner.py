@@ -118,7 +118,7 @@ class SeedRunner:
             response = self.session.post(
                 f"{self.api_url}/api/v1/auth/login",
                 json={
-                    "username": self.admin_email,
+                    "email": self.admin_email,
                     "password": self.admin_password
                 },
                 headers={"Content-Type": "application/json"}
@@ -260,12 +260,46 @@ class SeedRunner:
         logger.info(f"✅ Users: {self.stats['users_created']} created, "
                    f"{self.stats['users_skipped']} skipped")
     
+    def _fetch_existing_payrolls(self) -> set:
+        """Fetch existing payrolls and return set of (employeeId, payroll_date) tuples."""
+        existing = set()
+        try:
+            response = self.session.get(
+                f"{self.api_url}/api/v1/payroll",
+                headers=self._auth_headers()
+            )
+            if response.status_code == 200:
+                payrolls = response.json()
+                for p in payrolls:
+                    # Unique key: employeeId + full payroll date
+                    emp_id = p.get("employeeId")
+                    payroll_date = p.get("payrollDate", "")[:10]  # YYYY-MM-DD
+                    if emp_id and payroll_date:
+                        existing.add((emp_id, payroll_date))
+                logger.debug(f"Found {len(existing)} existing payrolls")
+        except Exception as e:
+            logger.warning(f"Could not fetch existing payrolls: {e}")
+        return existing
+
     def seed_payrolls(self, payrolls: List[Dict[str, Any]]) -> None:
-        """Seed payrolls via API."""
+        """Seed payrolls via API with duplicate detection."""
         logger.info(f"Seeding {len(payrolls)} payrolls...")
+        
+        # Pre-fetch existing payrolls for idempotency
+        existing_payrolls = self._fetch_existing_payrolls()
         
         for payroll in payrolls:
             try:
+                # Unique key: employeeId + full date
+                emp_id = payroll.get("employeeId")
+                payroll_date = payroll.get("payrollDate", "")[:10]  # YYYY-MM-DD
+                payroll_key = (emp_id, payroll_date)
+                
+                if payroll_key in existing_payrolls:
+                    logger.debug(f"Payroll for employee {emp_id} on {payroll_date} already exists, skipping")
+                    self.stats["payrolls_skipped"] += 1
+                    continue
+                
                 response = self.session.post(
                     f"{self.api_url}/api/v1/payroll/",
                     json=payroll,
@@ -274,6 +308,7 @@ class SeedRunner:
                 
                 if response.status_code in [200, 201]:
                     self.stats["payrolls_created"] += 1
+                    existing_payrolls.add(payroll_key)  # Add to set to avoid duplicates in same batch
                 else:
                     self.stats["payrolls_skipped"] += 1
                     
@@ -284,12 +319,50 @@ class SeedRunner:
         logger.info(f"✅ Payrolls: {self.stats['payrolls_created']} created, "
                    f"{self.stats['payrolls_skipped']} skipped")
     
+    def _fetch_existing_expenses(self) -> set:
+        """Fetch existing expenses and return set of unique keys."""
+        existing = set()
+        try:
+            response = self.session.get(
+                f"{self.api_url}/api/v1/expense",
+                headers=self._auth_headers()
+            )
+            if response.status_code == 200:
+                expenses = response.json()
+                for e in expenses:
+                    # Unique key: userId + date + amount + concept
+                    user_id = e.get("expenseUserId")
+                    expense_date = e.get("expenseDate", "")[:10]  # YYYY-MM-DD
+                    amount = round(float(e.get("amount", 0)), 2)
+                    concept = e.get("concept", "").lower()
+                    if user_id:
+                        existing.add((user_id, expense_date, amount, concept))
+                logger.debug(f"Found {len(existing)} existing expenses")
+        except Exception as e:
+            logger.warning(f"Could not fetch existing expenses: {e}")
+        return existing
+
     def seed_expenses(self, expenses: List[Dict[str, Any]]) -> None:
-        """Seed expenses via API."""
+        """Seed expenses via API with duplicate detection."""
         logger.info(f"Seeding {len(expenses)} expenses...")
+        
+        # Pre-fetch existing expenses for idempotency
+        existing_expenses = self._fetch_existing_expenses()
         
         for expense in expenses:
             try:
+                # Unique key: userId + date + amount + concept
+                user_id = expense.get("expenseUserId")
+                expense_date = expense.get("expenseDate", "")[:10]  # YYYY-MM-DD
+                amount = round(float(expense.get("amount", 0)), 2)
+                concept = expense.get("concept", "").lower()
+                expense_key = (user_id, expense_date, amount, concept)
+                
+                if expense_key in existing_expenses:
+                    logger.debug(f"Expense for user {user_id} on {expense_date} ({concept}) already exists, skipping")
+                    self.stats["expenses_skipped"] += 1
+                    continue
+                
                 response = self.session.post(
                     f"{self.api_url}/api/v1/expense/",
                     json=expense,
@@ -298,6 +371,7 @@ class SeedRunner:
                 
                 if response.status_code in [200, 201]:
                     self.stats["expenses_created"] += 1
+                    existing_expenses.add(expense_key)  # Add to set to avoid duplicates in same batch
                 else:
                     self.stats["expenses_skipped"] += 1
                     
