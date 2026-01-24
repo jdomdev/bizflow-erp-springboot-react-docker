@@ -1,6 +1,6 @@
 -- =========================================================
 -- Master bootstrap for DEV environment
--- Medium dataset: 80 employees, 60 users, 500 payrolls, 200 expenses
+-- Schema and reference data ONLY - seed data via API seeder
 -- =========================================================
 
 -- Common schema and reference data
@@ -8,10 +8,15 @@
 \ir ../common/02_positions.sql
 \ir ../common/03_roles.sql
 
--- DEV-specific seed data
-\ir 10_employees_dev.sql
-\ir ../common/05_expense_admin_bootstrap.sql
-\ir 15_users_dev.sql
-\ir 20_payrolls_dev.sql
-\ir 30_expenses_dev.sql
+-- Bootstrap admin users with DEV/TEST passwords
+\ir ../common/05_admin_bootstrap_dev_test.sql
+
+-- =========================================================
+-- NOTE: Seed data (employees, users, payrolls, expenses) is now
+-- loaded via API seeder instead of SQL files.
+-- 
+-- Run: docker compose run --rm api-seeder-dev
+-- 
+-- Legacy SQL files are in sql/_legacy_dev/ for reference only.
+-- =========================================================
 
