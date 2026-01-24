@@ -63,3 +63,23 @@ CREATE TABLE IF NOT EXISTS expense (
     expense_user_id BIGINT NOT NULL,
     CONSTRAINT fk_expense_expense_user FOREIGN KEY (expense_user_id) REFERENCES expense_user(id)
 );
+
+CREATE TABLE IF NOT EXISTS notifications (
+    id BIGSERIAL PRIMARY KEY,
+    created_at TIMESTAMP(6) NOT NULL,
+    is_read BOOLEAN NOT NULL DEFAULT FALSE,
+    message VARCHAR(500) NOT NULL,
+    read_at TIMESTAMP(6),
+    reference_id BIGINT,
+    reference_type VARCHAR(50),
+    title VARCHAR(128) NOT NULL,
+    type VARCHAR(50) NOT NULL CHECK (type IN (
+        'EXPENSE_CREATED', 'EXPENSE_UPDATED', 'EXPENSE_APPROVED', 
+        'EXPENSE_REJECTED', 'EXPENSE_DELETED', 'PAYROLL_GENERATED', 
+        'PAYROLL_AVAILABLE', 'PAYROLL_REMINDER', 'EMPLOYEE_LINKED', 
+        'EMPLOYEE_UNLINKED', 'USER_REGISTERED', 'USER_ROLE_CHANGED', 
+        'SYSTEM_ALERT', 'BUDGET_EXCEEDED', 'INFO', 'WARNING'
+    )),
+    user_id BIGINT NOT NULL,
+    CONSTRAINT fk_notifications_user FOREIGN KEY (user_id) REFERENCES expense_user(id)
+);
