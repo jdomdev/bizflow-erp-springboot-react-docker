@@ -106,8 +106,9 @@ services:
       - postgres_prod_data:/var/lib/postgresql/data
       - ./sql/01_init_prod.sql:/docker-entrypoint-initdb.d/01_init_prod.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
-      - ./sql/_legacy_prod:/docker-entrypoint-initdb.d/prod:ro
+      - ./sql/prod:/docker-entrypoint-initdb.d/prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/_legacy_dev_prod:ro
+      - ./sql/_legacy_prod:/docker-entrypoint-initdb.d/_legacy_prod:ro
     healthcheck:
       <<: *db-health
       test:
@@ -280,8 +281,8 @@ services:
     environment:
       SEED_ENV: prod
       API_URL: http://backend-prod:8080
-      ADMIN_EMAIL: admin@bizflow.com
-      WAIT_FOR_BACKEND: "true"
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
 
   api-seeder-dev:
     <<: [*api-seeder-common, *dev-env]
@@ -293,8 +294,8 @@ services:
     environment:
       SEED_ENV: dev
       API_URL: http://backend-dev:8080
-      ADMIN_EMAIL: admin@bizflow.com
-      WAIT_FOR_BACKEND: "true"
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
 
   api-seeder-test:
     <<: [*api-seeder-common, *test-env]
@@ -306,8 +307,8 @@ services:
     environment:
       SEED_ENV: test
       API_URL: http://backend-test:8080
-      ADMIN_EMAIL: admin@bizflow.com
-      WAIT_FOR_BACKEND: "true"
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
 
   frontend-prod:
     <<: *frontend-common
