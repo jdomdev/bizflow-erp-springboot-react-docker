@@ -1,7 +1,7 @@
 -- ====================================================================
 -- Bootstrap ADMIN users for DEV/TEST environments
 -- ====================================================================
--- See scripts/secrets/ → <PASSWORD>, <PASSWORD>
+-- See scripts/secrets/ → See scripts/secrets/
 -- ====================================================================
 
 INSERT INTO expense_user (id, email, name, surname, password, employee_id)
