@@ -1,7 +1,7 @@
 -- ====================================================================
 -- Bootstrap ADMIN users for DEV/TEST environments
 -- ====================================================================
--- See scripts/secrets/ → See scripts/secrets/
+-- Passwords stored as BCrypt hashes. See scripts/secrets/ for credentials.
 -- ====================================================================
 
 INSERT INTO expense_user (id, email, name, surname, password, employee_id)

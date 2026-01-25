@@ -1,8 +1,7 @@
 -- ====================================================================
 -- Bootstrap ADMIN users for PROD environment
 -- ====================================================================
--- See scripts/secrets/![2UPPER][symbol]
--- Example: <EXAMPLE_PASSWORD> (stronger than dev/test)
+-- Passwords stored as BCrypt hashes. See scripts/secrets/ for credentials.
 -- ====================================================================
 
 INSERT INTO expense_user (id, email, name, surname, password, employee_id)
