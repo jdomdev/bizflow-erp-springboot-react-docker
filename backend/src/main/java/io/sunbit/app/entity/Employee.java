@@ -50,11 +50,11 @@ public class Employee implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "name", nullable = false, length = 128)
-	@Length(min = 3, max = 128)
+	@Length(min = 2, max = 128)
 	@NonNull
 	private String name;
 	@Column(name = "surname", nullable = false, length = 255)
-	@Length(min = 5, max = 255)
+	@Length(min = 2, max = 255)
 	@NonNull
 	private String surname;
 	@Column(name = "birth_date")
