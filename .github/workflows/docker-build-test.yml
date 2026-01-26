@@ -86,8 +86,8 @@ jobs:
         echo "Testing login endpoint..."
         TOKEN=$(curl -s -X POST http://localhost:8080/api/v1/auth/login \
           -H "Content-Type: application/json" \
-          -d '{"email":"admin@example.com","password":"<PASSWORD>"}' \
-          | jq -r '.token')
+          -d "{\"email\":\"admin@example.com\",\"password\":\"${TEST_ADMIN_PASSWORD:-adminpass123}\"}" \
+          | jq -r '.accessToken')
         
         if [ -z "$TOKEN" ] || [ "$TOKEN" = "null" ]; then
           echo "Failed to get authentication token"
