@@ -88,21 +88,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			       }
 
 	/**
-	 * Verifica si la petición contiene un header de autorización válido.
-	 * 
-	 * @param request Petición HTTP
-	 * @return true si el header existe y comienza con "Bearer"
-					@Override
-					protected void doFilterInternal(@NonNull HttpServletRequest request,
-							@NonNull HttpServletResponse response,
-							@NonNull FilterChain filterChain)
-							throws ServletException, IOException {
-	private boolean hasAuthorizationHeader(HttpServletRequest request) {
-		String header = request.getHeader(AUTHORIZATION_HEADER);
-		return !ObjectUtils.isEmpty(header) && header.startsWith(BEARER_PREFIX);
-	}
-
-	/**
 	 * Extrae el token JWT del header de autorización.
 	 * 
 	 * @param request Petición HTTP
