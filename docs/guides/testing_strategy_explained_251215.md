@@ -435,7 +435,7 @@ services:
     env:
       POSTGRES_DB: erp_test_db
       POSTGRES_USER: erp_test_user
-      POSTGRES_PASSWORD: testpassword
+      POSTGRES_PASSWORD: <DB_PASSWORD>word
     ports:
       - 5434:5432
     options: >-

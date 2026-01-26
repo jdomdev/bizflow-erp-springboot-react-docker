@@ -264,7 +264,7 @@ docker-compose down --volumes
 
 ### Credenciales de Prueba
 - **Email**: admin@example.com
-- **Contraseña**: admin123
+- **Contraseña**: <PASSWORD>
 
 ## 📊 Versioning
 

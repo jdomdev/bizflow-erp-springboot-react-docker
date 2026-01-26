@@ -337,7 +337,7 @@ psql -U postgres -d expense_note_app
 # Request login
 curl -X POST http://localhost:8080/api/authentication/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"admin123"}'
+  -d '{"email":"admin@example.com","password":"<PASSWORD>"}'
 
 # Esperado: JSON con token JWT
 # {"token":"<JWT_TOKEN_PLACEHOLDER>", "user": {...}}
@@ -351,7 +351,7 @@ curl -X POST http://localhost:8080/api/authentication/login \
 
 ```
 Email: admin@example.com
-Password: admin123
+Password: <PASSWORD>
 Rol: ROLE_ADMIN
 ```
 
@@ -361,8 +361,8 @@ Rol: ROLE_ADMIN
 2. Click en "Signup"
 3. Rellenar formulario:
    - Email: `user@example.com`
-   - Password: `password123`
-   - Confirm Password: `password123`
+   - Password: `<PASSWORD>`
+   - Confirm Password: `<PASSWORD>`
 4. Click "Register"
 5. Login con nuevas credenciales
 

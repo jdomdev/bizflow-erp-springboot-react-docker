@@ -99,7 +99,7 @@ test.describe('Authentication', () => {
     
     // Fill login form
     await page.fill('input[name="email"]', 'admin@example.com');
-    await page.fill('input[name="password"]', 'admin123');
+    await page.fill('input[name="password"]', '<PASSWORD>');
     
     // Click login button
     await page.click('button[type="submit"]');
@@ -115,7 +115,7 @@ test.describe('Authentication', () => {
     await page.goto('/login');
     
     await page.fill('input[name="email"]', 'wrong@example.com');
-    await page.fill('input[name="password"]', 'wrongpassword');
+    await page.fill('input[name="password"]', '<PASSWORD>');
     await page.click('button[type="submit"]');
     
     // Should stay on login page
@@ -129,7 +129,7 @@ test.describe('Authentication', () => {
     // Login first
     await page.goto('/login');
     await page.fill('input[name="email"]', 'admin@example.com');
-    await page.fill('input[name="password"]', 'admin123');
+    await page.fill('input[name="password"]', '<PASSWORD>');
     await page.click('button[type="submit"]');
     await expect(page).toHaveURL(/.*dashboard/);
     
@@ -155,7 +155,7 @@ import { test, expect } from '@playwright/test';
 async function login(page) {
   await page.goto('/login');
   await page.fill('input[name="email"]', 'admin@example.com');
-  await page.fill('input[name="password"]', 'admin123');
+  await page.fill('input[name="password"]', '<PASSWORD>');
   await page.click('button[type="submit"]');
   await expect(page).toHaveURL(/.*dashboard/);
 }
@@ -251,7 +251,7 @@ test.describe('Payroll Management', () => {
     // Login
     await page.goto('/login');
     await page.fill('input[name="email"]', 'admin@example.com');
-    await page.fill('input[name="password"]', 'admin123');
+    await page.fill('input[name="password"]', '<PASSWORD>');
     await page.click('button[type="submit"]');
     
     // Navigate to payrolls
@@ -289,7 +289,7 @@ import { Page } from '@playwright/test';
 export async function loginAsAdmin(page: Page) {
   await page.goto('/login');
   await page.fill('input[name="email"]', 'admin@example.com');
-  await page.fill('input[name="password"]', 'admin123');
+  await page.fill('input[name="password"]', '<PASSWORD>');
   await page.click('button[type="submit"]');
   await page.waitForURL(/.*dashboard/);
 }
@@ -297,7 +297,7 @@ export async function loginAsAdmin(page: Page) {
 export async function loginAsUser(page: Page) {
   await page.goto('/login');
   await page.fill('input[name="email"]', 'user@example.com');
-  await page.fill('input[name="password"]', 'user123');
+  await page.fill('input[name="password"]', '<PASSWORD>');
   await page.click('button[type="submit"]');
   await page.waitForURL(/.*dashboard/);
 }
@@ -488,7 +488,7 @@ import { LoginPage } from './pages/LoginPage';
 test('login with POM', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
-  await loginPage.login('admin@example.com', 'admin123');
+  await loginPage.login('admin@example.com', '<PASSWORD>');
   await expect(page).toHaveURL(/.*dashboard/);
 });
 ```

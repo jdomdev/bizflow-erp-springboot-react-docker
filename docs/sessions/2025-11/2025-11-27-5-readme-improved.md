@@ -129,7 +129,7 @@ curl http://localhost:8080/api/v1/auth/check-email?email=test@example.com
 |-------|-----|-----------|-----------|
 | testuser1@example.com | USER | TestPass123456 | API Signup |
 | testuser2@example.com | USER | TestPass123456 | API Signup |
-| frontendtest1@example.com | USER | FrontEnd123456 | API Signup |
+| frontendtest1@example.com | USER | <PASSWORD> | API Signup |
 | admin1@example.com | ADMIN | AdminPass123456 | DB INSERT |
 | admin2@example.com | ADMIN | AdminPass123456 | DB INSERT |
 | manager1@example.com | MANAGER | ManagerPass123456 | DB INSERT |

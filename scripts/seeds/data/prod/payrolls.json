@@ -1,0 +1,6002 @@
+[
+  {
+    "amount": 4126,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4187,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4025,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4069,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4107,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 3989,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4020,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4117,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 1
+  },
+  {
+    "amount": 4065,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4121,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4196,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4245,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4133,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4249,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4238,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4095,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 2
+  },
+  {
+    "amount": 4001,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 3899,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 3889,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 3916,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 3978,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 4013,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 4035,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 4069,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 3
+  },
+  {
+    "amount": 3920,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3760,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3983,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3892,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3955,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3914,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3943,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 3815,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 4
+  },
+  {
+    "amount": 4161,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4030,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4215,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4168,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4142,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4148,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4000,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 4185,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 5
+  },
+  {
+    "amount": 3877,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 4120,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 4064,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 3970,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 3922,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 3922,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 3976,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 3983,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 6
+  },
+  {
+    "amount": 3949,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 3803,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 3924,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 4053,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 3891,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 3874,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 3818,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 3941,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 7
+  },
+  {
+    "amount": 4114,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 3992,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 4128,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 4136,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 3970,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 4146,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 4110,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 4138,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 8
+  },
+  {
+    "amount": 3919,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3915,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3917,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3754,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3783,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3772,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3761,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 3931,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 9
+  },
+  {
+    "amount": 4038,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 4103,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 3985,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 4105,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 4071,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 3968,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 4086,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 4075,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 10
+  },
+  {
+    "amount": 3724,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3708,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3868,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3735,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3832,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3688,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3674,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3803,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 11
+  },
+  {
+    "amount": 3591,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3786,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3788,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3601,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3759,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3592,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3825,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 3686,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 12
+  },
+  {
+    "amount": 4086,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 4004,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 4100,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 3892,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 4032,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 4121,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 3948,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 4041,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 13
+  },
+  {
+    "amount": 3895,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3990,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3867,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3913,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3994,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3875,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3998,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 3851,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 14
+  },
+  {
+    "amount": 4011,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3857,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3857,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3990,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 4014,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3998,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3835,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3861,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 15
+  },
+  {
+    "amount": 3976,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3777,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3895,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3905,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3908,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3779,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3895,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3873,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 16
+  },
+  {
+    "amount": 3863,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 4007,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 3889,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 3809,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 3906,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 3921,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 4008,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 3857,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 17
+  },
+  {
+    "amount": 3683,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3672,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3682,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3737,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3863,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3779,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3665,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3899,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 18
+  },
+  {
+    "amount": 3708,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3497,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3552,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3486,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3674,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3559,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3712,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3655,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 19
+  },
+  {
+    "amount": 3980,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3886,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3777,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3853,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3868,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3803,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3763,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3750,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 20
+  },
+  {
+    "amount": 3853,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3862,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3921,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3854,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3954,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3754,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3850,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3757,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 21
+  },
+  {
+    "amount": 3558,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3719,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3726,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3551,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3599,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3540,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3581,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3695,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 22
+  },
+  {
+    "amount": 3656,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3651,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3624,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3582,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3554,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3527,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3579,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3575,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 23
+  },
+  {
+    "amount": 3715,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3647,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3620,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3724,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3723,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3761,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3843,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3770,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 24
+  },
+  {
+    "amount": 3898,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3667,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3896,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3835,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3715,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3902,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3670,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3787,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 25
+  },
+  {
+    "amount": 3700,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3672,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3603,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3646,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3695,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3592,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3746,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3552,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 26
+  },
+  {
+    "amount": 3654,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3576,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3607,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3536,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3434,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3590,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3531,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3542,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 27
+  },
+  {
+    "amount": 3824,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3809,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3638,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3786,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3782,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3796,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3859,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3697,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 28
+  },
+  {
+    "amount": 3653,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3489,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3502,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3528,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3488,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3418,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3584,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3415,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 29
+  },
+  {
+    "amount": 3708,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3839,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3817,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3693,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3838,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3849,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3728,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3642,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 30
+  },
+  {
+    "amount": 3674,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3769,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3746,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3889,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3678,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3746,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3734,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3905,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 31
+  },
+  {
+    "amount": 3781,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3750,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3675,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3727,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3731,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3800,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3694,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3774,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 32
+  },
+  {
+    "amount": 3553,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3417,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3384,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3477,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3544,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3397,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3489,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3497,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 33
+  },
+  {
+    "amount": 3485,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3452,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3316,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3322,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3365,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3316,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3279,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3432,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 34
+  },
+  {
+    "amount": 3538,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3463,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3364,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3460,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3325,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3457,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3383,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3465,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 35
+  },
+  {
+    "amount": 3437,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3442,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3410,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3291,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3423,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3367,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3392,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3263,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 36
+  },
+  {
+    "amount": 3454,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3376,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3482,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3393,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3377,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3356,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3378,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3368,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 37
+  },
+  {
+    "amount": 3472,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3650,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3591,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3501,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3689,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3632,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3686,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3586,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 38
+  },
+  {
+    "amount": 3575,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3581,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3597,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3591,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3791,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3673,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3787,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3701,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 39
+  },
+  {
+    "amount": 3467,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3369,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3350,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3400,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3498,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3435,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3560,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3352,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 40
+  },
+  {
+    "amount": 3607,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3638,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3450,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3532,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3591,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3594,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3664,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3460,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 41
+  },
+  {
+    "amount": 3551,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3465,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3437,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3340,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3524,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3384,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3497,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3563,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 42
+  },
+  {
+    "amount": 3176,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3176,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3352,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3356,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3287,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3172,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3216,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3281,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 43
+  },
+  {
+    "amount": 3308,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3285,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3480,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3375,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3320,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3299,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3423,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3325,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 44
+  },
+  {
+    "amount": 3315,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3321,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3152,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3278,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3096,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3171,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3211,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3173,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 45
+  },
+  {
+    "amount": 3199,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3335,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3338,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3346,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3351,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3315,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3308,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3327,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 46
+  },
+  {
+    "amount": 3364,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3355,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3483,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3549,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3368,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3548,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3353,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3510,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 47
+  },
+  {
+    "amount": 3099,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3072,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3092,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3125,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3262,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3104,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3306,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3170,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 48
+  },
+  {
+    "amount": 3416,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3405,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3391,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3577,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3483,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3425,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3490,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3578,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 49
+  },
+  {
+    "amount": 3445,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3536,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3468,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3421,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3432,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3520,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3458,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3529,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 50
+  },
+  {
+    "amount": 3466,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3599,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3472,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3566,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3394,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3587,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3496,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3432,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 51
+  },
+  {
+    "amount": 3343,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3204,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3149,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3169,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3280,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3299,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3281,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3264,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 52
+  },
+  {
+    "amount": 3494,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3447,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3464,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3478,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3361,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3325,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3467,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3349,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 53
+  },
+  {
+    "amount": 3190,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3210,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3318,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3103,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3198,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3247,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3307,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3139,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 54
+  },
+  {
+    "amount": 3446,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3354,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3306,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3383,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3299,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3295,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3366,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3259,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 55
+  },
+  {
+    "amount": 3288,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3072,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3302,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3132,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3180,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3080,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3206,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3211,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 56
+  },
+  {
+    "amount": 3295,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3334,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3273,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3413,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3291,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3440,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3345,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3337,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 57
+  },
+  {
+    "amount": 3354,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3366,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3518,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3307,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3291,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3499,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3509,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3425,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 58
+  },
+  {
+    "amount": 3247,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3403,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3354,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3263,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3343,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3170,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3250,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3172,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 59
+  },
+  {
+    "amount": 3077,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3312,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3173,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3081,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3190,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3184,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3193,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3202,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 60
+  },
+  {
+    "amount": 3068,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 2965,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 2913,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 2943,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 3070,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 2938,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 3076,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 3028,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 61
+  },
+  {
+    "amount": 3146,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3134,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3007,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3141,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3010,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3187,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3112,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3152,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 62
+  },
+  {
+    "amount": 3168,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3258,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3197,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3270,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3129,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3234,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3270,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3152,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 63
+  },
+  {
+    "amount": 3021,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 2943,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 3058,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 3070,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 2913,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 2997,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 2997,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 3057,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 64
+  },
+  {
+    "amount": 3030,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 3010,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 3101,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 2914,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 3094,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 2922,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 3099,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 3066,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 65
+  },
+  {
+    "amount": 3001,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 3075,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 2909,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 3034,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 2919,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 3050,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 2932,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 2858,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 66
+  },
+  {
+    "amount": 3195,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3233,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3294,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3173,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3296,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3375,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3289,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3327,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 67
+  },
+  {
+    "amount": 3151,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3240,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3169,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3340,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3319,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3251,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3331,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3253,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 68
+  },
+  {
+    "amount": 3087,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 2996,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 2899,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 2894,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 2912,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 2925,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 3078,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 3027,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 69
+  },
+  {
+    "amount": 2876,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2925,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2867,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2958,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2826,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2959,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2973,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 2808,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 70
+  },
+  {
+    "amount": 3157,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3179,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3016,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3130,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3099,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3073,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3253,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 3211,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 71
+  },
+  {
+    "amount": 2926,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2923,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2829,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2849,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2827,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2809,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2957,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2948,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 72
+  },
+  {
+    "amount": 2992,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 3074,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 3056,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 2951,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 3009,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 2950,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 2970,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 3075,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 73
+  },
+  {
+    "amount": 3064,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3130,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3148,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3098,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3016,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3090,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3020,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 3069,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 74
+  },
+  {
+    "amount": 2955,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2866,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2876,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2902,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2829,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2881,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2879,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 3069,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 75
+  },
+  {
+    "amount": 2937,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2895,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2936,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2942,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 3006,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2830,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2996,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2941,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 76
+  },
+  {
+    "amount": 2903,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2739,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2851,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2767,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2920,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2825,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2810,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2702,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 77
+  },
+  {
+    "amount": 2815,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2720,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2753,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2747,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2892,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2907,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2884,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2924,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 78
+  },
+  {
+    "amount": 2998,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 3055,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 2949,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 3109,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 3052,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 2899,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 3002,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 3065,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 79
+  },
+  {
+    "amount": 2766,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2837,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2872,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2795,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2848,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2774,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2904,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2746,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 80
+  },
+  {
+    "amount": 2802,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2810,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2679,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2764,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2755,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2704,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2712,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2808,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 81
+  },
+  {
+    "amount": 2863,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2767,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2891,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2913,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2787,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2910,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2936,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2811,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 82
+  },
+  {
+    "amount": 2931,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2748,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2737,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2923,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2808,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2902,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2795,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2930,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 83
+  },
+  {
+    "amount": 2811,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2850,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2749,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2931,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2865,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2804,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2798,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2692,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 84
+  },
+  {
+    "amount": 2845,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 3016,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 2895,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 2787,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 2907,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 2945,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 2944,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 2840,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 85
+  },
+  {
+    "amount": 3021,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 2892,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 3059,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 3054,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 2993,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 3020,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 2866,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 2848,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 86
+  },
+  {
+    "amount": 2779,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2619,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2637,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2781,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2800,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2649,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2681,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2729,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 87
+  },
+  {
+    "amount": 2629,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2708,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2677,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2681,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2812,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2734,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2617,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2805,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 88
+  },
+  {
+    "amount": 2710,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2877,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2730,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2764,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2801,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2695,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2859,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2730,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 89
+  },
+  {
+    "amount": 2739,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2649,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2605,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2760,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2666,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2691,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2740,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2692,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 90
+  },
+  {
+    "amount": 2555,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2632,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2519,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2680,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2481,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2558,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2561,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2554,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 91
+  },
+  {
+    "amount": 2727,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2817,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2663,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2772,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2793,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2646,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2776,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2728,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 92
+  },
+  {
+    "amount": 2698,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2692,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2787,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2813,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2861,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2790,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2726,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2781,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 93
+  },
+  {
+    "amount": 2936,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2774,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2696,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2844,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2773,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2835,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2850,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2912,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 94
+  },
+  {
+    "amount": 2807,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2805,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2731,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2740,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2696,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2648,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2629,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2647,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 95
+  },
+  {
+    "amount": 2605,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2642,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2576,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2458,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2699,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2574,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2656,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2587,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 96
+  },
+  {
+    "amount": 2618,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2721,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2752,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2717,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2636,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2717,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2737,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2614,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 97
+  },
+  {
+    "amount": 2558,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2390,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2462,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2408,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2551,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2393,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2353,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2478,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 98
+  },
+  {
+    "amount": 2529,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2604,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2546,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2731,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2529,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2608,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2518,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2682,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 99
+  },
+  {
+    "amount": 2607,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2573,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2589,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2377,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2552,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2572,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2605,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2420,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 100
+  },
+  {
+    "amount": 2688,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2653,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2552,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2673,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2706,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2566,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2676,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2699,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 101
+  },
+  {
+    "amount": 2635,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2821,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2703,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2856,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2746,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2645,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2819,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2860,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 102
+  },
+  {
+    "amount": 2720,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2678,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2739,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2780,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2683,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2702,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2559,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2621,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 103
+  },
+  {
+    "amount": 2686,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2625,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2658,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2561,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2690,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2623,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2588,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2716,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 104
+  },
+  {
+    "amount": 2547,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2571,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2474,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2514,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2482,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2355,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2525,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2525,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 105
+  },
+  {
+    "amount": 2647,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2619,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2586,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2551,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2683,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2671,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2477,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2471,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 106
+  },
+  {
+    "amount": 2272,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2264,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2430,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2447,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2288,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2252,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2450,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2413,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 107
+  },
+  {
+    "amount": 2607,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2563,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2536,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2628,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2500,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2467,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2628,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2467,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 108
+  },
+  {
+    "amount": 2287,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2335,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2300,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2352,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2247,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2487,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2379,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2424,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 109
+  },
+  {
+    "amount": 2539,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2330,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2389,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2317,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2376,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2519,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2484,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2381,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 110
+  },
+  {
+    "amount": 2543,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2453,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2461,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2512,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2446,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2512,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2357,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2435,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 111
+  },
+  {
+    "amount": 2327,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2359,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2344,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2445,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2508,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2387,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2298,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2381,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 112
+  },
+  {
+    "amount": 2344,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2398,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2265,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2269,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2224,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2395,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2410,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2409,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 113
+  },
+  {
+    "amount": 2360,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2205,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2362,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2217,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2354,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2214,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2376,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2342,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 114
+  },
+  {
+    "amount": 2063,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2165,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2255,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2211,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2075,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2078,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2063,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2194,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 115
+  },
+  {
+    "amount": 2480,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2512,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2405,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2473,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2502,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2532,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2597,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2455,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 116
+  },
+  {
+    "amount": 2225,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2298,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2318,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2253,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2253,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2251,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2121,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2209,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 117
+  },
+  {
+    "amount": 2453,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2460,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2543,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2416,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2356,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2500,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2482,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2379,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 118
+  },
+  {
+    "amount": 2225,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2222,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2071,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2175,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2231,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2100,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2287,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2261,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 119
+  },
+  {
+    "amount": 2439,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2317,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2279,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2419,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2392,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2448,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2218,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2299,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 120
+  },
+  {
+    "amount": 2384,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2393,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2408,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2309,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2384,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2271,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2257,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2404,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 121
+  },
+  {
+    "amount": 2107,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2090,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2206,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2109,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2173,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2252,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2139,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2190,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 122
+  },
+  {
+    "amount": 2269,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2423,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2260,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2470,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2340,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2427,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2287,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2331,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 123
+  },
+  {
+    "amount": 2155,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2292,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2122,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2195,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2280,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2168,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2077,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2111,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 124
+  },
+  {
+    "amount": 2230,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2203,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2206,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2082,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2132,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2039,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2193,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2032,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 125
+  },
+  {
+    "amount": 2438,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2298,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2300,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2368,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2329,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2286,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2274,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2439,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 126
+  },
+  {
+    "amount": 2243,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2478,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2298,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2464,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2455,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2376,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2390,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2267,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 127
+  },
+  {
+    "amount": 2304,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2287,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2301,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2124,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2285,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2266,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2095,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2255,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 128
+  },
+  {
+    "amount": 2381,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2206,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2276,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2301,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2344,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2435,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2198,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2417,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 129
+  },
+  {
+    "amount": 2105,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 2092,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 1974,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 2160,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 1970,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 2078,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 2073,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 2007,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 130
+  },
+  {
+    "amount": 2105,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 2160,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 2035,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 1951,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 2059,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 2135,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 2102,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 2024,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 131
+  },
+  {
+    "amount": 1828,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 2059,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 2009,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 1914,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 2011,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 1828,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 2031,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 1992,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 132
+  },
+  {
+    "amount": 1938,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1885,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1954,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1825,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1820,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1878,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1966,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1806,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 133
+  },
+  {
+    "amount": 1784,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1790,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1978,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1803,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1843,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1913,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1871,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1753,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 134
+  },
+  {
+    "amount": 1901,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 1878,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 2101,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 2100,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 2049,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 2022,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 1974,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 2022,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 135
+  },
+  {
+    "amount": 1966,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1871,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1847,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1935,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1978,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1966,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1863,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 1887,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 136
+  },
+  {
+    "amount": 2083,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2214,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2089,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2157,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2241,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2147,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2206,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2115,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 137
+  },
+  {
+    "amount": 2214,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2062,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2132,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2099,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2221,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2112,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2065,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 2029,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 138
+  },
+  {
+    "amount": 1981,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 1900,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 2055,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 2082,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 2107,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 1987,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 1937,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 1995,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 139
+  },
+  {
+    "amount": 2020,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 1806,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 1930,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 1826,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 2023,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 1895,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 1889,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 1987,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 140
+  },
+  {
+    "amount": 2077,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 1982,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 1973,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 2083,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 1955,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 2180,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 2163,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 1990,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 141
+  },
+  {
+    "amount": 1679,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1788,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1737,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1689,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1731,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1836,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1832,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1697,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 142
+  },
+  {
+    "amount": 1983,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1896,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1911,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1824,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1878,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 2034,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1840,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1979,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 143
+  },
+  {
+    "amount": 1719,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1722,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1711,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1736,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1814,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1715,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1915,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 1877,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 144
+  },
+  {
+    "amount": 2037,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 1990,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 2149,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 2157,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 2035,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 2107,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 2173,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 2113,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 145
+  },
+  {
+    "amount": 1698,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1692,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1778,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1726,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1733,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1763,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1670,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1869,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 146
+  },
+  {
+    "amount": 1916,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 1990,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2076,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2164,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2102,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2077,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2035,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2034,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 147
+  },
+  {
+    "amount": 2096,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 2054,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 2144,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 1991,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 1985,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 2093,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 2063,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 2120,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 148
+  },
+  {
+    "amount": 1926,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 2115,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 2038,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 1966,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 1879,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 1892,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 2123,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 1990,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 149
+  },
+  {
+    "amount": 1912,
+    "payrollDate": "2025-10-01T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1856,
+    "payrollDate": "2025-10-16T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1903,
+    "payrollDate": "2025-10-31T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1682,
+    "payrollDate": "2025-11-15T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1756,
+    "payrollDate": "2025-11-30T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1762,
+    "payrollDate": "2025-12-15T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1781,
+    "payrollDate": "2025-12-30T10:00:00",
+    "employeeId": 150
+  },
+  {
+    "amount": 1851,
+    "payrollDate": "2026-01-14T10:00:00",
+    "employeeId": 150
+  }
+]

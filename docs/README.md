@@ -77,7 +77,7 @@ docker-compose exec backend mvn test
 ## 👤 Credenciales por Defecto
 ```
 Username: admin
-Password: admin123
+Password: <PASSWORD>
 Email: admin@expenseapp.com
 ```
 
@@ -94,7 +94,7 @@ Posiciones: 3 ejemplos incluidos
 - [ ] Seguí la ruta "Primer día en el proyecto"
 - [ ] Revisé el roadmap vigente
 - [ ] Ejecuté docker-compose up -d y verifiqué servicios
-- [ ] Probé el login con admin/admin123
+- [ ] Probé el login con admin/<PASSWORD>
 - [ ] Revisé la colección Postman oficial
 - [ ] Consulté el índice maestro para profundizar
 

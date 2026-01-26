@@ -110,7 +110,7 @@ public class DataLoader implements ApplicationRunner {
             // Crear usuario admin
             User admin = User.builder()
                 .name("Admin").surname("User")
-                .password(passwordEncoder.encode("admin123"))
+                .password(passwordEncoder.encode("<PASSWORD>"))
                 .email("admin@expenseapp.com")
                 .enabled(true)
                 .roles(Set.of(adminRole))
@@ -320,7 +320,7 @@ curl -X POST http://localhost:8080/api/v1/auth/signup \
     "name": "Test",
     "surname": "User",
     "email": "test@app.com",
-    "password": "password123"
+    "password": "<PASSWORD>"
   }'
 
 # 3. Verificar usuario creado
@@ -332,7 +332,7 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
   -d '{
     "name": "Test",
     "surname": "User",
-    "password": "password123"
+    "password": "<PASSWORD>"
   }'
 ```
 

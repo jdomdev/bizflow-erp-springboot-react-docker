@@ -199,7 +199,7 @@ jobs:
         env:
           POSTGRES_DB: testdb
           POSTGRES_USER: testuser
-          POSTGRES_PASSWORD: testpass
+          POSTGRES_PASSWORD: <DB_PASSWORD>
         ports:
           - 5434:5432
         options: >-
@@ -217,7 +217,7 @@ jobs:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5434/testdb
 spring.datasource.username=testuser
-spring.datasource.password=testpass
+spring.datasource.password=<DB_PASSWORD>
 ```
 
 ---
@@ -317,7 +317,7 @@ docker-compose-test:
     run: |
       curl -X POST http://localhost:8080/api/v1/auth/login \
         -H "Content-Type: application/json" \
-        -d '{"email":"admin@example.com","password":"admin123"}' || exit 1
+        -d '{"email":"admin@example.com","password":"<PASSWORD>"}' || exit 1
 ```
 
 **Qué prueba:**
@@ -559,7 +559,7 @@ jobs:
         env:
           POSTGRES_DB: testdb
           POSTGRES_USER: testuser
-          POSTGRES_PASSWORD: testpass
+          POSTGRES_PASSWORD: <DB_PASSWORD>
         ports:
           - 5434:5432
         options: >-
@@ -575,7 +575,7 @@ jobs:
 # backend/src/test/resources/application-test.properties
 spring.datasource.url=jdbc:postgresql://localhost:5434/testdb
 spring.datasource.username=testuser
-spring.datasource.password=testpass
+spring.datasource.password=<DB_PASSWORD>
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
 
@@ -714,7 +714,7 @@ public class EmployeeControllerTest {
     # Login y obtener token
     TOKEN=$(curl -s -X POST http://localhost:8080/api/v1/auth/login \
       -H "Content-Type: application/json" \
-      -d '{"email":"admin@example.com","password":"admin123"}' \
+      -d '{"email":"admin@example.com","password":"<PASSWORD>"}' \
       | jq -r '.token')
     
     # Test GET /api/employees
@@ -769,7 +769,7 @@ test('complete employee CRUD flow', async ({ page }) => {
   // Login
   await page.goto('http://localhost:3000/login');
   await page.fill('[name="email"]', 'admin@example.com');
-  await page.fill('[name="password"]', 'admin123');
+  await page.fill('[name="password"]', '<PASSWORD>');
   await page.click('button[type="submit"]');
   await expect(page).toHaveURL('/dashboard');
   

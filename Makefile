@@ -198,3 +198,59 @@ up-test: build-base-images ## Construye imágenes base y levanta el entorno de t
 .PHONY: rebuild
 rebuild: clean-base-images all ## Limpia y reconstruye todo desde cero
 	@echo "$(COLOR_GREEN)✓ Reconstrucción completa finalizada$(COLOR_RESET)"
+
+# ===========================================================================
+# Targets de backup y seguridad
+# ===========================================================================
+
+.PHONY: backup-dev
+backup-dev: ## Crea backup de la base de datos de desarrollo
+	@FECHA=$$(date +%Y%m%d_%H%M%S) && \
+	echo "$(COLOR_BLUE)==> Creando backup DEV: $${FECHA}_erp_dev_db.dump$(COLOR_RESET)" && \
+	docker exec erp-dev-db-container pg_dump -U erp_dev_user -Fc erp_dev_db > backups/dev/$${FECHA}_erp_dev_db.dump && \
+	echo "$(COLOR_GREEN)✓ Backup DEV creado: backups/dev/$${FECHA}_erp_dev_db.dump$(COLOR_RESET)"
+
+.PHONY: backup-prod
+backup-prod: ## Crea backup de la base de datos de producción
+	@FECHA=$$(date +%Y%m%d_%H%M%S) && \
+	echo "$(COLOR_BLUE)==> Creando backup PROD: $${FECHA}_erp_prod_db.dump$(COLOR_RESET)" && \
+	docker exec erp-prod-db-container pg_dump -U erp_prod_user -Fc erp_prod_db > backups/prod/$${FECHA}_erp_prod_db.dump && \
+	echo "$(COLOR_GREEN)✓ Backup PROD creado: backups/prod/$${FECHA}_erp_prod_db.dump$(COLOR_RESET)"
+
+.PHONY: backup-test
+backup-test: ## Crea backup de la base de datos de testing
+	@FECHA=$$(date +%Y%m%d_%H%M%S) && \
+	echo "$(COLOR_BLUE)==> Creando backup TEST: $${FECHA}_erp_test_db.dump$(COLOR_RESET)" && \
+	docker exec erp-test-db-container pg_dump -U erp_test_user -Fc erp_test_db > backups/test/$${FECHA}_erp_test_db.dump && \
+	echo "$(COLOR_GREEN)✓ Backup TEST creado: backups/test/$${FECHA}_erp_test_db.dump$(COLOR_RESET)"
+
+.PHONY: backup-all
+backup-all: backup-dev backup-prod backup-test ## Crea backup de todas las bases de datos
+
+.PHONY: down-dev
+down-dev: ## Detiene el entorno de desarrollo (conserva datos)
+	@echo "$(COLOR_BLUE)==> Deteniendo entorno DEV...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile dev down
+	@echo "$(COLOR_GREEN)✓ Entorno DEV detenido (datos conservados)$(COLOR_RESET)"
+
+.PHONY: down-prod
+down-prod: ## Detiene el entorno de producción (conserva datos) - SEGURO
+	@echo "$(COLOR_BLUE)==> Deteniendo entorno PROD...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile prod down
+	@echo "$(COLOR_GREEN)✓ Entorno PROD detenido (datos conservados)$(COLOR_RESET)"
+
+.PHONY: down-test
+down-test: ## Detiene el entorno de testing (conserva datos)
+	@echo "$(COLOR_BLUE)==> Deteniendo entorno TEST...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile test down
+	@echo "$(COLOR_GREEN)✓ Entorno TEST detenido (datos conservados)$(COLOR_RESET)"
+
+.PHONY: down-prod-with-volumes
+down-prod-with-volumes: ## ⛔ PELIGROSO: Elimina contenedores Y datos de producción
+	@echo "$(COLOR_YELLOW)⚠️  ADVERTENCIA: Esto eliminará TODOS los datos de producción$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)   Tienes 5 segundos para cancelar con Ctrl+C...$(COLOR_RESET)"
+	@sleep 5
+	@$(MAKE) backup-prod
+	@echo "$(COLOR_BLUE)==> Eliminando entorno PROD con volúmenes...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile prod down -v
+	@echo "$(COLOR_GREEN)✓ Entorno PROD eliminado (backup creado previamente)$(COLOR_RESET)"

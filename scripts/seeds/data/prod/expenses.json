@@ -1,0 +1,3362 @@
+[
+  {
+    "amount": 121.14,
+    "concept": "Conference fee",
+    "expenseDate": "2025-10-02T16:00:00",
+    "note": "Conference fee - October 2025",
+    "expenseUserId": 1
+  },
+  {
+    "amount": 345.77,
+    "concept": "Office supplies",
+    "expenseDate": "2025-10-22T15:00:00",
+    "note": "Office supplies - October 2025",
+    "expenseUserId": 1
+  },
+  {
+    "amount": 317.94,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-11T13:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 1
+  },
+  {
+    "amount": 349.33,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-12-01T13:00:00",
+    "note": "Travel insurance - December 2025",
+    "expenseUserId": 1
+  },
+  {
+    "amount": 479.39,
+    "concept": "Books",
+    "expenseDate": "2025-10-03T11:00:00",
+    "note": "Books - October 2025",
+    "expenseUserId": 2
+  },
+  {
+    "amount": 451.75,
+    "concept": "Business lunch",
+    "expenseDate": "2025-10-23T11:00:00",
+    "note": "Business lunch - October 2025",
+    "expenseUserId": 2
+  },
+  {
+    "amount": 315.07,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-12T15:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 2
+  },
+  {
+    "amount": 289.8,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-02T13:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 2
+  },
+  {
+    "amount": 311.06,
+    "concept": "Books",
+    "expenseDate": "2025-10-04T10:00:00",
+    "note": "Books - October 2025",
+    "expenseUserId": 3
+  },
+  {
+    "amount": 349.28,
+    "concept": "Hardware",
+    "expenseDate": "2025-10-24T16:00:00",
+    "note": "Hardware - October 2025",
+    "expenseUserId": 3
+  },
+  {
+    "amount": 335.97,
+    "concept": "Catering",
+    "expenseDate": "2025-11-13T11:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 3
+  },
+  {
+    "amount": 502.82,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-03T13:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 3
+  },
+  {
+    "amount": 427.05,
+    "concept": "Subscription",
+    "expenseDate": "2025-10-05T17:00:00",
+    "note": "Subscription - October 2025",
+    "expenseUserId": 4
+  },
+  {
+    "amount": 156.72,
+    "concept": "Catering",
+    "expenseDate": "2025-10-25T12:00:00",
+    "note": "Catering - October 2025",
+    "expenseUserId": 4
+  },
+  {
+    "amount": 455.54,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-11-14T19:00:00",
+    "note": "Taxi airport - November 2025",
+    "expenseUserId": 4
+  },
+  {
+    "amount": 194.38,
+    "concept": "Training",
+    "expenseDate": "2025-12-04T14:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 4
+  },
+  {
+    "amount": 462.17,
+    "concept": "Team dinner",
+    "expenseDate": "2025-10-06T16:00:00",
+    "note": "Team dinner - October 2025",
+    "expenseUserId": 5
+  },
+  {
+    "amount": 141.59,
+    "concept": "Equipment",
+    "expenseDate": "2025-10-26T11:00:00",
+    "note": "Equipment - October 2025",
+    "expenseUserId": 5
+  },
+  {
+    "amount": 460.48,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-15T09:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 5
+  },
+  {
+    "amount": 180.38,
+    "concept": "Parking",
+    "expenseDate": "2025-12-05T16:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 5
+  },
+  {
+    "amount": 77.19,
+    "concept": "Hardware",
+    "expenseDate": "2025-10-07T16:00:00",
+    "note": "Hardware - October 2025",
+    "expenseUserId": 6
+  },
+  {
+    "amount": 236.61,
+    "concept": "Catering",
+    "expenseDate": "2025-10-27T18:00:00",
+    "note": "Catering - October 2025",
+    "expenseUserId": 6
+  },
+  {
+    "amount": 143.35,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-16T18:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 6
+  },
+  {
+    "amount": 444.92,
+    "concept": "Hardware",
+    "expenseDate": "2025-12-06T10:00:00",
+    "note": "Hardware - December 2025",
+    "expenseUserId": 6
+  },
+  {
+    "amount": 283.92,
+    "concept": "Workshop",
+    "expenseDate": "2025-10-08T21:00:00",
+    "note": "Workshop - October 2025",
+    "expenseUserId": 7
+  },
+  {
+    "amount": 211.64,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-10-28T16:00:00",
+    "note": "Client entertainment - October 2025",
+    "expenseUserId": 7
+  },
+  {
+    "amount": 225.63,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-11-17T12:00:00",
+    "note": "Travel insurance - November 2025",
+    "expenseUserId": 7
+  },
+  {
+    "amount": 198.9,
+    "concept": "Training",
+    "expenseDate": "2025-12-07T12:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 7
+  },
+  {
+    "amount": 394.68,
+    "concept": "Hardware",
+    "expenseDate": "2025-10-09T21:00:00",
+    "note": "Hardware - October 2025",
+    "expenseUserId": 8
+  },
+  {
+    "amount": 541.25,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-10-29T14:00:00",
+    "note": "Client entertainment - October 2025",
+    "expenseUserId": 8
+  },
+  {
+    "amount": 269.45,
+    "concept": "Parking",
+    "expenseDate": "2025-11-18T10:00:00",
+    "note": "Parking - November 2025",
+    "expenseUserId": 8
+  },
+  {
+    "amount": 97.03,
+    "concept": "Parking",
+    "expenseDate": "2025-12-08T13:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 8
+  },
+  {
+    "amount": 430.62,
+    "concept": "Hotel",
+    "expenseDate": "2025-10-10T19:00:00",
+    "note": "Hotel - October 2025",
+    "expenseUserId": 9
+  },
+  {
+    "amount": 431.98,
+    "concept": "Hotel",
+    "expenseDate": "2025-10-30T14:00:00",
+    "note": "Hotel - October 2025",
+    "expenseUserId": 9
+  },
+  {
+    "amount": 488.73,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-19T16:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 9
+  },
+  {
+    "amount": 406.2,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-09T18:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 9
+  },
+  {
+    "amount": 44.81,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-10-11T18:00:00",
+    "note": "Client entertainment - October 2025",
+    "expenseUserId": 10
+  },
+  {
+    "amount": 184.7,
+    "concept": "Books",
+    "expenseDate": "2025-10-31T12:00:00",
+    "note": "Books - October 2025",
+    "expenseUserId": 10
+  },
+  {
+    "amount": 520.8,
+    "concept": "Books",
+    "expenseDate": "2025-11-20T15:00:00",
+    "note": "Books - November 2025",
+    "expenseUserId": 10
+  },
+  {
+    "amount": 397.48,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-10T19:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 10
+  },
+  {
+    "amount": 311.73,
+    "concept": "Training",
+    "expenseDate": "2025-10-12T21:00:00",
+    "note": "Training - October 2025",
+    "expenseUserId": 11
+  },
+  {
+    "amount": 304.28,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-11-01T13:00:00",
+    "note": "Travel insurance - November 2025",
+    "expenseUserId": 11
+  },
+  {
+    "amount": 529.33,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-11-21T09:00:00",
+    "note": "Client entertainment - November 2025",
+    "expenseUserId": 11
+  },
+  {
+    "amount": 490.78,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-11T12:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 11
+  },
+  {
+    "amount": 215.29,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-10-13T10:00:00",
+    "note": "Travel insurance - October 2025",
+    "expenseUserId": 12
+  },
+  {
+    "amount": 504.45,
+    "concept": "Catering",
+    "expenseDate": "2025-11-02T16:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 12
+  },
+  {
+    "amount": 517.64,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-11-22T15:00:00",
+    "note": "Client entertainment - November 2025",
+    "expenseUserId": 12
+  },
+  {
+    "amount": 575.13,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-12T20:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 12
+  },
+  {
+    "amount": 443.3,
+    "concept": "Workshop",
+    "expenseDate": "2025-10-14T16:00:00",
+    "note": "Workshop - October 2025",
+    "expenseUserId": 13
+  },
+  {
+    "amount": 383.15,
+    "concept": "Hardware",
+    "expenseDate": "2025-11-03T15:00:00",
+    "note": "Hardware - November 2025",
+    "expenseUserId": 13
+  },
+  {
+    "amount": 389.78,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-11-23T15:00:00",
+    "note": "Client entertainment - November 2025",
+    "expenseUserId": 13
+  },
+  {
+    "amount": 312.14,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-13T12:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 13
+  },
+  {
+    "amount": 467.8,
+    "concept": "Team dinner",
+    "expenseDate": "2025-10-15T18:00:00",
+    "note": "Team dinner - October 2025",
+    "expenseUserId": 14
+  },
+  {
+    "amount": 149.41,
+    "concept": "Conference fee",
+    "expenseDate": "2025-11-04T17:00:00",
+    "note": "Conference fee - November 2025",
+    "expenseUserId": 14
+  },
+  {
+    "amount": 381.83,
+    "concept": "Catering",
+    "expenseDate": "2025-11-24T16:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 14
+  },
+  {
+    "amount": 396.64,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-14T10:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 14
+  },
+  {
+    "amount": 324.77,
+    "concept": "Parking",
+    "expenseDate": "2025-10-16T12:00:00",
+    "note": "Parking - October 2025",
+    "expenseUserId": 15
+  },
+  {
+    "amount": 345.96,
+    "concept": "Parking",
+    "expenseDate": "2025-11-05T20:00:00",
+    "note": "Parking - November 2025",
+    "expenseUserId": 15
+  },
+  {
+    "amount": 343.49,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-25T09:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 15
+  },
+  {
+    "amount": 314.48,
+    "concept": "Hardware",
+    "expenseDate": "2025-12-15T20:00:00",
+    "note": "Hardware - December 2025",
+    "expenseUserId": 15
+  },
+  {
+    "amount": 525.96,
+    "concept": "Hotel",
+    "expenseDate": "2025-10-17T21:00:00",
+    "note": "Hotel - October 2025",
+    "expenseUserId": 16
+  },
+  {
+    "amount": 308.64,
+    "concept": "Books",
+    "expenseDate": "2025-11-06T16:00:00",
+    "note": "Books - November 2025",
+    "expenseUserId": 16
+  },
+  {
+    "amount": 444.34,
+    "concept": "Software license",
+    "expenseDate": "2025-11-26T21:00:00",
+    "note": "Software license - November 2025",
+    "expenseUserId": 16
+  },
+  {
+    "amount": 285.57,
+    "concept": "Software license",
+    "expenseDate": "2025-12-16T20:00:00",
+    "note": "Software license - December 2025",
+    "expenseUserId": 16
+  },
+  {
+    "amount": 464.7,
+    "concept": "Books",
+    "expenseDate": "2025-10-18T16:00:00",
+    "note": "Books - October 2025",
+    "expenseUserId": 17
+  },
+  {
+    "amount": 152.17,
+    "concept": "Training",
+    "expenseDate": "2025-11-07T13:00:00",
+    "note": "Training - November 2025",
+    "expenseUserId": 17
+  },
+  {
+    "amount": 561.31,
+    "concept": "Hotel",
+    "expenseDate": "2025-11-27T18:00:00",
+    "note": "Hotel - November 2025",
+    "expenseUserId": 17
+  },
+  {
+    "amount": 72.57,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-12-17T10:00:00",
+    "note": "Taxi airport - December 2025",
+    "expenseUserId": 17
+  },
+  {
+    "amount": 97.25,
+    "concept": "Hardware",
+    "expenseDate": "2025-10-19T09:00:00",
+    "note": "Hardware - October 2025",
+    "expenseUserId": 18
+  },
+  {
+    "amount": 559.91,
+    "concept": "Office supplies",
+    "expenseDate": "2025-11-08T12:00:00",
+    "note": "Office supplies - November 2025",
+    "expenseUserId": 18
+  },
+  {
+    "amount": 353.09,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-28T15:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 18
+  },
+  {
+    "amount": 152.74,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-18T12:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 18
+  },
+  {
+    "amount": 252.44,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-10-20T18:00:00",
+    "note": "Taxi airport - October 2025",
+    "expenseUserId": 19
+  },
+  {
+    "amount": 130.03,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-09T19:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 19
+  },
+  {
+    "amount": 345.91,
+    "concept": "Subscription",
+    "expenseDate": "2025-11-29T15:00:00",
+    "note": "Subscription - November 2025",
+    "expenseUserId": 19
+  },
+  {
+    "amount": 525.84,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-19T17:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 19
+  },
+  {
+    "amount": 395.38,
+    "concept": "Workshop",
+    "expenseDate": "2025-10-21T20:00:00",
+    "note": "Workshop - October 2025",
+    "expenseUserId": 20
+  },
+  {
+    "amount": 149.82,
+    "concept": "Hotel",
+    "expenseDate": "2025-11-10T21:00:00",
+    "note": "Hotel - November 2025",
+    "expenseUserId": 20
+  },
+  {
+    "amount": 359.29,
+    "concept": "Catering",
+    "expenseDate": "2025-11-30T09:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 20
+  },
+  {
+    "amount": 358.71,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-20T13:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 20
+  },
+  {
+    "amount": 400.1,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-10-22T13:00:00",
+    "note": "Travel insurance - October 2025",
+    "expenseUserId": 21
+  },
+  {
+    "amount": 106.49,
+    "concept": "Catering",
+    "expenseDate": "2025-11-11T15:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 21
+  },
+  {
+    "amount": 581.69,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-12-01T20:00:00",
+    "note": "Taxi airport - December 2025",
+    "expenseUserId": 21
+  },
+  {
+    "amount": 288.56,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-21T14:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 21
+  },
+  {
+    "amount": 189.92,
+    "concept": "Hardware",
+    "expenseDate": "2025-10-23T14:00:00",
+    "note": "Hardware - October 2025",
+    "expenseUserId": 22
+  },
+  {
+    "amount": 406.97,
+    "concept": "Hardware",
+    "expenseDate": "2025-11-12T15:00:00",
+    "note": "Hardware - November 2025",
+    "expenseUserId": 22
+  },
+  {
+    "amount": 488.45,
+    "concept": "Parking",
+    "expenseDate": "2025-12-02T10:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 22
+  },
+  {
+    "amount": 391.1,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-22T19:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 22
+  },
+  {
+    "amount": 131.08,
+    "concept": "Software license",
+    "expenseDate": "2025-10-24T10:00:00",
+    "note": "Software license - October 2025",
+    "expenseUserId": 23
+  },
+  {
+    "amount": 458.87,
+    "concept": "Hotel",
+    "expenseDate": "2025-11-13T11:00:00",
+    "note": "Hotel - November 2025",
+    "expenseUserId": 23
+  },
+  {
+    "amount": 311.15,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-03T13:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 23
+  },
+  {
+    "amount": 96.37,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-23T19:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 23
+  },
+  {
+    "amount": 309.32,
+    "concept": "Equipment",
+    "expenseDate": "2025-10-25T17:00:00",
+    "note": "Equipment - October 2025",
+    "expenseUserId": 24
+  },
+  {
+    "amount": 224.61,
+    "concept": "Equipment",
+    "expenseDate": "2025-11-14T14:00:00",
+    "note": "Equipment - November 2025",
+    "expenseUserId": 24
+  },
+  {
+    "amount": 225.41,
+    "concept": "Software license",
+    "expenseDate": "2025-12-04T18:00:00",
+    "note": "Software license - December 2025",
+    "expenseUserId": 24
+  },
+  {
+    "amount": 528.93,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-24T15:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 24
+  },
+  {
+    "amount": 437.71,
+    "concept": "Team dinner",
+    "expenseDate": "2025-10-26T18:00:00",
+    "note": "Team dinner - October 2025",
+    "expenseUserId": 25
+  },
+  {
+    "amount": 243.61,
+    "concept": "Books",
+    "expenseDate": "2025-11-15T15:00:00",
+    "note": "Books - November 2025",
+    "expenseUserId": 25
+  },
+  {
+    "amount": 243.26,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-05T09:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 25
+  },
+  {
+    "amount": 336.1,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-25T11:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 25
+  },
+  {
+    "amount": 282.13,
+    "concept": "Training",
+    "expenseDate": "2025-10-27T19:00:00",
+    "note": "Training - October 2025",
+    "expenseUserId": 26
+  },
+  {
+    "amount": 363.22,
+    "concept": "Software license",
+    "expenseDate": "2025-11-16T17:00:00",
+    "note": "Software license - November 2025",
+    "expenseUserId": 26
+  },
+  {
+    "amount": 383.64,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-06T13:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 26
+  },
+  {
+    "amount": 113.48,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-12-26T13:00:00",
+    "note": "Taxi airport - December 2025",
+    "expenseUserId": 26
+  },
+  {
+    "amount": 335.95,
+    "concept": "Office supplies",
+    "expenseDate": "2025-10-28T12:00:00",
+    "note": "Office supplies - October 2025",
+    "expenseUserId": 27
+  },
+  {
+    "amount": 103.01,
+    "concept": "Parking",
+    "expenseDate": "2025-11-17T19:00:00",
+    "note": "Parking - November 2025",
+    "expenseUserId": 27
+  },
+  {
+    "amount": 104.09,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-12-07T19:00:00",
+    "note": "Travel insurance - December 2025",
+    "expenseUserId": 27
+  },
+  {
+    "amount": 129.62,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-27T21:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 27
+  },
+  {
+    "amount": 385.12,
+    "concept": "Workshop",
+    "expenseDate": "2025-10-29T09:00:00",
+    "note": "Workshop - October 2025",
+    "expenseUserId": 28
+  },
+  {
+    "amount": 220.45,
+    "concept": "Training",
+    "expenseDate": "2025-11-18T14:00:00",
+    "note": "Training - November 2025",
+    "expenseUserId": 28
+  },
+  {
+    "amount": 509.74,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-08T12:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 28
+  },
+  {
+    "amount": 509.99,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-12-28T20:00:00",
+    "note": "Taxi airport - December 2025",
+    "expenseUserId": 28
+  },
+  {
+    "amount": 179.63,
+    "concept": "Equipment",
+    "expenseDate": "2025-10-30T19:00:00",
+    "note": "Equipment - October 2025",
+    "expenseUserId": 29
+  },
+  {
+    "amount": 183.79,
+    "concept": "Hotel",
+    "expenseDate": "2025-11-19T14:00:00",
+    "note": "Hotel - November 2025",
+    "expenseUserId": 29
+  },
+  {
+    "amount": 487.03,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-09T20:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 29
+  },
+  {
+    "amount": 539.0,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-29T20:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 29
+  },
+  {
+    "amount": 256.85,
+    "concept": "Books",
+    "expenseDate": "2025-10-31T13:00:00",
+    "note": "Books - October 2025",
+    "expenseUserId": 30
+  },
+  {
+    "amount": 315.92,
+    "concept": "Software license",
+    "expenseDate": "2025-11-20T14:00:00",
+    "note": "Software license - November 2025",
+    "expenseUserId": 30
+  },
+  {
+    "amount": 434.88,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-12-10T17:00:00",
+    "note": "Client entertainment - December 2025",
+    "expenseUserId": 30
+  },
+  {
+    "amount": 229.49,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-30T18:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 30
+  },
+  {
+    "amount": 381.22,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-01T10:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 31
+  },
+  {
+    "amount": 87.15,
+    "concept": "Parking",
+    "expenseDate": "2025-11-21T14:00:00",
+    "note": "Parking - November 2025",
+    "expenseUserId": 31
+  },
+  {
+    "amount": 323.91,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-11T18:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 31
+  },
+  {
+    "amount": 297.58,
+    "concept": "Training",
+    "expenseDate": "2025-12-31T13:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 31
+  },
+  {
+    "amount": 220.56,
+    "concept": "Conference fee",
+    "expenseDate": "2025-11-02T16:00:00",
+    "note": "Conference fee - November 2025",
+    "expenseUserId": 32
+  },
+  {
+    "amount": 431.42,
+    "concept": "Catering",
+    "expenseDate": "2025-11-22T17:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 32
+  },
+  {
+    "amount": 505.9,
+    "concept": "Hotel",
+    "expenseDate": "2025-12-12T18:00:00",
+    "note": "Hotel - December 2025",
+    "expenseUserId": 32
+  },
+  {
+    "amount": 537.09,
+    "concept": "Books",
+    "expenseDate": "2026-01-01T20:00:00",
+    "note": "Books - January 2026",
+    "expenseUserId": 32
+  },
+  {
+    "amount": 520.77,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-11-03T15:00:00",
+    "note": "Taxi airport - November 2025",
+    "expenseUserId": 33
+  },
+  {
+    "amount": 345.27,
+    "concept": "Hotel",
+    "expenseDate": "2025-11-23T12:00:00",
+    "note": "Hotel - November 2025",
+    "expenseUserId": 33
+  },
+  {
+    "amount": 308.94,
+    "concept": "Training",
+    "expenseDate": "2025-12-13T16:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 33
+  },
+  {
+    "amount": 374.49,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-02T11:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 33
+  },
+  {
+    "amount": 115.55,
+    "concept": "Catering",
+    "expenseDate": "2025-11-04T16:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 34
+  },
+  {
+    "amount": 111.09,
+    "concept": "Books",
+    "expenseDate": "2025-11-24T21:00:00",
+    "note": "Books - November 2025",
+    "expenseUserId": 34
+  },
+  {
+    "amount": 131.69,
+    "concept": "Training",
+    "expenseDate": "2025-12-14T20:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 34
+  },
+  {
+    "amount": 379.15,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-03T18:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 34
+  },
+  {
+    "amount": 349.67,
+    "concept": "Books",
+    "expenseDate": "2025-11-05T10:00:00",
+    "note": "Books - November 2025",
+    "expenseUserId": 35
+  },
+  {
+    "amount": 94.5,
+    "concept": "Equipment",
+    "expenseDate": "2025-11-25T21:00:00",
+    "note": "Equipment - November 2025",
+    "expenseUserId": 35
+  },
+  {
+    "amount": 204.16,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-12-15T17:00:00",
+    "note": "Client entertainment - December 2025",
+    "expenseUserId": 35
+  },
+  {
+    "amount": 389.82,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-04T09:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 35
+  },
+  {
+    "amount": 405.88,
+    "concept": "Parking",
+    "expenseDate": "2025-11-06T18:00:00",
+    "note": "Parking - November 2025",
+    "expenseUserId": 36
+  },
+  {
+    "amount": 234.45,
+    "concept": "Workshop",
+    "expenseDate": "2025-11-26T09:00:00",
+    "note": "Workshop - November 2025",
+    "expenseUserId": 36
+  },
+  {
+    "amount": 591.27,
+    "concept": "Hotel",
+    "expenseDate": "2025-12-16T20:00:00",
+    "note": "Hotel - December 2025",
+    "expenseUserId": 36
+  },
+  {
+    "amount": 49.86,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-01-05T15:00:00",
+    "note": "Taxi airport - January 2026",
+    "expenseUserId": 36
+  },
+  {
+    "amount": 91.92,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-11-07T21:00:00",
+    "note": "Travel insurance - November 2025",
+    "expenseUserId": 37
+  },
+  {
+    "amount": 176.6,
+    "concept": "Office supplies",
+    "expenseDate": "2025-11-27T19:00:00",
+    "note": "Office supplies - November 2025",
+    "expenseUserId": 37
+  },
+  {
+    "amount": 310.06,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-12-17T15:00:00",
+    "note": "Client entertainment - December 2025",
+    "expenseUserId": 37
+  },
+  {
+    "amount": 486.57,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-06T12:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 37
+  },
+  {
+    "amount": 412.43,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-11-08T13:00:00",
+    "note": "Flight ticket - November 2025",
+    "expenseUserId": 38
+  },
+  {
+    "amount": 149.28,
+    "concept": "Conference fee",
+    "expenseDate": "2025-11-28T09:00:00",
+    "note": "Conference fee - November 2025",
+    "expenseUserId": 38
+  },
+  {
+    "amount": 310.48,
+    "concept": "Hardware",
+    "expenseDate": "2025-12-18T10:00:00",
+    "note": "Hardware - December 2025",
+    "expenseUserId": 38
+  },
+  {
+    "amount": 284.77,
+    "concept": "Catering",
+    "expenseDate": "2026-01-07T18:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 38
+  },
+  {
+    "amount": 493.56,
+    "concept": "Office supplies",
+    "expenseDate": "2025-11-09T11:00:00",
+    "note": "Office supplies - November 2025",
+    "expenseUserId": 39
+  },
+  {
+    "amount": 534.02,
+    "concept": "Subscription",
+    "expenseDate": "2025-11-29T13:00:00",
+    "note": "Subscription - November 2025",
+    "expenseUserId": 39
+  },
+  {
+    "amount": 212.67,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-12-19T17:00:00",
+    "note": "Travel insurance - December 2025",
+    "expenseUserId": 39
+  },
+  {
+    "amount": 266.51,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-08T09:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 39
+  },
+  {
+    "amount": 199.53,
+    "concept": "Catering",
+    "expenseDate": "2025-11-10T14:00:00",
+    "note": "Catering - November 2025",
+    "expenseUserId": 40
+  },
+  {
+    "amount": 343.98,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-30T10:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 40
+  },
+  {
+    "amount": 453.67,
+    "concept": "Hardware",
+    "expenseDate": "2025-12-20T16:00:00",
+    "note": "Hardware - December 2025",
+    "expenseUserId": 40
+  },
+  {
+    "amount": 479.42,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-09T13:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 40
+  },
+  {
+    "amount": 274.84,
+    "concept": "Parking",
+    "expenseDate": "2025-11-11T21:00:00",
+    "note": "Parking - November 2025",
+    "expenseUserId": 41
+  },
+  {
+    "amount": 379.77,
+    "concept": "Books",
+    "expenseDate": "2025-12-01T12:00:00",
+    "note": "Books - December 2025",
+    "expenseUserId": 41
+  },
+  {
+    "amount": 97.87,
+    "concept": "Hotel",
+    "expenseDate": "2025-12-21T17:00:00",
+    "note": "Hotel - December 2025",
+    "expenseUserId": 41
+  },
+  {
+    "amount": 444.71,
+    "concept": "Software license",
+    "expenseDate": "2026-01-10T14:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 41
+  },
+  {
+    "amount": 262.75,
+    "concept": "Software license",
+    "expenseDate": "2025-11-12T11:00:00",
+    "note": "Software license - November 2025",
+    "expenseUserId": 42
+  },
+  {
+    "amount": 451.38,
+    "concept": "Conference fee",
+    "expenseDate": "2025-12-02T21:00:00",
+    "note": "Conference fee - December 2025",
+    "expenseUserId": 42
+  },
+  {
+    "amount": 304.89,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-22T16:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 42
+  },
+  {
+    "amount": 460.42,
+    "concept": "Catering",
+    "expenseDate": "2026-01-11T09:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 42
+  },
+  {
+    "amount": 287.57,
+    "concept": "Training",
+    "expenseDate": "2025-11-13T15:00:00",
+    "note": "Training - November 2025",
+    "expenseUserId": 43
+  },
+  {
+    "amount": 187.81,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-03T17:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 43
+  },
+  {
+    "amount": 492.11,
+    "concept": "Office supplies",
+    "expenseDate": "2025-12-23T13:00:00",
+    "note": "Office supplies - December 2025",
+    "expenseUserId": 43
+  },
+  {
+    "amount": 215.92,
+    "concept": "Subscription",
+    "expenseDate": "2026-01-12T15:00:00",
+    "note": "Subscription - January 2026",
+    "expenseUserId": 43
+  },
+  {
+    "amount": 224.26,
+    "concept": "Software license",
+    "expenseDate": "2025-11-14T15:00:00",
+    "note": "Software license - November 2025",
+    "expenseUserId": 44
+  },
+  {
+    "amount": 482.24,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-04T10:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 44
+  },
+  {
+    "amount": 379.69,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-24T10:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 44
+  },
+  {
+    "amount": 317.3,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-13T09:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 44
+  },
+  {
+    "amount": 547.98,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-15T17:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 45
+  },
+  {
+    "amount": 590.88,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-12-05T13:00:00",
+    "note": "Travel insurance - December 2025",
+    "expenseUserId": 45
+  },
+  {
+    "amount": 139.8,
+    "concept": "Catering",
+    "expenseDate": "2025-12-25T11:00:00",
+    "note": "Catering - December 2025",
+    "expenseUserId": 45
+  },
+  {
+    "amount": 394.59,
+    "concept": "Team dinner",
+    "expenseDate": "2026-01-14T17:00:00",
+    "note": "Team dinner - January 2026",
+    "expenseUserId": 45
+  },
+  {
+    "amount": 221.71,
+    "concept": "Office supplies",
+    "expenseDate": "2025-11-16T11:00:00",
+    "note": "Office supplies - November 2025",
+    "expenseUserId": 46
+  },
+  {
+    "amount": 267.51,
+    "concept": "Training",
+    "expenseDate": "2025-12-06T13:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 46
+  },
+  {
+    "amount": 259.67,
+    "concept": "Training",
+    "expenseDate": "2025-12-26T11:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 46
+  },
+  {
+    "amount": 423.17,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-15T20:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 46
+  },
+  {
+    "amount": 371.4,
+    "concept": "Office supplies",
+    "expenseDate": "2025-11-17T11:00:00",
+    "note": "Office supplies - November 2025",
+    "expenseUserId": 47
+  },
+  {
+    "amount": 119.15,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-07T19:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 47
+  },
+  {
+    "amount": 500.5,
+    "concept": "Books",
+    "expenseDate": "2025-12-27T19:00:00",
+    "note": "Books - December 2025",
+    "expenseUserId": 47
+  },
+  {
+    "amount": 275.92,
+    "concept": "Catering",
+    "expenseDate": "2026-01-16T20:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 47
+  },
+  {
+    "amount": 303.54,
+    "concept": "Conference fee",
+    "expenseDate": "2025-11-18T11:00:00",
+    "note": "Conference fee - November 2025",
+    "expenseUserId": 48
+  },
+  {
+    "amount": 454.25,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-08T11:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 48
+  },
+  {
+    "amount": 190.66,
+    "concept": "Books",
+    "expenseDate": "2025-12-28T21:00:00",
+    "note": "Books - December 2025",
+    "expenseUserId": 48
+  },
+  {
+    "amount": 132.53,
+    "concept": "Software license",
+    "expenseDate": "2026-01-17T21:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 48
+  },
+  {
+    "amount": 189.35,
+    "concept": "Subscription",
+    "expenseDate": "2025-11-19T16:00:00",
+    "note": "Subscription - November 2025",
+    "expenseUserId": 49
+  },
+  {
+    "amount": 438.44,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-09T12:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 49
+  },
+  {
+    "amount": 235.47,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-29T18:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 49
+  },
+  {
+    "amount": 215.94,
+    "concept": "Training",
+    "expenseDate": "2026-01-18T17:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 49
+  },
+  {
+    "amount": 63.98,
+    "concept": "Hotel",
+    "expenseDate": "2025-11-20T19:00:00",
+    "note": "Hotel - November 2025",
+    "expenseUserId": 50
+  },
+  {
+    "amount": 267.27,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-10T16:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 50
+  },
+  {
+    "amount": 146.91,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-12-30T12:00:00",
+    "note": "Travel insurance - December 2025",
+    "expenseUserId": 50
+  },
+  {
+    "amount": 59.31,
+    "concept": "Conference fee",
+    "expenseDate": "2026-01-19T10:00:00",
+    "note": "Conference fee - January 2026",
+    "expenseUserId": 50
+  },
+  {
+    "amount": 322.0,
+    "concept": "Training",
+    "expenseDate": "2025-11-21T14:00:00",
+    "note": "Training - November 2025",
+    "expenseUserId": 51
+  },
+  {
+    "amount": 536.32,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-11T20:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 51
+  },
+  {
+    "amount": 158.74,
+    "concept": "Parking",
+    "expenseDate": "2025-12-31T14:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 51
+  },
+  {
+    "amount": 284.14,
+    "concept": "Catering",
+    "expenseDate": "2026-01-20T17:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 51
+  },
+  {
+    "amount": 233.47,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-22T20:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 52
+  },
+  {
+    "amount": 289.55,
+    "concept": "Parking",
+    "expenseDate": "2025-12-12T21:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 52
+  },
+  {
+    "amount": 155.93,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-01T21:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 52
+  },
+  {
+    "amount": 383.37,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-21T17:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 52
+  },
+  {
+    "amount": 173.83,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-11-23T15:00:00",
+    "note": "Taxi airport - November 2025",
+    "expenseUserId": 53
+  },
+  {
+    "amount": 350.93,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-12-13T12:00:00",
+    "note": "Flight ticket - December 2025",
+    "expenseUserId": 53
+  },
+  {
+    "amount": 320.03,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-01-02T16:00:00",
+    "note": "Taxi airport - January 2026",
+    "expenseUserId": 53
+  },
+  {
+    "amount": 216.84,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-22T20:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 53
+  },
+  {
+    "amount": 229.25,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-24T13:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 54
+  },
+  {
+    "amount": 175.44,
+    "concept": "Software license",
+    "expenseDate": "2025-12-14T12:00:00",
+    "note": "Software license - December 2025",
+    "expenseUserId": 54
+  },
+  {
+    "amount": 379.59,
+    "concept": "Software license",
+    "expenseDate": "2026-01-03T20:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 54
+  },
+  {
+    "amount": 242.64,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-23T13:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 54
+  },
+  {
+    "amount": 275.87,
+    "concept": "Business lunch",
+    "expenseDate": "2025-11-25T12:00:00",
+    "note": "Business lunch - November 2025",
+    "expenseUserId": 55
+  },
+  {
+    "amount": 335.51,
+    "concept": "Conference fee",
+    "expenseDate": "2025-12-15T15:00:00",
+    "note": "Conference fee - December 2025",
+    "expenseUserId": 55
+  },
+  {
+    "amount": 492.15,
+    "concept": "Team dinner",
+    "expenseDate": "2026-01-04T11:00:00",
+    "note": "Team dinner - January 2026",
+    "expenseUserId": 55
+  },
+  {
+    "amount": 446.55,
+    "concept": "Subscription",
+    "expenseDate": "2026-01-24T13:00:00",
+    "note": "Subscription - January 2026",
+    "expenseUserId": 55
+  },
+  {
+    "amount": 483.9,
+    "concept": "Equipment",
+    "expenseDate": "2025-11-26T11:00:00",
+    "note": "Equipment - November 2025",
+    "expenseUserId": 56
+  },
+  {
+    "amount": 257.28,
+    "concept": "Office supplies",
+    "expenseDate": "2025-12-16T20:00:00",
+    "note": "Office supplies - December 2025",
+    "expenseUserId": 56
+  },
+  {
+    "amount": 503.18,
+    "concept": "Parking",
+    "expenseDate": "2026-01-05T09:00:00",
+    "note": "Parking - January 2026",
+    "expenseUserId": 56
+  },
+  {
+    "amount": 357.3,
+    "concept": "Books",
+    "expenseDate": "2026-01-25T17:00:00",
+    "note": "Books - January 2026",
+    "expenseUserId": 56
+  },
+  {
+    "amount": 365.75,
+    "concept": "Conference fee",
+    "expenseDate": "2025-11-27T20:00:00",
+    "note": "Conference fee - November 2025",
+    "expenseUserId": 57
+  },
+  {
+    "amount": 299.2,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-17T11:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 57
+  },
+  {
+    "amount": 397.88,
+    "concept": "Business lunch",
+    "expenseDate": "2026-01-06T21:00:00",
+    "note": "Business lunch - January 2026",
+    "expenseUserId": 57
+  },
+  {
+    "amount": 434.7,
+    "concept": "Catering",
+    "expenseDate": "2026-01-26T13:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 57
+  },
+  {
+    "amount": 129.25,
+    "concept": "Office supplies",
+    "expenseDate": "2025-11-28T16:00:00",
+    "note": "Office supplies - November 2025",
+    "expenseUserId": 58
+  },
+  {
+    "amount": 355.55,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-12-18T16:00:00",
+    "note": "Client entertainment - December 2025",
+    "expenseUserId": 58
+  },
+  {
+    "amount": 196.4,
+    "concept": "Software license",
+    "expenseDate": "2026-01-07T16:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 58
+  },
+  {
+    "amount": 421.25,
+    "concept": "Team dinner",
+    "expenseDate": "2026-01-27T13:00:00",
+    "note": "Team dinner - January 2026",
+    "expenseUserId": 58
+  },
+  {
+    "amount": 352.49,
+    "concept": "Team dinner",
+    "expenseDate": "2025-11-29T19:00:00",
+    "note": "Team dinner - November 2025",
+    "expenseUserId": 59
+  },
+  {
+    "amount": 208.43,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-19T17:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 59
+  },
+  {
+    "amount": 406.16,
+    "concept": "Parking",
+    "expenseDate": "2026-01-08T09:00:00",
+    "note": "Parking - January 2026",
+    "expenseUserId": 59
+  },
+  {
+    "amount": 221.14,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-28T18:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 59
+  },
+  {
+    "amount": 506.47,
+    "concept": "Flight ticket",
+    "expenseDate": "2025-11-30T17:00:00",
+    "note": "Flight ticket - November 2025",
+    "expenseUserId": 60
+  },
+  {
+    "amount": 106.46,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-20T11:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 60
+  },
+  {
+    "amount": 227.67,
+    "concept": "Workshop",
+    "expenseDate": "2026-01-09T12:00:00",
+    "note": "Workshop - January 2026",
+    "expenseUserId": 60
+  },
+  {
+    "amount": 321.57,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-29T18:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 60
+  },
+  {
+    "amount": 105.31,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-12-01T15:00:00",
+    "note": "Taxi airport - December 2025",
+    "expenseUserId": 61
+  },
+  {
+    "amount": 250.58,
+    "concept": "Parking",
+    "expenseDate": "2025-12-21T16:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 61
+  },
+  {
+    "amount": 185.32,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-10T18:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 61
+  },
+  {
+    "amount": 572.85,
+    "concept": "Team dinner",
+    "expenseDate": "2026-01-30T11:00:00",
+    "note": "Team dinner - January 2026",
+    "expenseUserId": 61
+  },
+  {
+    "amount": 446.89,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-02T18:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 62
+  },
+  {
+    "amount": 234.35,
+    "concept": "Taxi airport",
+    "expenseDate": "2025-12-22T14:00:00",
+    "note": "Taxi airport - December 2025",
+    "expenseUserId": 62
+  },
+  {
+    "amount": 358.79,
+    "concept": "Training",
+    "expenseDate": "2026-01-11T17:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 62
+  },
+  {
+    "amount": 490.8,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-31T13:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 62
+  },
+  {
+    "amount": 350.76,
+    "concept": "Software license",
+    "expenseDate": "2025-12-03T09:00:00",
+    "note": "Software license - December 2025",
+    "expenseUserId": 63
+  },
+  {
+    "amount": 395.1,
+    "concept": "Books",
+    "expenseDate": "2025-12-23T20:00:00",
+    "note": "Books - December 2025",
+    "expenseUserId": 63
+  },
+  {
+    "amount": 299.39,
+    "concept": "Catering",
+    "expenseDate": "2026-01-12T09:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 63
+  },
+  {
+    "amount": 333.14,
+    "concept": "Hotel",
+    "expenseDate": "2026-02-01T17:00:00",
+    "note": "Hotel - February 2026",
+    "expenseUserId": 63
+  },
+  {
+    "amount": 430.52,
+    "concept": "Conference fee",
+    "expenseDate": "2025-12-04T21:00:00",
+    "note": "Conference fee - December 2025",
+    "expenseUserId": 64
+  },
+  {
+    "amount": 287.6,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-24T19:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 64
+  },
+  {
+    "amount": 460.92,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-13T17:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 64
+  },
+  {
+    "amount": 456.81,
+    "concept": "Office supplies",
+    "expenseDate": "2026-02-02T16:00:00",
+    "note": "Office supplies - February 2026",
+    "expenseUserId": 64
+  },
+  {
+    "amount": 158.64,
+    "concept": "Hardware",
+    "expenseDate": "2025-12-05T14:00:00",
+    "note": "Hardware - December 2025",
+    "expenseUserId": 65
+  },
+  {
+    "amount": 492.98,
+    "concept": "Hotel",
+    "expenseDate": "2025-12-25T16:00:00",
+    "note": "Hotel - December 2025",
+    "expenseUserId": 65
+  },
+  {
+    "amount": 339.9,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-14T15:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 65
+  },
+  {
+    "amount": 272.01,
+    "concept": "Business lunch",
+    "expenseDate": "2026-02-03T09:00:00",
+    "note": "Business lunch - February 2026",
+    "expenseUserId": 65
+  },
+  {
+    "amount": 562.38,
+    "concept": "Conference fee",
+    "expenseDate": "2025-12-06T17:00:00",
+    "note": "Conference fee - December 2025",
+    "expenseUserId": 66
+  },
+  {
+    "amount": 49.74,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-26T11:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 66
+  },
+  {
+    "amount": 289.85,
+    "concept": "Workshop",
+    "expenseDate": "2026-01-15T12:00:00",
+    "note": "Workshop - January 2026",
+    "expenseUserId": 66
+  },
+  {
+    "amount": 255.66,
+    "concept": "Parking",
+    "expenseDate": "2026-02-04T16:00:00",
+    "note": "Parking - February 2026",
+    "expenseUserId": 66
+  },
+  {
+    "amount": 404.41,
+    "concept": "Hardware",
+    "expenseDate": "2025-12-07T10:00:00",
+    "note": "Hardware - December 2025",
+    "expenseUserId": 67
+  },
+  {
+    "amount": 311.6,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-27T21:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 67
+  },
+  {
+    "amount": 421.37,
+    "concept": "Catering",
+    "expenseDate": "2026-01-16T18:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 67
+  },
+  {
+    "amount": 466.68,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-02-05T10:00:00",
+    "note": "Flight ticket - February 2026",
+    "expenseUserId": 67
+  },
+  {
+    "amount": 326.35,
+    "concept": "Software license",
+    "expenseDate": "2025-12-08T13:00:00",
+    "note": "Software license - December 2025",
+    "expenseUserId": 68
+  },
+  {
+    "amount": 377.97,
+    "concept": "Training",
+    "expenseDate": "2025-12-28T09:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 68
+  },
+  {
+    "amount": 548.96,
+    "concept": "Parking",
+    "expenseDate": "2026-01-17T21:00:00",
+    "note": "Parking - January 2026",
+    "expenseUserId": 68
+  },
+  {
+    "amount": 239.59,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-06T13:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 68
+  },
+  {
+    "amount": 337.18,
+    "concept": "Parking",
+    "expenseDate": "2025-12-09T19:00:00",
+    "note": "Parking - December 2025",
+    "expenseUserId": 69
+  },
+  {
+    "amount": 406.96,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-12-29T21:00:00",
+    "note": "Client entertainment - December 2025",
+    "expenseUserId": 69
+  },
+  {
+    "amount": 196.09,
+    "concept": "Equipment",
+    "expenseDate": "2026-01-18T10:00:00",
+    "note": "Equipment - January 2026",
+    "expenseUserId": 69
+  },
+  {
+    "amount": 63.87,
+    "concept": "Books",
+    "expenseDate": "2026-02-07T14:00:00",
+    "note": "Books - February 2026",
+    "expenseUserId": 69
+  },
+  {
+    "amount": 508.52,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-10T21:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 70
+  },
+  {
+    "amount": 189.83,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-30T15:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 70
+  },
+  {
+    "amount": 347.14,
+    "concept": "Hardware",
+    "expenseDate": "2026-01-19T18:00:00",
+    "note": "Hardware - January 2026",
+    "expenseUserId": 70
+  },
+  {
+    "amount": 375.65,
+    "concept": "Software license",
+    "expenseDate": "2026-02-08T13:00:00",
+    "note": "Software license - February 2026",
+    "expenseUserId": 70
+  },
+  {
+    "amount": 141.82,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-11T14:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 71
+  },
+  {
+    "amount": 579.95,
+    "concept": "Hotel",
+    "expenseDate": "2025-12-31T13:00:00",
+    "note": "Hotel - December 2025",
+    "expenseUserId": 71
+  },
+  {
+    "amount": 353.02,
+    "concept": "Conference fee",
+    "expenseDate": "2026-01-20T13:00:00",
+    "note": "Conference fee - January 2026",
+    "expenseUserId": 71
+  },
+  {
+    "amount": 430.96,
+    "concept": "Conference fee",
+    "expenseDate": "2026-02-09T14:00:00",
+    "note": "Conference fee - February 2026",
+    "expenseUserId": 71
+  },
+  {
+    "amount": 238.73,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-12T10:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 72
+  },
+  {
+    "amount": 535.32,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-01T16:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 72
+  },
+  {
+    "amount": 302.41,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-21T11:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 72
+  },
+  {
+    "amount": 308.27,
+    "concept": "Books",
+    "expenseDate": "2026-02-10T09:00:00",
+    "note": "Books - February 2026",
+    "expenseUserId": 72
+  },
+  {
+    "amount": 270.46,
+    "concept": "Catering",
+    "expenseDate": "2025-12-13T15:00:00",
+    "note": "Catering - December 2025",
+    "expenseUserId": 73
+  },
+  {
+    "amount": 172.96,
+    "concept": "Subscription",
+    "expenseDate": "2026-01-02T09:00:00",
+    "note": "Subscription - January 2026",
+    "expenseUserId": 73
+  },
+  {
+    "amount": 189.74,
+    "concept": "Hardware",
+    "expenseDate": "2026-01-22T10:00:00",
+    "note": "Hardware - January 2026",
+    "expenseUserId": 73
+  },
+  {
+    "amount": 266.06,
+    "concept": "Team dinner",
+    "expenseDate": "2026-02-11T12:00:00",
+    "note": "Team dinner - February 2026",
+    "expenseUserId": 73
+  },
+  {
+    "amount": 233.43,
+    "concept": "Books",
+    "expenseDate": "2025-12-14T10:00:00",
+    "note": "Books - December 2025",
+    "expenseUserId": 74
+  },
+  {
+    "amount": 549.1,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-03T12:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 74
+  },
+  {
+    "amount": 275.44,
+    "concept": "Business lunch",
+    "expenseDate": "2026-01-23T14:00:00",
+    "note": "Business lunch - January 2026",
+    "expenseUserId": 74
+  },
+  {
+    "amount": 151.53,
+    "concept": "Training",
+    "expenseDate": "2026-02-12T10:00:00",
+    "note": "Training - February 2026",
+    "expenseUserId": 74
+  },
+  {
+    "amount": 135.86,
+    "concept": "Catering",
+    "expenseDate": "2025-12-15T14:00:00",
+    "note": "Catering - December 2025",
+    "expenseUserId": 75
+  },
+  {
+    "amount": 177.45,
+    "concept": "Workshop",
+    "expenseDate": "2026-01-04T12:00:00",
+    "note": "Workshop - January 2026",
+    "expenseUserId": 75
+  },
+  {
+    "amount": 131.1,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-24T17:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 75
+  },
+  {
+    "amount": 527.76,
+    "concept": "Training",
+    "expenseDate": "2026-02-13T19:00:00",
+    "note": "Training - February 2026",
+    "expenseUserId": 75
+  },
+  {
+    "amount": 481.4,
+    "concept": "Catering",
+    "expenseDate": "2025-12-16T13:00:00",
+    "note": "Catering - December 2025",
+    "expenseUserId": 76
+  },
+  {
+    "amount": 379.5,
+    "concept": "Team dinner",
+    "expenseDate": "2026-01-05T15:00:00",
+    "note": "Team dinner - January 2026",
+    "expenseUserId": 76
+  },
+  {
+    "amount": 426.32,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-25T09:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 76
+  },
+  {
+    "amount": 381.89,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-02-14T21:00:00",
+    "note": "Flight ticket - February 2026",
+    "expenseUserId": 76
+  },
+  {
+    "amount": 488.86,
+    "concept": "Training",
+    "expenseDate": "2025-12-17T17:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 77
+  },
+  {
+    "amount": 389.47,
+    "concept": "Software license",
+    "expenseDate": "2026-01-06T19:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 77
+  },
+  {
+    "amount": 317.35,
+    "concept": "Hardware",
+    "expenseDate": "2026-01-26T14:00:00",
+    "note": "Hardware - January 2026",
+    "expenseUserId": 77
+  },
+  {
+    "amount": 343.82,
+    "concept": "Hotel",
+    "expenseDate": "2026-02-15T10:00:00",
+    "note": "Hotel - February 2026",
+    "expenseUserId": 77
+  },
+  {
+    "amount": 507.62,
+    "concept": "Training",
+    "expenseDate": "2025-12-18T14:00:00",
+    "note": "Training - December 2025",
+    "expenseUserId": 78
+  },
+  {
+    "amount": 547.3,
+    "concept": "Software license",
+    "expenseDate": "2026-01-07T13:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 78
+  },
+  {
+    "amount": 277.82,
+    "concept": "Software license",
+    "expenseDate": "2026-01-27T09:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 78
+  },
+  {
+    "amount": 363.82,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-02-16T10:00:00",
+    "note": "Flight ticket - February 2026",
+    "expenseUserId": 78
+  },
+  {
+    "amount": 106.29,
+    "concept": "Catering",
+    "expenseDate": "2025-12-19T18:00:00",
+    "note": "Catering - December 2025",
+    "expenseUserId": 79
+  },
+  {
+    "amount": 242.32,
+    "concept": "Business lunch",
+    "expenseDate": "2026-01-08T18:00:00",
+    "note": "Business lunch - January 2026",
+    "expenseUserId": 79
+  },
+  {
+    "amount": 108.61,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-28T20:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 79
+  },
+  {
+    "amount": 147.8,
+    "concept": "Training",
+    "expenseDate": "2026-02-17T13:00:00",
+    "note": "Training - February 2026",
+    "expenseUserId": 79
+  },
+  {
+    "amount": 68.96,
+    "concept": "Travel insurance",
+    "expenseDate": "2025-12-20T11:00:00",
+    "note": "Travel insurance - December 2025",
+    "expenseUserId": 80
+  },
+  {
+    "amount": 139.84,
+    "concept": "Equipment",
+    "expenseDate": "2026-01-09T12:00:00",
+    "note": "Equipment - January 2026",
+    "expenseUserId": 80
+  },
+  {
+    "amount": 426.18,
+    "concept": "Conference fee",
+    "expenseDate": "2026-01-29T11:00:00",
+    "note": "Conference fee - January 2026",
+    "expenseUserId": 80
+  },
+  {
+    "amount": 375.17,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-02-18T17:00:00",
+    "note": "Flight ticket - February 2026",
+    "expenseUserId": 80
+  },
+  {
+    "amount": 112.78,
+    "concept": "Client entertainment",
+    "expenseDate": "2025-12-21T11:00:00",
+    "note": "Client entertainment - December 2025",
+    "expenseUserId": 81
+  },
+  {
+    "amount": 524.25,
+    "concept": "Software license",
+    "expenseDate": "2026-01-10T14:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 81
+  },
+  {
+    "amount": 506.95,
+    "concept": "Subscription",
+    "expenseDate": "2026-01-30T20:00:00",
+    "note": "Subscription - January 2026",
+    "expenseUserId": 81
+  },
+  {
+    "amount": 327.42,
+    "concept": "Software license",
+    "expenseDate": "2026-02-19T15:00:00",
+    "note": "Software license - February 2026",
+    "expenseUserId": 81
+  },
+  {
+    "amount": 154.99,
+    "concept": "Team dinner",
+    "expenseDate": "2025-12-22T20:00:00",
+    "note": "Team dinner - December 2025",
+    "expenseUserId": 82
+  },
+  {
+    "amount": 384.64,
+    "concept": "Training",
+    "expenseDate": "2026-01-11T19:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 82
+  },
+  {
+    "amount": 433.72,
+    "concept": "Equipment",
+    "expenseDate": "2026-01-31T21:00:00",
+    "note": "Equipment - January 2026",
+    "expenseUserId": 82
+  },
+  {
+    "amount": 156.73,
+    "concept": "Conference fee",
+    "expenseDate": "2026-02-20T16:00:00",
+    "note": "Conference fee - February 2026",
+    "expenseUserId": 82
+  },
+  {
+    "amount": 223.97,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-23T14:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 83
+  },
+  {
+    "amount": 117.67,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-12T09:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 83
+  },
+  {
+    "amount": 156.45,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-02-01T15:00:00",
+    "note": "Travel insurance - February 2026",
+    "expenseUserId": 83
+  },
+  {
+    "amount": 218.32,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-21T15:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 83
+  },
+  {
+    "amount": 527.99,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-24T13:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 84
+  },
+  {
+    "amount": 365.25,
+    "concept": "Catering",
+    "expenseDate": "2026-01-13T09:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 84
+  },
+  {
+    "amount": 141.41,
+    "concept": "Parking",
+    "expenseDate": "2026-02-02T11:00:00",
+    "note": "Parking - February 2026",
+    "expenseUserId": 84
+  },
+  {
+    "amount": 393.57,
+    "concept": "Parking",
+    "expenseDate": "2026-02-22T21:00:00",
+    "note": "Parking - February 2026",
+    "expenseUserId": 84
+  },
+  {
+    "amount": 355.46,
+    "concept": "Office supplies",
+    "expenseDate": "2025-12-25T19:00:00",
+    "note": "Office supplies - December 2025",
+    "expenseUserId": 85
+  },
+  {
+    "amount": 494.91,
+    "concept": "Software license",
+    "expenseDate": "2026-01-14T21:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 85
+  },
+  {
+    "amount": 394.44,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-02-03T21:00:00",
+    "note": "Travel insurance - February 2026",
+    "expenseUserId": 85
+  },
+  {
+    "amount": 281.37,
+    "concept": "Equipment",
+    "expenseDate": "2026-02-23T16:00:00",
+    "note": "Equipment - February 2026",
+    "expenseUserId": 85
+  },
+  {
+    "amount": 309.89,
+    "concept": "Business lunch",
+    "expenseDate": "2025-12-26T12:00:00",
+    "note": "Business lunch - December 2025",
+    "expenseUserId": 86
+  },
+  {
+    "amount": 386.76,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-15T13:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 86
+  },
+  {
+    "amount": 439.74,
+    "concept": "Equipment",
+    "expenseDate": "2026-02-04T19:00:00",
+    "note": "Equipment - February 2026",
+    "expenseUserId": 86
+  },
+  {
+    "amount": 282.94,
+    "concept": "Equipment",
+    "expenseDate": "2026-02-24T18:00:00",
+    "note": "Equipment - February 2026",
+    "expenseUserId": 86
+  },
+  {
+    "amount": 353.28,
+    "concept": "Books",
+    "expenseDate": "2025-12-27T14:00:00",
+    "note": "Books - December 2025",
+    "expenseUserId": 87
+  },
+  {
+    "amount": 229.41,
+    "concept": "Training",
+    "expenseDate": "2026-01-16T21:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 87
+  },
+  {
+    "amount": 538.31,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-05T12:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 87
+  },
+  {
+    "amount": 445.7,
+    "concept": "Books",
+    "expenseDate": "2026-02-25T13:00:00",
+    "note": "Books - February 2026",
+    "expenseUserId": 87
+  },
+  {
+    "amount": 138.53,
+    "concept": "Workshop",
+    "expenseDate": "2025-12-28T19:00:00",
+    "note": "Workshop - December 2025",
+    "expenseUserId": 88
+  },
+  {
+    "amount": 180.8,
+    "concept": "Parking",
+    "expenseDate": "2026-01-17T17:00:00",
+    "note": "Parking - January 2026",
+    "expenseUserId": 88
+  },
+  {
+    "amount": 544.79,
+    "concept": "Office supplies",
+    "expenseDate": "2026-02-06T21:00:00",
+    "note": "Office supplies - February 2026",
+    "expenseUserId": 88
+  },
+  {
+    "amount": 324.41,
+    "concept": "Equipment",
+    "expenseDate": "2026-02-26T19:00:00",
+    "note": "Equipment - February 2026",
+    "expenseUserId": 88
+  },
+  {
+    "amount": 181.97,
+    "concept": "Conference fee",
+    "expenseDate": "2025-12-29T20:00:00",
+    "note": "Conference fee - December 2025",
+    "expenseUserId": 89
+  },
+  {
+    "amount": 111.38,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-18T09:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 89
+  },
+  {
+    "amount": 472.67,
+    "concept": "Hotel",
+    "expenseDate": "2026-02-07T14:00:00",
+    "note": "Hotel - February 2026",
+    "expenseUserId": 89
+  },
+  {
+    "amount": 445.09,
+    "concept": "Training",
+    "expenseDate": "2026-02-27T18:00:00",
+    "note": "Training - February 2026",
+    "expenseUserId": 89
+  },
+  {
+    "amount": 359.72,
+    "concept": "Equipment",
+    "expenseDate": "2025-12-30T21:00:00",
+    "note": "Equipment - December 2025",
+    "expenseUserId": 90
+  },
+  {
+    "amount": 357.11,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-01-19T20:00:00",
+    "note": "Taxi airport - January 2026",
+    "expenseUserId": 90
+  },
+  {
+    "amount": 322.97,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-02-08T17:00:00",
+    "note": "Travel insurance - February 2026",
+    "expenseUserId": 90
+  },
+  {
+    "amount": 163.97,
+    "concept": "Parking",
+    "expenseDate": "2026-02-28T19:00:00",
+    "note": "Parking - February 2026",
+    "expenseUserId": 90
+  },
+  {
+    "amount": 111.13,
+    "concept": "Subscription",
+    "expenseDate": "2025-12-31T15:00:00",
+    "note": "Subscription - December 2025",
+    "expenseUserId": 91
+  },
+  {
+    "amount": 201.83,
+    "concept": "Software license",
+    "expenseDate": "2026-01-20T20:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 91
+  },
+  {
+    "amount": 113.9,
+    "concept": "Conference fee",
+    "expenseDate": "2026-02-09T21:00:00",
+    "note": "Conference fee - February 2026",
+    "expenseUserId": 91
+  },
+  {
+    "amount": 406.37,
+    "concept": "Team dinner",
+    "expenseDate": "2026-03-01T10:00:00",
+    "note": "Team dinner - March 2026",
+    "expenseUserId": 91
+  },
+  {
+    "amount": 230.66,
+    "concept": "Equipment",
+    "expenseDate": "2026-01-01T18:00:00",
+    "note": "Equipment - January 2026",
+    "expenseUserId": 92
+  },
+  {
+    "amount": 387.85,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-01-21T17:00:00",
+    "note": "Taxi airport - January 2026",
+    "expenseUserId": 92
+  },
+  {
+    "amount": 451.26,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-02-10T12:00:00",
+    "note": "Taxi airport - February 2026",
+    "expenseUserId": 92
+  },
+  {
+    "amount": 195.33,
+    "concept": "Hardware",
+    "expenseDate": "2026-03-02T15:00:00",
+    "note": "Hardware - March 2026",
+    "expenseUserId": 92
+  },
+  {
+    "amount": 194.6,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-02T21:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 93
+  },
+  {
+    "amount": 353.73,
+    "concept": "Parking",
+    "expenseDate": "2026-01-22T09:00:00",
+    "note": "Parking - January 2026",
+    "expenseUserId": 93
+  },
+  {
+    "amount": 190.23,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-02-11T11:00:00",
+    "note": "Taxi airport - February 2026",
+    "expenseUserId": 93
+  },
+  {
+    "amount": 276.05,
+    "concept": "Software license",
+    "expenseDate": "2026-03-03T11:00:00",
+    "note": "Software license - March 2026",
+    "expenseUserId": 93
+  },
+  {
+    "amount": 367.48,
+    "concept": "Hardware",
+    "expenseDate": "2026-01-03T19:00:00",
+    "note": "Hardware - January 2026",
+    "expenseUserId": 94
+  },
+  {
+    "amount": 551.53,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-23T14:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 94
+  },
+  {
+    "amount": 99.97,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-02-12T14:00:00",
+    "note": "Taxi airport - February 2026",
+    "expenseUserId": 94
+  },
+  {
+    "amount": 195.66,
+    "concept": "Hotel",
+    "expenseDate": "2026-03-04T21:00:00",
+    "note": "Hotel - March 2026",
+    "expenseUserId": 94
+  },
+  {
+    "amount": 519.04,
+    "concept": "Catering",
+    "expenseDate": "2026-01-04T18:00:00",
+    "note": "Catering - January 2026",
+    "expenseUserId": 95
+  },
+  {
+    "amount": 443.18,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-24T20:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 95
+  },
+  {
+    "amount": 520.7,
+    "concept": "Software license",
+    "expenseDate": "2026-02-13T16:00:00",
+    "note": "Software license - February 2026",
+    "expenseUserId": 95
+  },
+  {
+    "amount": 417.18,
+    "concept": "Hotel",
+    "expenseDate": "2026-03-05T21:00:00",
+    "note": "Hotel - March 2026",
+    "expenseUserId": 95
+  },
+  {
+    "amount": 379.39,
+    "concept": "Training",
+    "expenseDate": "2026-01-05T09:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 96
+  },
+  {
+    "amount": 273.09,
+    "concept": "Conference fee",
+    "expenseDate": "2026-01-25T11:00:00",
+    "note": "Conference fee - January 2026",
+    "expenseUserId": 96
+  },
+  {
+    "amount": 196.43,
+    "concept": "Parking",
+    "expenseDate": "2026-02-14T13:00:00",
+    "note": "Parking - February 2026",
+    "expenseUserId": 96
+  },
+  {
+    "amount": 317.3,
+    "concept": "Conference fee",
+    "expenseDate": "2026-03-06T19:00:00",
+    "note": "Conference fee - March 2026",
+    "expenseUserId": 96
+  },
+  {
+    "amount": 580.16,
+    "concept": "Training",
+    "expenseDate": "2026-01-06T10:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 97
+  },
+  {
+    "amount": 391.35,
+    "concept": "Office supplies",
+    "expenseDate": "2026-01-26T15:00:00",
+    "note": "Office supplies - January 2026",
+    "expenseUserId": 97
+  },
+  {
+    "amount": 483.87,
+    "concept": "Workshop",
+    "expenseDate": "2026-02-15T12:00:00",
+    "note": "Workshop - February 2026",
+    "expenseUserId": 97
+  },
+  {
+    "amount": 481.49,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-03-07T19:00:00",
+    "note": "Travel insurance - March 2026",
+    "expenseUserId": 97
+  },
+  {
+    "amount": 342.13,
+    "concept": "Software license",
+    "expenseDate": "2026-01-07T16:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 98
+  },
+  {
+    "amount": 368.5,
+    "concept": "Workshop",
+    "expenseDate": "2026-01-27T16:00:00",
+    "note": "Workshop - January 2026",
+    "expenseUserId": 98
+  },
+  {
+    "amount": 91.05,
+    "concept": "Conference fee",
+    "expenseDate": "2026-02-16T11:00:00",
+    "note": "Conference fee - February 2026",
+    "expenseUserId": 98
+  },
+  {
+    "amount": 439.74,
+    "concept": "Equipment",
+    "expenseDate": "2026-03-08T10:00:00",
+    "note": "Equipment - March 2026",
+    "expenseUserId": 98
+  },
+  {
+    "amount": 309.3,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-08T16:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 99
+  },
+  {
+    "amount": 92.02,
+    "concept": "Business lunch",
+    "expenseDate": "2026-01-28T17:00:00",
+    "note": "Business lunch - January 2026",
+    "expenseUserId": 99
+  },
+  {
+    "amount": 403.04,
+    "concept": "Business lunch",
+    "expenseDate": "2026-02-17T11:00:00",
+    "note": "Business lunch - February 2026",
+    "expenseUserId": 99
+  },
+  {
+    "amount": 445.11,
+    "concept": "Subscription",
+    "expenseDate": "2026-03-09T10:00:00",
+    "note": "Subscription - March 2026",
+    "expenseUserId": 99
+  },
+  {
+    "amount": 94.7,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-01-09T19:00:00",
+    "note": "Travel insurance - January 2026",
+    "expenseUserId": 100
+  },
+  {
+    "amount": 262.72,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-29T14:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 100
+  },
+  {
+    "amount": 460.87,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-02-18T12:00:00",
+    "note": "Taxi airport - February 2026",
+    "expenseUserId": 100
+  },
+  {
+    "amount": 500.78,
+    "concept": "Subscription",
+    "expenseDate": "2026-03-10T09:00:00",
+    "note": "Subscription - March 2026",
+    "expenseUserId": 100
+  },
+  {
+    "amount": 276.27,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-10T16:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 101
+  },
+  {
+    "amount": 213.91,
+    "concept": "Equipment",
+    "expenseDate": "2026-01-30T16:00:00",
+    "note": "Equipment - January 2026",
+    "expenseUserId": 101
+  },
+  {
+    "amount": 268.67,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-02-19T14:00:00",
+    "note": "Client entertainment - February 2026",
+    "expenseUserId": 101
+  },
+  {
+    "amount": 406.73,
+    "concept": "Conference fee",
+    "expenseDate": "2026-03-11T12:00:00",
+    "note": "Conference fee - March 2026",
+    "expenseUserId": 101
+  },
+  {
+    "amount": 408.22,
+    "concept": "Subscription",
+    "expenseDate": "2026-01-11T19:00:00",
+    "note": "Subscription - January 2026",
+    "expenseUserId": 102
+  },
+  {
+    "amount": 325.71,
+    "concept": "Software license",
+    "expenseDate": "2026-01-31T17:00:00",
+    "note": "Software license - January 2026",
+    "expenseUserId": 102
+  },
+  {
+    "amount": 427.63,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-02-20T12:00:00",
+    "note": "Client entertainment - February 2026",
+    "expenseUserId": 102
+  },
+  {
+    "amount": 327.61,
+    "concept": "Team dinner",
+    "expenseDate": "2026-03-12T17:00:00",
+    "note": "Team dinner - March 2026",
+    "expenseUserId": 102
+  },
+  {
+    "amount": 388.58,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-12T16:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 103
+  },
+  {
+    "amount": 478.85,
+    "concept": "Hotel",
+    "expenseDate": "2026-02-01T17:00:00",
+    "note": "Hotel - February 2026",
+    "expenseUserId": 103
+  },
+  {
+    "amount": 257.81,
+    "concept": "Office supplies",
+    "expenseDate": "2026-02-21T10:00:00",
+    "note": "Office supplies - February 2026",
+    "expenseUserId": 103
+  },
+  {
+    "amount": 521.91,
+    "concept": "Team dinner",
+    "expenseDate": "2026-03-13T13:00:00",
+    "note": "Team dinner - March 2026",
+    "expenseUserId": 103
+  },
+  {
+    "amount": 207.94,
+    "concept": "Workshop",
+    "expenseDate": "2026-01-13T11:00:00",
+    "note": "Workshop - January 2026",
+    "expenseUserId": 104
+  },
+  {
+    "amount": 268.2,
+    "concept": "Team dinner",
+    "expenseDate": "2026-02-02T17:00:00",
+    "note": "Team dinner - February 2026",
+    "expenseUserId": 104
+  },
+  {
+    "amount": 549.0,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-22T19:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 104
+  },
+  {
+    "amount": 487.78,
+    "concept": "Business lunch",
+    "expenseDate": "2026-03-14T15:00:00",
+    "note": "Business lunch - March 2026",
+    "expenseUserId": 104
+  },
+  {
+    "amount": 174.67,
+    "concept": "Training",
+    "expenseDate": "2026-01-14T20:00:00",
+    "note": "Training - January 2026",
+    "expenseUserId": 105
+  },
+  {
+    "amount": 469.62,
+    "concept": "Team dinner",
+    "expenseDate": "2026-02-03T14:00:00",
+    "note": "Team dinner - February 2026",
+    "expenseUserId": 105
+  },
+  {
+    "amount": 238.42,
+    "concept": "Conference fee",
+    "expenseDate": "2026-02-23T12:00:00",
+    "note": "Conference fee - February 2026",
+    "expenseUserId": 105
+  },
+  {
+    "amount": 262.16,
+    "concept": "Conference fee",
+    "expenseDate": "2026-03-15T18:00:00",
+    "note": "Conference fee - March 2026",
+    "expenseUserId": 105
+  },
+  {
+    "amount": 314.96,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-15T13:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 106
+  },
+  {
+    "amount": 203.74,
+    "concept": "Office supplies",
+    "expenseDate": "2026-02-04T11:00:00",
+    "note": "Office supplies - February 2026",
+    "expenseUserId": 106
+  },
+  {
+    "amount": 191.1,
+    "concept": "Hotel",
+    "expenseDate": "2026-02-24T12:00:00",
+    "note": "Hotel - February 2026",
+    "expenseUserId": 106
+  },
+  {
+    "amount": 73.76,
+    "concept": "Catering",
+    "expenseDate": "2026-03-16T20:00:00",
+    "note": "Catering - March 2026",
+    "expenseUserId": 106
+  },
+  {
+    "amount": 404.73,
+    "concept": "Business lunch",
+    "expenseDate": "2026-01-16T13:00:00",
+    "note": "Business lunch - January 2026",
+    "expenseUserId": 107
+  },
+  {
+    "amount": 215.58,
+    "concept": "Catering",
+    "expenseDate": "2026-02-05T21:00:00",
+    "note": "Catering - February 2026",
+    "expenseUserId": 107
+  },
+  {
+    "amount": 69.56,
+    "concept": "Team dinner",
+    "expenseDate": "2026-02-25T13:00:00",
+    "note": "Team dinner - February 2026",
+    "expenseUserId": 107
+  },
+  {
+    "amount": 175.42,
+    "concept": "Hotel",
+    "expenseDate": "2026-03-17T11:00:00",
+    "note": "Hotel - March 2026",
+    "expenseUserId": 107
+  },
+  {
+    "amount": 447.63,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-17T12:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 108
+  },
+  {
+    "amount": 296.22,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-02-06T14:00:00",
+    "note": "Flight ticket - February 2026",
+    "expenseUserId": 108
+  },
+  {
+    "amount": 203.59,
+    "concept": "Hardware",
+    "expenseDate": "2026-02-26T18:00:00",
+    "note": "Hardware - February 2026",
+    "expenseUserId": 108
+  },
+  {
+    "amount": 295.19,
+    "concept": "Subscription",
+    "expenseDate": "2026-03-18T13:00:00",
+    "note": "Subscription - March 2026",
+    "expenseUserId": 108
+  },
+  {
+    "amount": 204.79,
+    "concept": "Taxi airport",
+    "expenseDate": "2026-01-18T17:00:00",
+    "note": "Taxi airport - January 2026",
+    "expenseUserId": 109
+  },
+  {
+    "amount": 125.54,
+    "concept": "Workshop",
+    "expenseDate": "2026-02-07T12:00:00",
+    "note": "Workshop - February 2026",
+    "expenseUserId": 109
+  },
+  {
+    "amount": 553.95,
+    "concept": "Business lunch",
+    "expenseDate": "2026-02-27T09:00:00",
+    "note": "Business lunch - February 2026",
+    "expenseUserId": 109
+  },
+  {
+    "amount": 291.48,
+    "concept": "Business lunch",
+    "expenseDate": "2026-03-19T13:00:00",
+    "note": "Business lunch - March 2026",
+    "expenseUserId": 109
+  },
+  {
+    "amount": 52.72,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-19T20:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 110
+  },
+  {
+    "amount": 332.15,
+    "concept": "Training",
+    "expenseDate": "2026-02-08T12:00:00",
+    "note": "Training - February 2026",
+    "expenseUserId": 110
+  },
+  {
+    "amount": 423.01,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-28T10:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 110
+  },
+  {
+    "amount": 413.86,
+    "concept": "Workshop",
+    "expenseDate": "2026-03-20T21:00:00",
+    "note": "Workshop - March 2026",
+    "expenseUserId": 110
+  },
+  {
+    "amount": 367.15,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-01-20T18:00:00",
+    "note": "Flight ticket - January 2026",
+    "expenseUserId": 111
+  },
+  {
+    "amount": 256.95,
+    "concept": "Parking",
+    "expenseDate": "2026-02-09T15:00:00",
+    "note": "Parking - February 2026",
+    "expenseUserId": 111
+  },
+  {
+    "amount": 362.89,
+    "concept": "Office supplies",
+    "expenseDate": "2026-03-01T15:00:00",
+    "note": "Office supplies - March 2026",
+    "expenseUserId": 111
+  },
+  {
+    "amount": 310.84,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-03-21T13:00:00",
+    "note": "Flight ticket - March 2026",
+    "expenseUserId": 111
+  },
+  {
+    "amount": 559.08,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-21T09:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 112
+  },
+  {
+    "amount": 190.68,
+    "concept": "Business lunch",
+    "expenseDate": "2026-02-10T18:00:00",
+    "note": "Business lunch - February 2026",
+    "expenseUserId": 112
+  },
+  {
+    "amount": 187.14,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-03-02T12:00:00",
+    "note": "Travel insurance - March 2026",
+    "expenseUserId": 112
+  },
+  {
+    "amount": 265.85,
+    "concept": "Software license",
+    "expenseDate": "2026-03-22T12:00:00",
+    "note": "Software license - March 2026",
+    "expenseUserId": 112
+  },
+  {
+    "amount": 544.81,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-22T14:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 113
+  },
+  {
+    "amount": 369.28,
+    "concept": "Catering",
+    "expenseDate": "2026-02-11T11:00:00",
+    "note": "Catering - February 2026",
+    "expenseUserId": 113
+  },
+  {
+    "amount": 474.23,
+    "concept": "Hardware",
+    "expenseDate": "2026-03-03T12:00:00",
+    "note": "Hardware - March 2026",
+    "expenseUserId": 113
+  },
+  {
+    "amount": 187.42,
+    "concept": "Subscription",
+    "expenseDate": "2026-03-23T19:00:00",
+    "note": "Subscription - March 2026",
+    "expenseUserId": 113
+  },
+  {
+    "amount": 496.44,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-23T12:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 114
+  },
+  {
+    "amount": 324.94,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-12T16:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 114
+  },
+  {
+    "amount": 415.2,
+    "concept": "Office supplies",
+    "expenseDate": "2026-03-04T11:00:00",
+    "note": "Office supplies - March 2026",
+    "expenseUserId": 114
+  },
+  {
+    "amount": 266.72,
+    "concept": "Team dinner",
+    "expenseDate": "2026-03-24T14:00:00",
+    "note": "Team dinner - March 2026",
+    "expenseUserId": 114
+  },
+  {
+    "amount": 525.58,
+    "concept": "Team dinner",
+    "expenseDate": "2026-01-24T11:00:00",
+    "note": "Team dinner - January 2026",
+    "expenseUserId": 115
+  },
+  {
+    "amount": 232.88,
+    "concept": "Workshop",
+    "expenseDate": "2026-02-13T15:00:00",
+    "note": "Workshop - February 2026",
+    "expenseUserId": 115
+  },
+  {
+    "amount": 382.08,
+    "concept": "Office supplies",
+    "expenseDate": "2026-03-05T09:00:00",
+    "note": "Office supplies - March 2026",
+    "expenseUserId": 115
+  },
+  {
+    "amount": 425.51,
+    "concept": "Software license",
+    "expenseDate": "2026-03-25T12:00:00",
+    "note": "Software license - March 2026",
+    "expenseUserId": 115
+  },
+  {
+    "amount": 503.47,
+    "concept": "Subscription",
+    "expenseDate": "2026-01-25T21:00:00",
+    "note": "Subscription - January 2026",
+    "expenseUserId": 116
+  },
+  {
+    "amount": 80.72,
+    "concept": "Office supplies",
+    "expenseDate": "2026-02-14T18:00:00",
+    "note": "Office supplies - February 2026",
+    "expenseUserId": 116
+  },
+  {
+    "amount": 276.24,
+    "concept": "Hardware",
+    "expenseDate": "2026-03-06T12:00:00",
+    "note": "Hardware - March 2026",
+    "expenseUserId": 116
+  },
+  {
+    "amount": 351.19,
+    "concept": "Travel insurance",
+    "expenseDate": "2026-03-26T20:00:00",
+    "note": "Travel insurance - March 2026",
+    "expenseUserId": 116
+  },
+  {
+    "amount": 78.36,
+    "concept": "Conference fee",
+    "expenseDate": "2026-01-26T15:00:00",
+    "note": "Conference fee - January 2026",
+    "expenseUserId": 117
+  },
+  {
+    "amount": 325.19,
+    "concept": "Hardware",
+    "expenseDate": "2026-02-15T20:00:00",
+    "note": "Hardware - February 2026",
+    "expenseUserId": 117
+  },
+  {
+    "amount": 352.38,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-03-07T13:00:00",
+    "note": "Client entertainment - March 2026",
+    "expenseUserId": 117
+  },
+  {
+    "amount": 297.04,
+    "concept": "Books",
+    "expenseDate": "2026-03-27T12:00:00",
+    "note": "Books - March 2026",
+    "expenseUserId": 117
+  },
+  {
+    "amount": 315.89,
+    "concept": "Hotel",
+    "expenseDate": "2026-01-27T17:00:00",
+    "note": "Hotel - January 2026",
+    "expenseUserId": 118
+  },
+  {
+    "amount": 308.07,
+    "concept": "Software license",
+    "expenseDate": "2026-02-16T14:00:00",
+    "note": "Software license - February 2026",
+    "expenseUserId": 118
+  },
+  {
+    "amount": 256.8,
+    "concept": "Software license",
+    "expenseDate": "2026-03-08T17:00:00",
+    "note": "Software license - March 2026",
+    "expenseUserId": 118
+  },
+  {
+    "amount": 320.57,
+    "concept": "Conference fee",
+    "expenseDate": "2026-03-28T13:00:00",
+    "note": "Conference fee - March 2026",
+    "expenseUserId": 118
+  },
+  {
+    "amount": 239.83,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-01-28T10:00:00",
+    "note": "Client entertainment - January 2026",
+    "expenseUserId": 119
+  },
+  {
+    "amount": 392.61,
+    "concept": "Subscription",
+    "expenseDate": "2026-02-17T09:00:00",
+    "note": "Subscription - February 2026",
+    "expenseUserId": 119
+  },
+  {
+    "amount": 202.6,
+    "concept": "Flight ticket",
+    "expenseDate": "2026-03-09T09:00:00",
+    "note": "Flight ticket - March 2026",
+    "expenseUserId": 119
+  },
+  {
+    "amount": 123.65,
+    "concept": "Parking",
+    "expenseDate": "2026-03-29T17:00:00",
+    "note": "Parking - March 2026",
+    "expenseUserId": 119
+  },
+  {
+    "amount": 502.27,
+    "concept": "Hardware",
+    "expenseDate": "2026-01-29T20:00:00",
+    "note": "Hardware - January 2026",
+    "expenseUserId": 120
+  },
+  {
+    "amount": 88.91,
+    "concept": "Hardware",
+    "expenseDate": "2026-02-18T13:00:00",
+    "note": "Hardware - February 2026",
+    "expenseUserId": 120
+  },
+  {
+    "amount": 85.82,
+    "concept": "Office supplies",
+    "expenseDate": "2026-03-10T20:00:00",
+    "note": "Office supplies - March 2026",
+    "expenseUserId": 120
+  },
+  {
+    "amount": 438.13,
+    "concept": "Client entertainment",
+    "expenseDate": "2026-03-30T21:00:00",
+    "note": "Client entertainment - March 2026",
+    "expenseUserId": 120
+  }
+]

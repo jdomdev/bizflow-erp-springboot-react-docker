@@ -17,7 +17,7 @@ Se han creado dos soluciones complementarias para inicializar datos en la base d
 - **Propósito:** Insertar datos iniciales directamente en PostgreSQL
 - **Contenido:**
   - 3 roles por defecto: `ADMIN`, `USER`, `MANAGER`
-  - 1 usuario administrador: `admin` / `admin123`
+  - 1 usuario administrador: `admin` / `<PASSWORD>`
   - 3 posiciones de ejemplo para testing
 
 ### 2️⃣ DataLoader Bean (`DataLoader.java`)
@@ -37,7 +37,7 @@ Se han creado dos soluciones complementarias para inicializar datos en la base d
 ### Usuario Administrador Automático
 ```
 Email: admin@yourcompany.com
-Password: admin123
+Password: <PASSWORD>
 Email:    admin@expenseapp.com
 Roles:    ADMIN
 ```
@@ -80,7 +80,7 @@ Cuando ves estos logs, significa que la inicialización funcionó:
 [2025-11-27 10:00:00] INFO  ... ✓ Admin user created successfully
 [2025-11-27 10:00:00] INFO  ...   Email: admin@yourcompany.com
 [2025-11-27 10:00:00] INFO  ...   Email: admin@expenseapp.com
-[2025-11-27 10:00:00] INFO  ... ⚠️ Default password: admin123 (CHANGE IN PRODUCTION)
+[2025-11-27 10:00:00] INFO  ... ⚠️ Default password: <PASSWORD> (CHANGE IN PRODUCTION)
 [2025-11-27 10:00:00] INFO  ... ========== DataLoader Completed Successfully ==========
 ```
 
@@ -93,7 +93,7 @@ Cuando ves estos logs, significa que la inicialización funcionó:
 1. Abre http://localhost en navegador
 2. Intenta login con:
    - Email: admin@yourcompany.com
-   - Password: admin123
+   - Password: <PASSWORD>
 3. Deberías poder acceder
 4. Podrás crear nuevos usuarios desde el panel admin
 ```
@@ -114,7 +114,7 @@ SELECT * FROM user_role;               -- Ver asignaciones rol-usuario
 # Test login endpoint
 curl -X POST http://localhost:8080/api/v1/auth/login \
   -H "Content-Type: application/json" \
-   -d '{"email":"admin@yourcompany.com","password":"admin123"}'
+   -d '{"email":"admin@yourcompany.com","password":"<PASSWORD>"}'
 
 # Deberías recibir un token JWT si es correcto
 ```
@@ -181,7 +181,7 @@ String encodedPassword = passwordEncoder.encode("TU_NUEVA_CONTRASEÑA");
 
 **Opción B: Via Frontend (Recomendado)**
 ```
-1. Login con admin / admin123
+1. Login con admin / <PASSWORD>
 2. Ve a Settings o Admin Panel
 3. Cambia contraseña
 4. Cambia la línea en DataLoader.java
@@ -231,7 +231,7 @@ if (userRepository.findByEmail("testuser@example.com").isEmpty()) {
 ```
 ❌ NO hacer esto en Producción:
    - Usar credenciales hardcodeadas
-   - Contraseña "admin123" visible en código
+   - Contraseña "<PASSWORD>" visible en código
    - DataLoader accesible sin verificación
 
 ✅ Hacer esto en Producción:
@@ -370,7 +370,7 @@ position:
 
 ### Después de Verificar Datos
 
-1. ✅ Login con admin / admin123
+1. ✅ Login con admin / <PASSWORD>
 2. ✅ Cambiar contraseña admin
 3. ✅ Crear nuevos usuarios desde frontend
 4. ✅ Asignar roles apropiados

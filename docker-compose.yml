@@ -72,6 +72,14 @@ x-seed-common: &seed-common
     - bizflow_erp_network
   restart: "no"
 
+x-api-seeder-common: &api-seeder-common
+  build:
+    context: ./scripts/seeds
+    dockerfile: Dockerfile
+  networks:
+    - bizflow_erp_network
+  restart: "no"
+
 x-prod-env: &prod-env
   env_file:
     - .env.prod
@@ -98,8 +106,9 @@ services:
       - postgres_prod_data:/var/lib/postgresql/data
       - ./sql/01_init_prod.sql:/docker-entrypoint-initdb.d/01_init_prod.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
       - ./sql/prod:/docker-entrypoint-initdb.d/prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/_legacy_dev_prod:ro
+      - ./sql/_legacy_prod:/docker-entrypoint-initdb.d/_legacy_prod:ro
     healthcheck:
       <<: *db-health
       test:
@@ -123,7 +132,7 @@ services:
       - postgres_dev_data:/var/lib/postgresql/data
       - ./sql/01_init_dev.sql:/docker-entrypoint-initdb.d/01_init_dev.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
       - ./sql/dev:/docker-entrypoint-initdb.d/dev:ro
     healthcheck:
       <<: *db-health
@@ -148,7 +157,7 @@ services:
       - postgres_test_data:/var/lib/postgresql/data
       - ./sql/01_init_test.sql:/docker-entrypoint-initdb.d/01_init_test.sql:ro
       - ./sql/common:/docker-entrypoint-initdb.d/common:ro
-      - ./sql/dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
       - ./sql/test:/docker-entrypoint-initdb.d/test:ro
     healthcheck:
       <<: *db-health
@@ -260,6 +269,46 @@ services:
         condition: service_healthy
     environment:
       API_URL: http://backend-test:8080/api/v1/auth/signup
+
+  # API-based seeders (Phase 2) - Python-based seed runner
+  api-seeder-prod:
+    <<: [*api-seeder-common, *prod-env]
+    profiles: ["prod", "seed-prod"]
+    container_name: erp-api-seeder-prod
+    depends_on:
+      backend-prod:
+        condition: service_healthy
+    environment:
+      SEED_ENV: prod
+      API_URL: http://backend-prod:8080
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
+
+  api-seeder-dev:
+    <<: [*api-seeder-common, *dev-env]
+    profiles: ["dev", "seed-dev"]
+    container_name: erp-api-seeder-dev
+    depends_on:
+      backend-dev:
+        condition: service_healthy
+    environment:
+      SEED_ENV: dev
+      API_URL: http://backend-dev:8080
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
+
+  api-seeder-test:
+    <<: [*api-seeder-common, *test-env]
+    profiles: ["test", "seed-test"]
+    container_name: erp-api-seeder-test
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    environment:
+      SEED_ENV: test
+      API_URL: http://backend-test:8080
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
 
   frontend-prod:
     <<: *frontend-common

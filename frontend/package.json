@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:test": "VITE_API_URL=http://localhost:8083 vite",
+    "dev:prod": "VITE_API_URL=http://localhost:8181 vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
