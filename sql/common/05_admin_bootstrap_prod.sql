@@ -1,7 +1,10 @@
 -- ====================================================================
 -- Bootstrap ADMIN users for PROD environment
 -- ====================================================================
--- Passwords stored as BCrypt hashes. See scripts/secrets/ for credentials.
+-- AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+-- Generated: 2026-01-27 23:53:12
+-- Source: scripts/secrets/users_with_passwords/
+-- Regenerate: python3 scripts/utils/generate_password_hashes.py --generate
 -- ====================================================================
 
 INSERT INTO expense_user (id, email, name, surname, password, employee_id)
@@ -10,7 +13,7 @@ VALUES (
     'ada.lovelace@bizflowerp.com',
     'Ada',
     'Lovelace',
-    '$2b$10$rgclW36nL8PzcLqODthoYeqCptMV7UUStJIaMp4TybYALty6ItwIm',
+    '$2a$10$ym8o2IgVEUuFxdrdHRKyr..elZRWqP15rb.PKywfKySONo4CjnmSC',
     NULL
 )
 ON CONFLICT (id) DO NOTHING;
@@ -21,7 +24,7 @@ VALUES (
     'alan.turing@bizflowerp.com',
     'Alan',
     'Turing',
-    '$2b$10$lusSaQo0/BDSothhhnmtL.f5mipQRYmhG/1vOQki1MiqW1wTJuTJK',
+    '$2a$10$lMuiY9.ALc5ryUSGzz9URen6GUUEQ11xNxwdXdTFfhkrSq7LewqbG',
     NULL
 )
 ON CONFLICT (id) DO NOTHING;
