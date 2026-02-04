@@ -281,31 +281,33 @@ down-prod-with-volumes: ## ⛔ PELIGROSO: Elimina contenedores Y datos de produc
 	@echo "$(COLOR_GREEN)✓ Entorno PROD eliminado (backup creado previamente)$(COLOR_RESET)"
 
 # ===========================================================================
-# Targets de recreación completa (regenera hashes + reinicia BD)
+# Targets de recreación completa (reinicia BD desde cero)
 # ===========================================================================
 
 .PHONY: recreate-dev
-recreate-dev: generate-sql-hashes ## Recrea DEV desde cero (regenera hashes, elimina volumen, levanta)
+recreate-dev: ## Recrea DEV desde cero (elimina volumen, levanta). Ejecuta 'make generate-sql-hashes' si cambiaste passwords.
 	@echo "$(COLOR_BLUE)==> Recreando entorno DEV desde cero...$(COLOR_RESET)"
 	@$(DOCKER_COMPOSE) --profile dev down -v
 	@$(MAKE) up-dev
-	@echo "$(COLOR_GREEN)✓ Entorno DEV recreado con hashes sincronizados$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)✓ Entorno DEV recreado$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)💡 Si cambiaste passwords, ejecuta: make generate-sql-hashes$(COLOR_RESET)"
 
 .PHONY: recreate-test
-recreate-test: generate-sql-hashes ## Recrea TEST desde cero (regenera hashes, elimina volumen, levanta)
+recreate-test: ## Recrea TEST desde cero (elimina volumen, levanta). Ejecuta 'make generate-sql-hashes' si cambiaste passwords.
 	@echo "$(COLOR_BLUE)==> Recreando entorno TEST desde cero...$(COLOR_RESET)"
 	@$(DOCKER_COMPOSE) --profile test down -v
 	@$(MAKE) up-test
-	@echo "$(COLOR_GREEN)✓ Entorno TEST recreado con hashes sincronizados$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)✓ Entorno TEST recreado$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)💡 Si cambiaste passwords, ejecuta: make generate-sql-hashes$(COLOR_RESET)"
 
 .PHONY: recreate-prod
-recreate-prod: ## ⛔ PELIGROSO: Recrea PROD desde cero (backup + regenera hashes + reinicia)
+recreate-prod: ## ⛔ PELIGROSO: Recrea PROD desde cero (backup + reinicia). Ejecuta 'make generate-sql-hashes' si cambiaste passwords.
 	@echo "$(COLOR_YELLOW)⚠️  ADVERTENCIA: Esto eliminará TODOS los datos de producción$(COLOR_RESET)"
 	@echo "$(COLOR_YELLOW)   Tienes 5 segundos para cancelar con Ctrl+C...$(COLOR_RESET)"
 	@sleep 5
 	@$(MAKE) backup-prod
-	@$(MAKE) generate-sql-hashes
 	@echo "$(COLOR_BLUE)==> Recreando entorno PROD desde cero...$(COLOR_RESET)"
 	@$(DOCKER_COMPOSE) --profile prod down -v
 	@$(MAKE) up-prod
 	@echo "$(COLOR_GREEN)✓ Entorno PROD recreado (backup disponible en backups/prod/)$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)💡 Si cambiaste passwords, ejecuta: make generate-sql-hashes$(COLOR_RESET)"
