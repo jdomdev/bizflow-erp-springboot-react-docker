@@ -160,10 +160,11 @@ class SeedRunner:
         if entity == "users":
             file_path = SECRETS_DIR / "users_with_passwords" / f"{env}_users.json"
             if not file_path.exists():
-                logger.warning(f"⚠️  Users file not found: {file_path}")
-                logger.warning("   Users with real passwords must be in scripts/secrets/users_with_passwords/")
-                logger.warning("   Copy from backup or create manually. See scripts/seeds/README.md")
-                return []
+                logger.error(f"❌ CRITICAL: Users file not found: {file_path}")
+                logger.error("   Users with real passwords must be in scripts/secrets/users_with_passwords/")
+                logger.error("   Copy from backup or create manually. See scripts/seeds/README.md")
+                logger.error("   Aborting seed - cannot proceed without users file.")
+                raise FileNotFoundError(f"Required users secrets file not found: {file_path}")
         else:
             file_path = DATA_DIR / env / f"{entity}.json"
         
