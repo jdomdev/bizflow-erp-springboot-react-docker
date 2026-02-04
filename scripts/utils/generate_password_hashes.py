@@ -76,8 +76,18 @@ def load_secrets(secrets_file: Path) -> list[dict]:
 
 
 def get_bootstrap_users(all_users: list[dict]) -> list[dict]:
-    """Filter users to only bootstrap users."""
-    return [u for u in all_users if u.get("email") in BOOTSTRAP_USERS_EMAILS]
+    """Filter users to only bootstrap users in BOOTSTRAP_USERS_EMAILS order.
+    
+    Important: Returns users in the explicit order of BOOTSTRAP_USERS_EMAILS,
+    not the order from the JSON file. This ensures stable ID assignment
+    when using enumerate(..., start=1).
+    """
+    # Build a mapping from email to user for quick lookup
+    email_to_user = {u.get("email"): u for u in all_users}
+    
+    # Return users in BOOTSTRAP_USERS_EMAILS order (not JSON order)
+    return [email_to_user[email] for email in BOOTSTRAP_USERS_EMAILS 
+            if email in email_to_user]
 
 
 def generate_hash(password: str) -> str:
@@ -245,6 +255,17 @@ def generate_sql_file(config: dict, env_name: str, dry_run: bool = False) -> boo
     bootstrap_users = get_bootstrap_users(all_users)
     if not bootstrap_users:
         print(f"  ❌ No bootstrap users found matching: {BOOTSTRAP_USERS_EMAILS}")
+        return False
+    
+    # Validate all required bootstrap emails are present
+    required_emails = set(BOOTSTRAP_USERS_EMAILS)
+    found_emails = {user["email"] for user in bootstrap_users}
+    missing_emails = sorted(required_emails - found_emails)
+    if missing_emails:
+        print(f"  ❌ Missing required bootstrap user emails in {secrets_file.name}:")
+        for email in missing_emails:
+            print(f"     - {email}")
+        print("  Aborting generation to avoid incomplete bootstrap SQL.")
         return False
     
     print(f"  📋 Found {len(bootstrap_users)} bootstrap users:")
