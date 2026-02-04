@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1';
+// En desarrollo con Vite, usar URL relativa para que funcione el proxy
+// En producción (Docker), usar la URL completa de la variable de entorno
+// Exportado para uso en websocket.js (single source of truth)
+export const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

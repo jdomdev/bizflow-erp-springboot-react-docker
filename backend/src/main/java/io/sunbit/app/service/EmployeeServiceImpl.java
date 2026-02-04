@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import io.sunbit.app.dao.IEmployeeDao;
@@ -15,15 +16,22 @@ import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Position;
 import io.sunbit.app.exception.BadRequestException;
 import io.sunbit.app.exception.ResourceNotFoundException;
+import io.sunbit.app.security.dao.IUserDao;
+import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.util.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Autowired
 	IEmployeeDao employeeDao;
 	@Autowired
 	IPositionDao positionDao;
+	@Autowired
+	@Lazy
+	IUserDao userDao;
 
 	@Override
 	public Employee findByNameAndSurnameAllIgnoreCase(String name, String surname, String HeaderAuth) throws Exception {
@@ -63,7 +71,31 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			syncPosition(employee);
 			LocalDateTime parsedDate = DateUtil.formattingDate(employee.getBirthDate());
 			employee.setBirthDate(parsedDate);
-			return employeeDao.save(employee);
+			
+			// Save employee first to get the ID
+			Employee savedEmployee = employeeDao.save(employee);
+			
+			// Vinculación automática inversa: Si existe un user con el mismo email, vincularlo
+			// Esto complementa la vinculación User → Employee que ya existe en UserServiceImpl
+			if (savedEmployee.getEmail() != null) {
+				Optional<ExpenseUser> matchingUser = userDao.findByEmail(savedEmployee.getEmail());
+				if (matchingUser.isPresent()) {
+					ExpenseUser user = matchingUser.get();
+					// Vincular si el user no tiene employee asignado
+					if (user.getEmployee() == null) {
+						user.setEmployee(savedEmployee);
+						userDao.save(user);
+						log.info("Auto-linked employee {} with existing user {}", 
+							savedEmployee.getId(), user.getId());
+					} else if (!user.getEmployee().getId().equals(savedEmployee.getId())) {
+						// User ya tiene otro employee - conflicto que el admin debe resolver
+						log.warn("User {} (email: {}) already linked to different employee {}. New employee {} not auto-linked.",
+							user.getId(), user.getEmail(), user.getEmployee().getId(), savedEmployee.getId());
+					}
+				}
+			}
+			
+			return savedEmployee;
 		} catch (BadRequestException | ResourceNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
@@ -81,6 +113,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 				throw new io.sunbit.app.exception.ResourceNotFoundException("Employee", "id", id);
 			}
 			Employee existingEmployee = optionalEmployee.get();
+			String oldEmail = existingEmployee.getEmail();
+			
 			// Solo actualiza los campos enviados (no null)
 			if (employee.getName() != null) existingEmployee.setName(employee.getName());
 			if (employee.getSurname() != null) existingEmployee.setSurname(employee.getSurname());
@@ -93,7 +127,38 @@ public class EmployeeServiceImpl implements IEmployeeService {
 				syncPosition(employee);
 				existingEmployee.setPosition(employee.getPosition());
 			}
-			return employeeDao.save(existingEmployee);
+			
+			Employee savedEmployee = employeeDao.save(existingEmployee);
+			
+			// Si el email cambió, gestionar vinculación con usuarios
+			String newEmail = savedEmployee.getEmail();
+			if (newEmail != null && !newEmail.equals(oldEmail)) {
+				// Primero, desvincular al usuario anterior (si existe y apunta a este empleado)
+				if (oldEmail != null) {
+					Optional<ExpenseUser> oldUser = userDao.findByEmail(oldEmail);
+					if (oldUser.isPresent() && oldUser.get().getEmployee() != null 
+							&& oldUser.get().getEmployee().getId().equals(savedEmployee.getId())) {
+						oldUser.get().setEmployee(null);
+						userDao.save(oldUser.get());
+						log.info("Unlinked employee {} from old user {} after email change", 
+							savedEmployee.getId(), oldUser.get().getId());
+					}
+				}
+				
+				// Luego, vincular con usuario que tenga el nuevo email
+				Optional<ExpenseUser> matchingUser = userDao.findByEmail(newEmail);
+				if (matchingUser.isPresent()) {
+					ExpenseUser user = matchingUser.get();
+					if (user.getEmployee() == null) {
+						user.setEmployee(savedEmployee);
+						userDao.save(user);
+						log.info("Auto-linked employee {} with user {} after email update", 
+							savedEmployee.getId(), user.getId());
+					}
+				}
+			}
+			
+			return savedEmployee;
 		} catch (BadRequestException | ResourceNotFoundException e) {
 			throw e;
 		} catch (Exception e) {

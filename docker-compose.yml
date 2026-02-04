@@ -79,6 +79,8 @@ x-api-seeder-common: &api-seeder-common
   networks:
     - bizflow_erp_network
   restart: "no"
+  volumes:
+    - ./scripts/secrets:/secrets:ro
 
 x-prod-env: &prod-env
   env_file:

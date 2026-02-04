@@ -16,19 +16,45 @@ scripts/seeds/
 └── data/
     ├── test/              # Datos para TEST (mínimos)
     │   ├── employees.json
-    │   ├── users.json
+    │   ├── users.json.example  ⚠️ NO SE USA - solo referencia
     │   ├── payrolls.json
     │   └── expenses.json
     ├── dev/               # Datos para DEV (moderados)
     │   ├── employees.json
-    │   ├── users.json
+    │   ├── users.json.example  ⚠️ NO SE USA - solo referencia
     │   ├── payrolls.json
     │   └── expenses.json
     └── prod/              # Datos para PROD (completos)
         ├── employees.json
-        ├── users.json
+        ├── users.json.example  ⚠️ NO SE USA - solo referencia
         ├── payrolls.json
         └── expenses.json
+
+scripts/secrets/           # ⚠️ GITIGNORED - contraseñas reales
+└── users_with_passwords/
+    ├── dev_users.json     # ✅ Usuarios DEV con contraseñas reales
+    ├── test_users.json    # ✅ Usuarios TEST con contraseñas reales
+    └── prod_users.json    # ✅ Usuarios PROD con contraseñas reales
+```
+
+## ⚠️ IMPORTANTE: Archivos de usuarios
+
+Los archivos `users.json.example` en `data/*/` contienen passwords de placeholder
+(`<SEED_PASSWORD_PLACEHOLDER>`) y **NO SE USAN** para seeding.
+
+**Los usuarios se cargan desde `scripts/secrets/users_with_passwords/`** que:
+- Está en `.gitignore` (nunca se sube al repositorio)
+- Contiene las contraseñas reales para cada entorno
+- Debe existir en tu máquina local para que el seeding de usuarios funcione
+
+### Crear los archivos de usuarios con contraseñas
+
+Si no tienes los archivos de secrets, copia los `.example` y reemplaza los placeholders:
+
+```bash
+mkdir -p scripts/secrets/users_with_passwords
+cp scripts/seeds/data/dev/users.json.example scripts/secrets/users_with_passwords/dev_users.json
+# Luego edita y reemplaza <SEED_PASSWORD_PLACEHOLDER> con contraseñas reales
 ```
 
 ## Ventajas sobre SQL directo

@@ -177,6 +177,31 @@ check-base-images: ## Verifica si las imágenes base existen
 # Targets de desarrollo rápido
 # ===========================================================================
 
+.PHONY: generate-sql-hashes
+generate-sql-hashes: ## Genera SQL bootstrap desde secrets (sincroniza hashes)
+	@echo "$(COLOR_BLUE)==> Regenerando SQL bootstrap desde secrets...$(COLOR_RESET)"
+	@python3 scripts/utils/generate_password_hashes.py --generate
+	@echo "$(COLOR_GREEN)✓ SQL bootstrap regenerado$(COLOR_RESET)"
+
+.PHONY: verify-sql-hashes
+verify-sql-hashes: ## Verifica que los hashes SQL coinciden con secrets
+	@python3 scripts/utils/generate_password_hashes.py --verify
+
+.PHONY: generate-credentials
+generate-credentials: ## Genera passwords determinísticos para todos los entornos
+	@echo "$(COLOR_BLUE)==> Generando credenciales...$(COLOR_RESET)"
+	@python3 scripts/secrets/generate_user_credentials.py --generate
+	@echo "$(COLOR_GREEN)✓ Credenciales generadas$(COLOR_RESET)"
+
+.PHONY: show-password-formula
+show-password-formula: ## Muestra la fórmula de generación de passwords
+	@python3 scripts/secrets/generate_user_credentials.py --show-formula
+
+.PHONY: regenerate-all-credentials
+regenerate-all-credentials: generate-credentials generate-sql-hashes ## Regenera credenciales + hashes SQL
+	@echo "$(COLOR_GREEN)✓ Credenciales y hashes SQL regenerados$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)   Ejecuta 'make recreate-dev' para aplicar cambios$(COLOR_RESET)"
+
 .PHONY: up-dev
 up-dev: build-base-images ## Construye imágenes base y levanta el entorno de desarrollo
 	@echo "$(COLOR_BLUE)==> Iniciando entorno de desarrollo...$(COLOR_RESET)"
@@ -254,3 +279,35 @@ down-prod-with-volumes: ## ⛔ PELIGROSO: Elimina contenedores Y datos de produc
 	@echo "$(COLOR_BLUE)==> Eliminando entorno PROD con volúmenes...$(COLOR_RESET)"
 	@$(DOCKER_COMPOSE) --profile prod down -v
 	@echo "$(COLOR_GREEN)✓ Entorno PROD eliminado (backup creado previamente)$(COLOR_RESET)"
+
+# ===========================================================================
+# Targets de recreación completa (reinicia BD desde cero)
+# ===========================================================================
+
+.PHONY: recreate-dev
+recreate-dev: ## Recrea DEV desde cero (elimina volumen, levanta). Ejecuta 'make generate-sql-hashes' si cambiaste passwords.
+	@echo "$(COLOR_BLUE)==> Recreando entorno DEV desde cero...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile dev down -v
+	@$(MAKE) up-dev
+	@echo "$(COLOR_GREEN)✓ Entorno DEV recreado$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)💡 Si cambiaste passwords, ejecuta: make generate-sql-hashes$(COLOR_RESET)"
+
+.PHONY: recreate-test
+recreate-test: ## Recrea TEST desde cero (elimina volumen, levanta). Ejecuta 'make generate-sql-hashes' si cambiaste passwords.
+	@echo "$(COLOR_BLUE)==> Recreando entorno TEST desde cero...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile test down -v
+	@$(MAKE) up-test
+	@echo "$(COLOR_GREEN)✓ Entorno TEST recreado$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)💡 Si cambiaste passwords, ejecuta: make generate-sql-hashes$(COLOR_RESET)"
+
+.PHONY: recreate-prod
+recreate-prod: ## ⛔ PELIGROSO: Recrea PROD desde cero (backup + reinicia). Ejecuta 'make generate-sql-hashes' si cambiaste passwords.
+	@echo "$(COLOR_YELLOW)⚠️  ADVERTENCIA: Esto eliminará TODOS los datos de producción$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)   Tienes 5 segundos para cancelar con Ctrl+C...$(COLOR_RESET)"
+	@sleep 5
+	@$(MAKE) backup-prod
+	@echo "$(COLOR_BLUE)==> Recreando entorno PROD desde cero...$(COLOR_RESET)"
+	@$(DOCKER_COMPOSE) --profile prod down -v
+	@$(MAKE) up-prod
+	@echo "$(COLOR_GREEN)✓ Entorno PROD recreado (backup disponible en backups/prod/)$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)💡 Si cambiaste passwords, ejecuta: make generate-sql-hashes$(COLOR_RESET)"

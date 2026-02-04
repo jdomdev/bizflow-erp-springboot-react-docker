@@ -40,6 +40,7 @@ logger = logging.getLogger(__name__)
 # Constants
 SCRIPT_DIR = Path(__file__).parent
 DATA_DIR = SCRIPT_DIR / "data"
+SECRETS_DIR = SCRIPT_DIR.parent / "secrets"  # scripts/secrets/ for sensitive data
 DEFAULT_API_URL = "http://localhost:8080"
 DEFAULT_ADMIN_EMAIL = "admin@bizflowerp.com"
 DEFAULT_ADMIN_PASSWORD = "<PASSWORD>"
@@ -149,8 +150,23 @@ class SeedRunner:
         return headers
     
     def load_json_data(self, env: str, entity: str) -> List[Dict[str, Any]]:
-        """Load JSON data file for given environment and entity."""
-        file_path = DATA_DIR / env / f"{entity}.json"
+        """Load JSON data file for given environment and entity.
+        
+        For users, loads from scripts/secrets/users_with_passwords/ (gitignored)
+        to keep passwords out of version control.
+        For other entities (employees, payrolls, expenses), loads from scripts/seeds/data/.
+        """
+        # Users are loaded from secrets directory (gitignored) for security
+        if entity == "users":
+            file_path = SECRETS_DIR / "users_with_passwords" / f"{env}_users.json"
+            if not file_path.exists():
+                logger.error(f"❌ CRITICAL: Users file not found: {file_path}")
+                logger.error("   Users with real passwords must be in scripts/secrets/users_with_passwords/")
+                logger.error("   Copy from backup or create manually. See scripts/seeds/README.md")
+                logger.error("   Aborting seed - cannot proceed without users file.")
+                raise FileNotFoundError(f"Required users secrets file not found: {file_path}")
+        else:
+            file_path = DATA_DIR / env / f"{entity}.json"
         
         if not file_path.exists():
             logger.warning(f"Data file not found: {file_path}")
