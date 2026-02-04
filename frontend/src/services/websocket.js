@@ -2,10 +2,9 @@ import SockJS from 'sockjs-client/dist/sockjs';
 import { Client } from '@stomp/stompjs';
 import { useNotificationStore } from '../store/notificationStore';
 import { useAuthStore } from '../store/authStore';
+import { API_BASE_URL } from './api';
 
 let stompClient = null;
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1';
 
 export const getWebSocketUrl = () => {
   return API_BASE_URL.replace('/api/v1', '') + '/ws';
