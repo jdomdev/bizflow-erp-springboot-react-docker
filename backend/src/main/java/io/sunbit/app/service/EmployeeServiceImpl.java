@@ -81,12 +81,16 @@ public class EmployeeServiceImpl implements IEmployeeService {
 				Optional<ExpenseUser> matchingUser = userDao.findByEmail(savedEmployee.getEmail());
 				if (matchingUser.isPresent()) {
 					ExpenseUser user = matchingUser.get();
-					// Solo vincular si el user no tiene employee asignado
+					// Vincular si el user no tiene employee asignado
 					if (user.getEmployee() == null) {
 						user.setEmployee(savedEmployee);
 						userDao.save(user);
 						log.info("Auto-linked employee {} with existing user {}", 
 							savedEmployee.getId(), user.getId());
+					} else if (!user.getEmployee().getId().equals(savedEmployee.getId())) {
+						// User ya tiene otro employee - conflicto que el admin debe resolver
+						log.warn("User {} (email: {}) already linked to different employee {}. New employee {} not auto-linked.",
+							user.getId(), user.getEmail(), user.getEmployee().getId(), savedEmployee.getId());
 					}
 				}
 			}
@@ -126,9 +130,22 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			
 			Employee savedEmployee = employeeDao.save(existingEmployee);
 			
-			// Si el email cambió, intentar vincular con user que tenga el nuevo email
+			// Si el email cambió, gestionar vinculación con usuarios
 			String newEmail = savedEmployee.getEmail();
 			if (newEmail != null && !newEmail.equals(oldEmail)) {
+				// Primero, desvincular al usuario anterior (si existe y apunta a este empleado)
+				if (oldEmail != null) {
+					Optional<ExpenseUser> oldUser = userDao.findByEmail(oldEmail);
+					if (oldUser.isPresent() && oldUser.get().getEmployee() != null 
+							&& oldUser.get().getEmployee().getId().equals(savedEmployee.getId())) {
+						oldUser.get().setEmployee(null);
+						userDao.save(oldUser.get());
+						log.info("Unlinked employee {} from old user {} after email change", 
+							savedEmployee.getId(), oldUser.get().getId());
+					}
+				}
+				
+				// Luego, vincular con usuario que tenga el nuevo email
 				Optional<ExpenseUser> matchingUser = userDao.findByEmail(newEmail);
 				if (matchingUser.isPresent()) {
 					ExpenseUser user = matchingUser.get();
