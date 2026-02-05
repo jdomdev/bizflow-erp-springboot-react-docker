@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { employeeService, positionService } from '../services/api';
 import { useAuthStore } from '../store/authStore';
-import { Plus, Pencil, Trash2, Users, Search, X, Save, Mail, Calendar } from 'lucide-react';
+import { Plus, Pencil, Trash2, Users, Search, X, Save, Mail, Calendar, Link2 } from 'lucide-react';
 
 export default function EmployeesPage() {
   const { user } = useAuthStore();
@@ -21,6 +21,7 @@ export default function EmployeesPage() {
   });
   const [formErrors, setFormErrors] = useState({});
   const [saving, setSaving] = useState(false);
+  const [linkedUser, setLinkedUser] = useState(null);
 
   const isAdmin = user?.roleId === 1;
 
@@ -171,6 +172,14 @@ export default function EmployeesPage() {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
+    });
+  };
+
+  const handleViewLinkedUser = (employee) => {
+    setLinkedUser({
+      id: employee.expenseUserId,
+      name: employee.expenseUserName,
+      email: employee.expenseUserEmail,
     });
   };
 
@@ -386,17 +395,19 @@ export default function EmployeesPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100">
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-400 w-16">ID</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Empleado</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Email</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Cargo</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Fecha Nac.</th>
+                <th className="text-center py-3 px-4 text-sm font-semibold text-gray-600">Usuario</th>
                 <th className="text-center py-3 px-4 text-sm font-semibold text-gray-600">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {filteredEmployees.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="text-center py-12 text-gray-500">
+                  <td colSpan={7} className="text-center py-12 text-gray-500">
                     <Users className="h-12 w-12 mx-auto mb-3 opacity-50" />
                     <p>{searchTerm ? 'No se encontraron resultados' : 'No hay empleados registrados'}</p>
                   </td>
@@ -407,6 +418,9 @@ export default function EmployeesPage() {
                     key={employee.id}
                     className="border-b border-gray-50 hover:bg-gray-50 transition-colors"
                   >
+                    <td className="py-3 px-4 text-sm text-gray-400 font-mono">
+                      {employee.id}
+                    </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
@@ -429,6 +443,21 @@ export default function EmployeesPage() {
                     </td>
                     <td className="py-3 px-4 text-gray-600">
                       {formatDate(employee.birthDate)}
+                    </td>
+                    <td className="py-3 px-4">
+                      <div className="flex items-center justify-center">
+                        {employee.expenseUserId ? (
+                          <button
+                            onClick={() => handleViewLinkedUser(employee)}
+                            className="p-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-colors"
+                            title="Ver usuario vinculado"
+                          >
+                            <Link2 className="h-4 w-4" />
+                          </button>
+                        ) : (
+                          <span className="text-gray-300">-</span>
+                        )}
+                      </div>
                     </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center justify-center gap-2">
@@ -455,6 +484,48 @@ export default function EmployeesPage() {
           </table>
         </div>
       </div>
+
+      {/* Linked User Modal */}
+      {linkedUser && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-sm">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                <Link2 className="h-5 w-5 text-emerald-600" />
+                Usuario Vinculado
+              </h2>
+              <button
+                onClick={() => setLinkedUser(null)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="p-4 space-y-3">
+              <div>
+                <span className="text-sm text-gray-500">Nombre</span>
+                <p className="font-medium text-gray-900">{linkedUser.name || '-'}</p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">Email</span>
+                <p className="font-medium text-gray-900">{linkedUser.email || '-'}</p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">ID de Usuario</span>
+                <p className="font-medium text-gray-900">{linkedUser.id}</p>
+              </div>
+            </div>
+            <div className="p-4 border-t">
+              <button
+                onClick={() => setLinkedUser(null)}
+                className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

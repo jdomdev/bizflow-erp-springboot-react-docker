@@ -104,6 +104,20 @@ public class Employee implements Serializable {
 		return expenseUser != null ? expenseUser.getId() : null;
 	}
 
+	@JsonGetter("expenseUserName")
+	public String getExpenseUserName() {
+		if (expenseUser == null) return null;
+		String name = expenseUser.getName();
+		String surname = expenseUser.getSurname();
+		if (name == null && surname == null) return null;
+		return ((name != null ? name : "") + " " + (surname != null ? surname : "")).trim();
+	}
+
+	@JsonGetter("expenseUserEmail")
+	public String getExpenseUserEmail() {
+		return expenseUser != null ? expenseUser.getEmail() : null;
+	}
+
 
 	// Constructor sin id
 	public Employee(String name, String surname, LocalDateTime birthDate, Position position, String email, List<Payroll> payrolls) {
