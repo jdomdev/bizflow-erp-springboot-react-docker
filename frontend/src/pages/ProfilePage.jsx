@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mail, Shield, Save, X } from 'lucide-react';
+import { User, Mail, Shield, Save, X, Briefcase } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import { userService } from '../services/api';
@@ -82,11 +82,20 @@ function ProfilePage() {
                         <User className="h-10 w-10 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-white">{profile?.email}</h2>
+                        <h2 className="text-2xl font-bold text-white">
+                            {profile?.name && profile?.surname 
+                                ? `${profile.name} ${profile.surname}` 
+                                : profile?.email}
+                        </h2>
+                        <p className="text-slate-400 text-sm">{profile?.email}</p>
                         <div className="flex gap-2 mt-2">
-                            {profile?.roleIds?.map(roleId => (
+                            {profile?.roleDtos?.map(role => (
+                                <span key={role.id} className="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                                    {role.name?.replace('ROLE_', '')}
+                                </span>
+                            )) || profile?.roleIds?.map(roleId => (
                                 <span key={roleId} className="px-3 py-1 rounded-full text-xs font-medium bg-slate-700 text-slate-300 border border-slate-600">
-                                    {roleId}
+                                    {roleId === 1 ? 'ADMIN' : roleId === 2 ? 'USER' : roleId === 3 ? 'MANAGER' : `Role ${roleId}`}
                                 </span>
                             ))}
                         </div>
@@ -177,14 +186,41 @@ function ProfilePage() {
                     <div className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-                                <p className="text-sm text-slate-400 mb-1">Email</p>
-                                <p className="text-white font-medium">{profile?.email}</p>
+                                <p className="text-sm text-slate-500 mb-1">Nombre</p>
+                                <p className="text-slate-700 font-medium">{profile?.name || '-'}</p>
                             </div>
                             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-                                <p className="text-sm text-slate-400 mb-1">Contraseña</p>
-                                <p className="text-white font-medium">••••••••</p>
+                                <p className="text-sm text-slate-500 mb-1">Apellido</p>
+                                <p className="text-slate-700 font-medium">{profile?.surname || '-'}</p>
+                            </div>
+                            <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+                                <p className="text-sm text-slate-500 mb-1">Email</p>
+                                <p className="text-slate-700 font-medium">{profile?.email}</p>
+                            </div>
+                            <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+                                <p className="text-sm text-slate-500 mb-1">Contraseña</p>
+                                <p className="text-slate-700 font-medium">••••••••</p>
                             </div>
                         </div>
+
+                        {profile?.employeeId && (
+                            <div className="p-4 rounded-lg bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Briefcase className="h-5 w-5 text-emerald-500" />
+                                    <p className="text-sm font-medium text-emerald-500">Empleado Vinculado</p>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="text-xs text-slate-500">Nombre</p>
+                                        <p className="text-emerald-700 font-medium">{profile.employeeName || '-'}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-slate-500">Cargo</p>
+                                        <p className="text-emerald-700 font-medium">{profile.employeePosition || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         {success && (
                             <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-sm">

@@ -37,6 +37,12 @@ public class ExpenseUserMapper {
         dto.setSurname(user.getSurname());
         dto.setRoleIds(roleIds);
         dto.setRoleDtos(roleDtos);
+        dto.setEmployeeId(user.getEmployee() != null ? user.getEmployee().getId() : null);
+        if (user.getEmployee() != null) {
+            var emp = user.getEmployee();
+            dto.setEmployeeName(emp.getName() + " " + emp.getSurname());
+            dto.setEmployeePosition(emp.getPosition() != null ? emp.getPosition().getName() : null);
+        }
         return dto;
     }
 }
