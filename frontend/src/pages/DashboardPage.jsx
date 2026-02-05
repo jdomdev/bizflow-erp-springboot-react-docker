@@ -353,7 +353,10 @@ function DashboardPage() {
                           </div>
                           <div>
                             <p className="font-medium text-slate-800">{expense.concept}</p>
-                            <p className="text-xs text-slate-500 sm:hidden">
+                            {expense.expenseUserName && (
+                              <p className="text-xs text-slate-500">{expense.expenseUserName}</p>
+                            )}
+                            <p className="text-xs text-slate-400 sm:hidden">
                               {new Date(expense.expenseDate).toLocaleDateString('es-ES')}
                             </p>
                           </div>

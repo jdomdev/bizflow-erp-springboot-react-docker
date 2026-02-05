@@ -1,4 +1,4 @@
-import { Trash2, Edit2, Calendar, FileText, DollarSign } from 'lucide-react';
+import { Trash2, Edit2, Calendar, FileText, DollarSign, User } from 'lucide-react';
 
 export default function ExpenseList({ expenses, onDelete, onEdit }) {
     if (!expenses || expenses.length === 0) {
@@ -62,6 +62,12 @@ export default function ExpenseList({ expenses, onDelete, onEdit }) {
                                         <Calendar className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
                                         <p>{formatDate(expense.expenseDate || expense.date)}</p>
                                     </div>
+                                    {expense.expenseUserName && (
+                                        <div className="mt-1 flex items-center text-sm text-gray-500">
+                                            <User className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
+                                            <p>{expense.expenseUserName}</p>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex items-center">
                                     <div className="flex items-center text-sm text-gray-900 font-bold mr-6">
