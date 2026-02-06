@@ -29,13 +29,21 @@ function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   
+  // Command Palette state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  
   const userDropdownRef = useRef(null);
+  const searchRef = useRef(null);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
         setUserDropdownOpen(false);
+      }
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
       }
     };
 
@@ -44,6 +52,86 @@ function Layout() {
   }, []);
 
   const isAdmin = user?.roleId === 1;
+
+  // Command Palette: search commands configuration
+  const searchCommands = [
+    { label: 'Dashboard', path: '/dashboard', icon: Home, keywords: ['inicio', 'home', 'panel'] },
+    { label: 'Gastos', path: '/expenses', icon: CreditCard, keywords: ['expenses', 'gasto'], searchable: true },
+    { label: 'Nóminas', path: '/payroll', icon: Wallet, keywords: ['payroll', 'nomina', 'salario'], searchable: true },
+    ...(isAdmin ? [
+      { label: 'Cargos', path: '/positions', icon: Briefcase, keywords: ['positions', 'cargo', 'puesto'], searchable: true },
+      { label: 'Empleados', path: '/employees', icon: Users, keywords: ['employees', 'empleado'], searchable: true },
+      { label: 'Usuarios', path: '/users', icon: UserCog, keywords: ['users', 'usuario'], searchable: true },
+    ] : []),
+    { label: 'Perfil', path: '/profile', icon: User, keywords: ['profile', 'mi perfil'] },
+    { label: 'Configuración', path: '/settings', icon: Settings, keywords: ['settings', 'config'] },
+  ];
+
+  // Parse search query to extract command and search term
+  const parseSearchQuery = (query) => {
+    const trimmed = query.trim().toLowerCase();
+    
+    // Check if it's a search command like "Gastos Juan" or "Nominas Garcia"
+    for (const cmd of searchCommands) {
+      const cmdLabel = cmd.label.toLowerCase();
+      if (trimmed.startsWith(cmdLabel + ' ') && cmd.searchable) {
+        const searchTerm = query.slice(cmdLabel.length + 1).trim();
+        return { type: 'search', command: cmd, searchTerm };
+      }
+      // Also check keywords
+      for (const kw of cmd.keywords) {
+        if (trimmed.startsWith(kw + ' ') && cmd.searchable) {
+          const searchTerm = query.slice(kw.length + 1).trim();
+          return { type: 'search', command: cmd, searchTerm };
+        }
+      }
+    }
+    
+    // Otherwise, filter commands by query
+    return { type: 'navigate', query: trimmed };
+  };
+
+  // Get filtered suggestions based on query
+  const getSuggestions = () => {
+    if (!searchQuery.trim()) return searchCommands;
+    
+    const parsed = parseSearchQuery(searchQuery);
+    
+    if (parsed.type === 'search' && parsed.searchTerm) {
+      // Show the search action
+      return [{
+        label: `Buscar "${parsed.searchTerm}" en ${parsed.command.label}`,
+        path: `${parsed.command.path}?search=${encodeURIComponent(parsed.searchTerm)}`,
+        icon: Search,
+        isSearch: true
+      }];
+    }
+    
+    // Filter commands
+    return searchCommands.filter(cmd => {
+      const q = parsed.query;
+      return (
+        cmd.label.toLowerCase().includes(q) ||
+        cmd.keywords.some(kw => kw.includes(q))
+      );
+    });
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const suggestions = getSuggestions();
+    if (suggestions.length > 0) {
+      navigate(suggestions[0].path);
+      setSearchQuery('');
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    navigate(suggestion.path);
+    setSearchQuery('');
+    setShowSuggestions(false);
+  };
 
   const menuItems = [
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
@@ -238,14 +326,65 @@ function Layout() {
                 <Menu className="h-6 w-6" />
               </button>
               
-              {/* Search Bar - Hidden on mobile */}
-              <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100/80 border border-slate-200/60 w-64 lg:w-80">
-                <Search className="h-4 w-4 text-slate-400" />
-                <input 
-                  type="text" 
-                  placeholder="Buscar..." 
-                  className="bg-transparent text-sm text-slate-600 placeholder-slate-400 outline-none flex-1"
-                />
+              {/* Command Palette Search Bar */}
+              <div className="hidden sm:block relative" ref={searchRef}>
+                <form onSubmit={handleSearchSubmit}>
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100/80 border border-slate-200/60 w-64 lg:w-80">
+                    <Search className="h-4 w-4 text-slate-400" />
+                    <input 
+                      type="text" 
+                      placeholder="Buscar... (ej: Gastos Juan)" 
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        setShowSuggestions(true);
+                      }}
+                      onFocus={() => setShowSuggestions(true)}
+                      className="bg-transparent text-sm text-slate-600 placeholder-slate-400 outline-none flex-1"
+                    />
+                  </div>
+                </form>
+                
+                {/* Suggestions Dropdown */}
+                <AnimatePresence>
+                  {showSuggestions && searchQuery && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden z-50"
+                    >
+                      {getSuggestions().length > 0 ? (
+                        <div className="py-2">
+                          {getSuggestions().map((suggestion, idx) => {
+                            const Icon = suggestion.icon;
+                            return (
+                              <button
+                                key={idx}
+                                onClick={() => handleSuggestionClick(suggestion)}
+                                className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors text-left"
+                              >
+                                <div className={`p-1.5 rounded-lg ${suggestion.isSearch ? 'bg-blue-100' : 'bg-slate-100'}`}>
+                                  <Icon className={`h-4 w-4 ${suggestion.isSearch ? 'text-blue-600' : 'text-slate-500'}`} />
+                                </div>
+                                <span className={`text-sm ${suggestion.isSearch ? 'text-blue-600 font-medium' : 'text-slate-700'}`}>
+                                  {suggestion.label}
+                                </span>
+                                {!suggestion.isSearch && suggestion.searchable && (
+                                  <span className="ml-auto text-xs text-slate-400">+ nombre para buscar</span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="px-4 py-3 text-sm text-slate-500">
+                          No se encontraron resultados
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
 
