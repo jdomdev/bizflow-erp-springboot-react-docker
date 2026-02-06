@@ -21,16 +21,16 @@ ON CONFLICT DO NOTHING;
 -- ============================================================================
 -- OPTIONAL: Sample positions for testing
 -- ============================================================================
-INSERT INTO position (name, description)
-VALUES ('Software Developer', 'Full-stack software development role')
+INSERT INTO position (name, description, base_salary)
+VALUES ('Software Developer', 'Full-stack software development role', 55000.00)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO position (name, description)
-VALUES ('Project Manager', 'Project management and coordination')
+INSERT INTO position (name, description, base_salary)
+VALUES ('Project Manager', 'Project management and coordination', 65000.00)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO position (name, description)
-VALUES ('Designer', 'UI/UX design and prototyping')
+INSERT INTO position (name, description, base_salary)
+VALUES ('Designer', 'UI/UX design and prototyping', 50000.00)
 ON CONFLICT DO NOTHING;
 
 -- ============================================================================
