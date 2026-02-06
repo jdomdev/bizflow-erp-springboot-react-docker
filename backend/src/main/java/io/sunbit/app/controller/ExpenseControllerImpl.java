@@ -3,6 +3,10 @@ package io.sunbit.app.controller;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,9 +19,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.sunbit.app.dto.ExpenseSearchCriteria;
+import io.sunbit.app.dto.PageResponse;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.entity.NotificationType;
 import io.sunbit.app.service.ExpenseServiceImpl;
@@ -257,6 +264,57 @@ public class ExpenseControllerImpl implements IExpenseController {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
 					"{\"error\":\"Error. Please, Try it later. NOT possible UPDATE the expense which you are looking for.\"}");
+		}
+	}
+	
+	/**
+	 * Paginated search endpoint for expenses with filters.
+	 * GET /api/v1/expense/search?page=0&size=10&search=text&minAmount=100&maxAmount=500&sortBy=expenseDate&sortDirection=desc
+	 */
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@GetMapping("/search")
+	public ResponseEntity<?> searchExpenses(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(required = false) String search,
+			@RequestParam(required = false) Long userId,
+			@RequestParam(required = false) Double minAmount,
+			@RequestParam(required = false) Double maxAmount,
+			@RequestParam(required = false) String startDate,
+			@RequestParam(required = false) String endDate,
+			@RequestParam(defaultValue = "expenseDate") String sortBy,
+			@RequestParam(defaultValue = "desc") String sortDirection,
+			@RequestHeader("Authorization") String headerAuth) {
+		try {
+			// Build criteria
+			ExpenseSearchCriteria criteria = ExpenseSearchCriteria.builder()
+				.search(search)
+				.userId(userId)
+				.minAmount(minAmount)
+				.maxAmount(maxAmount)
+				.startDate(startDate != null && !startDate.isEmpty() 
+					? java.time.LocalDateTime.parse(startDate.replace(" ", "T")) : null)
+				.endDate(endDate != null && !endDate.isEmpty() 
+					? java.time.LocalDateTime.parse(endDate.replace(" ", "T")) : null)
+				.sortBy(sortBy)
+				.sortDirection(sortDirection)
+				.build();
+			
+			// Build pageable with sorting
+			Sort sort = Sort.by(
+				sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC,
+				sortBy
+			);
+			Pageable pageable = PageRequest.of(page, size, sort);
+			
+			// Execute search
+			Page<Expense> expensePage = expenseService.findWithFilters(criteria, pageable, headerAuth);
+			
+			return ResponseEntity.ok(PageResponse.from(expensePage));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+				.body("{\"error\":\"Error searching expenses: " + e.getMessage() + "\"}");
 		}
 	}
 }
