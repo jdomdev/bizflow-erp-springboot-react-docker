@@ -54,6 +54,7 @@ export const expenseService = {
   create: (data) => apiClient.post('/expense/', data),
   update: (id, data) => apiClient.put('/expense/', data),
   delete: (id) => apiClient.delete(`/expense/${id}`),
+  search: (queryString) => apiClient.get(`/expense/search?${queryString}`),
 };
 
 // Servicios de nómina
@@ -63,6 +64,7 @@ export const payrollService = {
   getById: (id) => apiClient.get(`/payroll/${id}`),
   getByUserId: (userId) => apiClient.get(`/payroll/user/${userId}`),
   getByEmployeeId: (employeeId) => apiClient.get(`/payroll/employee/${employeeId}`),
+  search: (queryString) => apiClient.get(`/payroll/search?${queryString}`),
 };
 
 // Servicios de empleados
