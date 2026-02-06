@@ -1,10 +1,12 @@
 import { Trash2, Edit2, Calendar, FileText, DollarSign, User } from 'lucide-react';
 
-export default function ExpenseList({ expenses, onDelete, onEdit }) {
+export default function ExpenseList({ expenses, onDelete, onEdit, searchTerm }) {
     if (!expenses || expenses.length === 0) {
         return (
             <div className="text-center py-10 bg-gray-50 rounded-lg border border-gray-200">
-                <p className="text-gray-500">No hay gastos registrados aún.</p>
+                <p className="text-gray-500">
+                    {searchTerm ? 'No se encontraron resultados' : 'No hay gastos registrados aún.'}
+                </p>
             </div>
         );
     }
