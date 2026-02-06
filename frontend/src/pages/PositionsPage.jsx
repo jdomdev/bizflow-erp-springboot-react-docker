@@ -278,6 +278,7 @@ export default function PositionsPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100">
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-400 w-16">ID</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Nombre</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Descripción</th>
                 <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600">Salario Base</th>
@@ -287,7 +288,7 @@ export default function PositionsPage() {
             <tbody>
               {filteredPositions.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="text-center py-12 text-gray-500">
+                  <td colSpan={5} className="text-center py-12 text-gray-500">
                     <Briefcase className="h-12 w-12 mx-auto mb-3 opacity-50" />
                     <p>{searchTerm ? 'No se encontraron resultados' : 'No hay cargos registrados'}</p>
                   </td>
@@ -298,6 +299,9 @@ export default function PositionsPage() {
                     key={position.id}
                     className="border-b border-gray-50 hover:bg-gray-50 transition-colors"
                   >
+                    <td className="py-3 px-4 text-sm text-gray-400 font-mono">
+                      {position.id}
+                    </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
