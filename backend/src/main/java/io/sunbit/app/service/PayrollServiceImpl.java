@@ -10,16 +10,21 @@ import java.util.Set;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import io.sunbit.app.dao.IEmployeeDao;
 import io.sunbit.app.dao.IPayrollDao;
+import io.sunbit.app.dao.PayrollSpecifications;
+import io.sunbit.app.dto.PayrollSearchCriteria;
 import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Payroll;
 import io.sunbit.app.exception.BadRequestException;
 import io.sunbit.app.exception.ResourceNotFoundException;
 import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
+import io.sunbit.app.security.jwt.JwtAuthenticationUtil;
 import io.sunbit.app.util.DateUtil;
 
 @Service
@@ -33,6 +38,9 @@ public class PayrollServiceImpl implements IPayrollService {
 
 	@Autowired
 	private IUserDao userDao;
+	
+	@Autowired
+	private JwtAuthenticationUtil jwtAuthUtil;
 
 	/**
 	 * Obtiene todas las nóminas del usuario por su email.
@@ -212,5 +220,45 @@ public class PayrollServiceImpl implements IPayrollService {
 				userDao.findByEmployee_Id(managedEmployee.getId()).ifPresent(payroll::setExpenseUser);
 			}
 		}
+	}
+	
+	@Override
+	public Page<Payroll> findAllPaginated(Pageable pageable) throws Exception {
+		try {
+			return payrollDao.findAll(pageable);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	@Override
+	public Page<Payroll> findWithFilters(PayrollSearchCriteria criteria, Pageable pageable, String headerAuth) throws Exception {
+		String token = headerAuth.split(" ")[1].trim();
+		boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+		
+		// If not admin, filter by their own userId
+		Long effectiveUserId = criteria.getUserId();
+		if (!isAdmin) {
+			Integer tokenUserId = jwtAuthUtil.extractTokenUserId(token);
+			effectiveUserId = tokenUserId != null ? tokenUserId.longValue() : null;
+		}
+		
+		// Parse dates if provided
+		LocalDateTime startDate = criteria.getStartDate();
+		LocalDateTime endDate = criteria.getEndDate();
+		
+		// Use Specifications for dynamic query building (avoids PostgreSQL null type inference issues)
+		return payrollDao.findAll(
+			PayrollSpecifications.withFilters(
+				effectiveUserId,
+				criteria.getSearch(),
+				criteria.getMinAmount(),
+				criteria.getMaxAmount(),
+				startDate,
+				endDate
+			),
+			pageable
+		);
 	}
 }
