@@ -4,7 +4,9 @@
 
 CREATE TABLE IF NOT EXISTS position (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(128) NOT NULL
+    name VARCHAR(128) NOT NULL,
+    description VARCHAR(500),
+    base_salary DECIMAL(10, 2)
 );
 
 CREATE TABLE IF NOT EXISTS employee (
