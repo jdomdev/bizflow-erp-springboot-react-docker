@@ -3,6 +3,10 @@ package io.sunbit.app.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import io.sunbit.app.dto.ExpenseSearchCriteria;
 import io.sunbit.app.entity.Expense;
 
 public interface IExpenseService {
@@ -23,4 +27,9 @@ public interface IExpenseService {
 			LocalDateTime expenseDate, String concept,
 			Long expenseUserId,
 			String headerAuth) throws Exception;
+			
+	// Paginated methods
+	public Page<Expense> findAllPaginated(Pageable pageable) throws Exception;
+	
+	public Page<Expense> findWithFilters(ExpenseSearchCriteria criteria, Pageable pageable, String headerAuth) throws Exception;
 }

@@ -7,9 +7,13 @@ import java.util.Optional;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import io.sunbit.app.dao.ExpenseSpecifications;
 import io.sunbit.app.dao.IExpenseDao;
+import io.sunbit.app.dto.ExpenseSearchCriteria;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
@@ -222,5 +226,50 @@ public class ExpenseServiceImpl implements IExpenseService {
 			}
 			expense.setExpenseUser(resolveExpenseUser(relatedUser));
 		}
+	}
+	
+	@Override
+	public Page<Expense> findAllPaginated(Pageable pageable) throws Exception {
+		try {
+			Page<Expense> expenses = expenseDao.findAll(pageable);
+			expenses.forEach(this::loadExpenseUser);
+			return expenses;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	@Override
+	public Page<Expense> findWithFilters(ExpenseSearchCriteria criteria, Pageable pageable, String headerAuth) throws Exception {
+		String token = headerAuth.split(" ")[1].trim();
+		boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+		
+		// If not admin, filter by their own userId
+		Long effectiveUserId = criteria.getUserId();
+		if (!isAdmin) {
+			Integer tokenUserId = jwtAuthUtil.extractTokenUserId(token);
+			effectiveUserId = tokenUserId != null ? tokenUserId.longValue() : null;
+		}
+		
+		// Parse dates if provided
+		LocalDateTime startDate = criteria.getStartDate() != null ? DateUtil.formattingDate(criteria.getStartDate()) : null;
+		LocalDateTime endDate = criteria.getEndDate() != null ? DateUtil.formattingDate(criteria.getEndDate()) : null;
+		
+		// Use Specifications for dynamic query building (avoids PostgreSQL null type inference issues)
+		Page<Expense> expenses = expenseDao.findAll(
+			ExpenseSpecifications.withFilters(
+				effectiveUserId,
+				criteria.getSearch(),
+				criteria.getMinAmount(),
+				criteria.getMaxAmount(),
+				startDate,
+				endDate
+			),
+			pageable
+		);
+		
+		expenses.forEach(this::loadExpenseUser);
+		return expenses;
 	}
 }
