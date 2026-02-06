@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   DollarSign, 
@@ -9,20 +10,22 @@ import {
   X,
   TrendingUp,
   Briefcase,
-  ChevronLeft,
-  ChevronRight,
   Users,
   UserCheck,
   Plus,
   Pencil,
   Trash2,
-  Save
+  Save,
+  Search,
+  Filter
 } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import Pagination from '../components/Pagination';
 import { payrollService, payrollAdminService, employeeService, userService } from '../services/api';
 
 function PayrollPage() {
+  const [searchParams] = useSearchParams();
   const [payrolls, setPayrolls] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +36,14 @@ function PayrollPage() {
   const [viewMode, setViewMode] = useState('mine'); // 'mine' or 'all' (admin only)
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(15);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    minAmount: '',
+    maxAmount: '',
+    startDate: '',
+    endDate: ''
+  });
   
   // CRUD State
   const [showForm, setShowForm] = useState(false);
@@ -55,6 +66,18 @@ function PayrollPage() {
   useEffect(() => {
     loadData();
   }, [viewMode]);
+
+  // Handle search from URL params (Command Palette)
+  useEffect(() => {
+    const searchFromUrl = searchParams.get('search');
+    if (searchFromUrl) {
+      setSearchTerm(searchFromUrl);
+      // Admin should see all payrolls when searching from command palette
+      if (profile?.roleIds?.includes(1)) {
+        setViewMode('all');
+      }
+    }
+  }, [searchParams, profile]);
 
   const loadData = async () => {
     try {
@@ -138,12 +161,46 @@ function PayrollPage() {
     return 'Freelance';
   };
 
+  // Filter payrolls by search term and filters
+  const filteredPayrolls = payrolls.filter(payroll => {
+    const term = searchTerm.toLowerCase();
+    const employeeName = getEmployeeName(payroll).toLowerCase();
+    
+    // Search filter
+    if (term && !employeeName.includes(term)) return false;
+    
+    // Amount filters
+    const amount = payroll.amount || 0;
+    if (filters.minAmount && amount < parseFloat(filters.minAmount)) return false;
+    if (filters.maxAmount && amount > parseFloat(filters.maxAmount)) return false;
+    
+    // Date filters
+    const payrollDate = new Date(payroll.payrollDate);
+    if (filters.startDate && payrollDate < new Date(filters.startDate)) return false;
+    if (filters.endDate && payrollDate > new Date(filters.endDate + 'T23:59:59')) return false;
+    
+    return true;
+  });
+
+  const hasActiveFilters = filters.minAmount || filters.maxAmount || filters.startDate || filters.endDate;
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters(prev => ({ ...prev, [name]: value }));
+    setCurrentPage(1);
+  };
+
+  const clearFilters = () => {
+    setFilters({ minAmount: '', maxAmount: '', startDate: '', endDate: '' });
+    setCurrentPage(1);
+  };
+
   // Paginación
   const isAdmin = profile?.roleIds?.includes(1);
-  const totalPages = Math.ceil(payrolls.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredPayrolls.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentPayrolls = payrolls.slice(startIndex, endIndex);
+  const currentPayrolls = filteredPayrolls.slice(startIndex, endIndex);
 
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -387,6 +444,110 @@ function PayrollPage() {
         })}
       </div>
 
+      {/* Search and Filters */}
+      <div className="space-y-3">
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Buscar por nombre de empleado..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${
+              showFilters || hasActiveFilters
+                ? 'bg-blue-50 border-blue-300 text-blue-700'
+                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+            }`}
+          >
+            <Filter className="h-5 w-5" />
+            <span className="hidden sm:inline">Filtros</span>
+            {hasActiveFilters && (
+              <span className="bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                {[filters.minAmount, filters.maxAmount, filters.startDate, filters.endDate].filter(Boolean).length}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Filter Panel */}
+        {showFilters && (
+          <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Monto mínimo
+                </label>
+                <input
+                  type="number"
+                  name="minAmount"
+                  value={filters.minAmount}
+                  onChange={handleFilterChange}
+                  placeholder="0.00"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Monto máximo
+                </label>
+                <input
+                  type="number"
+                  name="maxAmount"
+                  value={filters.maxAmount}
+                  onChange={handleFilterChange}
+                  placeholder="10000.00"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Desde fecha
+                </label>
+                <input
+                  type="date"
+                  name="startDate"
+                  value={filters.startDate}
+                  onChange={handleFilterChange}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Hasta fecha
+                </label>
+                <input
+                  type="date"
+                  name="endDate"
+                  value={filters.endDate}
+                  onChange={handleFilterChange}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            {hasActiveFilters && (
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={clearFilters}
+                  className="flex items-center gap-1 px-3 py-1.5 text-gray-600 hover:text-gray-800"
+                >
+                  <X className="h-4 w-4" />
+                  Limpiar filtros
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Payrolls Table */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -436,7 +597,7 @@ function PayrollPage() {
                       </div>
                     </td>
                   </tr>
-                ) : payrolls.length === 0 ? (
+                ) : filteredPayrolls.length === 0 ? (
                   <tr>
                     <td colSpan="4" className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center gap-3">
@@ -444,8 +605,12 @@ function PayrollPage() {
                           <DollarSign className="h-8 w-8 text-slate-400" />
                         </div>
                         <div>
-                          <p className="text-slate-700 font-medium">No hay nóminas disponibles</p>
-                          <p className="text-sm text-slate-500">Las nóminas aparecerán aquí cuando estén disponibles</p>
+                          <p className="text-slate-700 font-medium">
+                            {searchTerm ? 'No se encontraron resultados' : 'No hay nóminas disponibles'}
+                          </p>
+                          <p className="text-sm text-slate-500">
+                            {searchTerm ? 'Prueba con otro término de búsqueda' : 'Las nóminas aparecerán aquí cuando estén disponibles'}
+                          </p>
                         </div>
                       </div>
                     </td>
@@ -521,56 +686,18 @@ function PayrollPage() {
           </div>
           
           {/* Paginación */}
-          {payrolls.length > 0 && (
-            <div className="px-6 py-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-slate-500">
-                Mostrando {startIndex + 1}-{Math.min(endIndex, payrolls.length)} de {payrolls.length} nóminas
-              </p>
-              {totalPages > 1 && (
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="p-2 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
-                    <ChevronLeft className="h-5 w-5" />
-                  </button>
-                  <div className="flex items-center gap-1">
-                    {[...Array(Math.min(5, totalPages))].map((_, i) => {
-                      let pageNum;
-                      if (totalPages <= 5) {
-                        pageNum = i + 1;
-                      } else if (currentPage <= 3) {
-                        pageNum = i + 1;
-                      } else if (currentPage >= totalPages - 2) {
-                        pageNum = totalPages - 4 + i;
-                      } else {
-                        pageNum = currentPage - 2 + i;
-                      }
-                      return (
-                        <button
-                          key={pageNum}
-                          onClick={() => goToPage(pageNum)}
-                          className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                            currentPage === pageNum
-                              ? 'bg-blue-600 text-white'
-                              : 'text-slate-600 hover:bg-slate-100'
-                          }`}
-                        >
-                          {pageNum}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <button
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="p-2 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
-                    <ChevronRight className="h-5 w-5" />
-                  </button>
-                </div>
-              )}
+          {filteredPayrolls.length > 0 && (
+            <div className="px-6 py-4">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={goToPage}
+                totalItems={filteredPayrolls.length}
+                itemsPerPage={itemsPerPage}
+                showingFrom={startIndex + 1}
+                showingTo={Math.min(endIndex, filteredPayrolls.length)}
+                itemName="nóminas"
+              />
             </div>
           )}
         </Card>
