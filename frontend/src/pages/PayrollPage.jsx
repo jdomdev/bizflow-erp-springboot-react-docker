@@ -22,6 +22,7 @@ import {
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Pagination from '../components/Pagination';
+import { useItemsPerPage } from '../hooks/useItemsPerPage';
 import { payrollService, payrollAdminService, employeeService, userService } from '../services/api';
 
 function PayrollPage() {
@@ -35,7 +36,7 @@ function PayrollPage() {
   const [profile, setProfile] = useState(null);
   const [viewMode, setViewMode] = useState('mine'); // 'mine' or 'all' (admin only)
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(15);
+  const itemsPerPage = useItemsPerPage(15);
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { expenseService } from '../services/api';
 import { useAuthStore } from '../store/authStore';
+import { useItemsPerPage } from '../hooks/useItemsPerPage';
 import ExpenseForm from '../components/ExpenseForm';
 import ExpenseList from '../components/ExpenseList';
 import Pagination from '../components/Pagination';
@@ -38,7 +39,7 @@ export default function ExpensesPage() {
   
   // Pagination state (server-side)
   const [currentPage, setCurrentPage] = useState(0); // API uses 0-indexed
-  const [pageSize] = useState(15);
+  const pageSize = useItemsPerPage(15);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
 
