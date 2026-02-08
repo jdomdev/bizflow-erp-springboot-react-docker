@@ -26,7 +26,7 @@ public class ExpenseSpecifications {
     }
     
     /**
-     * Search in concept or note fields (case insensitive)
+     * Search in concept, note, or user name/surname fields (case insensitive)
      */
     public static Specification<Expense> searchInConceptOrNote(String search) {
         return (root, query, cb) -> {
@@ -36,7 +36,10 @@ public class ExpenseSpecifications {
             String lowerSearch = "%" + search.toLowerCase() + "%";
             return cb.or(
                 cb.like(cb.lower(root.get("concept")), lowerSearch),
-                cb.like(cb.lower(cb.coalesce(root.get("note"), "")), lowerSearch)
+                cb.like(cb.lower(cb.coalesce(root.get("note"), "")), lowerSearch),
+                cb.like(cb.lower(root.get("expenseUser").get("name")), lowerSearch),
+                cb.like(cb.lower(root.get("expenseUser").get("surname")), lowerSearch),
+                cb.like(cb.lower(root.get("expenseUser").get("email")), lowerSearch)
             );
         };
     }
