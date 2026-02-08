@@ -22,7 +22,7 @@ public class ExpenseUserDto {
     @NonNull
     private String surname;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+    private String password = ""; // Default empty to avoid NPE when field is omitted
     private java.util.List<Long> roleIds;
     private java.util.List<RoleDto> roleDtos;
     private Long employeeId;
