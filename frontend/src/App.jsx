@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -17,6 +18,7 @@ function App() {
   const { isAuthenticated } = useAuthStore();
 
   return (
+    <ThemeProvider>
     <Router>
       <Routes>
         {!isAuthenticated ? (
@@ -40,6 +42,7 @@ function App() {
         )}
       </Routes>
     </Router>
+    </ThemeProvider>
   );
 }
 
