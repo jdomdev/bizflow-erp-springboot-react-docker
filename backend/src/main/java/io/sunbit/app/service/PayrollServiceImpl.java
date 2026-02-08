@@ -155,13 +155,15 @@ public class PayrollServiceImpl implements IPayrollService {
 		Payroll payrollUpdated = null;
 		try {
 			Optional<Payroll> optionalPayroll = payrollDao.findById(id);
-			Payroll oldPayroll = optionalPayroll.get();
-			if (oldPayroll != null) {
-				syncAssociations(payroll);
-				LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getPayrollDate());
-				payroll.setPayrollDate(parsedDate);
-				payrollUpdated = payrollDao.save(payroll);
+			if (optionalPayroll.isEmpty()) {
+				throw new ResourceNotFoundException("Payroll", "id", id);
 			}
+			// Ensure the path ID is used (not any ID from request body)
+			payroll.setId(id);
+			syncAssociations(payroll);
+			LocalDateTime parsedDate = DateUtil.formattingDate(payroll.getPayrollDate());
+			payroll.setPayrollDate(parsedDate);
+			payrollUpdated = payrollDao.save(payroll);
 		} catch (BadRequestException | ResourceNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
