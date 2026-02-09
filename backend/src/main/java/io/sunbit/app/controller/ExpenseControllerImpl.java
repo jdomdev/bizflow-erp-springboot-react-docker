@@ -64,7 +64,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/user/{expenseUserId}")
 	@ResponseBody
 	public ResponseEntity<?> getAllExpenseByExpenseUserId(@PathVariable("expenseUserId") Long expenseUserId,
@@ -80,7 +80,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/{expenseId}")
 	// @ResponseBody
 	public ResponseEntity<?> getExpenseById(@PathVariable("expenseId") Long expenseId,
@@ -95,7 +95,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@PostMapping("/")
 	// @ResponseBody
 	public ResponseEntity<?> saveExpense(@RequestBody @Valid io.sunbit.app.dto.ExpenseCreateRequest request,
@@ -227,7 +227,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@PutMapping("/")
 	public ResponseEntity<?> updateExpense(@RequestBody @Valid Expense expense,
 			@RequestHeader("Authorization") String headerAuth) {
@@ -271,7 +271,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 	 * Paginated search endpoint for expenses with filters.
 	 * GET /api/v1/expense/search?page=0&size=10&search=text&minAmount=100&maxAmount=500&sortBy=expenseDate&sortDirection=desc
 	 */
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/search")
 	public ResponseEntity<?> searchExpenses(
 			@RequestParam(defaultValue = "0") int page,

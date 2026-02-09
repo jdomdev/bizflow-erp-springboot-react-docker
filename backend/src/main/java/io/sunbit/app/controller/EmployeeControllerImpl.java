@@ -28,7 +28,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 	EmployeeServiceImpl employeeService;
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping
 	public ResponseEntity<?> getAllEmployee() {
 		try {
@@ -41,7 +41,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/{employeeId}")
 	// @ResponseBody
 	public ResponseEntity<?> getEmployeeById(@PathVariable("employeeId") Long employeeId,
@@ -56,7 +56,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@PostMapping("/")
 	// @ResponseBody
 	   public ResponseEntity<?> saveEmployee(@RequestBody @Valid io.sunbit.app.dto.EmployeeDto employeeDto) {
@@ -71,7 +71,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 	   }
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@DeleteMapping("/{employeeId}")
 	// @ResponseBody
 	public ResponseEntity<?> deleteEmployee(@PathVariable("employeeId") Long employeeId) {
@@ -85,7 +85,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@PutMapping("/{employeeId}")
 	   public ResponseEntity<?> updateEmployee(@RequestBody @Valid io.sunbit.app.dto.EmployeeDto employeeDto,
 			   @PathVariable("employeeId") Long employeeId) {
@@ -100,7 +100,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 	   }
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/{name}/{surname}")
 	public ResponseEntity<?> getEmployeeByNameAndSurname(@PathVariable("name") String name,
 			@PathVariable("surname") String surname,

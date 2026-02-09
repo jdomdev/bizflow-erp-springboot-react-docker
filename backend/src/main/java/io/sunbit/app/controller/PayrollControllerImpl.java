@@ -67,7 +67,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 		}
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping
 	public ResponseEntity<?> getAllPayroll() {
 		try {
@@ -80,7 +80,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/employee/{employeeId}")
 	// @ResponseBody
 	public ResponseEntity<?> getAllPayrollByEmployeeId(@PathVariable("employeeId") Long employeeId) {
@@ -94,7 +94,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/user/{expenseUserId}")
 	public ResponseEntity<?> getAllPayrollByExpenseUserId(@PathVariable("expenseUserId") Long expenseUserId) {
 		try {
@@ -106,7 +106,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 		}
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/{payrollId}")
 	// @ResponseBody
 	public ResponseEntity<?> getPayrollById(@PathVariable("payrollId") Long payrollId) {
@@ -280,7 +280,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	 * Paginated search endpoint for payrolls with filters.
 	 * GET /api/v1/payroll/search?page=0&size=10&search=text&minAmount=1000&maxAmount=3000&sortBy=payrollDate&sortDirection=desc
 	 */
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/search")
 	public ResponseEntity<?> searchPayrolls(
 			@RequestParam(defaultValue = "0") int page,
