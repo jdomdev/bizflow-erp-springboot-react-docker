@@ -76,25 +76,25 @@ export default function ExpenseForm({ expense, onSuccess, onCancel }) {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-md overflow-hidden">
-                <div className="flex justify-between items-center p-4 border-b">
-                    <h2 className="text-xl font-semibold text-gray-800">
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-md overflow-hidden">
+                <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-slate-700">
+                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
                         {isEditing ? 'Editar Gasto' : 'Nuevo Gasto'}
                     </h2>
-                    <button onClick={onCancel} className="text-gray-500 hover:text-gray-700">
+                    <button onClick={onCancel} className="text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-white">
                         <X size={24} />
                     </button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="p-4 space-y-4">
                     {error && (
-                        <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
+                        <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-md text-sm border border-red-200 dark:border-red-800">
                             {error}
                         </div>
                     )}
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Concepto</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Concepto</label>
                         <input
                             type="text"
                             value={formData.concept}
@@ -102,13 +102,13 @@ export default function ExpenseForm({ expense, onSuccess, onCancel }) {
                             required
                             minLength={3}
                             maxLength={128}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Ej: Almuerzo de negocios"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Nota</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Nota</label>
                         <textarea
                             value={formData.note}
                             onChange={(e) => setFormData({ ...formData, note: e.target.value })}
@@ -116,32 +116,32 @@ export default function ExpenseForm({ expense, onSuccess, onCancel }) {
                             minLength={3}
                             maxLength={255}
                             rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Detalles adicionales..."
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Monto</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Monto</label>
                         <input
                             type="number"
                             step="0.01"
                             value={formData.amount}
                             onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="0.00"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Fecha y Hora</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Fecha y Hora</label>
                         <input
                             type="datetime-local"
                             value={formData.date}
                             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
 
@@ -149,7 +149,7 @@ export default function ExpenseForm({ expense, onSuccess, onCancel }) {
                         <button
                             type="button"
                             onClick={onCancel}
-                            className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                            className="px-4 py-2 text-gray-700 dark:text-slate-300 bg-gray-100 dark:bg-slate-700 rounded-md hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
                         >
                             Cancelar
                         </button>

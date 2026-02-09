@@ -2,12 +2,15 @@ import SockJS from 'sockjs-client/dist/sockjs';
 import { Client } from '@stomp/stompjs';
 import { useNotificationStore } from '../store/notificationStore';
 import { useAuthStore } from '../store/authStore';
-import { API_BASE_URL } from './api';
 
 let stompClient = null;
 
 export const getWebSocketUrl = () => {
-  return API_BASE_URL.replace('/api/v1', '') + '/ws';
+  // In development, Vite proxy doesn't work for WebSocket, so use explicit backend URL
+  // In production (Docker), use the environment variable or same origin
+  const wsBaseUrl = import.meta.env.VITE_WS_URL || 
+    (import.meta.env.DEV ? 'http://localhost:8082' : window.location.origin);
+  return wsBaseUrl + '/ws';
 };
 
 export const connectWebSocket = () => {
