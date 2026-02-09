@@ -52,6 +52,8 @@ function Layout() {
   }, []);
 
   const isAdmin = user?.roleId === 1;
+  const isManager = user?.roleId === 3;
+  const isAdminOrManager = isAdmin || isManager;
 
   // Command Palette: search commands configuration
   const searchCommands = [
@@ -60,7 +62,11 @@ function Layout() {
     { label: 'Nóminas', path: '/payroll', icon: Wallet, keywords: ['payroll', 'nomina', 'salario'], searchable: true },
     ...(isAdmin ? [
       { label: 'Cargos', path: '/positions', icon: Briefcase, keywords: ['positions', 'cargo', 'puesto'], searchable: true },
+    ] : []),
+    ...(isAdminOrManager ? [
       { label: 'Empleados', path: '/employees', icon: Users, keywords: ['employees', 'empleado'], searchable: true },
+    ] : []),
+    ...(isAdmin ? [
       { label: 'Usuarios', path: '/users', icon: UserCog, keywords: ['users', 'usuario'], searchable: true },
     ] : []),
     { label: 'Perfil', path: '/profile', icon: User, keywords: ['profile', 'mi perfil'] },
@@ -139,7 +145,11 @@ function Layout() {
     { icon: Wallet, label: 'Nómina', path: '/payroll' },
     ...(isAdmin ? [
       { icon: Briefcase, label: 'Cargos', path: '/positions' },
+    ] : []),
+    ...(isAdminOrManager ? [
       { icon: Users, label: 'Empleados', path: '/employees' },
+    ] : []),
+    ...(isAdmin ? [
       { icon: UserCog, label: 'Usuarios', path: '/users' },
     ] : []),
     { icon: User, label: 'Perfil', path: '/profile' },
