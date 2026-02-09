@@ -67,12 +67,19 @@ public class ExpenseServiceImpl implements IExpenseService {
 		LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
 		expense.setExpenseDate(parsedDate);
 		String token = headerAuth.split(" ")[1].trim();
-		// Only admin can save expenses, or add custom user validation here if needed
-		if (jwtAuthUtil.isAdminTokenUser(token)) {
+		
+		// Allow admin to save any expense, or user to save their own expense
+		Long expenseUserId = expense.getExpenseUser() != null ? expense.getExpenseUser().getId() : null;
+		boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+		boolean isOwnExpense = isRequestingOwnExpenses(expenseUserId, token);
+		
+		if (isAdmin || isOwnExpense) {
 			ExpenseUser expenseUser = resolveExpenseUser(expense.getExpenseUser());
 			expense.setExpenseUser(expenseUser);
 			savedExpense = expenseDao.save(expense);
 			savedExpense.setExpenseUser(expenseUser);
+		} else {
+			throw new SecurityException("User is not authorized to create this expense");
 		}
 		return savedExpense;
 	}
