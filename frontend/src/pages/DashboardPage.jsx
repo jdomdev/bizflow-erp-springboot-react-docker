@@ -191,9 +191,9 @@ function DashboardPage() {
 
   const getStatusBadge = (status) => {
     const styles = {
-      approved: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      pending: 'bg-amber-50 text-amber-700 border-amber-200',
-      rejected: 'bg-rose-50 text-rose-700 border-rose-200',
+      approved: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800',
+      pending: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800',
+      rejected: 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/30 dark:text-rose-400 dark:border-rose-800',
     };
     const labels = {
       approved: 'Aprobado',
@@ -207,6 +207,16 @@ function DashboardPage() {
     );
   };
 
+  // Loading state general
+  if (isLoading) {
+    return (
+      <div className="flex flex-col justify-center items-center h-64 gap-3">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <span className="text-slate-500 dark:text-slate-400">Cargando dashboard...</span>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
@@ -216,10 +226,10 @@ function DashboardPage() {
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
       >
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 mb-1">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 dark:text-white mb-1">
             ¡Buen día! 👋
           </h1>
-          <p className="text-slate-500">
+          <p className="text-slate-500 dark:text-slate-400">
             Aquí tienes un resumen de tus finanzas
           </p>
         </div>
@@ -263,8 +273,8 @@ function DashboardPage() {
                     {stat.change}
                   </div>
                 </div>
-                <p className="text-sm font-medium text-slate-500 mb-1">{stat.label}</p>
-                <p className="text-2xl sm:text-3xl font-bold text-slate-800">
+                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">{stat.label}</p>
+                <p className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white">
                   {stat.value}
                 </p>
               </Card>
@@ -280,7 +290,7 @@ function DashboardPage() {
         transition={{ delay: 0.3 }}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-slate-800">Gastos Recientes</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Gastos Recientes</h2>
           <Button variant="ghost" size="sm" onClick={() => navigate('/expenses')}>
             Ver todos
             <ArrowUpRight className="h-4 w-4" />
@@ -291,31 +301,31 @@ function DashboardPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-100">
-                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <tr className="border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-700/50">
+                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Descripción
                   </th>
-                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Monto
                   </th>
-                  <th className="hidden sm:table-cell px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  <th className="hidden sm:table-cell px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Fecha
                   </th>
-                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Estado
                   </th>
-                  <th className="px-4 sm:px-6 py-4 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  <th className="px-4 sm:px-6 py-4 text-right text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Acciones
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                 {isLoading ? (
                   <tr>
                     <td colSpan="5" className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center gap-3">
                         <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                        <span className="text-slate-500">Cargando gastos...</span>
+                        <span className="text-slate-500 dark:text-slate-400">Cargando gastos...</span>
                       </div>
                     </td>
                   </tr>
@@ -323,12 +333,12 @@ function DashboardPage() {
                   <tr>
                     <td colSpan="5" className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center gap-3">
-                        <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center">
-                          <DollarSign className="h-8 w-8 text-slate-400" />
+                        <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+                          <DollarSign className="h-8 w-8 text-slate-400 dark:text-slate-500" />
                         </div>
                         <div>
-                          <p className="text-slate-700 font-medium">No hay gastos registrados</p>
-                          <p className="text-sm text-slate-500">Comienza agregando tu primer gasto</p>
+                          <p className="text-slate-700 dark:text-slate-200 font-medium">No hay gastos registrados</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">Comienza agregando tu primer gasto</p>
                         </div>
                         <Button variant="primary" size="sm" className="mt-2" onClick={() => navigate('/expenses')}>
                           <PlusCircle className="h-4 w-4" />
@@ -344,30 +354,30 @@ function DashboardPage() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.4 + idx * 0.05 }}
-                      className="hover:bg-slate-50/50 transition-colors"
+                      className="hover:bg-slate-50/50 dark:hover:bg-slate-700/50 transition-colors"
                     >
                       <td className="px-4 sm:px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-                            <DollarSign className="h-5 w-5 text-blue-600" />
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 flex items-center justify-center">
+                            <DollarSign className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                           </div>
                           <div>
-                            <p className="font-medium text-slate-800">{expense.concept}</p>
+                            <p className="font-medium text-slate-800 dark:text-white">{expense.concept}</p>
                             {expense.expenseUserName && (
-                              <p className="text-xs text-slate-500">{expense.expenseUserName}</p>
+                              <p className="text-xs text-slate-500 dark:text-slate-400">{expense.expenseUserName}</p>
                             )}
-                            <p className="text-xs text-slate-400 sm:hidden">
+                            <p className="text-xs text-slate-400 dark:text-slate-500 sm:hidden">
                               {new Date(expense.expenseDate).toLocaleDateString('es-ES')}
                             </p>
                           </div>
                         </div>
                       </td>
                       <td className="px-4 sm:px-6 py-4">
-                        <span className="font-semibold text-slate-800">
+                        <span className="font-semibold text-slate-800 dark:text-white">
                           ${expense.amount?.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
                         </span>
                       </td>
-                      <td className="hidden sm:table-cell px-4 sm:px-6 py-4 text-slate-500">
+                      <td className="hidden sm:table-cell px-4 sm:px-6 py-4 text-slate-500 dark:text-slate-400">
                         {new Date(expense.expenseDate).toLocaleDateString('es-ES', {
                           day: 'numeric',
                           month: 'short',
@@ -380,14 +390,14 @@ function DashboardPage() {
                       <td className="px-4 sm:px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-1 relative">
                           <button 
-                            className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                            className="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:text-slate-500 dark:hover:text-blue-400 dark:hover:bg-blue-900/30 transition-colors"
                             onClick={() => handleViewExpense(expense)}
                             title="Ver detalle"
                           >
                             <Eye className="h-4 w-4" />
                           </button>
                           <button 
-                            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:text-slate-500 dark:hover:text-slate-300 dark:hover:bg-slate-700 transition-colors"
                             onClick={() => setShowActionsMenu(showActionsMenu === expense.id ? null : expense.id)}
                             title="Más acciones"
                           >
@@ -400,18 +410,18 @@ function DashboardPage() {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
-                                className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-10 min-w-[140px]"
+                                className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-10 min-w-[140px]"
                               >
                                 <button
                                   onClick={() => handleEditExpense(expense)}
-                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2"
                                 >
                                   <Edit className="h-4 w-4" />
                                   Editar
                                 </button>
                                 <button
                                   onClick={() => handleDeleteExpense(expense)}
-                                  className="w-full px-4 py-2 text-left text-sm text-rose-600 hover:bg-rose-50 flex items-center gap-2"
+                                  className="w-full px-4 py-2 text-left text-sm text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 flex items-center gap-2"
                                 >
                                   <Trash2 className="h-4 w-4" />
                                   Eliminar
@@ -444,27 +454,27 @@ function DashboardPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6"
+              className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl max-w-md w-full p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-slate-800">Detalle del Gasto</h3>
+                <h3 className="text-xl font-bold text-slate-800 dark:text-white">Detalle del Gasto</h3>
                 <button
                   onClick={() => setShowDetailModal(false)}
-                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                 >
-                  <X className="h-5 w-5 text-slate-500" />
+                  <X className="h-5 w-5 text-slate-500 dark:text-slate-400" />
                 </button>
               </div>
               
               <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl">
-                  <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                    <DollarSign className="h-6 w-6 text-blue-600" />
+                <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
+                  <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                    <DollarSign className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500">Monto</p>
-                    <p className="text-2xl font-bold text-slate-800">
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Monto</p>
+                    <p className="text-2xl font-bold text-slate-800 dark:text-white">
                       ${selectedExpense.amount?.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
                     </p>
                   </div>
@@ -472,16 +482,16 @@ function DashboardPage() {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-slate-500 mb-1">Descripción</p>
-                    <p className="font-medium text-slate-800">{selectedExpense.concept}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Descripción</p>
+                    <p className="font-medium text-slate-800 dark:text-white">{selectedExpense.concept}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500 mb-1">Estado</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Estado</p>
                     {getStatusBadge(selectedExpense.status || 'approved')}
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500 mb-1">Fecha</p>
-                    <p className="font-medium text-slate-800">
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Fecha</p>
+                    <p className="font-medium text-slate-800 dark:text-white">
                       {new Date(selectedExpense.expenseDate).toLocaleDateString('es-ES', {
                         day: 'numeric',
                         month: 'long',
@@ -490,8 +500,8 @@ function DashboardPage() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500 mb-1">ID</p>
-                    <p className="font-medium text-slate-800">#{selectedExpense.id}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">ID</p>
+                    <p className="font-medium text-slate-800 dark:text-white">#{selectedExpense.id}</p>
                   </div>
                 </div>
               </div>

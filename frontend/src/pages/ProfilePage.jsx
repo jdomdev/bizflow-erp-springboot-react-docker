@@ -187,19 +187,19 @@ function ProfilePage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
                                 <p className="text-sm text-slate-500 mb-1">Nombre</p>
-                                <p className="text-slate-700 font-medium">{profile?.name || '-'}</p>
+                                <p className="text-slate-200 font-medium">{profile?.name || '-'}</p>
                             </div>
                             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
                                 <p className="text-sm text-slate-500 mb-1">Apellido</p>
-                                <p className="text-slate-700 font-medium">{profile?.surname || '-'}</p>
+                                <p className="text-slate-200 font-medium">{profile?.surname || '-'}</p>
                             </div>
                             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
                                 <p className="text-sm text-slate-500 mb-1">Email</p>
-                                <p className="text-slate-700 font-medium">{profile?.email}</p>
+                                <p className="text-slate-200 font-medium">{profile?.email}</p>
                             </div>
                             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
                                 <p className="text-sm text-slate-500 mb-1">Contraseña</p>
-                                <p className="text-slate-700 font-medium">••••••••</p>
+                                <p className="text-slate-200 font-medium">••••••••</p>
                             </div>
                         </div>
 
@@ -212,11 +212,11 @@ function ProfilePage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <p className="text-xs text-slate-500">Nombre</p>
-                                        <p className="text-emerald-700 font-medium">{profile.employeeName || '-'}</p>
+                                        <p className="text-emerald-400 font-medium">{profile.employeeName || '-'}</p>
                                     </div>
                                     <div>
                                         <p className="text-xs text-slate-500">Cargo</p>
-                                        <p className="text-emerald-700 font-medium">{profile.employeePosition || '-'}</p>
+                                        <p className="text-emerald-400 font-medium">{profile.employeePosition || '-'}</p>
                                     </div>
                                 </div>
                             </div>
