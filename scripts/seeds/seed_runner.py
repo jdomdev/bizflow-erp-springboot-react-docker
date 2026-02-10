@@ -589,7 +589,8 @@ class SeedRunner:
             
             existing_user = existing_users[email]
             user_id = existing_user.get("id")
-            current_roles = existing_user.get("roles", [])
+            # API returns roles in 'roleDtos' field (not 'roles')
+            current_roles = existing_user.get("roleDtos", existing_user.get("roles", []))
             
             # Determine expected role from password prefix
             expected_role_id, expected_role_name = self._get_role_from_password_prefix(password)
