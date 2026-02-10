@@ -101,3 +101,4 @@ backups/**/*.sql
 *_passwords.md
 
 
+__pycache__/
