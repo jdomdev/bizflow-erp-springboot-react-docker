@@ -98,7 +98,8 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 | **ADMIN** | Alan Turing | alan.turing@bizflowerp.com | Acceso completo |
 | **MANAGER** | Marie Curie | marie.curie@bizflowerp.com | Gestión de equipo |
 | **MANAGER** | Albert Einstein | albert.einstein@bizflowerp.com | Gestión de equipo |
-| **USER** | Nikola Tesla | nikola.tesla@bizflowerp.com | Acceso básico |
+| **MANAGER** | Nikola Tesla | nikola.tesla@bizflowerp.com | Gestión de equipo |
+| **USER** | Ken Thompson | ken.thompson@bizflowerp.com | Acceso básico |
 | **USER** | Isaac Newton | isaac.newton@bizflowerp.com | Acceso básico |
 
 > ⚠️ **Nota sobre credenciales**: Las contraseñas se encuentran en `scripts/secrets/users_with_passwords/` (gitignored). Consulta [credentials_system.md](../credentials_system.md) para más información.
@@ -266,13 +267,13 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 
 ---
 
-## 👤 CHECKLIST USER (Nikola Tesla)
+## 👤 CHECKLIST USER (Ken Thompson)
 
 ```json
 {
-  "name": "Nikola",
-  "surname": "Tesla",
-  "email": "nikola.tesla@bizflowerp.com"
+  "name": "Ken",
+  "surname": "Thompson",
+  "email": "ken.thompson@bizflowerp.com"
 }
 ```
 
@@ -355,7 +356,7 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 |-----|---------|----------------|-----------------|-------|
 | ADMIN | Ada Lovelace | __/__ | __/__ | |
 | MANAGER | Marie Curie | __/__ | __/__ | |
-| USER | Nikola Tesla | __/__ | __/__ | |
+| USER | Ken Thompson | __/__ | __/__ | |
 
 ### Issues Encontrados
 
