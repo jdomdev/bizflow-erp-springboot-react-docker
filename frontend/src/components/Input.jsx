@@ -38,7 +38,7 @@ function Input({
           type={inputType}
           disabled={isLoading}
           className={clsx(
-            'w-full rounded-xl border-2 py-3 text-slate-700 placeholder-slate-400 transition-all duration-200',
+            'w-full rounded-xl border-2 py-3 text-base text-slate-700 placeholder-slate-400 transition-all duration-200',
             'bg-white/80 backdrop-blur-sm',
             'border-slate-200 hover:border-slate-300 focus:border-blue-500',
             'focus:outline-none focus:ring-4 focus:ring-blue-500/10',
