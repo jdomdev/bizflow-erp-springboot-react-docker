@@ -7,9 +7,13 @@ import java.util.Optional;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import io.sunbit.app.dao.ExpenseSpecifications;
 import io.sunbit.app.dao.IExpenseDao;
+import io.sunbit.app.dto.ExpenseSearchCriteria;
 import io.sunbit.app.entity.Expense;
 import io.sunbit.app.security.dao.IUserDao;
 import io.sunbit.app.security.entity.ExpenseUser;
@@ -63,12 +67,19 @@ public class ExpenseServiceImpl implements IExpenseService {
 		LocalDateTime parsedDate = DateUtil.formattingDate(expense.getExpenseDate());
 		expense.setExpenseDate(parsedDate);
 		String token = headerAuth.split(" ")[1].trim();
-		// Only admin can save expenses, or add custom user validation here if needed
-		if (jwtAuthUtil.isAdminTokenUser(token)) {
+		
+		// Allow admin to save any expense, or user to save their own expense
+		Long expenseUserId = expense.getExpenseUser() != null ? expense.getExpenseUser().getId() : null;
+		boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+		boolean isOwnExpense = isRequestingOwnExpenses(expenseUserId, token);
+		
+		if (isAdmin || isOwnExpense) {
 			ExpenseUser expenseUser = resolveExpenseUser(expense.getExpenseUser());
 			expense.setExpenseUser(expenseUser);
 			savedExpense = expenseDao.save(expense);
 			savedExpense.setExpenseUser(expenseUser);
+		} else {
+			throw new SecurityException("User is not authorized to create this expense");
 		}
 		return savedExpense;
 	}
@@ -222,5 +233,51 @@ public class ExpenseServiceImpl implements IExpenseService {
 			}
 			expense.setExpenseUser(resolveExpenseUser(relatedUser));
 		}
+	}
+	
+	@Override
+	public Page<Expense> findAllPaginated(Pageable pageable) throws Exception {
+		try {
+			Page<Expense> expenses = expenseDao.findAll(pageable);
+			expenses.forEach(this::loadExpenseUser);
+			return expenses;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	@Override
+	public Page<Expense> findWithFilters(ExpenseSearchCriteria criteria, Pageable pageable, String headerAuth) throws Exception {
+		String token = headerAuth.split(" ")[1].trim();
+		boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+		boolean isManager = jwtAuthUtil.isManagerTokenUser(token);
+		
+		// If not admin or manager, filter by their own userId
+		Long effectiveUserId = criteria.getUserId();
+		if (!isAdmin && !isManager) {
+			Integer tokenUserId = jwtAuthUtil.extractTokenUserId(token);
+			effectiveUserId = tokenUserId != null ? tokenUserId.longValue() : null;
+		}
+		
+		// Parse dates if provided
+		LocalDateTime startDate = criteria.getStartDate() != null ? DateUtil.formattingDate(criteria.getStartDate()) : null;
+		LocalDateTime endDate = criteria.getEndDate() != null ? DateUtil.formattingDate(criteria.getEndDate()) : null;
+		
+		// Use Specifications for dynamic query building (avoids PostgreSQL null type inference issues)
+		Page<Expense> expenses = expenseDao.findAll(
+			ExpenseSpecifications.withFilters(
+				effectiveUserId,
+				criteria.getSearch(),
+				criteria.getMinAmount(),
+				criteria.getMaxAmount(),
+				startDate,
+				endDate
+			),
+			pageable
+		);
+		
+		expenses.forEach(this::loadExpenseUser);
+		return expenses;
 	}
 }

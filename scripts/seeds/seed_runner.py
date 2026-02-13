@@ -225,8 +225,76 @@ class SeedRunner:
         logger.info(f"✅ Employees: {self.stats['employees_created']} created, "
                    f"{self.stats['employees_skipped']} skipped")
     
+    def _get_role_from_password_prefix(self, password: str) -> tuple:
+        """Determine role ID and name from password prefix.
+        
+        Password prefixes indicate intended roles:
+        - 'adm' = ADMIN (roleId=1)
+        - 'mng' = MANAGER (roleId=3)
+        - 'usr' = USER (roleId=2)
+        
+        Returns: (role_id, role_name)
+        """
+        if not password:
+            return (2, "USER")  # Default to USER
+        
+        prefix = password[:3].lower()
+        if prefix == "adm":
+            return (1, "ADMIN")
+        elif prefix == "mng":
+            return (3, "MANAGER")
+        else:
+            return (2, "USER")  # Default for 'usr' or any other prefix
+    
+    def _assign_user_role(self, user_id: int, role_ids: List[int], email: str) -> bool:
+        """Assign role to user via PUT /api/v1/user/{id}.
+        
+        Returns True if successful, False otherwise.
+        """
+        try:
+            # Get current user data to preserve other fields
+            get_response = self.session.get(
+                f"{self.api_url}/api/v1/user/{user_id}",
+                headers=self._auth_headers()
+            )
+            
+            if get_response.status_code != 200:
+                logger.warning(f"Could not fetch user {user_id} for role assignment")
+                return False
+            
+            user_data = get_response.json()
+            
+            # Update with correct role
+            update_data = {
+                "id": user_id,
+                "name": user_data.get("name"),
+                "surname": user_data.get("surname"),
+                "email": user_data.get("email"),
+                "roleIds": role_ids
+            }
+            
+            response = self.session.put(
+                f"{self.api_url}/api/v1/user/{user_id}",
+                json=update_data,
+                headers=self._auth_headers()
+            )
+            
+            if response.status_code in [200, 201]:
+                return True
+            else:
+                logger.warning(f"Failed to assign role to user {email}: {response.status_code}")
+                return False
+                
+        except requests.RequestException as e:
+            logger.error(f"Error assigning role to user {email}: {e}")
+            return False
+
     def seed_users(self, users: List[Dict[str, Any]]) -> None:
-        """Seed users via signup endpoint (auto-links with employees by email)."""
+        """Seed users via signup endpoint (auto-links with employees by email).
+        
+        After creating each user, assigns the appropriate role based on
+        the password prefix (adm=ADMIN, mng=MANAGER, usr=USER).
+        """
         logger.info(f"Seeding {len(users)} users...")
         
         for user in users:
@@ -262,6 +330,23 @@ class SeedRunner:
                 if response.status_code in [200, 201]:
                     self.stats["users_created"] += 1
                     logger.debug(f"Created user: {user.get('email')}")
+                    
+                    # Assign role based on password prefix
+                    role_id, role_name = self._get_role_from_password_prefix(user.get("password", ""))
+                    
+                    # Only need to update if not USER (USER is assigned by default)
+                    if role_name != "USER":
+                        try:
+                            response_data = response.json()
+                            user_id = response_data.get("id")
+                            if user_id:
+                                if self._assign_user_role(user_id, [role_id], user.get("email")):
+                                    logger.debug(f"Assigned {role_name} role to user: {user.get('email')}")
+                                else:
+                                    logger.warning(f"Could not assign {role_name} role to user: {user.get('email')}")
+                        except Exception as e:
+                            logger.warning(f"Error parsing signup response for role assignment: {e}")
+                            
                 elif response.status_code == 400 and "already" in response.text.lower():
                     self.stats["users_skipped"] += 1
                     logger.debug(f"User {user.get('email')} already exists")
@@ -449,6 +534,91 @@ class SeedRunner:
         
         return True
 
+    def fix_user_roles(self, env: str) -> bool:
+        """Fix roles for existing users based on password prefix.
+        
+        This reads the users JSON and updates each user's role based on
+        their password prefix (adm=ADMIN, mng=MANAGER, usr=USER).
+        
+        Useful for fixing roles when users were created before role 
+        assignment was implemented in the seeder.
+        """
+        logger.info(f"=" * 60)
+        logger.info(f"Fixing user roles for environment: {env.upper()}")
+        logger.info(f"=" * 60)
+        
+        # Login first
+        if not self.login():
+            logger.error("Cannot proceed without authentication")
+            return False
+        
+        # Load users data
+        users = self.load_json_data(env, "users")
+        if not users:
+            logger.warning("No users data found")
+            return False
+        
+        # Get all existing users
+        try:
+            response = self.session.get(
+                f"{self.api_url}/api/v1/user",
+                headers=self._auth_headers()
+            )
+            if response.status_code != 200:
+                logger.error(f"Could not fetch users: {response.status_code}")
+                return False
+            
+            existing_users = {u.get("email"): u for u in response.json()}
+        except Exception as e:
+            logger.error(f"Error fetching users: {e}")
+            return False
+        
+        # Track stats
+        roles_updated = 0
+        roles_skipped = 0
+        roles_failed = 0
+        
+        for user_data in users:
+            email = user_data.get("email")
+            password = user_data.get("password", "")
+            
+            if email not in existing_users:
+                logger.debug(f"User {email} does not exist, skipping")
+                roles_skipped += 1
+                continue
+            
+            existing_user = existing_users[email]
+            user_id = existing_user.get("id")
+            # API returns roles in 'roleDtos' field (not 'roles')
+            current_roles = existing_user.get("roleDtos", existing_user.get("roles", []))
+            
+            # Determine expected role from password prefix
+            expected_role_id, expected_role_name = self._get_role_from_password_prefix(password)
+            
+            # Check if user already has the correct role
+            current_role_names = [r.get("name") if isinstance(r, dict) else r for r in current_roles]
+            if expected_role_name in current_role_names:
+                logger.debug(f"User {email} already has {expected_role_name} role")
+                roles_skipped += 1
+                continue
+            
+            # Update role
+            logger.info(f"Updating {email}: {current_role_names} -> [{expected_role_name}]")
+            if self._assign_user_role(user_id, [expected_role_id], email):
+                roles_updated += 1
+            else:
+                roles_failed += 1
+        
+        # Summary
+        logger.info(f"=" * 60)
+        logger.info("ROLE FIX COMPLETE - Summary:")
+        logger.info(f"  Roles updated: {roles_updated}")
+        logger.info(f"  Roles skipped (already correct or user not found): {roles_skipped}")
+        logger.info(f"  Roles failed: {roles_failed}")
+        logger.info(f"=" * 60)
+        
+        return roles_failed == 0
+
 
 def main():
     parser = argparse.ArgumentParser(description="Seed data via REST API")
@@ -484,6 +654,11 @@ def main():
         action="store_true",
         help="Enable verbose output"
     )
+    parser.add_argument(
+        "--fix-roles",
+        action="store_true",
+        help="Only fix roles for existing users (based on password prefix)"
+    )
     
     args = parser.parse_args()
     
@@ -496,7 +671,11 @@ def main():
         admin_password=args.admin_password
     )
     
-    success = runner.run(env=args.env, wait_seconds=args.wait)
+    # Run fix-roles mode or normal seeding
+    if args.fix_roles:
+        success = runner.fix_user_roles(env=args.env)
+    else:
+        success = runner.run(env=args.env, wait_seconds=args.wait)
     sys.exit(0 if success else 1)
 
 

@@ -70,6 +70,22 @@ public class Expense implements Serializable {
 		return expenseUser != null ? expenseUser.getId() : null;
 	}
 
+	@JsonProperty("expenseUserName")
+	public String getExpenseUserName() {
+		if (expenseUser == null) return null;
+		String name = expenseUser.getName();
+		String surname = expenseUser.getSurname();
+		if (name != null && surname != null) {
+			return name + " " + surname;
+		}
+		return name != null ? name : (surname != null ? surname : null);
+	}
+
+	@JsonProperty("expenseUserEmail")
+	public String getExpenseUserEmail() {
+		return expenseUser != null ? expenseUser.getEmail() : null;
+	}
+
 	@JsonProperty("expenseUserId")
 	public void setExpenseUserId(Long expenseUserId) {
 		if (expenseUserId == null) {

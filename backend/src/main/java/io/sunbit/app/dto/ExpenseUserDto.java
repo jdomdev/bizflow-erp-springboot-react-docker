@@ -22,9 +22,12 @@ public class ExpenseUserDto {
     @NonNull
     private String surname;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+    private String password = ""; // Default empty to avoid NPE when field is omitted
     private java.util.List<Long> roleIds;
     private java.util.List<RoleDto> roleDtos;
+    private Long employeeId;
+    private String employeeName;
+    private String employeePosition;
 
     // Constructor sin roleDtos para compatibilidad
     public ExpenseUserDto(Long id, String email, String name, String surname, String password, java.util.List<Long> roleIds) {
@@ -35,5 +38,6 @@ public class ExpenseUserDto {
         this.password = password;
         this.roleIds = roleIds;
         this.roleDtos = null;
+        this.employeeId = null;
     }
 }

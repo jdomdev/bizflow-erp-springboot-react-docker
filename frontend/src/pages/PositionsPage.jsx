@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { positionService } from '../services/api';
 import { useAuthStore } from '../store/authStore';
-import { Plus, Pencil, Trash2, Briefcase, Search, X, Save } from 'lucide-react';
+import { Plus, Pencil, Trash2, Briefcase, Search, X, Save, DollarSign, FileText } from 'lucide-react';
 
 export default function PositionsPage() {
   const { user } = useAuthStore();
@@ -119,7 +119,7 @@ export default function PositionsPage() {
 
   if (!isAdmin) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+      <div className="flex flex-col items-center justify-center h-64 text-gray-500 dark:text-slate-400">
         <Briefcase className="h-16 w-16 mb-4 opacity-50" />
         <p className="text-lg">No tienes permisos para acceder a esta sección.</p>
       </div>
@@ -128,8 +128,9 @@ export default function PositionsPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
+      <div className="flex flex-col justify-center items-center h-64 gap-3">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <span className="text-slate-500 dark:text-slate-400">Cargando cargos...</span>
       </div>
     );
   }
@@ -139,8 +140,8 @@ export default function PositionsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Gestión de Cargos</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Gestión de Cargos</h1>
+          <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">
             {positions.length} cargo{positions.length !== 1 ? 's' : ''} registrado{positions.length !== 1 ? 's' : ''}
           </p>
         </div>
@@ -156,9 +157,9 @@ export default function PositionsPage() {
 
       {/* Error */}
       {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg flex items-center justify-between">
+        <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-4 rounded-lg flex items-center justify-between">
           <span>{error}</span>
-          <button onClick={() => setError('')} className="text-red-400 hover:text-red-600">
+          <button onClick={() => setError('')} className="text-red-400 hover:text-red-600 dark:hover:text-red-300">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -166,27 +167,27 @@ export default function PositionsPage() {
 
       {/* Search */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-slate-500" />
         <input
           type="text"
           placeholder="Buscar por nombre o descripción..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500"
         />
       </div>
 
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
-            <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold text-gray-900">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-md">
+            <div className="flex items-center justify-between p-4 border-b dark:border-slate-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 {editingPosition ? 'Editar Cargo' : 'Nuevo Cargo'}
               </h2>
               <button
                 onClick={handleCloseForm}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -194,38 +195,38 @@ export default function PositionsPage() {
 
             <form onSubmit={handleSubmit} className="p-4 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                   Nombre del Cargo *
                 </label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    formErrors.name ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
+                    formErrors.name ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : 'border-gray-200 dark:border-slate-600'
                   }`}
                   placeholder="Ej: Desarrollador Senior"
                 />
                 {formErrors.name && (
-                  <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{formErrors.name}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                   Descripción
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                   placeholder="Descripción del cargo..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                   Salario Base (€) *
                 </label>
                 <input
@@ -234,13 +235,13 @@ export default function PositionsPage() {
                   min="0"
                   value={formData.baseSalary}
                   onChange={(e) => setFormData({ ...formData, baseSalary: e.target.value })}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    formErrors.baseSalary ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
+                    formErrors.baseSalary ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : 'border-gray-200 dark:border-slate-600'
                   }`}
                   placeholder="0.00"
                 />
                 {formErrors.baseSalary && (
-                  <p className="mt-1 text-sm text-red-600">{formErrors.baseSalary}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{formErrors.baseSalary}</p>
                 )}
               </div>
 
@@ -248,7 +249,7 @@ export default function PositionsPage() {
                 <button
                   type="button"
                   onClick={handleCloseForm}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
                 >
                   Cancelar
                 </button>
@@ -272,58 +273,120 @@ export default function PositionsPage() {
         </div>
       )}
 
-      {/* Positions Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-gray-50 border-b border-gray-100">
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Nombre</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Descripción</th>
-                <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600">Salario Base</th>
-                <th className="text-center py-3 px-4 text-sm font-semibold text-gray-600">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPositions.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="text-center py-12 text-gray-500">
-                    <Briefcase className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                    <p>{searchTerm ? 'No se encontraron resultados' : 'No hay cargos registrados'}</p>
-                  </td>
+      {/* Empty State */}
+      {filteredPositions.length === 0 && (
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-12 text-center">
+          <Briefcase className="h-12 w-12 mx-auto mb-3 text-gray-400 dark:text-slate-500 opacity-50" />
+          <p className="text-gray-500 dark:text-slate-400">
+            {searchTerm ? 'No se encontraron resultados' : 'No hay cargos registrados'}
+          </p>
+        </div>
+      )}
+
+      {/* Mobile Cards (visible < md) */}
+      {filteredPositions.length > 0 && (
+        <div className="md:hidden space-y-3">
+          {filteredPositions.map((position) => (
+            <div
+              key={position.id}
+              className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-4"
+            >
+              {/* Header con icono y nombre */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                  <Briefcase className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                    {position.name}
+                  </h3>
+                  <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
+                    <DollarSign className="h-4 w-4" />
+                    {formatCurrency(position.baseSalary)}
+                  </span>
+                </div>
+                <span className="text-xs text-gray-400 dark:text-slate-500 font-mono">#{position.id}</span>
+              </div>
+
+              {/* Descripción */}
+              {position.description && (
+                <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-slate-300 mb-3">
+                  <FileText className="h-4 w-4 text-gray-400 dark:text-slate-500 flex-shrink-0 mt-0.5" />
+                  <span>{position.description}</span>
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="flex gap-2 pt-3 border-t border-gray-100 dark:border-slate-700">
+                <button
+                  onClick={() => handleEdit(position)}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+                >
+                  <Pencil className="h-4 w-4" />
+                  Editar
+                </button>
+                <button
+                  onClick={() => handleDelete(position.id)}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Desktop Table (visible >= md) */}
+      {filteredPositions.length > 0 && (
+        <div className="hidden md:block bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50 dark:bg-slate-700 border-b border-gray-100 dark:border-slate-600">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-400 dark:text-slate-500 w-16">ID</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-slate-300">Nombre</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-slate-300">Descripción</th>
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600 dark:text-slate-300">Salario Base</th>
+                  <th className="text-center py-3 px-4 text-sm font-semibold text-gray-600 dark:text-slate-300">Acciones</th>
                 </tr>
-              ) : (
-                filteredPositions.map((position) => (
+              </thead>
+              <tbody>
+                {filteredPositions.map((position) => (
                   <tr
                     key={position.id}
-                    className="border-b border-gray-50 hover:bg-gray-50 transition-colors"
+                    className="border-b border-gray-50 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
                   >
+                    <td className="py-3 px-4 text-sm text-gray-400 dark:text-slate-500 font-mono">
+                      {position.id}
+                    </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                          <Briefcase className="h-5 w-5 text-blue-600" />
+                        <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                          <Briefcase className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                         </div>
-                        <span className="font-medium text-gray-900">{position.name}</span>
+                        <span className="font-medium text-gray-900 dark:text-white">{position.name}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-gray-600 max-w-xs truncate">
+                    <td className="py-3 px-4 text-gray-600 dark:text-slate-300 max-w-xs truncate">
                       {position.description || '-'}
                     </td>
-                    <td className="py-3 px-4 text-right font-medium text-gray-900">
+                    <td className="py-3 px-4 text-right font-medium text-gray-900 dark:text-white">
                       {formatCurrency(position.baseSalary)}
                     </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center justify-center gap-2">
                         <button
                           onClick={() => handleEdit(position)}
-                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-2 text-gray-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
                           title="Editar"
                         >
                           <Pencil className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(position.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-gray-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                           title="Eliminar"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -331,12 +394,12 @@ export default function PositionsPage() {
                       </div>
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

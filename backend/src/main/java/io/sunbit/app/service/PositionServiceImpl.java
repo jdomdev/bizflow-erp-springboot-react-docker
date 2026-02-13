@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import io.sunbit.app.dao.IPositionDao;
 import io.sunbit.app.entity.Position;
+import io.sunbit.app.exception.ResourceNotFoundException;
 
 @Service
 public class PositionServiceImpl implements IPositionService {
@@ -53,13 +54,20 @@ public class PositionServiceImpl implements IPositionService {
 	@Override
 	@Transactional
 	public Position update(Long id, Position position) throws Exception {
+		if (id == null) {
+			throw new IllegalArgumentException("id no puede ser nulo");
+		}
 		Position updatedPosition = null;
 		try {
-			Optional<Position> optionalPosition = positionDao.findById(Long.valueOf(id));
-			Position oldPosition = optionalPosition.get();
-			if (oldPosition != null) {
-				updatedPosition = positionDao.save(position);
+			Optional<Position> optionalPosition = positionDao.findById(id);
+			if (optionalPosition.isEmpty()) {
+				throw new ResourceNotFoundException("Position", "id", id);
 			}
+			// Ensure the path ID is used (not any ID from request body)
+			position.setId(id);
+			updatedPosition = positionDao.save(position);
+		} catch (ResourceNotFoundException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());

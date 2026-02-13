@@ -1,6 +1,7 @@
 package io.sunbit.app.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,8 +38,9 @@ public class Position implements Serializable {
 	@NonNull
 	private String name;
 
-	// Constructor withOUT id.
-	// public Position(String name) {
-	// this.name = name;
-	// }
+	@Column(name = "description", length = 500)
+	private String description;
+
+	@Column(name = "base_salary", precision = 10, scale = 2)
+	private BigDecimal baseSalary;
 }

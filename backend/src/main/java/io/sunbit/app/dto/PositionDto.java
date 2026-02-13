@@ -1,6 +1,7 @@
 package io.sunbit.app.dto;
 
-import io.sunbit.app.entity.Position;
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class PositionDto extends Position {
+public class PositionDto {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	@NonNull
 	private String name;
+	private String description;
+	private BigDecimal baseSalary;
 }

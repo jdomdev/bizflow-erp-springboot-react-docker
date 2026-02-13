@@ -4,10 +4,10 @@ import clsx from 'clsx';
 
 function Card({ children, className, hover = true, variant = 'default' }) {
   const variants = {
-    default: 'bg-white/80 border-slate-200/60 shadow-soft',
-    glass: 'bg-white/60 backdrop-blur-xl border-white/30 shadow-soft-lg',
-    solid: 'bg-white border-slate-200 shadow-soft',
-    gradient: 'bg-gradient-to-br from-white via-slate-50 to-blue-50/50 border-slate-200/60 shadow-soft-lg',
+    default: 'bg-white/80 dark:bg-slate-800/80 border-slate-200/60 dark:border-slate-700 shadow-soft',
+    glass: 'bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/30 dark:border-slate-700 shadow-soft-lg',
+    solid: 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-soft',
+    gradient: 'bg-gradient-to-br from-white via-slate-50 to-blue-50/50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 border-slate-200/60 dark:border-slate-700 shadow-soft-lg',
   };
 
   return (

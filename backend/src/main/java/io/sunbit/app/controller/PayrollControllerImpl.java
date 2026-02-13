@@ -6,6 +6,10 @@ import java.util.Locale;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,9 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.sunbit.app.dto.PageResponse;
+import io.sunbit.app.dto.PayrollSearchCriteria;
 import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.NotificationType;
 import io.sunbit.app.entity.Payroll;
@@ -59,7 +67,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 		}
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping
 	public ResponseEntity<?> getAllPayroll() {
 		try {
@@ -72,7 +80,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/employee/{employeeId}")
 	// @ResponseBody
 	public ResponseEntity<?> getAllPayrollByEmployeeId(@PathVariable("employeeId") Long employeeId) {
@@ -86,7 +94,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/user/{expenseUserId}")
 	public ResponseEntity<?> getAllPayrollByExpenseUserId(@PathVariable("expenseUserId") Long expenseUserId) {
 		try {
@@ -98,7 +106,7 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 		}
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
 	@GetMapping("/{payrollId}")
 	// @ResponseBody
 	public ResponseEntity<?> getPayrollById(@PathVariable("payrollId") Long payrollId) {
@@ -265,6 +273,59 @@ public class PayrollControllerImpl implements IPayrollController<Payroll> {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
 					"{\"error\":\"Error. Please, Try it later. It is NOT possible UPDATE the payroll which you are looking for.\"}");
+		}
+	}
+	
+	/**
+	 * Paginated search endpoint for payrolls with filters.
+	 * GET /api/v1/payroll/search?page=0&size=10&search=text&minAmount=1000&maxAmount=3000&sortBy=payrollDate&sortDirection=desc
+	 */
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
+	@GetMapping("/search")
+	public ResponseEntity<?> searchPayrolls(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(required = false) String search,
+			@RequestParam(required = false) Long userId,
+			@RequestParam(required = false) Long employeeId,
+			@RequestParam(required = false) Double minAmount,
+			@RequestParam(required = false) Double maxAmount,
+			@RequestParam(required = false) String startDate,
+			@RequestParam(required = false) String endDate,
+			@RequestParam(defaultValue = "payrollDate") String sortBy,
+			@RequestParam(defaultValue = "desc") String sortDirection,
+			@RequestHeader("Authorization") String headerAuth) {
+		try {
+			// Build criteria
+			PayrollSearchCriteria criteria = PayrollSearchCriteria.builder()
+				.search(search)
+				.userId(userId)
+				.employeeId(employeeId)
+				.minAmount(minAmount)
+				.maxAmount(maxAmount)
+				.startDate(startDate != null && !startDate.isEmpty() 
+					? java.time.LocalDateTime.parse(startDate.replace(" ", "T")) : null)
+				.endDate(endDate != null && !endDate.isEmpty() 
+					? java.time.LocalDateTime.parse(endDate.replace(" ", "T")) : null)
+				.sortBy(sortBy)
+				.sortDirection(sortDirection)
+				.build();
+			
+			// Build pageable with sorting
+			Sort sort = Sort.by(
+				sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC,
+				sortBy
+			);
+			Pageable pageable = PageRequest.of(page, size, sort);
+			
+			// Execute search
+			Page<Payroll> payrollPage = payrollService.findWithFilters(criteria, pageable, headerAuth);
+			
+			return ResponseEntity.ok(PageResponse.from(payrollPage));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+				.body("{\"error\":\"Error searching payrolls: " + e.getMessage() + "\"}");
 		}
 	}
 }

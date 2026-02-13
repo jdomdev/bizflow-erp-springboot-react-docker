@@ -3,6 +3,10 @@ package io.sunbit.app.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import io.sunbit.app.dto.PayrollSearchCriteria;
 import io.sunbit.app.entity.Employee;
 import io.sunbit.app.entity.Payroll;
 
@@ -23,4 +27,9 @@ public interface IPayrollService {
 	public List<Payroll> findAllPayrollByExpenseUserId(Long expenseUserId) throws Exception;
 
 	public Boolean findByDateAndEmployeeAllIgnoreCase(LocalDateTime PayrollDate, Employee employee) throws Exception;
+	
+	// Paginated methods
+	public Page<Payroll> findAllPaginated(Pageable pageable) throws Exception;
+	
+	public Page<Payroll> findWithFilters(PayrollSearchCriteria criteria, Pageable pageable, String headerAuth) throws Exception;
 }

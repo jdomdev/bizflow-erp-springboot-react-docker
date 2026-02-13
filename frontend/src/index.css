@@ -15,12 +15,25 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Base light theme */
+/* Base body styles */
 body {
-  @apply bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-800;
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Light theme (default) */
+html:not(.dark) body {
+  background: linear-gradient(to bottom right, #f8fafc, #ffffff, #eff6ff);
+  color: #1e293b;
+}
+
+/* Dark theme */
+html.dark body {
+  background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
+  color: #f1f5f9;
 }
 
 /* ============================================
