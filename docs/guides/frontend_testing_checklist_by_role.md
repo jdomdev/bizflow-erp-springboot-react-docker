@@ -1,9 +1,8 @@
-# 📋 Checklist de Pruebas Frontend por Rol
-
-> **Fecha de creación**: 9 de Febrero 2026  
-> **Última actualización**: 9 de Febrero 2026
-
+> **Fecha de creación**: 9 de Febrero 2026
+> **Última actualización**: 13 de Febrero 2026
+  
 Este documento contiene los checklists de pruebas para verificar el correcto funcionamiento del frontend según cada rol de usuario.
+ 
 
 ---
 
@@ -11,77 +10,88 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 
 ### Tabla Resumen
 
-| Módulo | ADMIN | MANAGER | USER |
-|--------|:-----:|:-------:|:----:|
-| **Dashboard** | ✅ Ver todos los gastos | ✅ Ver todos los gastos | ⚠️ Solo sus gastos |
-| **Employees** | ✅ CRUD completo | ✅ CRUD completo | ❌ Sin acceso |
-| **Positions** | ✅ CRUD completo | ❌ Sin acceso | ❌ Sin acceso |
-| **Expenses** | ✅ Ver/Gestionar todos | ⚠️ Solo los propios | ⚠️ Solo los propios |
-| **Payrolls** | ✅ CRUD + ver todas | ✅ Ver todas | ⚠️ Solo las propias |
-| **Users** | ✅ CRUD completo | ❌ Sin acceso | ❌ Sin acceso |
-| **Notificaciones** | ✅ Todas | ✅ Todas | ✅ Todas |
-| **Perfil** | ✅ Ver/Editar | ✅ Ver/Editar | ✅ Ver/Editar |
-| **Settings** | ✅ Acceso | ✅ Acceso | ✅ Acceso |
+| Módulo         | ADMIN                 | MANAGER                 | USER                 |
+| -------------- | :-------------------: | :---------------------: | :------------------: |
+| **Dashboard**  | ✅ Ver todos los gastos | ✅ Ver todos los gastos | ⚠️ Solo sus gastos   |
+| **Employees**  | ✅ CRUD completo       | ✅ CRUD completo        | ❌ Sin acceso        |
+| **Positions**  | ✅ CRUD completo       | ❌ Sin acceso           | ❌ Sin acceso        |
+| **Expenses**   | ✅ Ver/Gestionar todos | ✅ Ver todos / Gestionar propios | ⚠️ Solo los propios  |
+| **Payrolls**   | ✅ CRUD + ver todas    | ✅ Ver todas            | ⚠️ Solo las propias  |
+| **Users**      | ✅ CRUD completo       | ❌ Sin acceso           | ❌ Sin acceso        |
+| **Notificaciones** | ✅ Todas            | ✅ Todas                | ✅ Todas             |
+| **Perfil**     | ✅ Ver/Editar          | ✅ Ver/Editar           | ✅ Ver/Editar        |
+| **Settings**   | ✅ Acceso              | ✅ Acceso               | ✅ Acceso            |
+
+---
 
 ### Detalle de Permisos por Módulo
 
 #### 👥 Employees
-| Acción | ADMIN | MANAGER | USER |
-|--------|:-----:|:-------:|:----:|
-| Listar todos | ✅ | ✅ | ❌ |
-| Ver detalle | ✅ | ✅ | ❌ |
-| Crear | ✅ | ✅ | ❌ |
-| Editar | ✅ | ✅ | ❌ |
-| Eliminar | ✅ | ✅ | ❌ |
+
+| Acción         | ADMIN | MANAGER | USER |
+| -------------- | :---: | :-----: | :--: |
+| Listar todos   |   ✅  |    ✅   |   ❌  |
+| Ver detalle    |   ✅  |    ✅   |   ❌  |
+| Crear          |   ✅  |    ✅   |   ❌  |
+| Editar         |   ✅  |    ✅   |   ❌  |
+| Eliminar       |   ✅  |    ✅   |   ❌  |
 
 #### 💼 Positions
-| Acción | ADMIN | MANAGER | USER |
-|--------|:-----:|:-------:|:----:|
-| Listar | ✅ | ❌ | ❌ |
-| Crear | ✅ | ❌ | ❌ |
-| Editar | ✅ | ❌ | ❌ |
-| Eliminar | ✅ | ❌ | ❌ |
+
+| Acción         | ADMIN | MANAGER | USER |
+| -------------- | :---: | :-----: | :--: |
+| Listar         |   ✅  |    ❌   |   ❌  |
+| Crear          |   ✅  |    ❌   |   ❌  |
+| Editar         |   ✅  |    ❌   |   ❌  |
+| Eliminar       |   ✅  |    ❌   |   ❌  |
 
 #### 💰 Expenses
-| Acción | ADMIN | MANAGER | USER |
-|--------|:-----:|:-------:|:----:|
-| Ver todos | ✅ | ❌ | ❌ |
-| Ver propios | ✅ | ✅ | ✅ |
-| Crear (propios) | ✅ | ✅ | ✅ |
-| Editar propios | ✅ | ✅ | ✅ |
-| Editar de otros | ✅ | ❌ | ❌ |
-| Eliminar | ✅ | ❌ | ❌ |
+
+| Acción             | ADMIN | MANAGER | USER |
+| ------------------ | :---: | :-----: | :--: |
+| Ver todos          |   ✅  |    ✅   |   ❌  |
+| Ver propios        |   ✅  |    ✅   |   ✅  |
+| Crear (propios)    |   ✅  |    ✅   |   ✅  |
+| Editar propios     |   ✅  |    ✅   |   ✅  |
+| Editar de otros    |   ✅  |    ❌   |   ❌  |
+| Eliminar           |   ✅  |    ❌   |   ❌  |
 
 #### 💵 Payrolls
-| Acción | ADMIN | MANAGER | USER |
-|--------|:-----:|:-------:|:----:|
-| Ver todas | ✅ | ✅ | ❌ |
-| Ver propias | ✅ | ✅ | ✅ |
-| Crear | ✅ | ❌ | ❌ |
-| Editar | ✅ | ❌ | ❌ |
-| Eliminar | ✅ | ❌ | ❌ |
+
+| Acción         | ADMIN | MANAGER | USER |
+| -------------- | :---: | :-----: | :--: |
+| Ver todas      |   ✅  |    ✅   |   ❌  |
+| Ver propias    |   ✅  |    ✅   |   ✅  |
+| Crear          |   ✅  |    ❌   |   ❌  |
+| Editar         |   ✅  |    ❌   |   ❌  |
+| Eliminar       |   ✅  |    ❌   |   ❌  |
 
 #### 👤 Users
-| Acción | ADMIN | MANAGER | USER |
-|--------|:-----:|:-------:|:----:|
-| Listar | ✅ | ❌ | ❌ |
-| Crear | ✅ | ❌ | ❌ |
-| Editar | ✅ | ❌ | ❌ |
-| Eliminar | ✅ | ❌ | ❌ |
-| Asignar roles | ✅ | ❌ | ❌ |
+
+| Acción         | ADMIN | MANAGER | USER |
+| -------------- | :---: | :-----: | :--: |
+| Listar         |   ✅  |    ❌   |   ❌  |
+| Crear          |   ✅  |    ❌   |   ❌  |
+| Editar         |   ✅  |    ❌   |   ❌  |
+| Eliminar       |   ✅  |    ❌   |   ❌  |
+| Asignar roles  |   ✅  |    ❌   |   ❌  |
+
+---
 
 ### Menú de Navegación por Rol
 
 | Opción de Menú | ADMIN | MANAGER | USER |
-|----------------|:-----:|:-------:|:----:|
-| Dashboard | ✅ | ✅ | ✅ |
-| Gastos | ✅ | ✅ | ✅ |
-| Nóminas | ✅ | ✅ | ✅ |
-| Cargos | ✅ | ❌ | ❌ |
-| Empleados | ✅ | ✅ | ❌ |
-| Usuarios | ✅ | ❌ | ❌ |
-| Perfil | ✅ | ✅ | ✅ |
-| Configuración | ✅ | ✅ | ✅ |
+| -------------- | :---: | :-----: | :--: |
+| Dashboard      |   ✅  |    ✅   |   ✅  |
+| Gastos         |   ✅  |    ✅   |   ✅  |
+| Nóminas        |   ✅  |    ✅   |   ✅  |
+| Cargos         |   ✅  |    ❌   |   ❌  |
+| Empleados      |   ✅  |    ✅   |   ❌  |
+| Usuarios       |   ✅  |    ❌   |   ❌  |
+| Perfil         |   ✅  |    ✅   |   ✅  |
+| Configuración  |   ✅  |    ✅   |   ✅  |
+
+---
 
 **Leyenda:**
 - ✅ Acceso completo
@@ -92,22 +102,18 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 
 ## 🔐 Usuarios de Prueba
 
-| Rol | Nombre | Email | Notas |
-|-----|--------|-------|-------|
-| **ADMIN** | Ada Lovelace | ada.lovelace@bizflowerp.com | Acceso completo |
-| **ADMIN** | Alan Turing | alan.turing@bizflowerp.com | Acceso completo |
-| **MANAGER** | Marie Curie | marie.curie@bizflowerp.com | Gestión de equipo |
-| **MANAGER** | Albert Einstein | albert.einstein@bizflowerp.com | Gestión de equipo |
-| **MANAGER** | Nikola Tesla | nikola.tesla@bizflowerp.com | Gestión de equipo |
-| **USER** | Ken Thompson | ken.thompson@bizflowerp.com | Acceso básico |
-| **USER** | Isaac Newton | isaac.newton@bizflowerp.com | Acceso básico |
+| Rol        | Nombre       | Email                          | Notas                          |
+| ---------- | ------------ | ------------------------------ | ------------------------------ |
+| **ADMIN**  | Ada Lovelace | ada.lovelace@bizflowerp.com    | Acceso completo                |
+| **MANAGER**| Nikola Tesla | nikola.tesla@bizflowerp.com    | Ver todos los gastos, gestión de empleados |
+| **USER**   | Ken Thompson | ken.thompson@bizflowerp.com    | Acceso básico, solo sus datos  |
+  
 
 > ⚠️ **Nota sobre credenciales**: Las contraseñas se encuentran en `scripts/secrets/users_with_passwords/` (gitignored). Consulta [credentials_system.md](../credentials_system.md) para más información.
 
 ---
 
 ## 👑 CHECKLIST ADMIN (Ada Lovelace) ✅ COMPLETADO
-
 ```json
 {
   "name": "Ada",
@@ -149,6 +155,7 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 - [x] **Eliminar** - Borrar posición (solo ADMIN)
 
 ### 💰 6. EXPENSES (ExpensesPage)
+
 - [x] **Listar** - Ver lista de gastos
 - [x] **Crear** - Añadir nuevo gasto
 - [x] **Editar** - Modificar gasto existente
@@ -169,7 +176,7 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 - [x] **Eliminar** - Borrar usuario
 - [x] **Asignar roles** - Cambiar roles de usuario
 
-### ⚙️ 9. SETTINGS (SettingsPage)
+# ⚙️ 9. SETTINGS (SettingsPage)
 - [x] **Acceso** - Página carga correctamente
 - [x] **Funcionalidad** - Lo que ofrezca (temas, preferencias, etc.)
 
@@ -189,23 +196,21 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 - [x] **Loading states** - Se muestran spinners mientras carga
 - [x] **Error handling** - Errores de API se muestran al usuario
 - [x] **Validación formularios** - Campos requeridos, formatos correctos
-
 ---
 
-## 👔 CHECKLIST MANAGER (Marie Curie)
-
+## 👔 CHECKLIST MANAGER (Nicola Tesla)
 ```json
 {
-  "name": "Marie",
-  "surname": "Curie",
-  "email": "marie.curie@bizflowerp.com"
+"name": "Nikola",
+"surname": "Tesla",
+"email": "nikola.tesla@bizflowerp.com"
 }
 ```
 
 ### 🔐 1. AUTENTICACIÓN
-- [ ] **Login** - Ingresar con credenciales válidas
-- [ ] **Verificar rol** - En perfil debe mostrar "MANAGER"
-- [ ] **Logout** - Cerrar sesión correctamente
+- [x] **Login** - Ingresar con credenciales válidas
+- [x] **Verificar rol** - En perfil debe mostrar "MANAGER"
+- [x] **Logout** - Cerrar sesión correctamente
 
 ### 🏠 2. DASHBOARD
 - [ ] **Carga inicial** - Dashboard carga sin errores
@@ -247,6 +252,7 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 - [ ] **Menú oculto** - El link "Usuarios" NO aparece en el menú lateral
 - [ ] **URL directa** - Al ir a `/users` debe mostrar error de permisos
 
+
 ### ⚙️ 9. SETTINGS
 - [ ] **Acceso** - Página carga correctamente
 
@@ -268,12 +274,12 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 ---
 
 ## 👤 CHECKLIST USER (Ken Thompson)
-
+  
 ```json
 {
-  "name": "Ken",
-  "surname": "Thompson",
-  "email": "ken.thompson@bizflowerp.com"
+"name": "Ken",
+"surname": "Thompson",
+"email": "ken.thompson@bizflowerp.com"
 }
 ```
 
@@ -319,6 +325,7 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 ### 👤 8. USERS (UsersPage) ❌ SIN ACCESO
 - [ ] **Menú oculto** - El link "Usuarios" NO aparece
 - [ ] **URL directa** - Al ir a `/users` debe mostrar error de permisos
+ 
 
 ### ⚙️ 9. SETTINGS
 - [ ] **Acceso** - Página carga correctamente
@@ -341,31 +348,32 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 ---
 
 ## 📝 Plantilla de Registro de Pruebas
-
+  
 ```markdown
 ## Registro de Ejecución
-
+  
 **Fecha:** _______________
 **Entorno:** _______________ (dev/test/prod)
 **Navegador:** _______________
 **Tester:** _______________
 
 ### Resultados por Rol
-
+  
 | Rol | Usuario | Checks Pasados | Checks Fallidos | Notas |
 |-----|---------|----------------|-----------------|-------|
 | ADMIN | Ada Lovelace | __/__ | __/__ | |
 | MANAGER | Marie Curie | __/__ | __/__ | |
 | USER | Ken Thompson | __/__ | __/__ | |
 
-### Issues Encontrados
 
+### Issues Encontrados
 1. **[ROL] Módulo - Descripción**
-   - Pasos para reproducir:
-   - Comportamiento esperado:
-   - Comportamiento actual:
+- Pasos para reproducir:
+- Comportamiento esperado:
+- Comportamiento actual:
 
 2. ...
+  
 
 ### Comentarios Adicionales
 
@@ -373,11 +381,14 @@ Este documento contiene los checklists de pruebas para verificar el correcto fun
 
 ---
 
+  
+
 ## 🔄 Historial de Cambios
 
-| Fecha | Cambio | Autor |
-|-------|--------|-------|
-| 2026-02-09 | Creación inicial con 3 roles | - |
-| 2026-02-09 | Implementación de permisos MANAGER en backend | - |
-| 2026-02-09 | Checklist ADMIN completado | - |
+  
 
+| Fecha       | Cambio                                             | Autor |
+| ----------- | -------------------------------------------------- | :---: |
+| 2026-02-09  | Creación inicial con 3 roles                      |   -   |
+| 2026-02-09  | Implementación de permisos MANAGER en backend     |   -   |
+| 2026-02-09  | Checklist ADMIN completado                        |   -   |
