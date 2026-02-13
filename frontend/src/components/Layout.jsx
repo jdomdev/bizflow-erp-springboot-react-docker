@@ -186,7 +186,7 @@ function Layout() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-slate-800 dark:text-white truncate">{user?.email || 'Usuario'}</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Administrador</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{user?.roleName || 'Usuario'}</p>
             </div>
           </div>
         </div>
@@ -275,7 +275,7 @@ function Layout() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-slate-800 dark:text-white truncate">{user?.email || 'Usuario'}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Administrador</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{user?.roleName || 'Usuario'}</p>
                   </div>
                 </div>
               </div>
@@ -430,7 +430,7 @@ function Layout() {
                     >
                       <div className="p-3 border-b border-slate-100 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800">
                         <p className="text-sm font-semibold text-slate-800 dark:text-white">{user?.email || 'Usuario'}</p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Administrador</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">{user?.roleName || 'Usuario'}</p>
                       </div>
                       <div className="p-2">
                         <button
