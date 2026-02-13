@@ -28,7 +28,7 @@ public class PositionControllerImpl implements IPositionController {
 	private PositionServiceImpl positionService;
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping
 	public ResponseEntity<?> getAllPosition() {
 		try {
@@ -41,7 +41,7 @@ public class PositionControllerImpl implements IPositionController {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping("/{positionId}")
 	// @ResponseBody
 	public ResponseEntity<?> getPositionById(@PathVariable("positionId") Long positionId) {
