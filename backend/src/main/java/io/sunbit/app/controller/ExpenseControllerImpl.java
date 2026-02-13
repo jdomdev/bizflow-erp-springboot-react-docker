@@ -51,7 +51,7 @@ public class ExpenseControllerImpl implements IExpenseController {
 	private IUserDao userDao;
 
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping
 	public ResponseEntity<?> getAllExpense() {
 		try {

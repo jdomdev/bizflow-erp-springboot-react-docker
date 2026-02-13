@@ -251,10 +251,11 @@ public class ExpenseServiceImpl implements IExpenseService {
 	public Page<Expense> findWithFilters(ExpenseSearchCriteria criteria, Pageable pageable, String headerAuth) throws Exception {
 		String token = headerAuth.split(" ")[1].trim();
 		boolean isAdmin = jwtAuthUtil.isAdminTokenUser(token);
+		boolean isManager = jwtAuthUtil.isManagerTokenUser(token);
 		
-		// If not admin, filter by their own userId
+		// If not admin or manager, filter by their own userId
 		Long effectiveUserId = criteria.getUserId();
-		if (!isAdmin) {
+		if (!isAdmin && !isManager) {
 			Integer tokenUserId = jwtAuthUtil.extractTokenUserId(token);
 			effectiveUserId = tokenUserId != null ? tokenUserId.longValue() : null;
 		}
