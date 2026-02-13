@@ -119,12 +119,13 @@ public class JwtAuthenticationUtil {
 	}
 
 	/**
-	 * Verifica si el usuario en el token tiene rol de administrador.
+	 * Verifica si el usuario en el token tiene un rol específico.
 	 * 
 	 * @param token Token JWT
-	 * @return true si el usuario es admin, false en caso contrario
+	 * @param roleName Nombre del rol a verificar (ej: "ADMIN", "MANAGER", "USER")
+	 * @return true si el usuario tiene el rol, false en caso contrario
 	 */
-	public Boolean isAdminTokenUser(String token) {
+	public Boolean hasRole(String token, String roleName) {
 		try {
 			Claims claims = parseClaims(token);
 			String claimRoles = (String) claims.get("roles");
@@ -136,15 +137,37 @@ public class JwtAuthenticationUtil {
 			claimRoles = claimRoles.replace("[", "").replace("]", "");
 			String[] roleNames = claimRoles.split(",");
 			
+			String targetRole = roleName.startsWith("ROLE_") ? roleName : "ROLE_" + roleName;
+			
 			for (String role : roleNames) {
-				if (role.trim().equalsIgnoreCase("ROLE_ADMIN")) {
+				if (role.trim().equalsIgnoreCase(targetRole)) {
 					return true;
 				}
 			}
 		} catch (JwtException ex) {
-			LOGGER.warn("Error validando rol admin del token: {}", ex.getMessage());
+			LOGGER.warn("Error validando rol {} del token: {}", roleName, ex.getMessage());
 		}
 		return false;
+	}
+
+	/**
+	 * Verifica si el usuario en el token tiene rol de administrador.
+	 * 
+	 * @param token Token JWT
+	 * @return true si el usuario es admin, false en caso contrario
+	 */
+	public Boolean isAdminTokenUser(String token) {
+		return hasRole(token, "ADMIN");
+	}
+
+	/**
+	 * Verifica si el usuario en el token tiene rol de manager.
+	 * 
+	 * @param token Token JWT
+	 * @return true si el usuario es manager, false en caso contrario
+	 */
+	public Boolean isManagerTokenUser(String token) {
+		return hasRole(token, "MANAGER");
 	}
 
 	/**
