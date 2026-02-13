@@ -1,55 +1,55 @@
 # Pull Request: feat/frontend-refactor-2 → dev
 
-**Date:** 2026-02-13  
-**Source Branch:** `feat/frontend-refactor-2`  
-**Target Branch:** `dev`  
+**Fecha:** 2026-02-13  
+**Rama origen:** `feat/frontend-refactor-2`  
+**Rama destino:** `dev`  
 **Commits:** 62  
-**Files Modified:** 61  
-**Lines:** +7,902 / -748
+**Archivos modificados:** 61  
+**Líneas:** +7.902 / -748
 
 ---
 
-## 📋 Executive Summary
+## 📋 Resumen Ejecutivo
 
-This branch delivers a **comprehensive enhancement of the Bizflow ERP system** focusing on **server-side pagination**, **role-based access control for MANAGER role**, **dark mode theming**, **user settings page**, and **extensive UI/UX improvements**. The MANAGER role has been fully implemented following a supervisor model where managers can view all resources but only edit their own data.
+Esta rama entrega una **mejora integral del sistema Bizflow ERP** centrada en **paginación del lado del servidor**, **control de acceso basado en roles para el rol MANAGER**, **tema modo oscuro**, **página de ajustes de usuario**, y **extensas mejoras de UI/UX**. El rol MANAGER ha sido completamente implementado siguiendo un modelo de supervisor donde los managers pueden ver todos los recursos pero solo editar sus propios datos.
 
 ---
 
-## 🎯 Objectives Achieved
+## 🎯 Objetivos Alcanzados
 
-| Objective | Status |
+| Objetivo | Estado |
 |----------|--------|
-| Server-side pagination for expenses and payrolls | ✅ |
-| Reusable Pagination component | ✅ |
-| MANAGER role full implementation (supervisor model) | ✅ |
-| Dark mode theming with ThemeContext | ✅ |
-| Settings page with theme and pagination preferences | ✅ |
-| useItemsPerPage hook for pagination persistence | ✅ |
-| Dynamic role display in sidebar | ✅ |
-| Profile page enhancements | ✅ |
-| Linked employee/user indicators | ✅ |
-| Expense creator name display | ✅ |
-| WebSocket documentation | ✅ |
-| Role-based testing checklists | ✅ |
+| Paginación del lado del servidor para gastos y nóminas | ✅ |
+| Componente de paginación reutilizable | ✅ |
+| Implementación completa del rol MANAGER (modelo supervisor) | ✅ |
+| Tema modo oscuro con ThemeContext | ✅ |
+| Página de ajustes con preferencias de tema y paginación | ✅ |
+| Hook useItemsPerPage para persistencia de paginación | ✅ |
+| Visualización dinámica de rol en sidebar | ✅ |
+| Mejoras en página de perfil | ✅ |
+| Indicadores de empleado/usuario vinculado | ✅ |
+| Visualización del nombre del creador del gasto | ✅ |
+| Documentación de WebSocket | ✅ |
+| Checklists de testing por rol | ✅ |
 
 ---
 
-## 🔄 Server-Side Pagination
+## 🔄 Paginación del Lado del Servidor
 
-### Backend Implementation
+### Implementación Backend
 
-**New Endpoints:**
+**Nuevos Endpoints:**
 ```
 GET /api/v1/expenses/search?page=0&size=10&sortBy=expenseDate&sortDir=desc
 GET /api/v1/payroll/search?page=0&size=10&sortBy=payrollDate&sortDir=desc
 ```
 
-**Components Added:**
-- **JPA Specifications** for dynamic query building (`ExpenseSpecifications.java`, `PayrollSpecifications.java`)
-- **DTOs** for paginated responses (`PageResponse.java`, `ExpenseSearchRequest.java`, `PayrollSearchRequest.java`)
-- **DAO Extensions** with `JpaSpecificationExecutor` for specification-based queries
+**Componentes Añadidos:**
+- **JPA Specifications** para construcción dinámica de consultas (`ExpenseSpecifications.java`, `PayrollSpecifications.java`)
+- **DTOs** para respuestas paginadas (`PageResponse.java`, `ExpenseSearchRequest.java`, `PayrollSearchRequest.java`)
+- **Extensiones de DAO** con `JpaSpecificationExecutor` para consultas basadas en especificaciones
 
-**Files Modified:**
+**Archivos Modificados:**
 - `backend/src/main/java/io/sunbit/app/controller/ExpenseControllerImpl.java`
 - `backend/src/main/java/io/sunbit/app/controller/PayrollControllerImpl.java`
 - `backend/src/main/java/io/sunbit/app/service/ExpenseServiceImpl.java`
@@ -57,113 +57,113 @@ GET /api/v1/payroll/search?page=0&size=10&sortBy=payrollDate&sortDir=desc
 - `backend/src/main/java/io/sunbit/app/dao/ExpenseDao.java`
 - `backend/src/main/java/io/sunbit/app/dao/PayrollDao.java`
 
-### Frontend Implementation
+### Implementación Frontend
 
-**Reusable Pagination Component:**
-- Located at `frontend/src/components/Pagination.jsx`
-- Responsive design with mobile-friendly controls
-- Page size selector with configurable options
-- Navigation buttons (first, prev, next, last)
+**Componente de Paginación Reutilizable:**
+- Ubicado en `frontend/src/components/Pagination.jsx`
+- Diseño responsive con controles adaptados a móvil
+- Selector de tamaño de página con opciones configurables
+- Botones de navegación (primera, anterior, siguiente, última)
 
-**Pages Updated:**
-- `ExpensesPage.jsx` - Full server-side pagination
-- `PayrollPage.jsx` - Prepared for server pagination
-- `PositionsPage.jsx` - Improved data handling
+**Páginas Actualizadas:**
+- `ExpensesPage.jsx` - Paginación completa del lado del servidor
+- `PayrollPage.jsx` - Preparada para paginación del servidor
+- `PositionsPage.jsx` - Manejo de datos mejorado
 
 ---
 
-## 👔 MANAGER Role Implementation
+## 👔 Implementación del Rol MANAGER
 
-### Permission Model (Supervisor Model - Option A)
+### Modelo de Permisos (Modelo Supervisor - Opción A)
 
-The MANAGER role follows a **supervisor model** where managers have visibility into all company data but can only modify their own records.
+El rol MANAGER sigue un **modelo de supervisor** donde los managers tienen visibilidad de todos los datos de la empresa pero solo pueden modificar sus propios registros.
 
-| Module | ADMIN | MANAGER | USER |
+| Módulo | ADMIN | MANAGER | USER |
 |--------|-------|---------|------|
-| Dashboard | All expenses | All expenses | Own only |
-| Employees | Full CRUD | Read + Edit own | ❌ No access |
-| Positions | Full CRUD | Read only | ❌ No access |
-| Expenses | Full CRUD | View all, Edit own | CRUD own |
-| Payrolls | Full CRUD | View all | View own |
-| Users | Full CRUD | ❌ No access | ❌ No access |
-| Profile | ✅ | ✅ | ✅ |
-| Settings | ✅ | ✅ | ✅ |
-| Notifications | All expense notifs | Payroll only | Payroll only |
+| Dashboard | Todos los gastos | Todos los gastos | Solo propios |
+| Empleados | CRUD completo | Lectura + Edición propios | ❌ Sin acceso |
+| Cargos | CRUD completo | Solo lectura | ❌ Sin acceso |
+| Gastos | CRUD completo | Ver todos, Editar propios | CRUD propios |
+| Nóminas | CRUD completo | Ver todas | Ver propias |
+| Usuarios | CRUD completo | ❌ Sin acceso | ❌ Sin acceso |
+| Perfil | ✅ | ✅ | ✅ |
+| Ajustes | ✅ | ✅ | ✅ |
+| Notificaciones | Todas las de gastos | Solo nóminas | Solo nóminas |
 
-### Backend Changes
+### Cambios en Backend
 
 **JwtAuthenticationUtil.java:**
-- Added generic `hasRole(String token, String roleName)` method
-- Added `isManagerTokenUser(String token)` method
-- Refactored `isAdminTokenUser()` to use generic method
+- Añadido método genérico `hasRole(String token, String roleName)`
+- Añadido método `isManagerTokenUser(String token)`
+- Refactorizado `isAdminTokenUser()` para usar el método genérico
 
 **ExpenseControllerImpl.java:**
-- `getAllExpense` now allows `ROLE_ADMIN` and `ROLE_MANAGER`
+- `getAllExpense` ahora permite `ROLE_ADMIN` y `ROLE_MANAGER`
 
 **ExpenseServiceImpl.java:**
-- `findWithFilters()` checks for both admin and manager roles
-- Managers see all expenses, users see only their own
+- `findWithFilters()` verifica tanto el rol admin como manager
+- Los managers ven todos los gastos, los usuarios solo ven los suyos
 
 **PositionControllerImpl.java:**
-- GET endpoints allow `ROLE_MANAGER` (read-only access)
-- POST/PUT/DELETE remain `ROLE_ADMIN` only
+- Los endpoints GET permiten `ROLE_MANAGER` (acceso solo lectura)
+- POST/PUT/DELETE permanecen solo para `ROLE_ADMIN`
 
-### Frontend Changes
+### Cambios en Frontend
 
 **Layout.jsx:**
-- Fixed hardcoded "Administrador" text
-- Now displays dynamic `user.roleName` (Administrador, Manager, Usuario)
+- Corregido texto hardcodeado "Administrador"
+- Ahora muestra `user.roleName` dinámico (Administrador, Manager, Usuario)
 
 **DashboardPage.jsx:**
-- Added `isManager` check (`roleId === 3`)
-- Managers see all expenses in dashboard stats
+- Añadida verificación `isManager` (`roleId === 3`)
+- Los managers ven todos los gastos en las estadísticas del dashboard
 
 **ExpensesPage.jsx:**
-- Added `canViewAllExpenses` flag for admin/manager
-- Toggle "Ver todos/Mis gastos" visible for managers
-- Delete button only visible for admins
+- Añadido flag `canViewAllExpenses` para admin/manager
+- Toggle "Ver todos/Mis gastos" visible para managers
+- Botón de eliminar solo visible para admins
 
 ---
 
-## 🎨 Dark Mode & Theming
+## 🎨 Modo Oscuro y Temas
 
-### ThemeContext Implementation
+### Implementación de ThemeContext
 
-**New Files:**
-- `frontend/src/context/ThemeContext.jsx` - Theme state management
-- Provides `theme`, `toggleTheme`, `setTheme` functions
-- Persists theme preference in localStorage
+**Nuevos Archivos:**
+- `frontend/src/context/ThemeContext.jsx` - Gestión del estado del tema
+- Proporciona funciones `theme`, `toggleTheme`, `setTheme`
+- Persiste la preferencia de tema en localStorage
 
-**Integration:**
-- `App.jsx` wrapped with `ThemeProvider`
-- `tailwind.config.js` enabled `darkMode: 'class'`
-- Dark mode CSS variables in body styles
+**Integración:**
+- `App.jsx` envuelto con `ThemeProvider`
+- `tailwind.config.js` habilitado `darkMode: 'class'`
+- Variables CSS de modo oscuro en estilos del body
 
-**Components Updated:**
-- `Layout.jsx` - Dark mode variant classes
-- `Card.jsx` - Dark theme support
+**Componentes Actualizados:**
+- `Layout.jsx` - Clases variantes para modo oscuro
+- `Card.jsx` - Soporte para tema oscuro
 
 ---
 
-## ⚙️ Settings Page
+## ⚙️ Página de Ajustes
 
-**New File:** `frontend/src/pages/SettingsPage.jsx`
+**Nuevo Archivo:** `frontend/src/pages/SettingsPage.jsx`
 
-**Features:**
-- Theme toggle (Light/Dark mode)
-- Items per page selector (10, 20, 50, 100)
-- Visual preview of settings
+**Características:**
+- Toggle de tema (Modo claro/oscuro)
+- Selector de elementos por página (10, 20, 50, 100)
+- Vista previa visual de ajustes
 
-### useItemsPerPage Hook
+### Hook useItemsPerPage
 
-**New File:** `frontend/src/hooks/useItemsPerPage.js`
+**Nuevo Archivo:** `frontend/src/hooks/useItemsPerPage.js`
 
-**Features:**
-- Persistent pagination preference
-- Default value: 10 items
-- Synced with Settings page
+**Características:**
+- Preferencia de paginación persistente
+- Valor por defecto: 10 elementos
+- Sincronizado con la página de Ajustes
 
-**Pages Integrated:**
+**Páginas Integradas:**
 - ExpensesPage
 - PayrollPage
 - PositionsPage
@@ -172,105 +172,105 @@ The MANAGER role follows a **supervisor model** where managers have visibility i
 
 ---
 
-## 👤 Profile Page Enhancements
+## 👤 Mejoras en Página de Perfil
 
-**File:** `frontend/src/pages/ProfilePage.jsx`
+**Archivo:** `frontend/src/pages/ProfilePage.jsx`
 
-**New Information Displayed:**
-- Full user details (ID, email, role)
-- Linked employee indicator
-- Employee details if linked (ID, position, department)
+**Nueva Información Mostrada:**
+- Detalles completos del usuario (ID, email, rol)
+- Indicador de empleado vinculado
+- Detalles del empleado si está vinculado (ID, cargo, departamento)
 
 ---
 
-## 📊 UI/UX Improvements
+## 📊 Mejoras de UI/UX
 
-### Linked Entity Indicators
+### Indicadores de Entidades Vinculadas
 
 **EmployeesPage:**
-- ID column added
-- "User linked" indicator with icon
+- Columna ID añadida
+- Indicador "Usuario vinculado" con icono
 
 **UsersPage:**
-- ID column added  
-- "Employee linked" indicator with icon
+- Columna ID añadida  
+- Indicador "Empleado vinculado" con icono
 
-### Expense Creator Display
+### Visualización del Creador del Gasto
 
-**Components Updated:**
-- `DashboardPage.jsx` - Shows creator name in recent expenses
-- `ExpenseList.jsx` - Shows creator name column
+**Componentes Actualizados:**
+- `DashboardPage.jsx` - Muestra nombre del creador en gastos recientes
+- `ExpenseList.jsx` - Muestra columna con nombre del creador
 
-### iOS Font Size Fix
+### Corrección de Tamaño de Fuente en iOS
 
-**File:** `frontend/src/components/ui/Input.jsx`
-- Added `text-base` class to prevent iOS auto-zoom on focus
+**Archivo:** `frontend/src/components/ui/Input.jsx`
+- Añadida clase `text-base` para prevenir auto-zoom en iOS al enfocar
 
 ---
 
-## 📚 Documentation Added
+## 📚 Documentación Añadida
 
-### New Documentation Files
+### Nuevos Archivos de Documentación
 
-| File | Description |
-|------|-------------|
-| `docs/guides/frontend_testing_checklist_by_role.md` | Testing checklists for ADMIN, MANAGER, USER roles |
-| `docs/researching/websocket-realtime-notifications.md` | WebSocket architecture documentation |
-| `docs/researching/cloud-deployment-options.md` | Cloud deployment research |
-| `docs/makefile/makefile_commands_reference.md` | Makefile commands documentation |
-| `docs/sessions/session8_*.md` | Multiple session summaries |
+| Archivo | Descripción |
+|---------|-------------|
+| `docs/guides/frontend_testing_checklist_by_role.md` | Checklists de testing para roles ADMIN, MANAGER, USER |
+| `docs/researching/websocket-realtime-notifications.md` | Documentación de arquitectura WebSocket |
+| `docs/researching/cloud-deployment-options.md` | Investigación de opciones de despliegue en cloud |
+| `docs/makefile/makefile_commands_reference.md` | Documentación de comandos Makefile |
+| `docs/sessions/session8_*.md` | Múltiples resúmenes de sesión |
 
-### Testing Checklist Highlights
+### Puntos Destacados del Checklist de Testing
 
-Three test users defined:
+Tres usuarios de prueba definidos:
 1. **Ada Lovelace** (ADMIN) - `ada.lovelace@bizflowerp.com`
 2. **Nikola Tesla** (MANAGER) - `nikola.tesla@bizflowerp.com`
 3. **Ken Thompson** (USER) - `ken.thompson@bizflowerp.com`
 
-Each role has a detailed checklist covering:
-- Dashboard access and data visibility
-- CRUD operations per module
-- Navigation restrictions
-- Expected error messages (403 for unauthorized access)
+Cada rol tiene un checklist detallado que cubre:
+- Acceso al dashboard y visibilidad de datos
+- Operaciones CRUD por módulo
+- Restricciones de navegación
+- Mensajes de error esperados (403 para acceso no autorizado)
 
 ---
 
-## 🔧 Bug Fixes
+## 🔧 Corrección de Errores
 
-| Issue | Fix | File |
-|-------|-----|------|
-| NPE when editing user without password | Added null check | `ExpenseUserServiceImpl.java` |
-| Position duplication on edit | Fixed update logic | `PositionServiceImpl.java` |
-| Payroll duplication on edit | Fixed update logic | `PayrollServiceImpl.java` |
-| Seeder role assignment | Fixed to use password prefix | `seed_runner.py` |
-| Axios version warning | Restored ^1.13.2 | `package.json` |
+| Problema | Solución | Archivo |
+|----------|----------|---------|
+| NPE al editar usuario sin contraseña | Añadida verificación null | `ExpenseUserServiceImpl.java` |
+| Duplicación de cargo al editar | Corregida lógica de actualización | `PositionServiceImpl.java` |
+| Duplicación de nómina al editar | Corregida lógica de actualización | `PayrollServiceImpl.java` |
+| Asignación de roles en seeder | Corregido para usar prefijo de contraseña | `seed_runner.py` |
+| Warning de versión de Axios | Restaurado ^1.13.2 | `package.json` |
 
 ---
 
-## 🔒 Security Considerations
+## 🔒 Consideraciones de Seguridad
 
-### Role-Based Access Control
+### Control de Acceso Basado en Roles
 
-- **Backend:** Spring Security `@PreAuthorize` annotations on all endpoints
-- **Frontend:** Route guards with role checks
-- **API:** Token-based role validation in services
+- **Backend:** Anotaciones Spring Security `@PreAuthorize` en todos los endpoints
+- **Frontend:** Guardias de ruta con verificaciones de rol
+- **API:** Validación de roles basada en token en servicios
 
-### Permission Enforcement
+### Aplicación de Permisos
 
 | Endpoint | ADMIN | MANAGER | USER |
 |----------|-------|---------|------|
-| `GET /expenses` | ✅ All | ✅ All | Own only |
+| `GET /expenses` | ✅ Todos | ✅ Todos | Solo propios |
 | `POST /expenses` | ✅ | ✅ | ✅ |
-| `PUT /expenses` | ✅ All | Own only | Own only |
+| `PUT /expenses` | ✅ Todos | Solo propios | Solo propios |
 | `DELETE /expenses` | ✅ | ❌ | ❌ |
 | `GET /positions` | ✅ | ✅ | ❌ |
 | `POST /positions` | ✅ | ❌ | ❌ |
-| `GET /payroll` | ✅ All | ✅ All | `/my` only |
+| `GET /payroll` | ✅ Todos | ✅ Todos | Solo `/my` |
 | `GET /users` | ✅ | ❌ | ❌ |
 
 ---
 
-## 📦 Commits Summary (Last 7 from this session)
+## 📦 Resumen de Commits (Últimos 7 de esta sesión)
 
 ```
 88c2137 docs: update role testing checklist with MANAGER permissions and reduce test users
@@ -284,44 +284,44 @@ f299aed feat(expenses): allow MANAGER role to view all expenses
 
 ---
 
-## ✅ Testing Performed
+## ✅ Testing Realizado
 
-- [x] ADMIN role checklist - All tests passed
-- [x] MANAGER role checklist - All tests passed
-- [x] USER role checklist - All tests passed
-- [x] WebSocket notifications working (status 101)
-- [x] Server-side pagination verified
-- [x] Dark mode toggle functional
-- [x] Settings persistence verified
-- [x] Mobile responsive layout tested
+- [x] Checklist rol ADMIN - Todas las pruebas pasaron
+- [x] Checklist rol MANAGER - Todas las pruebas pasaron
+- [x] Checklist rol USER - Todas las pruebas pasaron
+- [x] Notificaciones WebSocket funcionando (status 101)
+- [x] Paginación del lado del servidor verificada
+- [x] Toggle de modo oscuro funcional
+- [x] Persistencia de ajustes verificada
+- [x] Layout responsive móvil testeado
 
 ---
 
-## 🚀 Deployment Notes
+## 🚀 Notas de Despliegue
 
-1. **Database:** No schema changes required
-2. **Backend:** Rebuild required for new role permissions
-3. **Frontend:** Standard build process
+1. **Base de datos:** No se requieren cambios de esquema
+2. **Backend:** Se requiere rebuild para los nuevos permisos de rol
+3. **Frontend:** Proceso de build estándar
 
 ```bash
 # Rebuild backend
 docker compose --profile dev up -d --build backend-dev
 
-# Rebuild frontend (if needed)
+# Rebuild frontend (si es necesario)
 docker compose --profile dev up -d --build frontend-dev
 ```
 
 ---
 
-## 📝 Breaking Changes
+## 📝 Cambios Incompatibles
 
-None. All changes are backward compatible.
+Ninguno. Todos los cambios son retrocompatibles.
 
 ---
 
-## 🔮 Future Considerations
+## 🔮 Consideraciones Futuras
 
-1. **Notification Preferences:** Allow users to configure which notifications they receive
-2. **MANAGER Delete Permissions:** Consider allowing managers to delete their own expenses
-3. **Audit Log:** Track who modified what and when
-4. **Role Hierarchy:** Implement role inheritance for cleaner permission management
+1. **Preferencias de Notificación:** Permitir a los usuarios configurar qué notificaciones reciben
+2. **Permisos de Eliminación para MANAGER:** Considerar permitir a los managers eliminar sus propios gastos
+3. **Log de Auditoría:** Registrar quién modificó qué y cuándo
+4. **Jerarquía de Roles:** Implementar herencia de roles para una gestión de permisos más limpia
