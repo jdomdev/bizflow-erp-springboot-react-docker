@@ -44,6 +44,8 @@ export default function ExpensesPage() {
   const [totalElements, setTotalElements] = useState(0);
 
   const isAdmin = user?.roleId === 1;
+  const isManager = user?.roleId === 3;
+  const canViewAllExpenses = isAdmin || isManager;
 
   // Debounced search
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -81,8 +83,8 @@ export default function ExpensesPage() {
       if (filters.startDate) params.append('startDate', filters.startDate + 'T00:00:00');
       if (filters.endDate) params.append('endDate', filters.endDate + 'T23:59:59');
       
-      // If not admin or viewing own expenses, the backend will filter by userId automatically
-      if (!isAdmin || viewMode === 'mine') {
+      // If not admin/manager or viewing own expenses, the backend will filter by userId automatically
+      if (!canViewAllExpenses || viewMode === 'mine') {
         params.append('userId', user.id.toString());
       }
       
@@ -99,7 +101,7 @@ export default function ExpensesPage() {
     } finally {
       setLoading(false);
     }
-  }, [currentPage, pageSize, debouncedSearch, filters, viewMode, user?.id, isAdmin]);
+  }, [currentPage, pageSize, debouncedSearch, filters, viewMode, user?.id, canViewAllExpenses]);
 
   useEffect(() => {
     fetchExpenses();
@@ -110,9 +112,9 @@ export default function ExpensesPage() {
     const searchFromUrl = searchParams.get('search');
     if (searchFromUrl) {
       setSearchTerm(searchFromUrl);
-      if (isAdmin) setViewMode('all');
+      if (canViewAllExpenses) setViewMode('all');
     }
-  }, [searchParams, isAdmin]);
+  }, [searchParams, canViewAllExpenses]);
 
   // Handle edit from navigation (e.g., from Dashboard)
   useEffect(() => {
@@ -243,8 +245,8 @@ export default function ExpensesPage() {
             {viewMode === 'all' ? 'Todos los Gastos' : 'Mis Gastos'}
           </h1>
           
-          {/* Admin Toggle */}
-          {isAdmin && (
+          {/* Admin/Manager Toggle */}
+          {canViewAllExpenses && (
             <div className="flex items-center bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
               <button
                 onClick={() => { setViewMode('mine'); setCurrentPage(0); }}
