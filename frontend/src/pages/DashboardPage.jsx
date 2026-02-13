@@ -47,11 +47,12 @@ function DashboardPage() {
       const userProfile = profileResponse.data;
       setProfile(userProfile);
       
-      // Admin (roleId 1) ve todos los gastos, usuarios normales solo los suyos
+      // Admin (roleId 1) y Manager (roleId 3) ven todos los gastos, usuarios normales solo los suyos
       const isAdmin = userProfile.roleIds?.includes(1);
+      const isManager = userProfile.roleIds?.includes(3);
       let expensesResponse;
       
-      if (isAdmin) {
+      if (isAdmin || isManager) {
         expensesResponse = await expenseService.getAll();
       } else {
         expensesResponse = await expenseService.getByUserId(userProfile.id);
