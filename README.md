@@ -73,7 +73,7 @@ Usuario de prueba: `ada.lovelace@bizflowerp.com`
 
 ## 📖 Documentación
 
-📚 **[Documentación completa →](https://bizflow-docs.netlify.app)**
+📚 **[Documentación completa →](https://bizflowerp.netlify.app)**
 
 O localmente en la carpeta [`/docs`](./docs/):
 - [Índice de documentación](./docs/INDEX.md)
