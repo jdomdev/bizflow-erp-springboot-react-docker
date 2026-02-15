@@ -5,7 +5,7 @@
 [![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk)](https://openjdk.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)](https://docs.docker.com/compose/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.txt)
 
 Sistema ERP moderno para gestión de gastos empresariales, empleados y nóminas.
 
