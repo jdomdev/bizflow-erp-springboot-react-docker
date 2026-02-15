@@ -26,7 +26,7 @@ Sistema ERP moderno para gestión de gastos empresariales, empleados y nóminas.
   </tr>
   <tr>
     <td><img src="docs/images/employees.png" alt="Empleados" width="400"/></td>
-    <td><img src="docs/images/dark-mode.png" alt="Modo Oscuro" width="400"/></td>
+    <td><img src="docs/images/dashboard-dark-mode.png" alt="Modo Oscuro" width="400"/></td>
   </tr>
 </table>
 

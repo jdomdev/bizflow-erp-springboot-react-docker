@@ -4,4 +4,4 @@ Añadir aquí las capturas de pantalla:
 - dashboard.png
 - expenses.png
 - employees.png
-- dark-mode.png
+- dashboard-dark-mode.png
