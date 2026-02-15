@@ -121,7 +121,7 @@ make stop             # Detener todos los servicios
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT - ver [LICENSE.txt](LICENSE.txt) para más detalles.
+Este proyecto está bajo la Licencia GNU General Public License v3.0 - ver [LICENSE.txt](LICENSE.txt) para más detalles.
 
 ---
 
