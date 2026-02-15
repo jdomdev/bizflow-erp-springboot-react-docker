@@ -92,7 +92,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: 'Licencia MIT',
+      message: 'Licencia GNU GPL v3',
       copyright: 'Copyright © 2025-present Bizflow ERP'
     },
 
