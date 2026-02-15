@@ -17,14 +17,14 @@ Authorization: Bearer <token>
 [
   {
     "id": 1,
-    "firstName": "Ada",
-    "lastName": "Lovelace",
+    "name": "Ada",
+    "surname": "Lovelace",
+    "birthDate": "1815-12-10T00:00:00",
     "email": "ada.lovelace@bizflowerp.com",
-    "phone": "+34 600 000 001",
     "positionId": 1,
-    "positionName": "CEO",
-    "department": "Dirección",
-    "userId": 1
+    "expenseUserId": 1,
+    "expenseUserName": "Ada Lovelace",
+    "expenseUserEmail": "ada.lovelace@bizflowerp.com"
   }
 ]
 ```
@@ -44,12 +44,11 @@ Authorization: Bearer <token>
 Content-Type: application/json
 
 {
-  "firstName": "Grace",
-  "lastName": "Hopper",
+  "name": "Grace",
+  "surname": "Hopper",
+  "birthDate": "1906-12-09T00:00:00",
   "email": "grace.hopper@bizflowerp.com",
-  "phone": "+34 600 000 010",
-  "positionId": 2,
-  "userId": null
+  "positionId": 2
 }
 ```
 
@@ -63,10 +62,10 @@ Authorization: Bearer <token>
 Content-Type: application/json
 
 {
-  "firstName": "Grace",
-  "lastName": "Hopper",
+  "name": "Grace",
+  "surname": "Hopper",
+  "birthDate": "1906-12-09T00:00:00",
   "email": "grace.hopper@bizflowerp.com",
-  "phone": "+34 600 000 010",
   "positionId": 3
 }
 ```
