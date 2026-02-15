@@ -5,6 +5,26 @@ export default defineConfig({
   description: 'Documentación del sistema ERP Bizflow',
   lang: 'es-ES',
   
+  // Excluir carpetas internas del build
+  srcExclude: [
+    'sessions/**',
+    'backups/**',
+    'planning/**',
+    'process/**',
+    'json/**',
+    'postman/**',
+    'researching/**',
+    'entity/**',
+    'spring/**',
+    'docker/**',
+    'makefile/**',
+    'guides/**',
+    'README_FULL.md',
+    'README.md',
+    'INDEX.md',
+    'credentials_system.md'
+  ],
+
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
