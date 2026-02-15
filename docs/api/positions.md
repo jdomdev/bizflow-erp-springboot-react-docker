@@ -18,13 +18,13 @@ Authorization: Bearer <token>
   {
     "id": 1,
     "name": "CEO",
-    "department": "Dirección",
+    "description": "Chief Executive Officer",
     "baseSalary": 8000.00
   },
   {
     "id": 2,
     "name": "CTO",
-    "department": "Tecnología",
+    "description": "Chief Technology Officer",
     "baseSalary": 7000.00
   }
 ]
@@ -48,7 +48,7 @@ Content-Type: application/json
 
 {
   "name": "Data Scientist",
-  "department": "Tecnología",
+  "description": "Analista de datos y machine learning",
   "baseSalary": 4500.00
 }
 ```
@@ -61,7 +61,7 @@ Content-Type: application/json
 {
   "id": 15,
   "name": "Data Scientist",
-  "department": "Tecnología",
+  "description": "Analista de datos y machine learning",
   "baseSalary": 4500.00
 }
 ```
@@ -75,7 +75,7 @@ Content-Type: application/json
 
 {
   "name": "Senior Data Scientist",
-  "department": "Tecnología",
+  "description": "Analista de datos senior y machine learning",
   "baseSalary": 5500.00
 }
 ```
