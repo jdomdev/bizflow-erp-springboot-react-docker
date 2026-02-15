@@ -81,8 +81,8 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/erp_dev_db
 spring.datasource.username=erp_user
 spring.datasource.password=tu_password
 
-jwt.secret=tu_clave_secreta_muy_larga_de_al_menos_32_caracteres
-jwt.expiration=86400000
+app.jwt.secret=tu_clave_secreta_muy_larga_de_al_menos_32_caracteres
+app.jwt.expiration=86400000
 ```
 
 ### Ejecutar backend
