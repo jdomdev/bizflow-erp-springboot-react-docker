@@ -25,6 +25,11 @@ export default defineConfig({
     'credentials_system.md'
   ],
 
+  // Ignorar enlaces localhost durante el build
+  ignoreDeadLinks: [
+    /^http:\/\/localhost/
+  ],
+
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
