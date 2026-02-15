@@ -18,13 +18,13 @@ Authorization: Bearer <token>
   {
     "id": 1,
     "name": "CEO",
-    "description": "Chief Executive Officer",
+    "description": "Director Ejecutivo",
     "baseSalary": 8000.00
   },
   {
     "id": 2,
     "name": "CTO",
-    "description": "Chief Technology Officer",
+    "description": "Director de Tecnología",
     "baseSalary": 7000.00
   }
 ]
