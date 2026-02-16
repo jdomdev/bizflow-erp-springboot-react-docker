@@ -11,8 +11,6 @@ Sistema ERP moderno para gestión de gastos empresariales, empleados y nóminas.
 
 ## 📸 Screenshots
 
-### Aplicación Web
-
 <table>
   <tr>
     <td align="center"><strong>Dashboard</strong></td>
@@ -29,41 +27,6 @@ Sistema ERP moderno para gestión de gastos empresariales, empleados y nóminas.
   <tr>
     <td><img src="docs/images/app/employees.png" alt="Empleados" width="400"/></td>
     <td><img src="docs/images/app/dashboard-dark-mode.png" alt="Modo Oscuro" width="400"/></td>
-  </tr>
-</table>
-
-### Documentación
-
-<table>
-  <tr>
-    <td align="center"><strong>Home</strong></td>
-    <td align="center"><strong>Arquitectura</strong></td>
-  </tr>
-  <tr>
-    <td><img src="docs/images/docs/home.png" alt="Docs Home" width="400"/></td>
-    <td><img src="docs/images/docs/architecture.png" alt="Arquitectura" width="400"/></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Guía Docker</strong></td>
-    <td align="center"><strong>API Reference</strong></td>
-  </tr>
-  <tr>
-    <td><img src="docs/images/docs/docker-guide.png" alt="Docker Guide" width="400"/></td>
-    <td><img src="docs/images/docs/api-reference.png" alt="API Reference" width="400"/></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>API - Employees</strong></td>
-    <td align="center"><strong>API - Expenses</strong></td>
-  </tr>
-  <tr>
-    <td><img src="docs/images/docs/api-reference-2.png" alt="API Employees" width="400"/></td>
-    <td><img src="docs/images/docs/api-reference-3.png" alt="API Expenses" width="400"/></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2"><strong>API - Payroll</strong></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2"><img src="docs/images/docs/api-reference-4.png" alt="API Payroll" width="400"/></td>
   </tr>
 </table>
 
@@ -111,6 +74,25 @@ Usuario de prueba: `ada.lovelace@bizflowerp.com`
 ## 📖 Documentación
 
 [![Netlify](https://img.shields.io/badge/Docs-Netlify-00C7B7?logo=netlify&logoColor=white)](https://bizflowerp.netlify.app) **[Documentación completa desplegada en Netlify →](https://bizflowerp.netlify.app)**
+
+<table>
+  <tr>
+    <td align="center"><strong>Home</strong></td>
+    <td align="center"><strong>Arquitectura</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/docs/home.png" alt="Docs Home" width="400"/></td>
+    <td><img src="docs/images/docs/architecture.png" alt="Arquitectura" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Guía Docker</strong></td>
+    <td align="center"><strong>API Reference</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/docs/docker-guide.png" alt="Docker Guide" width="400"/></td>
+    <td><img src="docs/images/docs/api-reference.png" alt="API Reference" width="400"/></td>
+  </tr>
+</table>
 
 O localmente en la carpeta [`/docs`](./docs/):
 - [Índice de documentación](./docs/INDEX.md)
