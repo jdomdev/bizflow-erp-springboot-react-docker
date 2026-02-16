@@ -33,8 +33,8 @@ public class OpenApiConfig {
                     .name("Bizflow ERP Team")
                     .email("support@bizflowerp.com"))
                 .license(new License()
-                    .name("MIT License")
-                    .url("https://opensource.org/licenses/MIT")))
+                    .name("GNU General Public License v3.0")
+                    .url("https://www.gnu.org/licenses/gpl-3.0.html")))
             .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
             .components(new Components()
                 .addSecuritySchemes(securitySchemeName,
