@@ -35,7 +35,7 @@ jobs:
         sed -i 's/^[[:space:]]*//' .env.test
     
     - name: Start services with docker-compose
-      run: docker compose --profile test up -d
+      run: docker compose --profile test up -d --build
     
     - name: Wait for services to be healthy
       run: |
