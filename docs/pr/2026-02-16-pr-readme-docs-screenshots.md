@@ -190,5 +190,5 @@ O localmente en /docs/:
 ## 📝 Notas
 
 - Las carpetas se nombraron de forma genérica (`app/`, `docs/`) para no depender de nombres de plataformas específicas (Netlify, Vercel, etc.)
-- Se mantuvieron solo 4 capturas de API Reference para no sobrecargar el README
+- Se mantuvieron solo 4 capturas de la documentación (incluida 1 de API Reference) para no sobrecargar el README
 - El orden del stack tecnológico ahora refleja mejor la jerarquía: lenguaje → framework → librerías
