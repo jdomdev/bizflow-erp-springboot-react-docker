@@ -85,12 +85,10 @@ public class ExpenseServiceImpl implements IExpenseService {
 	}
 
 	@Override
-	@Transactional
 	public List<Expense> findAll() throws Exception {
 		try {
-			List<Expense> expenses = expenseDao.findAll();
-			expenses.forEach(this::loadExpenseUser);
-			return expenses;
+			// Use JOIN FETCH to eagerly load expenseUser and avoid LazyInitializationException
+			return expenseDao.findAllWithUser();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());

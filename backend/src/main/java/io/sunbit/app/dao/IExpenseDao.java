@@ -56,4 +56,11 @@ public interface IExpenseDao extends JpaRepository<Expense, Long>, JpaSpecificat
 		    @Param("startDate") LocalDateTime startDate,
 		    @Param("endDate") LocalDateTime endDate,
 		    Pageable pageable);
+
+		/**
+		 * Fetches all expenses with their associated expenseUser eagerly loaded.
+		 * This prevents LazyInitializationException when serializing to JSON.
+		 */
+		@Query("SELECT e FROM Expense e JOIN FETCH e.expenseUser")
+		List<Expense> findAllWithUser();
 }
