@@ -85,7 +85,7 @@ Se creó una nueva sección **🌍 Entornos** en el README con tabla consolidada
 
 | Entorno | Frontend | Backend API | Base de datos | Comando |
 |---------|----------|-------------|---------------|---------|
-| **Dev** | http://localhost:3000 | http://localhost:8080/api/v1 | localhost:5432 | `make dev` |
+| **Dev** | http://localhost:8085 | http://localhost:8082/api/v1 | localhost:5433 | `make dev` |
 | **Test** | http://localhost:8086 | http://localhost:8083/api/v1 | localhost:5434 | `make up-test` |
 | **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make prod` |
 
@@ -210,11 +210,21 @@ curl -X POST http://localhost:8181/api/v1/auth/login \
 
 ### Verificación de puertos en docker-compose.yml
 
+**Entorno Development:**
+
+| Servicio | Línea | Puerto |
+|----------|-------|--------|
+| frontend-dev | 348 | `8085:80` |
+| backend-dev | 218 | `8082:8080` |
+| erp-dev-db-container | 132 | `5433:5432` |
+
+**Entorno Test:**
+
 | Servicio | Línea | Puerto |
 |----------|-------|--------|
 | frontend-test | 368 | `8086:80` |
-| backend-test | 230 | `8083:8080` |
-| erp-test-db | 157 | `5434:5432` |
+| backend-test | 235 | `8083:8080` |
+| erp-test-db-container | 157 | `5434:5432` |
 
 ---
 
@@ -226,7 +236,7 @@ curl -X POST http://localhost:8181/api/v1/auth/login \
 │                    DEV                          │
 ├─────────────┬─────────────┬─────────────────────┤
 │  Frontend   │   Backend   │     Database        │
-│   :3000     │   :8080     │      :5432          │
+│   :8085     │   :8082     │      :5433          │
 ├─────────────┴─────────────┴─────────────────────┤
 │  pgAdmin: :5050                                 │
 └─────────────────────────────────────────────────┘
