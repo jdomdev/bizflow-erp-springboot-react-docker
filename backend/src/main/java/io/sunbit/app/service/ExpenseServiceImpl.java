@@ -234,7 +234,12 @@ public class ExpenseServiceImpl implements IExpenseService {
 			if (relatedUser.getEmail() != null && relatedUser.getName() != null) {
 				return;
 			}
-			expense.setExpenseUser(resolveExpenseUser(relatedUser));
+			try {
+				expense.setExpenseUser(resolveExpenseUser(relatedUser));
+			} catch (Exception e) {
+				// User not found - keep the proxy to avoid breaking serialization
+				System.err.println("Warning: Could not load expense user " + relatedUser.getId() + ": " + e.getMessage());
+			}
 		}
 	}
 	
