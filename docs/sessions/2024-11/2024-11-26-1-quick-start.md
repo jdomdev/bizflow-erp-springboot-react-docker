@@ -27,7 +27,7 @@ cd backend
 # Editar application.properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/expense_note_app
 spring.datasource.username=postgres
-spring.datasource.password=<PASSWORD>
+spring.datasource.password=tu_password
 app.jwt.secret=tu-clave-secreta-min-32-caracteres
 
 # Ejecutar
