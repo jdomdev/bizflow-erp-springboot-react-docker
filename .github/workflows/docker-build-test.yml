@@ -77,13 +77,31 @@ jobs:
         
         # Test GET /api/v1/employee/
         echo "Testing GET /api/v1/employee/..."
-        curl -f -H "Authorization: Bearer $TOKEN" \
-          http://localhost:8083/api/v1/employee/ || exit 1
+        EMPLOYEE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
+          http://localhost:8083/api/v1/employee/ || echo "000")
+        EMPLOYEE_CODE=$(echo "$EMPLOYEE_RESPONSE" | tail -n1)
+        echo "Employee response code: $EMPLOYEE_CODE"
+        if [ "$EMPLOYEE_CODE" -ge 500 ] || [ "$EMPLOYEE_CODE" = "000" ]; then
+          echo "Employee endpoint returned server error, checking logs..."
+          docker logs erp-backend-test-container --tail 100
+          echo "Response body:"
+          echo "$EMPLOYEE_RESPONSE" | head -n -1
+          exit 1
+        fi
         
         # Test GET /api/v1/position/
         echo "Testing GET /api/v1/position/..."
-        curl -f -H "Authorization: Bearer $TOKEN" \
-          http://localhost:8083/api/v1/position/ || exit 1
+        POSITION_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
+          http://localhost:8083/api/v1/position/ || echo "000")
+        POSITION_CODE=$(echo "$POSITION_RESPONSE" | tail -n1)
+        echo "Position response code: $POSITION_CODE"
+        if [ "$POSITION_CODE" -ge 500 ] || [ "$POSITION_CODE" = "000" ]; then
+          echo "Position endpoint returned server error, checking logs..."
+          docker logs erp-backend-test-container --tail 100
+          echo "Response body:"
+          echo "$POSITION_RESPONSE" | head -n -1
+          exit 1
+        fi
         
         # Test GET /api/v1/payroll/ (may return empty if no data seeded)
         echo "Testing GET /api/v1/payroll/..."
