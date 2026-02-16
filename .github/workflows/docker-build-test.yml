@@ -34,6 +34,13 @@ jobs:
         # Remove leading whitespace from env file
         sed -i 's/^[[:space:]]*//' .env.test
     
+    - name: Build base images
+      run: |
+        docker build -t bizflow/backend-builder:local -f docker/base/backend-builder.Dockerfile docker/base/
+        docker build -t bizflow/backend-runtime:local -f docker/base/backend-runtime.Dockerfile docker/base/
+        docker build -t bizflow/frontend-builder:local -f docker/base/frontend-builder.Dockerfile docker/base/
+        docker build -t bizflow/frontend-runtime:local -f docker/base/frontend-runtime.Dockerfile docker/base/
+    
     - name: Start services with docker-compose
       run: docker compose --profile test up -d --build
     
