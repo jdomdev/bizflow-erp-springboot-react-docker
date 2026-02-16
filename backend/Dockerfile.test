@@ -1,0 +1,20 @@
+# syntax=docker/dockerfile:1.5
+
+ARG BACKEND_BUILDER_IMAGE=bizflow/backend-builder:local
+
+FROM ${BACKEND_BUILDER_IMAGE}
+
+WORKDIR /workspace
+
+# Copiar Maven wrapper y preparar el repositorio local
+COPY .mvn ./.mvn
+COPY mvnw ./mvnw
+COPY pom.xml ./
+RUN chmod +x mvnw \
+	&& ./mvnw -B -ntp dependency:go-offline
+
+# Incluir el código fuente necesario para los tests
+COPY src ./src
+
+# Entrada por defecto: ejecución de la suite de tests
+ENTRYPOINT ["./mvnw", "test"]

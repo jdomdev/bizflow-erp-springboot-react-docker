@@ -1,4 +1,4 @@
-# ExpenseNote App - Frontend
+# Bizflow ERP - Frontend
 
 Frontend moderno, profesional y responsivo para el Sistema de Control de Gastos Empresariales.
 
@@ -67,6 +67,9 @@ frontend/
 │   ├── App.jsx             # Componente principal
 │   ├── main.jsx            # Entry point
 │   └── index.css           # Estilos globales
+├── config/
+│   └── nginx/
+│       └── nginx.conf      # Configuración para el contenedor Nginx
 ├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
@@ -147,6 +150,10 @@ http://localhost:8080/api/v1
 - `GET /payroll` - Obtener nóminas
 - `GET /employees` - Obtener empleados
 
+## 🌐 Despliegue en Nginx
+
+El contenedor runtime usa la configuración ubicada en `config/nginx/nginx.conf`. Si necesitas variaciones (por ejemplo, staging o producción), duplica ese archivo en el mismo directorio y actualiza el Dockerfile o los scripts de deploy para seleccionar la variante adecuada.
+
 ## 🧪 Testing
 
 (En desarrollo)
@@ -180,7 +187,7 @@ Este proyecto está bajo la licencia GPLv3.
 
 ## 👨‍💻 Autores
 
-- ExpenseNote App Team
+- Bizflow ERP Team
 
 ---
 

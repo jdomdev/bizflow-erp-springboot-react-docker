@@ -1,101 +1,385 @@
-version: '3.9'
+x-db-health: &db-health
+  interval: 10s
+  timeout: 5s
+  retries: 5
+
+x-db-common: &db-common
+  image: postgres:16-alpine
+  restart: unless-stopped
+
+x-backend-health: &backend-health
+  test:
+    - CMD
+    - curl
+    - -f
+    - http://localhost:8080/actuator/health
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 40s
+
+x-backend-common: &backend-common
+  image: bizflow-erp-springboot-react-docker-backend:latest
+  build:
+    context: ./backend
+    dockerfile: Dockerfile
+    args:
+      BACKEND_BUILDER_IMAGE: bizflow/backend-builder:local
+      BACKEND_RUNTIME_IMAGE: bizflow/backend-runtime:local
+  healthcheck: *backend-health
+  restart: unless-stopped
+  volumes:
+    - ./backend/logs:/app/logs
+
+x-frontend-build: &frontend-build
+  context: ./frontend
+  dockerfile: Dockerfile
+
+x-frontend-health: &frontend-health
+  test:
+    - CMD
+    - wget
+    - --quiet
+    - --tries=1
+    - --spider
+    - http://localhost/health
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 10s
+
+x-frontend-common: &frontend-common
+  healthcheck: *frontend-health
+  restart: unless-stopped
+
+x-seed-entrypoint: &seed-entrypoint
+  - /bin/sh
+  - -c
+  - |
+    apk add --no-cache bash curl >/dev/null 2>&1
+    if [ -n "$${REGISTER_USERS_SEED_FILE}" ] || [ -f /workspace/scripts/secrets/register_users_payloads.jsonl ]; then
+      bash /workspace/scripts/users/register_users.sh
+    else
+      echo "REGISTER_USERS_SEED_FILE no definido y no existe scripts/secrets/register_users_payloads.jsonl; se omite el sembrado de usuarios."
+    fi
+
+x-seed-common: &seed-common
+  image: alpine:3.19
+  volumes:
+    - ./scripts:/workspace/scripts:ro
+  entrypoint: *seed-entrypoint
+  networks:
+    - bizflow_erp_network
+  restart: "no"
+
+x-api-seeder-common: &api-seeder-common
+  build:
+    context: ./scripts/seeds
+    dockerfile: Dockerfile
+  networks:
+    - bizflow_erp_network
+  restart: "no"
+  volumes:
+    - ./scripts/secrets:/secrets:ro
+
+x-prod-env: &prod-env
+  env_file:
+    - .env.prod
+
+x-dev-env: &dev-env
+  env_file:
+    - .env.dev
+
+x-test-env: &test-env
+  env_file:
+    - .env.test
 
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:16-alpine
-    container_name: expense_db
+  erp-prod-db-container:
+    <<: [*db-common, *prod-env]
+    profiles: ["prod"]
+    container_name: erp-prod-db-container
     environment:
-      POSTGRES_DB: expense_note_app
-      POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: erp_prod_db
+      POSTGRES_USER: erp_prod_user
+    ports:
+      - "5442:5432"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - ./sql/01_init_prod.sql:/docker-entrypoint-initdb.d/01_init_prod.sql:ro
+      - ./sql/common:/docker-entrypoint-initdb.d/common:ro
+      - ./sql/prod:/docker-entrypoint-initdb.d/prod:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/_legacy_dev_prod:ro
+      - ./sql/_legacy_prod:/docker-entrypoint-initdb.d/_legacy_prod:ro
+    healthcheck:
+      <<: *db-health
+      test:
+        - CMD-SHELL
+        - pg_isready -U erp_prod_user
+    networks:
+      bizflow_erp_network:
+        aliases:
+          - prod-db
+
+  erp-dev-db-container:
+    <<: [*db-common, *dev-env]
+    profiles: ["dev"]
+    container_name: erp-dev-db-container
+    environment:
+      POSTGRES_DB: erp_dev_db
+      POSTGRES_USER: erp_dev_user
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./sql/01_init_dev.sql:/docker-entrypoint-initdb.d/01_init_dev.sql:ro
+      - ./sql/common:/docker-entrypoint-initdb.d/common:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/dev:/docker-entrypoint-initdb.d/dev:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      <<: *db-health
+      test:
+        - CMD-SHELL
+        - pg_isready -U erp_dev_user
     networks:
-      - expense_network
-    restart: unless-stopped
+      bizflow_erp_network:
+        aliases:
+          - dev-db
 
-  # pgAdmin - PostgreSQL GUI (optional)
+  erp-test-db-container:
+    <<: [*db-common, *test-env]
+    profiles: ["test"]
+    container_name: erp-test-db-container
+    environment:
+      POSTGRES_DB: erp_test_db
+      POSTGRES_USER: erp_test_user
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+      - ./sql/01_init_test.sql:/docker-entrypoint-initdb.d/01_init_test.sql:ro
+      - ./sql/common:/docker-entrypoint-initdb.d/common:ro
+      - ./sql/_legacy_dev_prod:/docker-entrypoint-initdb.d/dev_prod:ro
+      - ./sql/test:/docker-entrypoint-initdb.d/test:ro
+    healthcheck:
+      <<: *db-health
+      test:
+        - CMD-SHELL
+        - pg_isready -U erp_test_user -d erp_test_db
+    networks:
+      bizflow_erp_network:
+        aliases:
+          - test-db
+
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: expense_pgadmin
+    container_name: bizflowerp_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
     depends_on:
-      - postgres
+      - erp-prod-db-container
+      - erp-dev-db-container
+      - erp-test-db-container
     networks:
-      - expense_network
+      bizflow_erp_network:
+        aliases:
+          - pgadmin
     restart: unless-stopped
     profiles:
       - debug
 
-  # Spring Boot Backend
-  backend:
-    build:
-      context: ./backend-springboot
-      dockerfile: Dockerfile
-    container_name: expense_backend
+  backend-prod:
+    <<: [*backend-common, *prod-env]
+    profiles: ["prod"]
+    container_name: erp-backend-prod-container
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/expense_note_app
-      SPRING_DATASOURCE_USERNAME: ${DB_USER:-postgres}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-postgres}
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      APP_JWT_SECRET: ${JWT_SECRET:-kN8x9mK2p3L5q6R7sT8uV9wX0yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sTuVwXyZ1}
-      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE:-prod}
+      SPRING_PROFILES_ACTIVE: prod
     ports:
-      - "8080:8080"
+      - "8181:8080"
     depends_on:
-      postgres:
+      erp-prod-db-container:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
     networks:
-      - expense_network
-    restart: unless-stopped
-    volumes:
-      - ./backend-springboot/logs:/app/logs
+      bizflow_erp_network:
+        aliases:
+          - backend
+          - backend-prod
 
-  # React Frontend
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: expense_frontend
+  backend-dev:
+    <<: [*backend-common, *dev-env]
+    profiles: ["dev"]
+    container_name: erp-backend-dev-container
     environment:
-      VITE_API_URL: http://backend:8080
+      SPRING_PROFILES_ACTIVE: dev
     ports:
-      - "80:80"
+      - "8082:8080"
     depends_on:
-      backend:
+      erp-dev-db-container:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     networks:
-      - expense_network
-    restart: unless-stopped
+      bizflow_erp_network:
+        aliases:
+          - backend
+          - backend-dev
+
+  backend-test:
+    <<: [*backend-common, *test-env]
+    profiles: ["test"]
+    container_name: erp-backend-test-container
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+    ports:
+      - "8083:8080"
+    depends_on:
+      erp-test-db-container:
+        condition: service_healthy
+    networks:
+      bizflow_erp_network:
+        aliases:
+          - backend
+          - backend-test
+
+  seed-expense-users-prod:
+    <<: [*seed-common, *prod-env]
+    profiles: ["prod"]
+    container_name: erp-seed-expense-users-prod
+    depends_on:
+      backend-prod:
+        condition: service_healthy
+    environment:
+      API_URL: http://backend-prod:8080/api/v1/auth/signup
+
+  seed-expense-users-dev:
+    <<: [*seed-common, *dev-env]
+    profiles: ["dev"]
+    container_name: erp-seed-expense-users-dev
+    depends_on:
+      backend-dev:
+        condition: service_healthy
+    environment:
+      API_URL: http://backend-dev:8080/api/v1/auth/signup
+
+  seed-expense-users-test:
+    <<: [*seed-common, *test-env]
+    profiles: ["test"]
+    container_name: erp-seed-expense-users-test
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    environment:
+      API_URL: http://backend-test:8080/api/v1/auth/signup
+
+  # API-based seeders (Phase 2) - Python-based seed runner
+  api-seeder-prod:
+    <<: [*api-seeder-common, *prod-env]
+    profiles: ["prod", "seed-prod"]
+    container_name: erp-api-seeder-prod
+    depends_on:
+      backend-prod:
+        condition: service_healthy
+    environment:
+      SEED_ENV: prod
+      API_URL: http://backend-prod:8080
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
+
+  api-seeder-dev:
+    <<: [*api-seeder-common, *dev-env]
+    profiles: ["dev", "seed-dev"]
+    container_name: erp-api-seeder-dev
+    depends_on:
+      backend-dev:
+        condition: service_healthy
+    environment:
+      SEED_ENV: dev
+      API_URL: http://backend-dev:8080
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
+
+  api-seeder-test:
+    <<: [*api-seeder-common, *test-env]
+    profiles: ["test", "seed-test"]
+    container_name: erp-api-seeder-test
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    environment:
+      SEED_ENV: test
+      API_URL: http://backend-test:8080
+      ADMIN_EMAIL: ada.lovelace@bizflowerp.com
+      WAIT_SECONDS: "60"
+
+  frontend-prod:
+    <<: *frontend-common
+    profiles: ["prod"]
+    container_name: erp-frontend-prod-container
+    build:
+      <<: *frontend-build
+      args:
+        VITE_API_URL: http://localhost:8081/api/v1
+        FRONTEND_BUILDER_IMAGE: bizflow/frontend-builder:local
+        FRONTEND_RUNTIME_IMAGE: bizflow/frontend-runtime:local
+    environment:
+      VITE_API_URL: http://localhost:8081/api/v1
+    ports:
+      - "8080:80"
+    depends_on:
+      backend-prod:
+        condition: service_healthy
+    networks:
+      - bizflow_erp_network
+
+  frontend-dev:
+    <<: *frontend-common
+    profiles: ["dev"]
+    container_name: erp-frontend-dev-container
+    build:
+      <<: *frontend-build
+      args:
+        VITE_API_URL: http://localhost:8082/api/v1
+        FRONTEND_BUILDER_IMAGE: bizflow/frontend-builder:local
+        FRONTEND_RUNTIME_IMAGE: bizflow/frontend-runtime:local
+    environment:
+      VITE_API_URL: http://localhost:8082/api/v1
+    ports:
+      - "8085:80"
+    depends_on:
+      backend-dev:
+        condition: service_healthy
+    networks:
+      - bizflow_erp_network
+
+  frontend-test:
+    <<: *frontend-common
+    profiles: ["test"]
+    container_name: erp-frontend-test-container
+    build:
+      <<: *frontend-build
+      args:
+        VITE_API_URL: http://localhost:8083/api/v1
+        FRONTEND_BUILDER_IMAGE: bizflow/frontend-builder:local
+        FRONTEND_RUNTIME_IMAGE: bizflow/frontend-runtime:local
+    environment:
+      VITE_API_URL: http://localhost:8083/api/v1
+    ports:
+      - "8086:80"
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    networks:
+      - bizflow_erp_network
 
 volumes:
-  postgres_data:
+  postgres_prod_data:
+    driver: local
+  postgres_dev_data:
+    driver: local
+  postgres_test_data:
     driver: local
 
 networks:
-  expense_network:
+  bizflow_erp_network:
     driver: bridge

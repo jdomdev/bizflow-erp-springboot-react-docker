@@ -1,0 +1,22 @@
+[
+  {"name": "Ada", "surname": "Lovelace", "email": "ada.lovelace@bizflowerp.com", "birthDate": "1990-01-15T00:00:00", "positionId": 1},
+  {"name": "Alan", "surname": "Turing", "email": "alan.turing@bizflowerp.com", "birthDate": "1988-06-23T00:00:00", "positionId": 1},
+  {"name": "Grace", "surname": "Hopper", "email": "grace.hopper@bizflowerp.com", "birthDate": "1985-12-09T00:00:00", "positionId": 2},
+  {"name": "Marie", "surname": "Curie", "email": "marie.curie@bizflowerp.com", "birthDate": "1987-11-07T00:00:00", "positionId": 2},
+  {"name": "Albert", "surname": "Einstein", "email": "albert.einstein@bizflowerp.com", "birthDate": "1979-03-14T00:00:00", "positionId": 3},
+  {"name": "Nikola", "surname": "Tesla", "email": "nikola.tesla@bizflowerp.com", "birthDate": "1986-07-10T00:00:00", "positionId": 3},
+  {"name": "Rosalind", "surname": "Franklin", "email": "rosalind.franklin@bizflowerp.com", "birthDate": "1990-07-25T00:00:00", "positionId": 4},
+  {"name": "Stephen", "surname": "Hawking", "email": "stephen.hawking@bizflowerp.com", "birthDate": "1982-01-08T00:00:00", "positionId": 4},
+  {"name": "Richard", "surname": "Feynman", "email": "richard.feynman@bizflowerp.com", "birthDate": "1988-05-11T00:00:00", "positionId": 5},
+  {"name": "Linus", "surname": "Torvalds", "email": "linus.torvalds@bizflowerp.com", "birthDate": "1989-12-28T00:00:00", "positionId": 5},
+  {"name": "Margaret", "surname": "Hamilton", "email": "margaret.hamilton@bizflowerp.com", "birthDate": "1986-08-17T00:00:00", "positionId": 6},
+  {"name": "Katherine", "surname": "Johnson", "email": "katherine.johnson@bizflowerp.com", "birthDate": "1988-08-26T00:00:00", "positionId": 6},
+  {"name": "Tim", "surname": "Berners-Lee", "email": "tim.bernerslee@bizflowerp.com", "birthDate": "1985-06-08T00:00:00", "positionId": 7},
+  {"name": "Donald", "surname": "Knuth", "email": "donald.knuth@bizflowerp.com", "birthDate": "1988-01-10T00:00:00", "positionId": 7},
+  {"name": "Dennis", "surname": "Ritchie", "email": "dennis.ritchie@bizflowerp.com", "birthDate": "1981-09-09T00:00:00", "positionId": 8},
+  {"name": "Ken", "surname": "Thompson", "email": "ken.thompson@bizflowerp.com", "birthDate": "1983-02-04T00:00:00", "positionId": 8},
+  {"name": "Edsger", "surname": "Dijkstra", "email": "edsger.dijkstra@bizflowerp.com", "birthDate": "1990-05-11T00:00:00", "positionId": 9},
+  {"name": "John", "surname": "von Neumann", "email": "john.vonneumann@bizflowerp.com", "birthDate": "1983-12-28T00:00:00", "positionId": 9},
+  {"name": "Claude", "surname": "Shannon", "email": "claude.shannon@bizflowerp.com", "birthDate": "1986-04-30T00:00:00", "positionId": 10},
+  {"name": "Vint", "surname": "Cerf", "email": "vint.cerf@bizflowerp.com", "birthDate": "1983-06-23T00:00:00", "positionId": 10}
+]

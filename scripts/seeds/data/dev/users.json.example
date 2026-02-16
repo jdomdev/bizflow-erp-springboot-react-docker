@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Ada",
+    "surname": "Lovelace",
+    "email": "ada.lovelace@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Alan",
+    "surname": "Turing",
+    "email": "alan.turing@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Grace",
+    "surname": "Hopper",
+    "email": "grace.hopper@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Marie",
+    "surname": "Curie",
+    "email": "marie.curie@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Albert",
+    "surname": "Einstein",
+    "email": "albert.einstein@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Nikola",
+    "surname": "Tesla",
+    "email": "nikola.tesla@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Rosalind",
+    "surname": "Franklin",
+    "email": "rosalind.franklin@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Stephen",
+    "surname": "Hawking",
+    "email": "stephen.hawking@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Richard",
+    "surname": "Feynman",
+    "email": "richard.feynman@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Linus",
+    "surname": "Torvalds",
+    "email": "linus.torvalds@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Margaret",
+    "surname": "Hamilton",
+    "email": "margaret.hamilton@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Katherine",
+    "surname": "Johnson",
+    "email": "katherine.johnson@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Tim",
+    "surname": "Berners-Lee",
+    "email": "tim.berners-lee@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Donald",
+    "surname": "Knuth",
+    "email": "donald.knuth@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Dennis",
+    "surname": "Ritchie",
+    "email": "dennis.ritchie@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Ken",
+    "surname": "Thompson",
+    "email": "ken.thompson@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Edsger",
+    "surname": "Dijkstra",
+    "email": "edsger.dijkstra@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "John",
+    "surname": "von Neumann",
+    "email": "john.vonneumann@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Claude",
+    "surname": "Shannon",
+    "email": "claude.shannon@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Vint",
+    "surname": "Cerf",
+    "email": "vint.cerf@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Barbara",
+    "surname": "Liskov",
+    "email": "barbara.liskov@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Frances",
+    "surname": "Allen",
+    "email": "frances.allen@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Marvin",
+    "surname": "Minsky",
+    "email": "marvin.minsky@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "John",
+    "surname": "McCarthy",
+    "email": "john.mccarthy@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Guido",
+    "surname": "van Rossum",
+    "email": "guido.vanrossum@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "James",
+    "surname": "Gosling",
+    "email": "james.gosling@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Bjarne",
+    "surname": "Stroustrup",
+    "email": "bjarne.stroustrup@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Anders",
+    "surname": "Hejlsberg",
+    "email": "anders.hejlsberg@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Brendan",
+    "surname": "Eich",
+    "email": "brendan.eich@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Larry",
+    "surname": "Wall",
+    "email": "larry.wall@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Usain",
+    "surname": "Bolt",
+    "email": "usain.bolt@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Carl",
+    "surname": "Lewis",
+    "email": "carl.lewis@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Jesse",
+    "surname": "Owens",
+    "email": "jesse.owens@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Simone",
+    "surname": "Biles",
+    "email": "simone.biles@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Nadia",
+    "surname": "Comaneci",
+    "email": "nadia.comaneci@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Michael",
+    "surname": "Phelps",
+    "email": "michael.phelps@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Katie",
+    "surname": "Ledecky",
+    "email": "katie.ledecky@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Serena",
+    "surname": "Williams",
+    "email": "serena.williams@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Roger",
+    "surname": "Federer",
+    "email": "roger.federer@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Rafael",
+    "surname": "Nadal",
+    "email": "rafael.nadal@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Lionel",
+    "surname": "Messi",
+    "email": "lionel.messi@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Cristiano",
+    "surname": "Ronaldo",
+    "email": "cristiano.ronaldo@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Pele",
+    "surname": "Nascimento",
+    "email": "pele.nascimento@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Diego",
+    "surname": "Maradona",
+    "email": "diego.maradona@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Muhammad",
+    "surname": "Ali",
+    "email": "muhammad.ali@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Leonardo",
+    "surname": "da Vinci",
+    "email": "leonardo.davinci@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Michelangelo",
+    "surname": "Buonarroti",
+    "email": "michelangelo.buonarroti@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Vincent",
+    "surname": "van Gogh",
+    "email": "vincent.vangogh@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Pablo",
+    "surname": "Picasso",
+    "email": "pablo.picasso@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Frida",
+    "surname": "Kahlo",
+    "email": "frida.kahlo@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Claude",
+    "surname": "Monet",
+    "email": "claude.monet@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Salvador",
+    "surname": "Dali",
+    "email": "salvador.dali@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Andy",
+    "surname": "Warhol",
+    "email": "andy.warhol@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Georgia",
+    "surname": "OKeeffe",
+    "email": "georgia.okeeffe@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Jackson",
+    "surname": "Pollock",
+    "email": "jackson.pollock@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Alfred",
+    "surname": "Hitchcock",
+    "email": "alfred.hitchcock@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Steven",
+    "surname": "Spielberg",
+    "email": "steven.spielberg@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Martin",
+    "surname": "Scorsese",
+    "email": "martin.scorsese@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Quentin",
+    "surname": "Tarantino",
+    "email": "quentin.tarantino@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  },
+  {
+    "name": "Christopher",
+    "surname": "Nolan",
+    "email": "christopher.nolan@bizflowerp.com",
+    "password": "<SEED_PASSWORD_PLACEHOLDER>"
+  }
+]

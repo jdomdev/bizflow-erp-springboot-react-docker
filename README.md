@@ -1,132 +1,130 @@
-# ENTERPRISE EXPENSE MANAGEMENT SYSTEM
+# Bizflow ERP
 
-**Expense Note App v1.1.0** - Una aplicación moderna para gestión de gastos empresariales con backend Spring Boot 3.3.4 y frontend React 18.
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react)](https://reactjs.org/)
+[![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk)](https://openjdk.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)](https://docs.docker.com/compose/)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.txt)
 
-## 🎯 Descripción General
+Sistema ERP moderno para gestión de gastos empresariales, empleados y nóminas.
 
-ExpenseNoteApp es una solución completa para la administración de gastos corporativos que permite a los empleados gestionar sus reportes de gastos y nómina. Combina un backend robusto en Spring Boot 3 con un frontend moderno en React, proporcionando una experiencia de usuario profesional y segura.
+## 📸 Screenshots
 
-**Nota**: Esta versión (1.1.0) incluye una actualización importante desde Spring Boot 2.7.18 → 3.3.4, con todas las dependencias actualizadas a las versiones más seguras.
+<table>
+  <tr>
+    <td align="center"><strong>Dashboard</strong></td>
+    <td align="center"><strong>Gastos</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/dashboard.png" alt="Dashboard" width="400"/></td>
+    <td><img src="docs/images/expenses.png" alt="Gastos" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Empleados</strong></td>
+    <td align="center"><strong>Modo Oscuro</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/employees.png" alt="Empleados" width="400"/></td>
+    <td><img src="docs/images/dashboard-dark-mode.png" alt="Modo Oscuro" width="400"/></td>
+  </tr>
+</table>
 
-## 📚 Documentación
+## ✨ Características
 
-Para una guía completa, consulta los documentos en la carpeta `/docs`:
-- **[📖 INDEX.md](./docs/INDEX.md)** - Índice de documentación completo
-- **[🚀 QUICK_START.md](./docs/QUICK_START.md)** - Guía rápida de inicio
-- **[🔍 ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md)** - Problemas encontrados y soluciones
-- **[✅ CAMBIOS_V2.md](./docs/CAMBIOS_V2.md)** - Documentación detallada de cambios
+- 🔐 **Autenticación JWT** con control de acceso basado en roles (ADMIN, MANAGER, USER)
+- 📊 **Dashboard** con estadísticas y gráficos
+- 💰 **Gestión de Gastos** con paginación del lado del servidor
+- 👥 **Empleados y Nóminas** con vinculación a usuarios
+- 🌙 **Modo Oscuro** con persistencia de preferencias
+- 🔔 **Notificaciones en tiempo real** via WebSocket
+- 📱 **Diseño responsive** para móvil y escritorio
 
-## ✨ Características Principales
+## 🚀 Quick Start
 
-### Autenticación & Seguridad
-- ✅ Autenticación JWT moderna (JJWT 0.12.6)
-- ✅ Control de acceso basado en roles (RBAC)
-- ✅ Cifrado de contraseñas con Spring Security
-- ✅ Todas las dependencias sin vulnerabilidades conocidas
+### Prerrequisitos
 
-### Gestión de Gastos
-- ✅ CRUD completo de gastos
-- ✅ Validación en frontend y backend
-- ✅ Filtros avanzados
-- ✅ Dashboard con estadísticas
-
-### Gestión de Personal
-- ✅ Registro de empleados
-- ✅ Información de nómina
-- ✅ Puestos y departamentos
-- ✅ Gestión de roles
-
-### Interfaz Moderna
-- ✅ React 18 con Vite (ultra-rápido)
-- ✅ Tailwind CSS para diseño responsivo
-- ✅ Framer Motion para animaciones suaves
-- ✅ Zustand para state management eficiente
-
-## 🛠️ Stack Tecnológico
-
-| Componente | Tecnología | Versión |
-|-----------|-----------|---------|
-| **Lenguaje** | Java | 21 |
-| **Framework Backend** | Spring Boot | 3.3.4 |
-| **Framework Frontend** | React | 18.2.0 |
-| **Build Frontend** | Vite | 5.0.0 |
-| **Estilos** | Tailwind CSS | 3.4.0 |
-| **Base de Datos** | PostgreSQL | Latest |
-| **Autenticación** | JWT (JJWT) | 0.12.6 |
-| **Build Backend** | Maven | 3.6+ |
-
-## 🚀 Inicio Rápido
-
-### Requisitos
-- Java 21+
-- Node.js 18+
-- PostgreSQL 12+
-- Maven 3.6+
+- Docker y Docker Compose
+- Git
 
 ### Instalación
 
 ```bash
-# 1. Clonar repositorio
-git clone https://github.com/yourusername/ExpenseNoteApp.git
-cd ExpenseNoteApp
+# Clonar el repositorio
+git clone https://github.com/jdomdev/bizflow-erp-springboot-react-docker.git
+cd bizflow-erp-springboot-react-docker
 
-# 2. Configurar base de datos
-createdb expense_note_app
-# Editar backend-springboot/src/main/resources/application.properties
+# Iniciar en modo desarrollo
+make dev
 
-# 3. Iniciar backend
-cd backend-springboot
-mvn spring-boot:run
-# Backend disponible en http://localhost:8080
-
-# 4. En otra terminal, iniciar frontend
-cd frontend
-npm install
-npm run dev
-# Frontend disponible en http://localhost:3000
+# O con docker compose directamente
+docker compose --profile dev up -d
 ```
 
-### Credenciales de Prueba
-- **Email**: admin@example.com
-- **Contraseña**: admin123
+### Acceso
 
-## 📊 Versioning
+| Servicio | URL | Credenciales |
+|----------|-----|--------------|
+| Frontend | http://localhost:3000 | - |
+| Backend API | http://localhost:8080/api/v1 | - |
+| pgAdmin | http://localhost:5050 | Ver `.env` |
 
-Este proyecto usa **Semantic Versioning (SemVer)**:
-- **v1.1.0** (actual): Frontend React + Security updates
-- **v1.0.0**: Backend Spring Boot 3 migration
-- **v2.0.0**: Próximas grandes características
+Usuario de prueba: `ada.lovelace@bizflowerp.com`
 
-Ver [CAMBIOS_V2.md](./docs/CAMBIOS_V2.md) para historial completo.
+## 📖 Documentación
 
-## 🔒 Seguridad
+[![Netlify](https://img.shields.io/badge/Docs-Netlify-00C7B7?logo=netlify&logoColor=white)](https://bizflowerp.netlify.app) **[Documentación completa desplegada en Netlify →](https://bizflowerp.netlify.app)**
 
-✅ **Todas las dependencias están actualizadas** a versiones sin vulnerabilidades:
-- Spring Boot 3.3.4 con actualizaciones de seguridad más recientes
-- Spring Security 6.3.3
-- Log4j 2.23.1 con parches CVE
-- Jackson 2.17.2
-- Y más...
+O localmente en la carpeta [`/docs`](./docs/):
+- [Índice de documentación](./docs/INDEX.md)
+- [Guía de desarrollo](./docs/guides/DEVELOPMENT_GUIDELINES.md)
+- [Comandos Makefile](./docs/makefile/makefile_commands_reference.md)
 
-Ver [ANALISIS_DETALLADO.md](./docs/ANALISIS_DETALLADO.md) para detalles completos.
+## 🛠️ Stack Tecnológico
 
-## Authentication and Authorization
+| Backend | Frontend | Infraestructura |
+|---------|----------|-----------------|
+| Spring Boot 3.3.4 | React 18 | Docker Compose |
+| Spring Security + JWT | Vite 5 | PostgreSQL 16 |
+| JPA/Hibernate | Tailwind CSS | Nginx |
+| Maven | Zustand | pgAdmin |
 
-The application uses **JWT** for secure authentication. Access is role-based, with the following roles:
-- `ROLE_ADMIN`: Full access to system resources and management capabilities.
-- `ROLE_USER`: Limited access, with permissions scoped to their own data.
+## 📁 Estructura del Proyecto
 
-## Future Enhancements
+```
+├── backend/          # Spring Boot API
+├── frontend/         # React + Vite
+├── docker/           # Dockerfiles base
+├── scripts/          # Scripts de utilidad
+├── sql/              # Migraciones y seeds
+├── docs/             # Documentación
+└── docker-compose.yml
+```
 
-- **Migration to Spring Boot 3**: Planned update to leverage new features and optimizations.
-- **Frontend Integration**: Upcoming features include a frontend interface for easier interaction.
-- **Extended Testing**: Adding JUnit tests to enhance API stability and reliability.
+## 🔧 Comandos Útiles
 
-## Contributing
+```bash
+make dev              # Iniciar entorno desarrollo
+make test             # Ejecutar tests
+make logs             # Ver logs de servicios
+make db-seed          # Poblar base de datos
+make stop             # Detener todos los servicios
+```
 
-Feel free to submit issues and pull requests. For major changes, please discuss them via issues or email with the maintainers.
+## 🤝 Contribuir
 
-## License
+1. Fork del repositorio
+2. Crear rama feature (`git checkout -b feat/nueva-funcionalidad`)
+3. Commit cambios (`git commit -m 'feat: añadir nueva funcionalidad'`)
+4. Push a la rama (`git push origin feat/nueva-funcionalidad`)
+5. Abrir Pull Request
 
-This project is licensed under the GNU General Public License v3.0. See the [LICENSE](./LICENSE) file for more details.
-With this update, it is specified that the application is under the **GPLv3** license. This informs contributors and users that they can modify and redistribute the software under the terms of this license.
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia GNU General Public License v3.0 - ver [LICENSE.txt](LICENSE.txt) para más detalles.
+
+---
+
+<p align="center">
+  Desarrollado con ☕ y 💻
+</p>

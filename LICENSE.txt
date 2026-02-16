@@ -1,5 +1,5 @@
 /*
- * This file is part of Expense Note App.
+ * This file is part of Bizflow ERP.
  *
  * Copyright (C) 2022 Juan Domingo/Sunbit
  *

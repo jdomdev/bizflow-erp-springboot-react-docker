@@ -1,167 +1,122 @@
-# Documentación - ExpenseNoteApp v1.1.0
+# Índice completo de documentación
 
-Bienvenido a la documentación completa del proyecto ExpenseNoteApp. Este proyecto es una aplicación moderna para gestión de gastos empresariales con autenticación JWT, backend Spring Boot 3.3.4 y frontend React.
+Este índice enumera todos los archivos Markdown disponibles en la carpeta docs/ y mantiene los enlaces relativos actualizados.
 
-## 📋 Índice de Documentación
+## Listado jerárquico
 
-### 1. **[QUICK_START.md](./QUICK_START.md)** 🚀
-Guía rápida para empezar a usar la aplicación.
-- Requisitos previos
-- Instalación y configuración
-- Ejecución de backend y frontend
-- Troubleshooting común
+- [INDEX.md](INDEX.md)
+- [README.md](README.md)
+- docker/
+  - [docker/backend_tests_docker_guide.md](docker/backend_tests_docker_guide.md)
+  - [docker/docker_base_images.md](docker/docker_base_images.md)
+  - [docker/docker_cleanup_recovery_guide.md](docker/docker_cleanup_recovery_guide.md)
+  - [docker/docker_commands_overview.md](docker/docker_commands_overview.md)
+  - [docker/docker_commands_session6.md](docker/docker_commands_session6.md)
+  - [docker/docker_db_management_commands.md](docker/docker_db_management_commands.md)
+  - [docker/docker_images_centralization_plan.md](docker/docker_images_centralization_plan.md)
+  - [docker/fix_docker_cleanup.md](docker/fix_docker_cleanup.md)
+- entity/
+  - [entity/employee-entity-join-vs-list-20251211-0935.md](entity/employee-entity-join-vs-list-20251211-0935.md)
+  - [entity/fix_bean_employeeutil.md](entity/fix_bean_employeeutil.md)
+- guides/
+  - [guides/automated-db-initialization-sequence.md](guides/automated-db-initialization-sequence.md)
+  - [guides/e2e_testing_guide_playwright_251216.md](guides/e2e_testing_guide_playwright_251216.md)
+  - [guides/environment-switch-guide.md](guides/environment-switch-guide.md)
+  - [guides/testing_strategy_explained_251215.md](guides/testing_strategy_explained_251215.md)
+- planning/
+  - [planning/erp_functionality_251206.md](planning/erp_functionality_251206.md)
+- postman/
+  - [postman/postman_collection_guide.md](postman/postman_collection_guide.md)
+- process/
+  - [process/legacy_pr_archive.md](process/legacy_pr_archive.md)
+  - [process/session_6_branch_cleanup.md](process/session_6_branch_cleanup.md)
+- researching/
+  - [researching/env_password_handling.md](researching/env_password_handling.md)
+  - [researching/foreign_keys_vs_entities.md](researching/foreign_keys_vs_entities.md)
+  - [researching/github_actions_analysis_251216.md](researching/github_actions_analysis_251216.md)
+  - [researching/kubernetes_adoption_report.md](researching/kubernetes_adoption_report.md)
+- sessions/
+  - [sessions/README.md](sessions/README.md)
+  - 2024-11/
+    - [sessions/2024-11/README.md](sessions/2024-11/README.md)
+    - [sessions/2024-11/2024-11-26-1-launch-guide.md](sessions/2024-11/2024-11-26-1-launch-guide.md)
+    - [sessions/2024-11/2024-11-26-1-quick-start.md](sessions/2024-11/2024-11-26-1-quick-start.md)
+    - [sessions/2024-11/2024-11-26-3-docker.md](sessions/2024-11/2024-11-26-3-docker.md)
+    - [sessions/2024-11/2024-11-26-3-features-roadmap.md](sessions/2024-11/2024-11-26-3-features-roadmap.md)
+    - [sessions/2024-11/2024-11-26-3-index.md](sessions/2024-11/2024-11-26-3-index.md)
+    - [sessions/2024-11/2024-11-26-3-security.md](sessions/2024-11/2024-11-26-3-security.md)
+    - [sessions/2024-11/2024-11-26-5-file-manifest-v110.md](sessions/2024-11/2024-11-26-5-file-manifest-v110.md)
+    - [sessions/2024-11/2024-11-26-5-release-notes-v110.md](sessions/2024-11/2024-11-26-5-release-notes-v110.md)
+  - 2025-11/
+    - [sessions/2025-11/README.md](sessions/2025-11/README.md)
+    - [sessions/2025-11/2025-11-26-2-migration.md](sessions/2025-11/2025-11-26-2-migration.md)
+    - [sessions/2025-11/2025-11-27-1-manana-empieza-aqui.md](sessions/2025-11/2025-11-27-1-manana-empieza-aqui.md)
+    - [sessions/2025-11/2025-11-27-1-quick-start.md](sessions/2025-11/2025-11-27-1-quick-start.md)
+    - [sessions/2025-11/2025-11-27-1-startup-guide.md](sessions/2025-11/2025-11-27-1-startup-guide.md)
+    - [sessions/2025-11/2025-11-27-1-vscode-keep-button-explained.md](sessions/2025-11/2025-11-27-1-vscode-keep-button-explained.md)
+    - [sessions/2025-11/2025-11-27-1-welcome.md](sessions/2025-11/2025-11-27-1-welcome.md)
+    - [sessions/2025-11/2025-11-27-2-analisis-detallado.md](sessions/2025-11/2025-11-27-2-analisis-detallado.md)
+    - [sessions/2025-11/2025-11-27-2-cambios-v2.md](sessions/2025-11/2025-11-27-2-cambios-v2.md)
+    - [sessions/2025-11/2025-11-27-2-cloud-deployment-analysis.md](sessions/2025-11/2025-11-27-2-cloud-deployment-analysis.md)
+    - [sessions/2025-11/2025-11-27-2-exception-handling-plan.md](sessions/2025-11/2025-11-27-2-exception-handling-plan.md)
+    - [sessions/2025-11/2025-11-27-2-faq.md](sessions/2025-11/2025-11-27-2-faq.md)
+    - [sessions/2025-11/2025-11-27-2-signup-issue-analysis.md](sessions/2025-11/2025-11-27-2-signup-issue-analysis.md)
+    - [sessions/2025-11/2025-11-27-2-summary.md](sessions/2025-11/2025-11-27-2-summary.md)
+    - [sessions/2025-11/2025-11-27-3-architecture.md](sessions/2025-11/2025-11-27-3-architecture.md)
+    - [sessions/2025-11/2025-11-27-3-documentacion-index.md](sessions/2025-11/2025-11-27-3-documentacion-index.md)
+    - [sessions/2025-11/2025-11-27-4-database-initialization.md](sessions/2025-11/2025-11-27-4-database-initialization.md)
+    - [sessions/2025-11/2025-11-27-5-architecture.md](sessions/2025-11/2025-11-27-5-architecture.md)
+    - [sessions/2025-11/2025-11-27-5-debugging-guide.md](sessions/2025-11/2025-11-27-5-debugging-guide.md)
+    - [sessions/2025-11/2025-11-27-5-documentation-complete.md](sessions/2025-11/2025-11-27-5-documentation-complete.md)
+    - [sessions/2025-11/2025-11-27-5-index.md](sessions/2025-11/2025-11-27-5-index.md)
+    - [sessions/2025-11/2025-11-27-5-overview.md](sessions/2025-11/2025-11-27-5-overview.md)
+    - [sessions/2025-11/2025-11-27-5-pull-request-description.md](sessions/2025-11/2025-11-27-5-pull-request-description.md)
+    - [sessions/2025-11/2025-11-27-5-readme-improved.md](sessions/2025-11/2025-11-27-5-readme-improved.md)
+    - [sessions/2025-11/2025-11-27-5-start-here.md](sessions/2025-11/2025-11-27-5-start-here.md)
+    - [sessions/2025-11/2025-11-27-5-summary-technical.md](sessions/2025-11/2025-11-27-5-summary-technical.md)
+    - [sessions/2025-11/2025-11-27-5-summary.md](sessions/2025-11/2025-11-27-5-summary.md)
+    - [sessions/2025-11/2025-11-27-6-roadmap.md](sessions/2025-11/2025-11-27-6-roadmap.md)
+    - [sessions/2025-11/2025-11-28-6-phase-1-testing-report.md](sessions/2025-11/2025-11-28-6-phase-1-testing-report.md)
+    - [sessions/2025-11/2025-11-28-6-roadmap-sessions-6-15.md](sessions/2025-11/2025-11-28-6-roadmap-sessions-6-15.md)
+    - [sessions/2025-11/2025-11-29-6-phase-1-implementation-docs.md](sessions/2025-11/2025-11-29-6-phase-1-implementation-docs.md)
+    - [sessions/2025-11/2025-11-30-6-summary.md](sessions/2025-11/2025-11-30-6-summary.md)
+  - 2025-12/
+    - [sessions/2025-12/README.md](sessions/2025-12/README.md)
+    - [sessions/2025-12/2025-12-01-6-summary.md](sessions/2025-12/2025-12-01-6-summary.md)
+    - [sessions/2025-12/2025-12-05-6-summary.md](sessions/2025-12/2025-12-05-6-summary.md)
+    - [sessions/2025-12/2025-12-05-6-summary-1.md](sessions/2025-12/2025-12-05-6-summary-1.md)
+    - [sessions/2025-12/2025-12-06-6-phase-1-quick-reference.md](sessions/2025-12/2025-12-06-6-phase-1-quick-reference.md)
+    - [sessions/2025-12/2025-12-06-6-phase-1-work-completed.md](sessions/2025-12/2025-12-06-6-phase-1-work-completed.md)
+    - [sessions/2025-12/2025-12-06-6-phase-2-walkthrough.md](sessions/2025-12/2025-12-06-6-phase-2-walkthrough.md)
+    - [sessions/2025-12/2025-12-06-6-summary.md](sessions/2025-12/2025-12-06-6-summary.md)
+    - [sessions/2025-12/2025-12-07-6-summary.md](sessions/2025-12/2025-12-07-6-summary.md)
+    - [sessions/2025-12/2025-12-09-6-summary.md](sessions/2025-12/2025-12-09-6-summary.md)
+    - [sessions/2025-12/2025-12-10-6-summary.md](sessions/2025-12/2025-12-10-6-summary.md)
+    - [sessions/2025-12/2025-12-11-6-summary-0035.md](sessions/2025-12/2025-12-11-6-summary-0035.md)
+    - [sessions/2025-12/2025-12-12-6-summary.md](sessions/2025-12/2025-12-12-6-summary.md)
+    - [sessions/2025-12/2025-12-13-6-summary-0113.md](sessions/2025-12/2025-12-13-6-summary-0113.md)
+    - [sessions/2025-12/2025-12-13-6-summary-2348.md](sessions/2025-12/2025-12-13-6-summary-2348.md)
+    - [sessions/2025-12/2025-12-14-6-summary-2330.md](sessions/2025-12/2025-12-14-6-summary-2330.md)
+    - [sessions/2025-12/2025-12-16-6-summary-0130.md](sessions/2025-12/2025-12-16-6-summary-0130.md)
+    - [sessions/2025-12/2025-12-17-6-summary-0032.md](sessions/2025-12/2025-12-17-6-summary-0032.md)
+    - [sessions/2025-12/2025-12-17-6-summary-2342.md](sessions/2025-12/2025-12-17-6-summary-2342.md)
+    - [sessions/2025-12/2025-12-19-6-summary-0049.md](sessions/2025-12/2025-12-19-6-summary-0049.md)
+    - [sessions/2025-12/2025-12-20-6-summary-0100.md](sessions/2025-12/2025-12-20-6-summary-0100.md)
+    - [sessions/2025-12/2025-12-22-6-summary-0040.md](sessions/2025-12/2025-12-22-6-summary-0040.md)
+    - [sessions/2025-12/2025-12-24-6-summary-0059.md](sessions/2025-12/2025-12-24-6-summary-0059.md)
+    - [sessions/2025-12/2025-12-25-6-summary-0115.md](sessions/2025-12/2025-12-25-6-summary-0115.md)
+    - [sessions/2025-12/2025-12-26-6-summary-0117.md](sessions/2025-12/2025-12-26-6-summary-0117.md)
+    - [sessions/2025-12/2025-12-27-6-summary-0043.md](sessions/2025-12/2025-12-27-6-summary-0043.md)
+    - [sessions/2025-12/2025-12-29-6-summary.md](sessions/2025-12/2025-12-29-6-summary.md)
+  - 2026-01/
+    - [sessions/2026-01/README.md](sessions/2026-01/README.md)
+    - [sessions/2026-01/2026-01-03-6-summary.md](sessions/2026-01/2026-01-03-6-summary.md)
+    - [sessions/2026-01/2026-01-05-6-summary-2233.md](sessions/2026-01/2026-01-05-6-summary-2233.md)
+    - [sessions/2026-01/2026-01-06-6-summary-2238.md](sessions/2026-01/2026-01-06-6-summary-2238.md)
+    - [sessions/2026-01/2026-01-07-6-summary-2326.md](sessions/2026-01/2026-01-07-6-summary-2326.md)
+    - [sessions/2026-01/2026-01-08-6-summary-2252.md](sessions/2026-01/2026-01-08-6-summary-2252.md)
+- spring/
+  - [spring/security_spring_crypto.md](spring/security_spring_crypto.md)
+  - [spring/spring_profiles_guide.md](spring/spring_profiles_guide.md)
 
-### 2. **[ANALISIS_DETALLADO.md](./ANALISIS_DETALLADO.md)** 🔍
-Análisis exhaustivo de los problemas encontrados en el código original.
-- Dependencias deprecadas
-- Códigos vulnerables
-- Issues de seguridad
-- Recomendaciones de solución
-
-### 3. **[CAMBIOS_V2.md](./CAMBIOS_V2.md)** ✅
-Documentación detallada de todos los cambios realizados.
-- Migraciones de dependencias
-- Refactorización de código JWT
-- Eliminación de code smells
-- Aplicación de SOLID principles
-- Creación del frontend React
-
-### 4. **[SECURITY.md](./SECURITY.md)** 🔒
-Análisis completo de seguridad y vulnerabilidades solucionadas.
-- 13 vulnerabilidades identificadas y solucionadas
-- Detalles técnicos de cada remediación
-- Prácticas de seguridad implementadas
-- Checklist pre-producción
-
-### 5. **[LAUNCH_GUIDE.md](./LAUNCH_GUIDE.md)** 🚀
-Guía paso a paso para lanzar la aplicación.
-- Requisitos previos y verificación
-- Configuración de base de datos
-- Ejecución de backend y frontend
-- Troubleshooting y resolución de problemas
-
-### 6. **[FEATURES_ROADMAP.md](./FEATURES_ROADMAP.md)** 🎯
-Características empresariales adicionales para futuras versiones.
-- Gestión avanzada de gastos
-- Workflows de aprobación multi-nivel
-- Gestión presupuestaria
-- Reportes y analytics
-- Integraciones externas
-- Roadmap de implementación
-
-### 7. **[DOCKER.md](./DOCKER.md)** 🐳
-Guía completa de Docker, docker-compose y dev-containers.
-- Arquitectura de containers
-- Dockerfile backend (Java 21)
-- Dockerfile frontend (Nginx + React)
-- Docker Compose orchestration
-- VS Code dev-containers setup
-- Comandos útiles y troubleshooting
-
-### 8. **[RELEASE_NOTES_v1.1.0.md](../RELEASE_NOTES_v1.1.0.md)** 📋
-Resumen completo del release v1.1.0.
-- 8 commits granulares (Angular convention)
-- Estadísticas del proyecto
-- 13 vulnerabilidades solucionadas
-- Cambios principales por commit
-- Cómo iniciar con Docker
-- Beneficios de v1.1.0
-
-## 🏗️ Estructura del Proyecto
-
-```
-ExpenseNoteApp/
-├── backend-springboot/         # Backend Spring Boot 3.3.4
-│   ├── src/main/java/         # Código fuente Java
-│   ├── src/main/resources/    # Configuración
-│   └── pom.xml                # Dependencias Maven
-├── frontend/                   # Frontend React + Vite
-│   ├── src/                   # Componentes y páginas
-│   ├── public/                # Assets estáticos
-│   └── package.json           # Dependencias NPM
-├── docs/                      # Documentación (este archivo)
-└── README.md                  # Descripción general del proyecto
-```
-
-## 🛠️ Tecnologías Principales
-
-### Backend
-- **Java 21** con Spring Boot 3.3.4
-- **Spring Framework 6.1.13**
-- **Spring Security 6.3.3** con JWT (JJWT 0.12.6)
-- **PostgreSQL** para persistencia
-- **Maven 3.6+** para build
-
-### Frontend
-- **React 18.2.0** con Vite 5.0.0
-- **Tailwind CSS 3.4.0** para estilos
-- **Framer Motion 10.16.4** para animaciones
-- **Zustand 4.4.7** para state management
-- **Axios 1.6.0** para API calls
-
-## 📊 Versioning
-
-Este proyecto usa **Semantic Versioning (SemVer)**:
-- **1.1.0**: Versión actual con nuevas características (frontend React agregado)
-- Mayor (v2.0.0): Cambios incompatibles
-- Menor (v1.1.0): Nuevas características compatibles
-- Patch (v1.0.1): Correcciones de bugs
-
-## 🔒 Seguridad
-
-Todas las dependencias han sido actualizadas a las versiones más seguras:
-- ✅ Spring Boot 3.3.4 (últimas actualizaciones de seguridad)
-- ✅ Spring Security 6.3.3 (sin vulnerabilidades conocidas)
-- ✅ Log4j 2.23.1 (parches CVE aplicados)
-- ✅ Jackson 2.17.2 (sin vulnerabilidades conocidas)
-- ✅ PostgreSQL 42.7.3 (driver más reciente)
-- ✅ SnakeYAML 2.2 (mitigación de deserialización)
-- ✅ Commons Lang3 3.14.0
-- ✅ Commons IO 2.16.1
-
-## 🚀 Próximos Pasos
-
-1. **[Lee QUICK_START.md](./QUICK_START.md)** para configurar el ambiente
-2. **[Revisa CAMBIOS_V2.md](./CAMBIOS_V2.md)** para entender la arquitectura
-3. **Inicia el backend**: `cd backend-springboot && mvn spring-boot:run`
-4. **Inicia el frontend**: `cd frontend && npm run dev`
-5. Accede a http://localhost:3000 en tu navegador
-
-## 📱 Funcionalidades Principales
-
-### Autenticación
-- Login y registro de usuarios
-- JWT token basado en seguridad
-- Roles y permisos (Admin, User)
-
-### Gestión de Gastos
-- Crear, leer, actualizar, eliminar gastos
-- Filtrar por fecha, empleado, cantidad
-- Validación de datos en frontend y backend
-
-### Gestión de Nómina
-- Registro de salarios
-- Detalles de empleados
-- Información de puestos
-
-### Dashboard
-- Estadísticas de gastos
-- Gastos recientes
-- Indicadores clave
-
-## 🐛 Reportar Issues
-
-Si encuentras problemas:
-1. Revisa la sección de [troubleshooting en QUICK_START.md](./QUICK_START.md#troubleshooting)
-2. Verifica los logs en `backend-springboot/target/logs/`
-3. Abre un issue en GitHub con detalles del error
-
-## 📝 Licencia
-
-Este proyecto está bajo la licencia indicada en LICENSE.txt
-
----
-
-**Última actualización**: Noviembre 2024
-**Versión**: 1.1.0
-**Mantenido por**: ExpenseNoteApp Team
+**Total de documentos:** 102

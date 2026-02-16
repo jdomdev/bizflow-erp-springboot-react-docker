@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.metadata/
 
 ### IntelliJ IDEA ###
 .idea
@@ -37,6 +38,23 @@ expensenoteapp.code-workspace
 # Configuration
 application.properties
 application.yml
+.env
+.env.*
+
+# Environment files
+.env*
+!.env.example
+frontend/.env.development
+frontend/.env.production
+frontend/.env.test
+
+# Spring Boot sensitive config
+backend/src/main/resources/application-*.properties
+backend/src/test/resources/application-*.properties
+!backend/src/test/resources/application-test.properties
+backend/src/main/resources/application-dev.properties
+backend/src/main/resources/application-prod.properties
+backend/src/main/resources/application-test.properties
 
 # Maven / Gradle dependencies
 target/
@@ -67,3 +85,25 @@ spring.log
 
 # Build outputs
 out/
+
+# Scripts con credenciales sensibles (contienen passwords y tokens)
+scripts/secrets/
+
+# Backups de base de datos
+backups/
+
+# SQL backups (not seed files)
+backups/**/*.sql
+!backend/src/test/resources/data-test.sql
+
+# Credential files (keep secrets safe)
+*_credentials.md
+*_passwords.md
+
+
+__pycache__/
+
+# Docs (VitePress)
+docs/node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/

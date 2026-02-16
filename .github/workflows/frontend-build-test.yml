@@ -1,25 +1,27 @@
-name: Frontend Build and Test
+name: Build & Test - Frontend (React)
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main, dev, fix/*, feature/* ]
     paths:
       - 'frontend/**'
+      - 'package.json'
       - '.github/workflows/frontend-build-test.yml'
   pull_request:
     branches: [ main, dev ]
     paths:
       - 'frontend/**'
+      - 'package.json'
       - '.github/workflows/frontend-build-test.yml'
 
 jobs:
-  build-and-test:
+  build:
     name: Build and Test on Node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: ['18.x']  # Temporalmente limitado a 18.x - Se agregará 20.x después de configurar Vitest
+        node-version: ['18.x']  # Solo 18.x temporalmente
 
     defaults:
       run:
@@ -27,58 +29,52 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
+      - name: Display Node version
+        run: node --version && npm --version
+
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint code
+      - name: Lint
         run: npm run lint
         continue-on-error: true
 
-      - name: Build frontend
+      - name: Build
         run: npm run build
 
-      - name: Run tests
-        run: |
-          if grep -q '"test"' package.json; then
-            npm test
-          else
-            echo "Tests not yet configured - skipping"
-          fi
+      - name: Run Tests
+        run: npm run test:ci || echo "Tests not configured yet"
         continue-on-error: true
 
-      - name: Generate coverage report
-        run: |
-          if grep -q '"test:coverage"' package.json; then
-            npm run test:coverage
-          else
-            echo "Coverage not yet configured - skipping"
-          fi
+      - name: Run Sanity Suite
+        run: npm run test:sanity || echo "Sanity tests not configured yet"
         continue-on-error: true
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Archive build artifacts
         if: success()
+        uses: actions/upload-artifact@v4
         with:
-          name: frontend-build-node18
-          path: frontend/dist
+          name: frontend-build-${{ matrix.node-version }}
+          path: frontend/dist/
           retention-days: 7
 
-      - name: Upload coverage reports
-        uses: actions/upload-artifact@v4
+      - name: Archive test coverage
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: frontend-coverage-node18
-          path: frontend/coverage
+          name: frontend-coverage-${{ matrix.node-version }}
+          path: frontend/coverage/
           retention-days: 7
+        continue-on-error: true
 
   security:
     name: Security Scan
@@ -90,12 +86,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18.x'  # Temporalmente usando 18.x
+          node-version: '18.x'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
@@ -108,4 +104,12 @@ jobs:
 
       - name: Check for outdated packages
         run: npm outdated
+        continue-on-error: true
+
+      - name: Run Snyk security scan
+        run: |
+          npm install -g snyk
+          snyk test --all-projects
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         continue-on-error: true

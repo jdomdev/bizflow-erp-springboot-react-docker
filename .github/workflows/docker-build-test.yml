@@ -1,0 +1,147 @@
+name: Docker Build & Test
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+  workflow_dispatch:
+
+jobs:
+  docker-compose-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install -y jq
+    
+    - name: Create test environment file
+      run: |
+        cat > .env.test << EOF
+        FRONTEND_DEPENDS_ON=backend-test
+        REGISTER_USERS_SEED_FILE=/workspace/scripts/secrets/register_users_payloads.json
+        POSTGRES_PASSWORD=testpassword
+        SPRING_DATASOURCE_PASSWORD=testpassword
+        SPRING_DATASOURCE_USERNAME=erp_test_user
+        SPRING_DATASOURCE_URL=jdbc:postgresql://erp-test-db-container:5432/erp_test_db
+        APP_JWT_SECRET=testsecretkeymustbelongenoughforhs512algorithmtoworkproperly1234567890
+        ADMIN_EMAIL=${{ secrets.TEST_USER_EMAIL }}
+        ADMIN_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}
+        EOF
+        # Remove leading whitespace from env file
+        sed -i 's/^[[:space:]]*//' .env.test
+    
+    - name: Build base images
+      run: |
+        docker build -t bizflow/backend-builder:local -f docker/base/backend-builder.Dockerfile docker/base/
+        docker build -t bizflow/backend-runtime:local -f docker/base/backend-runtime.Dockerfile docker/base/
+        docker build -t bizflow/frontend-builder:local -f docker/base/frontend-builder.Dockerfile docker/base/
+        docker build -t bizflow/frontend-runtime:local -f docker/base/frontend-runtime.Dockerfile docker/base/
+    
+    - name: Start services with docker-compose
+      run: docker compose --profile test up -d --build
+    
+    - name: Wait for services to be healthy
+      run: |
+        timeout 180 bash -c 'until docker exec erp-backend-test-container curl -sf http://localhost:8080/actuator/health; do echo "Waiting for backend..."; sleep 10; done'
+    
+    - name: Test backend health
+      run: |
+        curl -f http://localhost:8083/actuator/health || exit 1
+    
+    - name: Test database connection
+      run: |
+        docker exec erp-test-db-container pg_isready -U postgres || exit 1
+    
+    - name: Run integration test
+      env:
+        TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+      run: |
+        # Test login and get JWT token
+        echo "Testing login endpoint..."
+        TOKEN=$(curl -s -X POST http://localhost:8083/api/v1/auth/login \
+          -H "Content-Type: application/json" \
+          -d "{\"email\":\"${TEST_USER_EMAIL}\",\"password\":\"${TEST_USER_PASSWORD}\"}" \
+          | jq -r '.accessToken')
+        
+        if [ -z "$TOKEN" ] || [ "$TOKEN" = "null" ]; then
+          echo "Failed to get authentication token"
+          exit 1
+        fi
+        
+        echo "Token obtained successfully"
+        
+        # Test GET /api/v1/employee
+        echo "Testing GET /api/v1/employee..."
+        EMPLOYEE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
+          http://localhost:8083/api/v1/employee || echo "000")
+        EMPLOYEE_CODE=$(echo "$EMPLOYEE_RESPONSE" | tail -n1)
+        echo "Employee response code: $EMPLOYEE_CODE"
+        if [ "$EMPLOYEE_CODE" -ge 500 ] || [ "$EMPLOYEE_CODE" = "000" ]; then
+          echo "Employee endpoint returned server error, checking logs..."
+          docker logs erp-backend-test-container --tail 100
+          echo "Response body:"
+          echo "$EMPLOYEE_RESPONSE" | head -n -1
+          exit 1
+        fi
+        
+        # Test GET /api/v1/position
+        echo "Testing GET /api/v1/position..."
+        POSITION_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
+          http://localhost:8083/api/v1/position || echo "000")
+        POSITION_CODE=$(echo "$POSITION_RESPONSE" | tail -n1)
+        echo "Position response code: $POSITION_CODE"
+        if [ "$POSITION_CODE" -ge 500 ] || [ "$POSITION_CODE" = "000" ]; then
+          echo "Position endpoint returned server error, checking logs..."
+          docker logs erp-backend-test-container --tail 100
+          echo "Response body:"
+          echo "$POSITION_RESPONSE" | head -n -1
+          exit 1
+        fi
+        
+        # Test GET /api/v1/payroll (may return empty if no data seeded)
+        echo "Testing GET /api/v1/payroll..."
+        PAYROLL_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
+          http://localhost:8083/api/v1/payroll)
+        PAYROLL_CODE=$(echo "$PAYROLL_RESPONSE" | tail -n1)
+        echo "Payroll response code: $PAYROLL_CODE"
+        if [ "$PAYROLL_CODE" -ge 500 ]; then
+          echo "Payroll endpoint returned server error, checking logs..."
+          docker logs erp-backend-test-container --tail 50
+          exit 1
+        fi
+        
+        # Test GET /api/v1/expense (may return empty if no data seeded)
+        echo "Testing GET /api/v1/expense..."
+        EXPENSE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
+          http://localhost:8083/api/v1/expense || echo "000")
+        EXPENSE_CODE=$(echo "$EXPENSE_RESPONSE" | tail -n1)
+        echo "Expense response code: $EXPENSE_CODE"
+        if [ "$EXPENSE_CODE" -ge 500 ] || [ "$EXPENSE_CODE" = "000" ]; then
+          echo "Expense endpoint returned server error, checking logs..."
+          docker logs erp-backend-test-container --tail 100
+          echo "Response body:"
+          echo "$EXPENSE_RESPONSE" | head -n -1
+          exit 1
+        fi
+        
+        echo "All integration tests passed!"
+    
+    - name: Collect logs
+      if: always()
+      run: docker compose --profile test logs > docker-compose.log
+    
+    - name: Archive logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-compose-logs
+        path: docker-compose.log
+    
+    - name: Cleanup
+      if: always()
+      run: docker compose --profile test down -v

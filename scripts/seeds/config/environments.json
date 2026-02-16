@@ -1,0 +1,23 @@
+{
+  "test": {
+    "description": "Minimal data for automated testing",
+    "employees": 20,
+    "users": 20,
+    "payrolls_per_employee": 4,
+    "expenses_per_user": 2
+  },
+  "dev": {
+    "description": "Moderate data for development",
+    "employees": 80,
+    "users": 60,
+    "payrolls_per_employee": 6,
+    "expenses_per_user": 3
+  },
+  "prod": {
+    "description": "Full demonstration data",
+    "employees": 250,
+    "users": 200,
+    "payrolls_per_employee": 8,
+    "expenses_per_user": 4
+  }
+}
