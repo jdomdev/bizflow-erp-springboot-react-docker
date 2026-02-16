@@ -224,7 +224,7 @@ curl -X POST http://localhost:8181/api/v1/auth/login \
 |----------|-------|--------|
 | frontend-test | 368 | `8086:80` |
 | backend-test | 235 | `8083:8080` |
-| erp-test-db | 157 | `5434:5432` |
+| erp-test-db-container | 157 | `5434:5432` |
 
 ---
 
