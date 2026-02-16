@@ -80,6 +80,8 @@ docker compose --profile dev up -d
 
 ### pgAdmin (Solo Dev)
 
+- Disponible solo cuando se levanta el perfil `debug` de Docker Compose
+- Para usarlo: `docker compose --profile debug up -d`
 - URL: http://localhost:5050
 - Credenciales: Ver variables en `.env`
 
