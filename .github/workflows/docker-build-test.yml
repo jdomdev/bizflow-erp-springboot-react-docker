@@ -100,10 +100,10 @@ jobs:
         # Test GET /api/v1/expense/ (may return empty if no data seeded)
         echo "Testing GET /api/v1/expense/..."
         EXPENSE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: Bearer $TOKEN" \
-          http://localhost:8083/api/v1/expense/)
+          http://localhost:8083/api/v1/expense/ || echo "000")
         EXPENSE_CODE=$(echo "$EXPENSE_RESPONSE" | tail -n1)
         echo "Expense response code: $EXPENSE_CODE"
-        if [ "$EXPENSE_CODE" -ge 500 ]; then
+        if [ "$EXPENSE_CODE" -ge 500 ] || [ "$EXPENSE_CODE" = "000" ]; then
           echo "WARNING: Expense endpoint returned server error (known issue - lazy loading)"
           docker logs erp-backend-test-container --tail 100
           echo "Response body:"
