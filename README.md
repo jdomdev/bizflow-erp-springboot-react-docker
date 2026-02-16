@@ -17,16 +17,16 @@ Sistema ERP moderno para gestión de gastos empresariales, empleados y nóminas.
     <td align="center"><strong>Gastos</strong></td>
   </tr>
   <tr>
-    <td><img src="docs/images/dashboard.png" alt="Dashboard" width="400"/></td>
-    <td><img src="docs/images/expenses.png" alt="Gastos" width="400"/></td>
+    <td><img src="docs/images/app/dashboard.png" alt="Dashboard" width="400"/></td>
+    <td><img src="docs/images/app/expenses.png" alt="Gastos" width="400"/></td>
   </tr>
   <tr>
     <td align="center"><strong>Empleados</strong></td>
     <td align="center"><strong>Modo Oscuro</strong></td>
   </tr>
   <tr>
-    <td><img src="docs/images/employees.png" alt="Empleados" width="400"/></td>
-    <td><img src="docs/images/dashboard-dark-mode.png" alt="Modo Oscuro" width="400"/></td>
+    <td><img src="docs/images/app/employees.png" alt="Empleados" width="400"/></td>
+    <td><img src="docs/images/app/dashboard-dark-mode.png" alt="Modo Oscuro" width="400"/></td>
   </tr>
 </table>
 
@@ -75,6 +75,25 @@ Usuario de prueba: `ada.lovelace@bizflowerp.com`
 
 [![Netlify](https://img.shields.io/badge/Docs-Netlify-00C7B7?logo=netlify&logoColor=white)](https://bizflowerp.netlify.app) **[Documentación completa desplegada en Netlify →](https://bizflowerp.netlify.app)**
 
+<table>
+  <tr>
+    <td align="center"><strong>Home</strong></td>
+    <td align="center"><strong>Arquitectura</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/docs/home.png" alt="Docs Home" width="400"/></td>
+    <td><img src="docs/images/docs/architecture.png" alt="Arquitectura" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Guía Docker</strong></td>
+    <td align="center"><strong>API Reference</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/docs/docker-guide.png" alt="Docker Guide" width="400"/></td>
+    <td><img src="docs/images/docs/api-reference.png" alt="API Reference" width="400"/></td>
+  </tr>
+</table>
+
 O localmente en la carpeta [`/docs`](./docs/):
 - [Índice de documentación](./docs/INDEX.md)
 - [Guía de desarrollo](./docs/guides/DEVELOPMENT_GUIDELINES.md)
@@ -84,10 +103,11 @@ O localmente en la carpeta [`/docs`](./docs/):
 
 | Backend | Frontend | Infraestructura |
 |---------|----------|-----------------|
-| Spring Boot 3.3.4 | React 18 | Docker Compose |
-| Spring Security + JWT | Vite 5 | PostgreSQL 16 |
-| JPA/Hibernate | Tailwind CSS | Nginx |
-| Maven | Zustand | pgAdmin |
+| Java 17 (OpenJDK) | React 18 | Docker Compose |
+| Spring Boot 3.3.4 | Vite 5 | PostgreSQL 16 |
+| Spring Security + JWT | Tailwind CSS | Nginx |
+| JPA/Hibernate | Zustand | pgAdmin |
+| Maven | | |
 
 ## 📁 Estructura del Proyecto
 
