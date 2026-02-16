@@ -61,7 +61,7 @@ make dev
 docker compose --profile dev up -d
 ```
 
-### Acceso
+### Acceso (Desarrollo)
 
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
@@ -69,7 +69,26 @@ docker compose --profile dev up -d
 | Backend API | http://localhost:8080/api/v1 | - |
 | pgAdmin | http://localhost:5050 | Ver `.env` |
 
-Usuario de prueba: `ada.lovelace@bizflowerp.com`
+Usuario de prueba: `ada.lovelace@bizflowerp.com` / `admlovel2768&`
+
+### 🚀 Modo Producción
+
+```bash
+# Iniciar en modo producción
+make prod
+
+# O con docker compose directamente
+docker compose --profile prod up -d
+```
+
+| Servicio | URL | Notas |
+|----------|-----|-------|
+| Frontend | http://localhost:8080 | Nginx optimizado |
+| Backend API | http://localhost:8181/api/v1 | Puerto diferente |
+| Base de datos | localhost:5442 | Puerto diferente |
+
+> ⚠️ **Nota**: En producción se usan contraseñas diferentes por seguridad.
+> Las credenciales de prod están en `scripts/secrets/users_with_passwords/prod_users.json`
 
 ## 📖 Documentación
 
