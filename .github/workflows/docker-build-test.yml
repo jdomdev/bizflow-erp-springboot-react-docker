@@ -18,6 +18,22 @@ jobs:
     - name: Install jq
       run: sudo apt-get update && sudo apt-get install -y jq
     
+    - name: Create test environment file
+      run: |
+        cat > .env.test << EOF
+        FRONTEND_DEPENDS_ON=backend-test
+        REGISTER_USERS_SEED_FILE=/workspace/scripts/secrets/register_users_payloads.json
+        POSTGRES_PASSWORD=testpassword
+        SPRING_DATASOURCE_PASSWORD=testpassword
+        SPRING_DATASOURCE_USERNAME=erp_test_user
+        SPRING_DATASOURCE_URL=jdbc:postgresql://erp-test-db-container:5432/erp_test_db
+        APP_JWT_SECRET=testsecretkeymustbelongenoughforhs512algorithmtoworkproperly1234567890
+        ADMIN_EMAIL=${{ secrets.TEST_USER_EMAIL }}
+        ADMIN_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}
+        EOF
+        # Remove leading whitespace from env file
+        sed -i 's/^[[:space:]]*//' .env.test
+    
     - name: Start services with docker-compose
       run: docker compose --profile test up -d
     
