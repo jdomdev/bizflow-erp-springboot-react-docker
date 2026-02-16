@@ -85,6 +85,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 	}
 
 	@Override
+	@Transactional
 	public List<Expense> findAll() throws Exception {
 		try {
 			List<Expense> expenses = expenseDao.findAll();
