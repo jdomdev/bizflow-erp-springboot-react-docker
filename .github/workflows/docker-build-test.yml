@@ -19,11 +19,11 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y jq
     
     - name: Start services with docker-compose
-      run: docker compose up -d
+      run: docker compose --profile test up -d
     
     - name: Wait for services to be healthy
       run: |
-        timeout 120 bash -c 'until docker exec expense_backend curl -f http://localhost:8080/actuator/health; do sleep 5; done'
+        timeout 180 bash -c 'until docker exec erp-backend-test-container curl -sf http://localhost:8080/actuator/health; do echo "Waiting for backend..."; sleep 10; done'
     
     - name: Test backend health
       run: |
@@ -31,15 +31,18 @@ jobs:
     
     - name: Test database connection
       run: |
-        docker exec expense_db pg_isready -U postgres || exit 1
+        docker exec erp-test-db-container pg_isready -U postgres || exit 1
     
     - name: Run integration test
+      env:
+        TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
       run: |
         # Test login and get JWT token
         echo "Testing login endpoint..."
         TOKEN=$(curl -s -X POST http://localhost:8080/api/v1/auth/login \
           -H "Content-Type: application/json" \
-          -d "{\"email\":\"admin@example.com\",\"password\":\"${TEST_ADMIN_PASSWORD:-adminpass123}\"}" \
+          -d "{\"email\":\"${TEST_USER_EMAIL}\",\"password\":\"${TEST_USER_PASSWORD}\"}" \
           | jq -r '.accessToken')
         
         if [ -z "$TOKEN" ] || [ "$TOKEN" = "null" ]; then
@@ -73,7 +76,7 @@ jobs:
     
     - name: Collect logs
       if: always()
-      run: docker compose logs > docker-compose.log
+      run: docker compose --profile test logs > docker-compose.log
     
     - name: Archive logs
       if: always()
@@ -84,4 +87,4 @@ jobs:
     
     - name: Cleanup
       if: always()
-      run: docker compose down -v
+      run: docker compose --profile test down -v
