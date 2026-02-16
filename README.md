@@ -103,10 +103,11 @@ O localmente en la carpeta [`/docs`](./docs/):
 
 | Backend | Frontend | Infraestructura |
 |---------|----------|-----------------|
-| Spring Boot 3.3.4 | React 18 | Docker Compose |
-| Spring Security + JWT | Vite 5 | PostgreSQL 16 |
-| JPA/Hibernate | Tailwind CSS | Nginx |
-| Maven | Zustand | pgAdmin |
+| Java 17 (OpenJDK) | React 18 | Docker Compose |
+| Spring Boot 3.3.4 | Vite 5 | PostgreSQL 16 |
+| Spring Security + JWT | Tailwind CSS | Nginx |
+| JPA/Hibernate | Zustand | pgAdmin |
+| Maven | | |
 
 ## 📁 Estructura del Proyecto
 
