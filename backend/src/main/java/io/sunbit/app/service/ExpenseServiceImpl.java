@@ -87,7 +87,9 @@ public class ExpenseServiceImpl implements IExpenseService {
 	@Override
 	public List<Expense> findAll() throws Exception {
 		try {
-			return expenseDao.findAll();
+			List<Expense> expenses = expenseDao.findAll();
+			expenses.forEach(this::loadExpenseUser);
+			return expenses;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());
