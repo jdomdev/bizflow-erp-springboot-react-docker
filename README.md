@@ -61,34 +61,27 @@ make dev
 docker compose --profile dev up -d
 ```
 
-### Acceso (Desarrollo)
+## 🌍 Entornos
 
-| Servicio | URL | Credenciales |
-|----------|-----|--------------|
-| Frontend | http://localhost:3000 | - |
-| Backend API | http://localhost:8080/api/v1 | - |
-| pgAdmin | http://localhost:5050 | Ver `.env` |
+| Entorno | Frontend | Backend API | Base de datos | Comando |
+|---------|----------|-------------|---------------|--------|
+| **Dev** | http://localhost:3000 | http://localhost:8080/api/v1 | localhost:5432 | `make dev` |
+| **Test** | - | http://localhost:8083/api/v1 | localhost:5433 | `make test-backend` |
+| **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make prod` |
 
-Usuario de prueba: `ada.lovelace@bizflowerp.com` / `admlovel2768&`
+### Credenciales
 
-### 🚀 Modo Producción
-
-```bash
-# Iniciar en modo producción
-make prod
-
-# O con docker compose directamente
-docker compose --profile prod up -d
-```
-
-| Servicio | URL | Notas |
-|----------|-----|-------|
-| Frontend | http://localhost:8080 | Nginx optimizado |
-| Backend API | http://localhost:8181/api/v1 | Puerto diferente |
-| Base de datos | localhost:5442 | Puerto diferente |
+| Entorno | Usuario | Contraseña |
+|---------|---------|------------|
+| Dev/Test | `ada.lovelace@bizflowerp.com` | `admlovel2768&` |
+| Prod | `ada.lovelace@bizflowerp.com` | Ver `scripts/secrets/users_with_passwords/prod_users.json` |
 
 > ⚠️ **Nota**: En producción se usan contraseñas diferentes por seguridad.
-> Las credenciales de prod están en `scripts/secrets/users_with_passwords/prod_users.json`
+
+### pgAdmin (Solo Dev)
+
+- URL: http://localhost:5050
+- Credenciales: Ver variables en `.env`
 
 ## 📖 Documentación
 
@@ -143,11 +136,20 @@ O localmente en la carpeta [`/docs`](./docs/):
 ## 🔧 Comandos Útiles
 
 ```bash
+# Entornos
 make dev              # Iniciar entorno desarrollo
-make test             # Ejecutar tests
-make logs             # Ver logs de servicios
-make db-seed          # Poblar base de datos
+make prod             # Iniciar entorno producción
+make test-backend     # Ejecutar tests backend en Docker
 make stop             # Detener todos los servicios
+
+# Base de datos
+make db-seed          # Poblar base de datos
+make db-backup        # Crear backup de BD
+make db-restore       # Restaurar backup
+
+# Logs y estado
+make logs             # Ver logs de servicios
+make ps               # Estado de contenedores
 ```
 
 ## 🤝 Contribuir
