@@ -66,7 +66,7 @@ docker compose --profile dev up -d
 | Entorno | Frontend | Backend API | Base de datos | Comando |
 |---------|----------|-------------|---------------|--------|
 | **Dev** | http://localhost:3000 | http://localhost:8080/api/v1 | localhost:5432 | `make dev` |
-| **Test** | - | http://localhost:8083/api/v1 | localhost:5433 | `make test-backend` |
+| **Test** | http://localhost:8086 | http://localhost:8083/api/v1 | localhost:5434 | `make up-test` |
 | **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make prod` |
 
 ### Credenciales
@@ -139,7 +139,7 @@ O localmente en la carpeta [`/docs`](./docs/):
 # Entornos
 make dev              # Iniciar entorno desarrollo
 make prod             # Iniciar entorno producción
-make test-backend     # Ejecutar tests backend en Docker
+make up-test          # Iniciar entorno testing
 make stop             # Detener todos los servicios
 
 # Base de datos
