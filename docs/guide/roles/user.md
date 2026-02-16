@@ -41,7 +41,7 @@ Verás únicamente **tus propios gastos**.
 | Ver tus gastos | ✅ |
 | Crear gasto | ✅ |
 | Editar tu gasto | ✅ |
-| Eliminar tu gasto | ❌ |
+| Eliminar tu gasto | ✅ |
 | Ver gastos de otros | ❌ |
 
 ### Crear un gasto
