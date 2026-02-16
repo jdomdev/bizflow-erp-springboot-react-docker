@@ -35,7 +35,8 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "name", nullable = false, unique = true)
-	@Length(min = 3, max = 25)
+	// Minimum length 6 to accommodate "ROLE_" prefix plus at least one character
+	@Length(min = 6, max = 25)
 	private String name;
 
 	// Constructor without id.
