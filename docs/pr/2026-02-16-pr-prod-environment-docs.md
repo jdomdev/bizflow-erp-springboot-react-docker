@@ -79,13 +79,23 @@ python3 scripts/utils/generate_password_hashes.py --generate
 '$2a$10$.EwXyrwRo/KPSJpQHcx2xOwPrpAwznEIt4IpR7z.dt.pwzGNXhbHS'
 ```
 
-### 2. Tabla Unificada de Entornos
+### 2. Documentación de Entornos
 
-Se creó una nueva sección **🌍 Entornos** en el README con tabla consolidada:
+Se añadió sección **🌍 Entornos** con dos escenarios:
+
+#### Desarrollo Local (Vite + Docker)
+
+| Servicio | URL |
+|----------|-----|
+| Frontend (Vite) | http://localhost:3000 |
+| Backend API | http://localhost:8082/api/v1 |
+| Base de datos | localhost:5433 |
+
+#### Entornos Docker (Todo containerizado)
 
 | Entorno | Frontend | Backend API | Base de datos | Comando |
-|---------|----------|-------------|---------------|---------|
-| **Dev** | http://localhost:8085 | http://localhost:8082/api/v1 | localhost:5433 | `make dev` |
+|---------|----------|-------------|---------------|--------|
+| **Dev** | http://localhost:8085 | http://localhost:8082/api/v1 | localhost:5433 | `make up-dev` |
 | **Test** | http://localhost:8086 | http://localhost:8083/api/v1 | localhost:5434 | `make up-test` |
 | **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make prod` |
 
@@ -232,10 +242,20 @@ curl -X POST http://localhost:8181/api/v1/auth/login \
 
 ## 📊 Resumen de Puertos por Entorno
 
-### Entorno Development (profile: dev)
+### Desarrollo Local (Vite + Docker backend)
 ```
 ┌─────────────────────────────────────────────────┐
-│                    DEV                          │
+│              DEV LOCAL (Vite)                   │
+├─────────────┬─────────────┬─────────────────────┤
+│  Frontend   │   Backend   │     Database        │
+│   :3000     │   :8082     │      :5433          │
+└─────────────┴─────────────┴─────────────────────┘
+```
+
+### Entorno Development Docker (profile: dev)
+```
+┌─────────────────────────────────────────────────┐
+│              DEV DOCKER                         │
 ├─────────────┬─────────────┬─────────────────────┤
 │  Frontend   │   Backend   │     Database        │
 │   :8085     │   :8082     │      :5433          │
