@@ -65,9 +65,9 @@ docker compose --profile dev up -d
 
 | Entorno | Frontend | Backend API | Base de datos | Comando |
 |---------|----------|-------------|---------------|--------|
-| **Dev** | http://localhost:8085 | http://localhost:8082/api/v1 | localhost:5433 | `make dev` |
+| **Dev** | http://localhost:3000 | http://localhost:8080/api/v1 | localhost:5432 | `make up-dev` |
 | **Test** | http://localhost:8086 | http://localhost:8083/api/v1 | localhost:5434 | `make up-test` |
-| **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make prod` |
+| **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make up-prod` |
 
 ### Credenciales
 
