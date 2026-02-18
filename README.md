@@ -61,15 +61,29 @@ make dev
 docker compose --profile dev up -d
 ```
 
-### Acceso
+## 🌍 Entornos
 
-| Servicio | URL | Credenciales |
-|----------|-----|--------------|
-| Frontend | http://localhost:3000 | - |
-| Backend API | http://localhost:8080/api/v1 | - |
-| pgAdmin | http://localhost:5050 | Ver `.env` |
+| Entorno | Frontend | Backend API | Base de datos | Comando |
+|---------|----------|-------------|---------------|--------|
+| **Dev** | http://localhost:3000 | http://localhost:8080/api/v1 | localhost:5432 | `make up-dev` |
+| **Test** | http://localhost:8086 | http://localhost:8083/api/v1 | localhost:5434 | `make up-test` |
+| **Prod** | http://localhost:8080 | http://localhost:8181/api/v1 | localhost:5442 | `make up-prod` |
 
-Usuario de prueba: `ada.lovelace@bizflowerp.com`
+### Credenciales
+
+| Entorno | Usuario | Contraseña |
+|---------|---------|------------|
+| Dev/Test | `ada.lovelace@bizflowerp.com` | `admlovel2768&` |
+| Prod | `ada.lovelace@bizflowerp.com` | Ver `scripts/secrets/users_with_passwords/prod_users.json` |
+
+> ⚠️ **Nota**: En producción se usan contraseñas diferentes por seguridad.
+
+### pgAdmin (Solo Dev)
+
+- Disponible solo cuando se levanta el perfil `debug` de Docker Compose
+- Para usarlo: `docker compose --profile debug up -d`
+- URL: http://localhost:5050
+- Credenciales: Ver variables en `.env`
 
 ## 📖 Documentación
 
@@ -124,11 +138,22 @@ O localmente en la carpeta [`/docs`](./docs/):
 ## 🔧 Comandos Útiles
 
 ```bash
-make dev              # Iniciar entorno desarrollo
-make test             # Ejecutar tests
-make logs             # Ver logs de servicios
-make db-seed          # Poblar base de datos
-make stop             # Detener todos los servicios
+# Entornos
+make up-dev           # Iniciar entorno desarrollo
+make up-prod          # Iniciar entorno producción
+make up-test          # Iniciar entorno testing
+make down-dev         # Detener entorno desarrollo
+make down-prod        # Detener entorno producción
+make down-test        # Detener entorno testing
+
+# Base de datos
+make backup-dev       # Crear backup de BD (desarrollo)
+make backup-prod      # Crear backup de BD (producción)
+make backup-test      # Crear backup de BD (testing)
+make backup-all       # Crear backup de todas las bases de datos
+
+# Ayuda
+make help             # Ver todos los comandos disponibles
 ```
 
 ## 🤝 Contribuir
