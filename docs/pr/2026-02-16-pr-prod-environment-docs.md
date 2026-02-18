@@ -111,16 +111,18 @@ La sección **🔧 Comandos Útiles** se reorganizó en categorías:
 make up-dev           # Iniciar entorno desarrollo
 make up-prod          # Iniciar entorno producción
 make up-test          # Iniciar entorno testing
-make stop             # Detener todos los servicios
+make down-dev         # Detener entorno desarrollo (conserva datos)
+make down-prod        # Detener entorno producción (conserva datos)
+make down-test        # Detener entorno testing (conserva datos)
 
 # Base de datos
-make db-seed          # Poblar base de datos
-make db-backup        # Crear backup de BD
-make db-restore       # Restaurar backup
+make backup-dev       # Crear backup de BD de desarrollo
+make backup-prod      # Crear backup de BD de producción
+make backup-test      # Crear backup de BD de testing
 
 # Logs y estado
-make logs             # Ver logs de servicios
-make ps               # Estado de contenedores
+docker compose logs   # Ver logs de servicios
+docker compose ps     # Estado de contenedores
 ```
 
 ### 5. Sección pgAdmin
