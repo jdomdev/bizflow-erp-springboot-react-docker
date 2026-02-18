@@ -80,6 +80,8 @@ docker compose --profile dev up -d
 
 ### pgAdmin (Solo Dev)
 
+- Disponible solo cuando se levanta el perfil `debug` de Docker Compose
+- Para usarlo: `docker compose --profile debug up -d`
 - URL: http://localhost:5050
 - Credenciales: Ver variables en `.env`
 
@@ -140,16 +142,18 @@ O localmente en la carpeta [`/docs`](./docs/):
 make dev              # Iniciar entorno desarrollo
 make prod             # Iniciar entorno producción
 make up-test          # Iniciar entorno testing
-make stop             # Detener todos los servicios
+make down-dev         # Detener entorno desarrollo
+make down-prod        # Detener entorno producción
+make down-test        # Detener entorno testing
 
 # Base de datos
-make db-seed          # Poblar base de datos
-make db-backup        # Crear backup de BD
-make db-restore       # Restaurar backup
+make backup-dev       # Crear backup de BD (desarrollo)
+make backup-prod      # Crear backup de BD (producción)
+make backup-test      # Crear backup de BD (testing)
+make backup-all       # Crear backup de todas las bases de datos
 
-# Logs y estado
-make logs             # Ver logs de servicios
-make ps               # Estado de contenedores
+# Ayuda
+make help             # Ver todos los comandos disponibles
 ```
 
 ## 🤝 Contribuir
