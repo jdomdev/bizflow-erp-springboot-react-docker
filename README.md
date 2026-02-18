@@ -139,8 +139,8 @@ O localmente en la carpeta [`/docs`](./docs/):
 
 ```bash
 # Entornos
-make dev              # Iniciar entorno desarrollo
-make prod             # Iniciar entorno producción
+make up-dev           # Iniciar entorno desarrollo
+make up-prod          # Iniciar entorno producción
 make up-test          # Iniciar entorno testing
 make down-dev         # Detener entorno desarrollo
 make down-prod        # Detener entorno producción
