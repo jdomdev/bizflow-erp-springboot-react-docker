@@ -174,7 +174,7 @@ spring.jpa.show-sql=false
 openssl rand -base64 32
 
 # Ejemplo de salida:
-# kN8x9mK2p3L5q6R7sT8uV9wX0yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sTuVwXyZ1
+# <VALOR_GENERADO_64_CARACTERES_ALEATORIOS>
 ```
 
 ### Paso 4: Compilar Backend

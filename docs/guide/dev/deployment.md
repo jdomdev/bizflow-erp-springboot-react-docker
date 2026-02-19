@@ -22,11 +22,11 @@ nano .env
 
 ```env
 # Base de datos
-POSTGRES_PASSWORD=contraseña_muy_segura_produccion
+POSTGRES_PASSWORD=<TU_PASSWORD_SEGURA_PRODUCCION>
 POSTGRES_DB=erp_prod_db
 
 # JWT
-JWT_SECRET=clave_secreta_produccion_minimo_32_caracteres
+JWT_SECRET=<GENERA_CON_openssl_rand_-base64_64>
 
 # URLs
 BACKEND_URL=https://api.tudominio.com
