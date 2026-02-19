@@ -45,7 +45,7 @@ GitGuardian detectó múltiples secretos expuestos en el repositorio:
 
 BFG Repo-Cleaner reescribe el historial de Git, reemplazando strings específicos en **todos** los commits. Pero BFG **protege el HEAD actual** - no modifica el último commit.
 
-**Requisito:** Antes de ejecutar BFG, todos los secretos deben estar eliminados del HEAD actual voor que la limpieza sea completa.
+**Requisito:** Antes de ejecutar BFG, todos los secretos deben estar eliminados del HEAD actual para que la limpieza sea completa.
 
 ---
 
