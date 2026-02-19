@@ -27,7 +27,7 @@ jobs:
         SPRING_DATASOURCE_PASSWORD=testpassword
         SPRING_DATASOURCE_USERNAME=erp_test_user
         SPRING_DATASOURCE_URL=jdbc:postgresql://erp-test-db-container:5432/erp_test_db
-        APP_JWT_SECRET=testsecretkeymustbelongenoughforhs512algorithmtoworkproperly1234567890
+        APP_JWT_SECRET=test-only-jwt-secret-do-not-use-in-production-min64chars-abcdef1234567890
         ADMIN_EMAIL=${{ secrets.TEST_USER_EMAIL }}
         ADMIN_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}
         EOF

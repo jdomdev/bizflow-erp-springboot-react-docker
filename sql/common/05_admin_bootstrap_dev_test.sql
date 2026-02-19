@@ -2,7 +2,7 @@
 -- Bootstrap ADMIN users for DEV/TEST environments
 -- ====================================================================
 -- AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
--- Generated: 2026-01-27 23:53:12
+-- Generated: 2026-02-16 22:06:49
 -- Source: scripts/secrets/users_with_passwords/
 -- Regenerate: python3 scripts/utils/generate_password_hashes.py --generate
 -- ====================================================================
@@ -13,7 +13,7 @@ VALUES (
     'ada.lovelace@bizflowerp.com',
     'Ada',
     'Lovelace',
-    '$2a$10$bjAW9T8vXbwRcCiewPNCgeZ.1SDX4TQtRoQIvlEQ7M.78YSZ1E0MO',
+    '$2a$10$MJ093bS6Ev0JgjgesPL/pOPsdSN6chxRVNmN8xBzyo3uSfFZFaRmC',
     NULL
 )
 ON CONFLICT (id) DO NOTHING;
@@ -24,7 +24,7 @@ VALUES (
     'alan.turing@bizflowerp.com',
     'Alan',
     'Turing',
-    '$2a$10$JQutf3lzytcYu3Vw7JDn/eVdRRpnlf8INe2p01xYI/pXqn1PScnE6',
+    '$2a$10$Ye//aEgCAkpoDMyla9Zxx.EXf0Sa/ykEpFtFebeUUseuP1W.joChy',
     NULL
 )
 ON CONFLICT (id) DO NOTHING;

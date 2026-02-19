@@ -30,7 +30,7 @@ import io.sunbit.app.security.entity.ExpenseUser;
 import io.sunbit.app.security.entity.Role;
 import io.sunbit.app.security.service.UserServiceImpl;
 
-@SpringBootTest(properties = "app.jwt.secret=testsecretkeymustbelongenoughforhs512algorithmtoworkproperly1234567890")
+@SpringBootTest(properties = "app.jwt.secret=test-only-jwt-secret-do-not-use-in-production-min64chars-abcdef1234567890")
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class UserControllerTest {
