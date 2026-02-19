@@ -22,11 +22,12 @@ nano .env
 
 ```env
 # Base de datos
-POSTGRES_PASSWORD=contraseña_muy_segura_produccion
+POSTGRES_PASSWORD=<TU_PASSWORD_SEGURA_PRODUCCION>
 POSTGRES_DB=erp_prod_db
 
-# JWT
-JWT_SECRET=clave_secreta_produccion_minimo_32_caracteres
+# JWT – genera con: openssl rand -base64 32  (32 bytes aleatorios → ~44 caracteres base64)
+# Para mayor entropía usa: openssl rand -base64 64  (64 bytes → ~88 caracteres base64)
+JWT_SECRET=<SECRETO_BASE64_MINIMO_32_BYTES>
 
 # URLs
 BACKEND_URL=https://api.tudominio.com
@@ -163,7 +164,7 @@ jobs:
 ## Checklist de Producción
 
 - [ ] Variables de entorno seguras (no en código)
-- [ ] JWT_SECRET de al menos 32 caracteres
+- [ ] JWT_SECRET generado con `openssl rand -base64 32` (mínimo 32 bytes de entropía)
 - [ ] HTTPS configurado
 - [ ] Base de datos con backups automáticos
 - [ ] Logs centralizados
