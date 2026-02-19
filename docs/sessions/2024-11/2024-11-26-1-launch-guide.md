@@ -171,7 +171,7 @@ spring.jpa.show-sql=false
 
 ```bash
 # En Linux/Mac/WSL:
-openssl rand -base64 32
+openssl rand -base64 48
 
 # Ejemplo de salida:
 # <VALOR_GENERADO_64_CARACTERES_ALEATORIOS>
